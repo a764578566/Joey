@@ -32,38 +32,49 @@
             this.sqlRtb = new System.Windows.Forms.RichTextBox();
             this.delIndexRtb = new System.Windows.Forms.RichTextBox();
             this.DeleteIndexbtn = new System.Windows.Forms.Button();
-            this.openSqlFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.OpenFile = new System.Windows.Forms.Button();
+            this.OpenIndexSqlFileBtn = new System.Windows.Forms.Button();
             this.filePathTbx = new System.Windows.Forms.TextBox();
             this.OutputBtn = new System.Windows.Forms.Button();
-            this.saveSqlFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.isFalseCopyRadioBtn = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.isTrueCopyRadioBtn = new System.Windows.Forms.RadioButton();
+            this.customizePathTBx = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.updateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.customizebtn = new System.Windows.Forms.Button();
+            this.updateFilesRTB = new System.Windows.Forms.RichTextBox();
+            this.pathTBx = new System.Windows.Forms.TextBox();
+            this.RootFileBtn = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.updateFilesTV = new System.Windows.Forms.TreeView();
+            this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sqlRtb
             // 
-            this.sqlRtb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sqlRtb.Location = new System.Drawing.Point(12, 49);
+            this.sqlRtb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.sqlRtb.Location = new System.Drawing.Point(3, 36);
             this.sqlRtb.Name = "sqlRtb";
-            this.sqlRtb.Size = new System.Drawing.Size(457, 584);
+            this.sqlRtb.Size = new System.Drawing.Size(450, 600);
             this.sqlRtb.TabIndex = 0;
             this.sqlRtb.Text = "";
             // 
             // delIndexRtb
             // 
-            this.delIndexRtb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.delIndexRtb.Location = new System.Drawing.Point(567, 49);
+            this.delIndexRtb.Location = new System.Drawing.Point(522, 36);
             this.delIndexRtb.Name = "delIndexRtb";
-            this.delIndexRtb.Size = new System.Drawing.Size(435, 584);
+            this.delIndexRtb.Size = new System.Drawing.Size(450, 600);
             this.delIndexRtb.TabIndex = 0;
             this.delIndexRtb.Text = "";
             // 
             // DeleteIndexbtn
             // 
-            this.DeleteIndexbtn.Location = new System.Drawing.Point(475, 61);
+            this.DeleteIndexbtn.Location = new System.Drawing.Point(816, 7);
             this.DeleteIndexbtn.Name = "DeleteIndexbtn";
             this.DeleteIndexbtn.Size = new System.Drawing.Size(75, 23);
             this.DeleteIndexbtn.TabIndex = 1;
@@ -71,30 +82,26 @@
             this.DeleteIndexbtn.UseVisualStyleBackColor = true;
             this.DeleteIndexbtn.Click += new System.EventHandler(this.DeleteIndexbtn_Click);
             // 
-            // openSqlFileDialog
+            // OpenIndexSqlFileBtn
             // 
-            this.openSqlFileDialog.FileName = "openFileDialog1";
-            // 
-            // OpenFile
-            // 
-            this.OpenFile.Location = new System.Drawing.Point(12, 20);
-            this.OpenFile.Name = "OpenFile";
-            this.OpenFile.Size = new System.Drawing.Size(75, 23);
-            this.OpenFile.TabIndex = 2;
-            this.OpenFile.Text = "打开文件";
-            this.OpenFile.UseVisualStyleBackColor = true;
-            this.OpenFile.Click += new System.EventHandler(this.OpenFile_Click);
+            this.OpenIndexSqlFileBtn.Location = new System.Drawing.Point(3, 7);
+            this.OpenIndexSqlFileBtn.Name = "OpenIndexSqlFileBtn";
+            this.OpenIndexSqlFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.OpenIndexSqlFileBtn.TabIndex = 2;
+            this.OpenIndexSqlFileBtn.Text = "打开文件";
+            this.OpenIndexSqlFileBtn.UseVisualStyleBackColor = true;
+            this.OpenIndexSqlFileBtn.Click += new System.EventHandler(this.OpenFile_Click);
             // 
             // filePathTbx
             // 
-            this.filePathTbx.Location = new System.Drawing.Point(113, 20);
+            this.filePathTbx.Location = new System.Drawing.Point(104, 7);
             this.filePathTbx.Name = "filePathTbx";
-            this.filePathTbx.Size = new System.Drawing.Size(322, 21);
+            this.filePathTbx.Size = new System.Drawing.Size(706, 21);
             this.filePathTbx.TabIndex = 3;
             // 
             // OutputBtn
             // 
-            this.OutputBtn.Location = new System.Drawing.Point(927, 18);
+            this.OutputBtn.Location = new System.Drawing.Point(897, 6);
             this.OutputBtn.Name = "OutputBtn";
             this.OutputBtn.Size = new System.Drawing.Size(75, 23);
             this.OutputBtn.TabIndex = 4;
@@ -102,22 +109,164 @@
             this.OutputBtn.UseVisualStyleBackColor = true;
             this.OutputBtn.Click += new System.EventHandler(this.OutputBtn_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(41, 25);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1024, 760);
+            this.tabControl1.TabIndex = 5;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.updateFilesTV);
+            this.tabPage2.Controls.Add(this.isFalseCopyRadioBtn);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.isTrueCopyRadioBtn);
+            this.tabPage2.Controls.Add(this.customizePathTBx);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.updateDateTimePicker);
+            this.tabPage2.Controls.Add(this.customizebtn);
+            this.tabPage2.Controls.Add(this.updateFilesRTB);
+            this.tabPage2.Controls.Add(this.pathTBx);
+            this.tabPage2.Controls.Add(this.RootFileBtn);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1016, 734);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "生成二开更新包";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // isFalseCopyRadioBtn
+            // 
+            this.isFalseCopyRadioBtn.AutoSize = true;
+            this.isFalseCopyRadioBtn.Location = new System.Drawing.Point(878, 62);
+            this.isFalseCopyRadioBtn.Name = "isFalseCopyRadioBtn";
+            this.isFalseCopyRadioBtn.Size = new System.Drawing.Size(35, 16);
+            this.isFalseCopyRadioBtn.TabIndex = 10;
+            this.isFalseCopyRadioBtn.TabStop = true;
+            this.isFalseCopyRadioBtn.Text = "否";
+            this.isFalseCopyRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(812, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(137, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "是否直接复制到指定目录";
+            // 
+            // isTrueCopyRadioBtn
+            // 
+            this.isTrueCopyRadioBtn.AutoSize = true;
+            this.isTrueCopyRadioBtn.Location = new System.Drawing.Point(816, 62);
+            this.isTrueCopyRadioBtn.Name = "isTrueCopyRadioBtn";
+            this.isTrueCopyRadioBtn.Size = new System.Drawing.Size(35, 16);
+            this.isTrueCopyRadioBtn.TabIndex = 8;
+            this.isTrueCopyRadioBtn.TabStop = true;
+            this.isTrueCopyRadioBtn.Text = "是";
+            this.isTrueCopyRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // customizePathTBx
+            // 
+            this.customizePathTBx.Location = new System.Drawing.Point(135, 641);
+            this.customizePathTBx.Name = "customizePathTBx";
+            this.customizePathTBx.Size = new System.Drawing.Size(671, 21);
+            this.customizePathTBx.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(808, 182);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "选择更新日期";
+            // 
+            // updateDateTimePicker
+            // 
+            this.updateDateTimePicker.Location = new System.Drawing.Point(810, 197);
+            this.updateDateTimePicker.Name = "updateDateTimePicker";
+            this.updateDateTimePicker.Size = new System.Drawing.Size(200, 21);
+            this.updateDateTimePicker.TabIndex = 4;
+            // 
+            // customizebtn
+            // 
+            this.customizebtn.Location = new System.Drawing.Point(6, 641);
+            this.customizebtn.Name = "customizebtn";
+            this.customizebtn.Size = new System.Drawing.Size(111, 23);
+            this.customizebtn.TabIndex = 3;
+            this.customizebtn.Text = "复制到指定目录";
+            this.customizebtn.UseVisualStyleBackColor = true;
+            this.customizebtn.Click += new System.EventHandler(this.customizebtn_Click);
+            // 
+            // updateFilesRTB
+            // 
+            this.updateFilesRTB.Location = new System.Drawing.Point(6, 35);
+            this.updateFilesRTB.Name = "updateFilesRTB";
+            this.updateFilesRTB.Size = new System.Drawing.Size(800, 600);
+            this.updateFilesRTB.TabIndex = 2;
+            this.updateFilesRTB.Text = "";
+            // 
+            // pathTBx
+            // 
+            this.pathTBx.Location = new System.Drawing.Point(105, 8);
+            this.pathTBx.Name = "pathTBx";
+            this.pathTBx.Size = new System.Drawing.Size(701, 21);
+            this.pathTBx.TabIndex = 1;
+            // 
+            // RootFileBtn
+            // 
+            this.RootFileBtn.Location = new System.Drawing.Point(6, 6);
+            this.RootFileBtn.Name = "RootFileBtn";
+            this.RootFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.RootFileBtn.TabIndex = 0;
+            this.RootFileBtn.Text = "打开文件";
+            this.RootFileBtn.UseVisualStyleBackColor = true;
+            this.RootFileBtn.Click += new System.EventHandler(this.RootFileBtn_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.delIndexRtb);
+            this.tabPage1.Controls.Add(this.OutputBtn);
+            this.tabPage1.Controls.Add(this.sqlRtb);
+            this.tabPage1.Controls.Add(this.filePathTbx);
+            this.tabPage1.Controls.Add(this.DeleteIndexbtn);
+            this.tabPage1.Controls.Add(this.OpenIndexSqlFileBtn);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1016, 734);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "生成索引删除脚本";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // updateFilesTV
+            // 
+            this.updateFilesTV.Location = new System.Drawing.Point(6, 35);
+            this.updateFilesTV.Name = "updateFilesTV";
+            this.updateFilesTV.Size = new System.Drawing.Size(798, 600);
+            this.updateFilesTV.TabIndex = 11;
+            // 
             // DeleteIndexFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1014, 645);
-            this.Controls.Add(this.OutputBtn);
-            this.Controls.Add(this.filePathTbx);
-            this.Controls.Add(this.OpenFile);
-            this.Controls.Add(this.DeleteIndexbtn);
-            this.Controls.Add(this.delIndexRtb);
-            this.Controls.Add(this.sqlRtb);
+            this.ClientSize = new System.Drawing.Size(1136, 826);
+            this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DeleteIndexFrom";
             this.Text = "生成索引删除脚本";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -126,11 +275,23 @@
         private System.Windows.Forms.RichTextBox sqlRtb;
         private System.Windows.Forms.RichTextBox delIndexRtb;
         private System.Windows.Forms.Button DeleteIndexbtn;
-        private System.Windows.Forms.OpenFileDialog openSqlFileDialog;
-        private System.Windows.Forms.Button OpenFile;
+        private System.Windows.Forms.Button OpenIndexSqlFileBtn;
         private System.Windows.Forms.TextBox filePathTbx;
         private System.Windows.Forms.Button OutputBtn;
-        private System.Windows.Forms.SaveFileDialog saveSqlFileDialog;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox pathTBx;
+        private System.Windows.Forms.Button RootFileBtn;
+        private System.Windows.Forms.Button customizebtn;
+        private System.Windows.Forms.RichTextBox updateFilesRTB;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker updateDateTimePicker;
+        private System.Windows.Forms.TextBox customizePathTBx;
+        private System.Windows.Forms.RadioButton isTrueCopyRadioBtn;
+        private System.Windows.Forms.RadioButton isFalseCopyRadioBtn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TreeView updateFilesTV;
     }
 }
 
