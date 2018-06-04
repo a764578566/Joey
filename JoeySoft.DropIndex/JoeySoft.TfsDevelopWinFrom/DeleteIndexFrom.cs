@@ -42,7 +42,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             //是否直接复制到指定目录 否
             this.isFalseCopyRadioBtn.Select();
             //是否直接签入二开 否
-            this.isFalseCheckoutRadioBtn.Select();
+            this.isTrueCheckoutRadioBtn.Select();
         }
 
         /// <summary>
@@ -417,6 +417,12 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private void CopyUpdateFile()
         {
+            if (this.updateFiles == null)
+            {
+                MessageBox.Show("请选择产品目录！");
+                return;
+            }
+
             TFSHelper tfsHelper = new TFSHelper();
             //复制文件
             foreach (var updateFile in this.updateFiles)
@@ -433,27 +439,26 @@ namespace JoeySoft.TfsDevelopWinFrom
                     File.Copy(updateFile.FullName, fileName, true);
                     if (this.isTrueCheckoutRadioBtn.Checked)
                     {
-                        tfsHelper.Edit(fileName);
+                        tfsHelper.CheckOut(fileName);
                     }
-
                 }
                 else
                 {
+                    //生成新目录
+                    string dir = Path.GetDirectoryName(fileName);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
                     File.Copy(updateFile.FullName, fileName);
                     if (this.isTrueCheckoutRadioBtn.Checked)
                     {
-                        tfsHelper.Add(fileName);
+                        tfsHelper.CheckOut(fileName);
                     }
                 }
 
             }
             MessageBox.Show("复制成功！");
-
-            //是否签入
-            if (this.isTrueCheckoutRadioBtn.Checked)
-            {
-
-            }
         }
 
         #endregion

@@ -154,6 +154,7 @@
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "是否编辑签出二开";
+            this.groupBox2.Visible = false;
             // 
             // isTrueCheckoutRadioBtn
             // 
@@ -183,10 +184,10 @@
             this.groupBox1.Controls.Add(this.isFalseCopyRadioBtn);
             this.groupBox1.Location = new System.Drawing.Point(816, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(163, 45);
+            this.groupBox1.Size = new System.Drawing.Size(163, 50);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "是否直接复制到指定目录";
+            this.groupBox1.Text = "是否直接复制并签出编辑";
             // 
             // isTrueCopyRadioBtn
             // 
@@ -246,7 +247,7 @@
             this.customizebtn.Name = "customizebtn";
             this.customizebtn.Size = new System.Drawing.Size(111, 23);
             this.customizebtn.TabIndex = 3;
-            this.customizebtn.Text = "复制到指定目录";
+            this.customizebtn.Text = "复制并签出编辑";
             this.customizebtn.UseVisualStyleBackColor = true;
             this.customizebtn.Click += new System.EventHandler(this.customizebtn_Click);
             // 
@@ -269,9 +270,9 @@
             // 
             this.RootFileBtn.Location = new System.Drawing.Point(6, 6);
             this.RootFileBtn.Name = "RootFileBtn";
-            this.RootFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.RootFileBtn.Size = new System.Drawing.Size(93, 23);
             this.RootFileBtn.TabIndex = 0;
-            this.RootFileBtn.Text = "打开文件";
+            this.RootFileBtn.Text = "打开产品目录";
             this.RootFileBtn.UseVisualStyleBackColor = true;
             this.RootFileBtn.Click += new System.EventHandler(this.RootFileBtn_Click);
             // 
