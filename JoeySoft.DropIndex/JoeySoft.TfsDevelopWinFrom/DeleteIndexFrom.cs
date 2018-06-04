@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -23,11 +24,34 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         private string openFileName;
 
+        //产品目录
+        private string KeyProduct = "ProductRootPath";
+        private string rootProductPath;
+
+        //二开目录
+        private string KeyCustomize = "CustomizeRootPath";
+        private string rootCustomizePath;
+
+        //迁移元数据目录
+        private string metadataDirectory;
 
         public DeleteIndexFrom()
         {
             InitializeComponent();
 
+            try
+            {
+                rootProductPath = ConfigurationManager.AppSettings[KeyProduct];
+
+                rootCustomizePath = ConfigurationManager.AppSettings[KeyCustomize];
+
+                metadataDirectory = ConfigurationManager.AppSettings["MetadataDirectory"];
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("请配置APP.config节点！");
+                return;
+            }
             textTemplateSqlText = File.ReadAllText("TextTemplate.txt");
 
             this.updateDateTimePicker.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -43,6 +67,8 @@ namespace JoeySoft.TfsDevelopWinFrom
             this.isFalseCopyRadioBtn.Select();
             //是否直接签入二开 否
             this.isTrueCheckoutRadioBtn.Select();
+
+            this.tabPage1.Parent = null;
         }
 
         /// <summary>
@@ -177,11 +203,6 @@ namespace JoeySoft.TfsDevelopWinFrom
         private string _clgyl = "Clgyl";
         private string _bin = "bin";
 
-        //产品地址
-        string rootProductPath = @"E:\mysoft\tfs_new\10.5.10.96\WH-ProductDev\住宅ERP-新平台\ERP-V1.0\60_材料供应链系统\03_主干-开发分支\00_根目录";
-        //二开地址
-        private string rootCustomizePath = @"E:\mysoft\tfs_new\10.5.10.70\星河二开项目\总部星河\明源云ERPv1.0SP5星河孵化\源代码\分支1\00-ERP站点";
-
         //需要更新的文件信息
         private List<FileInfo> updateFiles;
 
@@ -250,16 +271,13 @@ namespace JoeySoft.TfsDevelopWinFrom
 
             List<FileInfo> metadataFiles = new List<FileInfo>();
 
-            string[] directoryNames = new string[]
+            //如果不存在为空标识不迁移任何文件
+            if (string.IsNullOrEmpty(metadataDirectory))
             {
-                "AppForm", //表单
-                "AppGrid", //列表
-                "AppTreeGrid", //树列表
-                "AppCard", //卡片
-                "Entity", //实体
-                "View", //视图
-                "MetadataRelationship" //关系
-            };
+                return metadataFiles;
+            }
+            string[] directoryNames = metadataDirectory.Split(',');
+
             if (!Directory.Exists(openFileName))
             {
                 MessageBox.Show("请选择产品根目录！");
@@ -417,7 +435,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private void CopyUpdateFile()
         {
-            if (this.updateFiles == null)
+            if (this.updateFiles == null || this.updateFiles.Count == 0)
             {
                 MessageBox.Show("请选择产品目录！");
                 return;
