@@ -1,5 +1,7 @@
 1.将文件做MD5比较 如果相同不签出编辑
 2.获取产品签入签出记录，然后签入签出二开
 
+3.目前bin 目录只有产品dll会被签入
+
 
 TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/

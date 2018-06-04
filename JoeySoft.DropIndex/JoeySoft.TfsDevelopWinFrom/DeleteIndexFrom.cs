@@ -61,6 +61,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             {
                 Directory.CreateDirectory(DeleteIndexDirectory);
             }
+            this.pathTBx.Text = rootProductPath;
             this.customizePathTBx.Text = rootCustomizePath;
 
             //是否直接复制到指定目录 否
@@ -217,44 +218,47 @@ namespace JoeySoft.TfsDevelopWinFrom
             this.updateFilesTV.Nodes.Clear();
             //获取修改当前日期
             dt = DateTime.Parse(DateTime.Parse(this.updateDateTimePicker.Text).ToString("yyyy/MM/dd"));
-            //选择文件夹
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.SelectedPath = rootProductPath;
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(this.pathTBx.Text))
             {
-                //选择的文件夹
-                string openFileName = folderBrowserDialog.SelectedPath;
-                this.pathTBx.Text = openFileName;
-                if (!File.Exists(openFileName + "\\Web.config"))
+                //选择文件夹
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                folderBrowserDialog.SelectedPath = rootProductPath;
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("请选择产品根目录！");
+                    //选择的文件夹
+                    this.pathTBx.Text = folderBrowserDialog.SelectedPath;
                 }
-                else
+            }
+            this.pathTBx.Text = this.pathTBx.Text;
+            if (!File.Exists(this.pathTBx.Text + "\\Web.config"))
+            {
+                MessageBox.Show("请选择产品根目录！");
+            }
+            else
+            {
+                updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
+                updateFiles.AddRange(GetClgylJsFiles(this.pathTBx.Text));
+                updateFiles.AddRange(GetBinFiles(this.pathTBx.Text));
+
+                IEnumerable<IGrouping<string, FileInfo>> dictionarys = updateFiles.GroupBy(n => n.DirectoryName);
+                if (updateFiles != null && updateFiles.Count > 0)
                 {
-                    updateFiles.AddRange(GetMetadataFiles(openFileName));
-                    updateFiles.AddRange(GetClgylJsFiles(openFileName));
-                    updateFiles.AddRange(GetBinFiles(openFileName));
-
-                    IEnumerable<IGrouping<string, FileInfo>> dictionarys = updateFiles.GroupBy(n => n.DirectoryName);
-                    if (updateFiles != null && updateFiles.Count > 0)
+                    foreach (var dictionary in dictionarys)
                     {
-                        foreach (var dictionary in dictionarys)
+                        TreeNode treeNode1 = new TreeNode();
+                        treeNode1.Text = dictionary.Key.Replace(this.pathTBx.Text + "\\", "");
+                        foreach (var metadataFile in dictionary)
                         {
-                            TreeNode treeNode1 = new TreeNode();
-                            treeNode1.Text = dictionary.Key.Replace(openFileName + "\\", "");
-                            foreach (var metadataFile in dictionary)
-                            {
-                                TreeNode treeNode2 = new TreeNode();
-                                treeNode2.Text = metadataFile.Name;
-                                treeNode1.Nodes.Add(treeNode2);
-                            }
-                            this.updateFilesTV.Nodes.Add(treeNode1);
+                            TreeNode treeNode2 = new TreeNode();
+                            treeNode2.Text = metadataFile.Name;
+                            treeNode1.Nodes.Add(treeNode2);
                         }
+                        this.updateFilesTV.Nodes.Add(treeNode1);
+                    }
 
-                        if (this.isTrueCopyRadioBtn.Checked)
-                        {
-                            CopyUpdateFile();
-                        }
+                    if (this.isTrueCopyRadioBtn.Checked)
+                    {
+                        CopyUpdateFile();
                     }
                 }
             }
@@ -440,7 +444,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 MessageBox.Show("请选择产品目录！");
                 return;
             }
-
+            //Tfs帮助类
             TFSHelper tfsHelper = new TFSHelper();
             //复制文件
             foreach (var updateFile in this.updateFiles)
@@ -450,14 +454,10 @@ namespace JoeySoft.TfsDevelopWinFrom
                 if (File.Exists(fileName))
                 {
                     FileInfo fi = new FileInfo(fileName);
+                    //修改文件只读
                     if ((fi.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
                     {
                         fi.Attributes = FileAttributes.Normal;
-                    }
-                    File.Copy(updateFile.FullName, fileName, true);
-                    if (this.isTrueCheckoutRadioBtn.Checked)
-                    {
-                        tfsHelper.CheckOut(fileName);
                     }
                 }
                 else
@@ -468,15 +468,16 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         Directory.CreateDirectory(dir);
                     }
-                    File.Copy(updateFile.FullName, fileName);
-                    if (this.isTrueCheckoutRadioBtn.Checked)
-                    {
-                        tfsHelper.CheckOut(fileName);
-                    }
                 }
-
+                File.Copy(updateFile.FullName, fileName, true);
+                if (this.isTrueCheckoutRadioBtn.Checked)
+                {
+                    tfsHelper.CheckOut(fileName);
+                    MessageBox.Show("复制成功，并签出编辑！");
+                    return;
+                }
+                MessageBox.Show("复制成功！");
             }
-            MessageBox.Show("复制成功！");
         }
 
         #endregion
