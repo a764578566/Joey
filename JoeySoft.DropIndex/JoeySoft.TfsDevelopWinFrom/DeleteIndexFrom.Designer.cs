@@ -1,4 +1,4 @@
-﻿namespace JoeySoft.DropIndexWinFrom
+﻿namespace JoeySoft.TfsDevelopWinFrom
 {
     partial class DeleteIndexFrom
     {
@@ -37,6 +37,12 @@
             this.OutputBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.isTrueCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
+            this.isFalseCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.isTrueCopyRadioBtn = new System.Windows.Forms.RadioButton();
+            this.isFalseCopyRadioBtn = new System.Windows.Forms.RadioButton();
             this.updateFilesTV = new System.Windows.Forms.TreeView();
             this.customizePathTBx = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,17 +52,11 @@
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.RootFileBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.isTrueCheckInRadioBtn = new System.Windows.Forms.RadioButton();
-            this.isFalseCheckInRadioBtn = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.isTrueCopyRadioBtn = new System.Windows.Forms.RadioButton();
-            this.isFalseCopyRadioBtn = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sqlRtb
@@ -144,6 +144,72 @@
             this.tabPage2.Text = "生成二开更新包";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.isTrueCheckoutRadioBtn);
+            this.groupBox2.Controls.Add(this.isFalseCheckoutRadioBtn);
+            this.groupBox2.Location = new System.Drawing.Point(816, 108);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(163, 47);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "是否编辑签出二开";
+            // 
+            // isTrueCheckoutRadioBtn
+            // 
+            this.isTrueCheckoutRadioBtn.AutoSize = true;
+            this.isTrueCheckoutRadioBtn.Location = new System.Drawing.Point(23, 20);
+            this.isTrueCheckoutRadioBtn.Name = "isTrueCheckoutRadioBtn";
+            this.isTrueCheckoutRadioBtn.Size = new System.Drawing.Size(35, 16);
+            this.isTrueCheckoutRadioBtn.TabIndex = 13;
+            this.isTrueCheckoutRadioBtn.TabStop = true;
+            this.isTrueCheckoutRadioBtn.Text = "是";
+            this.isTrueCheckoutRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // isFalseCheckoutRadioBtn
+            // 
+            this.isFalseCheckoutRadioBtn.AutoSize = true;
+            this.isFalseCheckoutRadioBtn.Location = new System.Drawing.Point(94, 20);
+            this.isFalseCheckoutRadioBtn.Name = "isFalseCheckoutRadioBtn";
+            this.isFalseCheckoutRadioBtn.Size = new System.Drawing.Size(35, 16);
+            this.isFalseCheckoutRadioBtn.TabIndex = 14;
+            this.isFalseCheckoutRadioBtn.TabStop = true;
+            this.isFalseCheckoutRadioBtn.Text = "否";
+            this.isFalseCheckoutRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.isTrueCopyRadioBtn);
+            this.groupBox1.Controls.Add(this.isFalseCopyRadioBtn);
+            this.groupBox1.Location = new System.Drawing.Point(816, 35);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(163, 45);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "是否直接复制到指定目录";
+            // 
+            // isTrueCopyRadioBtn
+            // 
+            this.isTrueCopyRadioBtn.AutoSize = true;
+            this.isTrueCopyRadioBtn.Location = new System.Drawing.Point(23, 20);
+            this.isTrueCopyRadioBtn.Name = "isTrueCopyRadioBtn";
+            this.isTrueCopyRadioBtn.Size = new System.Drawing.Size(35, 16);
+            this.isTrueCopyRadioBtn.TabIndex = 8;
+            this.isTrueCopyRadioBtn.TabStop = true;
+            this.isTrueCopyRadioBtn.Text = "是";
+            this.isTrueCopyRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // isFalseCopyRadioBtn
+            // 
+            this.isFalseCopyRadioBtn.AutoSize = true;
+            this.isFalseCopyRadioBtn.Location = new System.Drawing.Point(94, 20);
+            this.isFalseCopyRadioBtn.Name = "isFalseCopyRadioBtn";
+            this.isFalseCopyRadioBtn.Size = new System.Drawing.Size(35, 16);
+            this.isFalseCopyRadioBtn.TabIndex = 10;
+            this.isFalseCopyRadioBtn.TabStop = true;
+            this.isFalseCopyRadioBtn.Text = "否";
+            this.isFalseCopyRadioBtn.UseVisualStyleBackColor = true;
+            // 
             // updateFilesTV
             // 
             this.updateFilesTV.Location = new System.Drawing.Point(6, 35);
@@ -225,72 +291,6 @@
             this.tabPage1.Text = "生成索引删除脚本";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.isTrueCheckInRadioBtn);
-            this.groupBox2.Controls.Add(this.isFalseCheckInRadioBtn);
-            this.groupBox2.Location = new System.Drawing.Point(825, 108);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(163, 47);
-            this.groupBox2.TabIndex = 18;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "是否直接签入二开";
-            // 
-            // isTrueCheckInRadioBtn
-            // 
-            this.isTrueCheckInRadioBtn.AutoSize = true;
-            this.isTrueCheckInRadioBtn.Location = new System.Drawing.Point(23, 20);
-            this.isTrueCheckInRadioBtn.Name = "isTrueCheckInRadioBtn";
-            this.isTrueCheckInRadioBtn.Size = new System.Drawing.Size(35, 16);
-            this.isTrueCheckInRadioBtn.TabIndex = 13;
-            this.isTrueCheckInRadioBtn.TabStop = true;
-            this.isTrueCheckInRadioBtn.Text = "是";
-            this.isTrueCheckInRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // isFalseCheckInRadioBtn
-            // 
-            this.isFalseCheckInRadioBtn.AutoSize = true;
-            this.isFalseCheckInRadioBtn.Location = new System.Drawing.Point(94, 20);
-            this.isFalseCheckInRadioBtn.Name = "isFalseCheckInRadioBtn";
-            this.isFalseCheckInRadioBtn.Size = new System.Drawing.Size(35, 16);
-            this.isFalseCheckInRadioBtn.TabIndex = 14;
-            this.isFalseCheckInRadioBtn.TabStop = true;
-            this.isFalseCheckInRadioBtn.Text = "否";
-            this.isFalseCheckInRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.isTrueCopyRadioBtn);
-            this.groupBox1.Controls.Add(this.isFalseCopyRadioBtn);
-            this.groupBox1.Location = new System.Drawing.Point(825, 35);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(163, 45);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "是否直接复制到指定目录";
-            // 
-            // isTrueCopyRadioBtn
-            // 
-            this.isTrueCopyRadioBtn.AutoSize = true;
-            this.isTrueCopyRadioBtn.Location = new System.Drawing.Point(23, 20);
-            this.isTrueCopyRadioBtn.Name = "isTrueCopyRadioBtn";
-            this.isTrueCopyRadioBtn.Size = new System.Drawing.Size(35, 16);
-            this.isTrueCopyRadioBtn.TabIndex = 8;
-            this.isTrueCopyRadioBtn.TabStop = true;
-            this.isTrueCopyRadioBtn.Text = "是";
-            this.isTrueCopyRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // isFalseCopyRadioBtn
-            // 
-            this.isFalseCopyRadioBtn.AutoSize = true;
-            this.isFalseCopyRadioBtn.Location = new System.Drawing.Point(94, 20);
-            this.isFalseCopyRadioBtn.Name = "isFalseCopyRadioBtn";
-            this.isFalseCopyRadioBtn.Size = new System.Drawing.Size(35, 16);
-            this.isFalseCopyRadioBtn.TabIndex = 10;
-            this.isFalseCopyRadioBtn.TabStop = true;
-            this.isFalseCopyRadioBtn.Text = "否";
-            this.isFalseCopyRadioBtn.UseVisualStyleBackColor = true;
-            // 
             // DeleteIndexFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -303,12 +303,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -331,13 +331,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker updateDateTimePicker;
         private System.Windows.Forms.TextBox customizePathTBx;
-        private System.Windows.Forms.TreeView updateFilesTV;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton isTrueCheckInRadioBtn;
-        private System.Windows.Forms.RadioButton isFalseCheckInRadioBtn;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton isTrueCopyRadioBtn;
         private System.Windows.Forms.RadioButton isFalseCopyRadioBtn;
+        private System.Windows.Forms.TreeView updateFilesTV;
+        private System.Windows.Forms.RadioButton isFalseCheckoutRadioBtn;
+        private System.Windows.Forms.RadioButton isTrueCheckoutRadioBtn;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

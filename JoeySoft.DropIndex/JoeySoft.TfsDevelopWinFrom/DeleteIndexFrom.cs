@@ -9,8 +9,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JoeySofy.TFS;
+using Microsoft.TeamFoundation.Client;
 
-namespace JoeySoft.DropIndexWinFrom
+namespace JoeySoft.TfsDevelopWinFrom
 {
     public partial class DeleteIndexFrom : Form
     {
@@ -36,9 +38,11 @@ namespace JoeySoft.DropIndexWinFrom
                 Directory.CreateDirectory(DeleteIndexDirectory);
             }
             this.customizePathTBx.Text = rootCustomizePath;
-            FileUserHelper.SetAccess("Users", rootCustomizePath);
+
             //是否直接复制到指定目录 否
             this.isFalseCopyRadioBtn.Select();
+            //是否直接签入二开 否
+            this.isFalseCheckoutRadioBtn.Select();
         }
 
         /// <summary>
@@ -391,7 +395,6 @@ namespace JoeySoft.DropIndexWinFrom
                 {
                     //选择的文件夹
                     string openFileName = folderBrowserDialog.SelectedPath;
-                    FileUserHelper.SetAccess("Users", openFileName);
                     this.customizePathTBx.Text = openFileName;
                     if (!File.Exists(openFileName + "\\Web.config"))
                     {
@@ -414,6 +417,7 @@ namespace JoeySoft.DropIndexWinFrom
         /// </summary>
         private void CopyUpdateFile()
         {
+            TFSHelper tfsHelper = new TFSHelper();
             //复制文件
             foreach (var updateFile in this.updateFiles)
             {
@@ -426,18 +430,31 @@ namespace JoeySoft.DropIndexWinFrom
                     {
                         fi.Attributes = FileAttributes.Normal;
                     }
+                    File.Copy(updateFile.FullName, fileName, true);
+                    if (this.isTrueCheckoutRadioBtn.Checked)
+                    {
+                        tfsHelper.Edit(fileName);
+                    }
+
                 }
-                File.Copy(updateFile.FullName, fileName, true);
+                else
+                {
+                    File.Copy(updateFile.FullName, fileName);
+                    if (this.isTrueCheckoutRadioBtn.Checked)
+                    {
+                        tfsHelper.Add(fileName);
+                    }
+                }
+
             }
             MessageBox.Show("复制成功！");
 
             //是否签入
-            if (this.isTrueCheckInRadioBtn.Checked)
+            if (this.isTrueCheckoutRadioBtn.Checked)
             {
 
             }
         }
-
 
         #endregion
 
