@@ -50,8 +50,11 @@
             this.customizebtn = new System.Windows.Forms.Button();
             this.updateFilesRTB = new System.Windows.Forms.RichTextBox();
             this.pathTBx = new System.Windows.Forms.TextBox();
-            this.RootFileBtn = new System.Windows.Forms.Button();
+            this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.CopyFilebtn = new System.Windows.Forms.Button();
+            this.Checkoutbtn = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -126,6 +129,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.Checkoutbtn);
+            this.tabPage2.Controls.Add(this.CopyFilebtn);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.updateFilesTV);
@@ -135,7 +141,7 @@
             this.tabPage2.Controls.Add(this.customizebtn);
             this.tabPage2.Controls.Add(this.updateFilesRTB);
             this.tabPage2.Controls.Add(this.pathTBx);
-            this.tabPage2.Controls.Add(this.RootFileBtn);
+            this.tabPage2.Controls.Add(this.ReadRootFileBtn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -148,13 +154,12 @@
             // 
             this.groupBox2.Controls.Add(this.isTrueCheckoutRadioBtn);
             this.groupBox2.Controls.Add(this.isFalseCheckoutRadioBtn);
-            this.groupBox2.Location = new System.Drawing.Point(816, 108);
+            this.groupBox2.Location = new System.Drawing.Point(813, 118);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(163, 47);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "是否编辑签出二开";
-            this.groupBox2.Visible = false;
             // 
             // isTrueCheckoutRadioBtn
             // 
@@ -182,12 +187,12 @@
             // 
             this.groupBox1.Controls.Add(this.isTrueCopyRadioBtn);
             this.groupBox1.Controls.Add(this.isFalseCopyRadioBtn);
-            this.groupBox1.Location = new System.Drawing.Point(816, 35);
+            this.groupBox1.Location = new System.Drawing.Point(810, 62);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(163, 50);
+            this.groupBox1.Size = new System.Drawing.Size(166, 50);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "是否直接复制并签出编辑";
+            this.groupBox1.Text = "是否复制到二开环境";
             // 
             // isTrueCopyRadioBtn
             // 
@@ -220,10 +225,11 @@
             // 
             // customizePathTBx
             // 
-            this.customizePathTBx.Location = new System.Drawing.Point(135, 641);
+            this.customizePathTBx.Location = new System.Drawing.Point(6, 654);
             this.customizePathTBx.Name = "customizePathTBx";
             this.customizePathTBx.Size = new System.Drawing.Size(671, 21);
             this.customizePathTBx.TabIndex = 6;
+            this.customizePathTBx.TextChanged += new System.EventHandler(this.customizePathTBx_TextChanged);
             // 
             // label1
             // 
@@ -243,7 +249,7 @@
             // 
             // customizebtn
             // 
-            this.customizebtn.Location = new System.Drawing.Point(6, 641);
+            this.customizebtn.Location = new System.Drawing.Point(695, 652);
             this.customizebtn.Name = "customizebtn";
             this.customizebtn.Size = new System.Drawing.Size(111, 23);
             this.customizebtn.TabIndex = 3;
@@ -261,20 +267,20 @@
             // 
             // pathTBx
             // 
-            this.pathTBx.Location = new System.Drawing.Point(105, 8);
+            this.pathTBx.Location = new System.Drawing.Point(6, 8);
             this.pathTBx.Name = "pathTBx";
             this.pathTBx.Size = new System.Drawing.Size(701, 21);
             this.pathTBx.TabIndex = 1;
             // 
-            // RootFileBtn
+            // ReadRootFileBtn
             // 
-            this.RootFileBtn.Location = new System.Drawing.Point(6, 6);
-            this.RootFileBtn.Name = "RootFileBtn";
-            this.RootFileBtn.Size = new System.Drawing.Size(93, 23);
-            this.RootFileBtn.TabIndex = 0;
-            this.RootFileBtn.Text = "打开产品目录";
-            this.RootFileBtn.UseVisualStyleBackColor = true;
-            this.RootFileBtn.Click += new System.EventHandler(this.RootFileBtn_Click);
+            this.ReadRootFileBtn.Location = new System.Drawing.Point(724, 6);
+            this.ReadRootFileBtn.Name = "ReadRootFileBtn";
+            this.ReadRootFileBtn.Size = new System.Drawing.Size(80, 24);
+            this.ReadRootFileBtn.TabIndex = 0;
+            this.ReadRootFileBtn.Text = "读取";
+            this.ReadRootFileBtn.UseVisualStyleBackColor = true;
+            this.ReadRootFileBtn.Click += new System.EventHandler(this.RootFileBtn_Click);
             // 
             // tabPage1
             // 
@@ -291,6 +297,36 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "生成索引删除脚本";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // CopyFilebtn
+            // 
+            this.CopyFilebtn.Location = new System.Drawing.Point(810, 6);
+            this.CopyFilebtn.Name = "CopyFilebtn";
+            this.CopyFilebtn.Size = new System.Drawing.Size(80, 24);
+            this.CopyFilebtn.TabIndex = 17;
+            this.CopyFilebtn.Text = "复制";
+            this.CopyFilebtn.UseVisualStyleBackColor = true;
+            this.CopyFilebtn.Click += new System.EventHandler(this.CopyFilebtn_Click);
+            // 
+            // Checkoutbtn
+            // 
+            this.Checkoutbtn.Location = new System.Drawing.Point(896, 5);
+            this.Checkoutbtn.Name = "Checkoutbtn";
+            this.Checkoutbtn.Size = new System.Drawing.Size(80, 24);
+            this.Checkoutbtn.TabIndex = 18;
+            this.Checkoutbtn.Text = "签出编辑";
+            this.Checkoutbtn.UseVisualStyleBackColor = true;
+            this.Checkoutbtn.Click += new System.EventHandler(this.Checkoutbtn_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(896, 32);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(80, 24);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "自动签入";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             // 
             // DeleteIndexFrom
             // 
@@ -327,7 +363,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox pathTBx;
-        private System.Windows.Forms.Button RootFileBtn;
+        private System.Windows.Forms.Button ReadRootFileBtn;
         private System.Windows.Forms.Button customizebtn;
         private System.Windows.Forms.RichTextBox updateFilesRTB;
         private System.Windows.Forms.Label label1;
@@ -340,6 +376,9 @@
         private System.Windows.Forms.RadioButton isTrueCheckoutRadioBtn;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button Checkoutbtn;
+        private System.Windows.Forms.Button CopyFilebtn;
     }
 }
 

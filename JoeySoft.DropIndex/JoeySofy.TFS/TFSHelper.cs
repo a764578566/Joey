@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JoeySofy.TFS
@@ -21,21 +22,23 @@ namespace JoeySofy.TFS
         private VersionControlServer version;
 
         private Dictionary<string, ItemSet> dic = new Dictionary<string, ItemSet>();
-        public TFSHelper()
-        {
-            ////连接TFS
-            string tpcURL = "http://10.5.10.70:8080/tfs";
-            var uICredentialsProvider = new UICredentialsProvider();
-            //登录服务器
-            TfsConfigurationServer tfs = TfsConfigurationServerFactory.GetConfigurationServer(new Uri(tpcURL),
-                uICredentialsProvider);
 
-            //登录服务前，如果没有登录过会弹出提示框登录，登录过会直接跳过
-            tfs.EnsureAuthenticated();
+
+        /// <summary>
+        /// Tfs初始化
+        /// </summary>
+        /// <param name="vsPath"></param>
+        /// <param name="fileName"></param>
+        public TFSHelper(string vsPath, string fileName)
+        {
+            //读取VS中的tfs地址
+            string tpcURL = GetTfsUrl(vsPath, fileName);
 
             //登录服务器指定tfs项目
-            TfsTeamProjectCollection pjc = new TfsTeamProjectCollection(new Uri(tpcURL + "/szzb"),
-                tfs.AuthorizedIdentity.Descriptor);
+            TfsTeamProjectCollection pjc = new TfsTeamProjectCollection(new Uri(tpcURL));
+
+            //登录服务前，如果没有登录过会弹出提示框登录，登录过会直接跳过
+            pjc.EnsureAuthenticated();
 
             version = pjc.GetService<VersionControlServer>();
 
@@ -51,6 +54,32 @@ namespace JoeySofy.TFS
             }
         }
 
+        /// <summary>
+        /// 读取VS中的tfs地址
+        /// </summary>
+        /// <param name="vsPath">vs所在地址</param>
+        /// <param name="fileName">解决方案名称</param>
+        private string GetTfsUrl(string vsPath, string fileName)
+        {
+            string filePath = Path.Combine(vsPath, fileName);
+            if (!File.Exists(filePath))
+            {
+                throw new Exception("请选择正确的产品地址或解决方案名称！");
+            }
+
+            //解决方案数据
+            string slnString = File.ReadAllText(filePath);
+
+            string regex = @"SccTeamFoundationServer = (.+)\r";
+
+            Match match = Regex.Match(slnString, regex, RegexOptions.IgnoreCase);
+
+            if (match.Groups.Count > 1)
+            {
+                return match.Groups[1].Value;
+            }
+            throw new Exception("请确定解决方案已经关联服务的TFS！");
+        }
 
         /// <summary>
         /// 签出编辑，可能是新增，可能是编辑

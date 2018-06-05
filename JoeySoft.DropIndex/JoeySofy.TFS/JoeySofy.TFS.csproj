@@ -47,11 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="DLL\Microsoft.TeamFoundation.Client.dll" />
-    <Content Include="DLL\Microsoft.TeamFoundation.Common.dll" />
-    <Content Include="DLL\Microsoft.TeamFoundation.VersionControl.Client.dll" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
