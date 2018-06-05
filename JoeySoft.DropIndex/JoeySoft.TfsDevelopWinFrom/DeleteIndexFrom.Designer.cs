@@ -37,6 +37,9 @@
             this.OutputBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.Checkoutbtn = new System.Windows.Forms.Button();
+            this.CopyFilebtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.isTrueCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
             this.isFalseCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
@@ -52,9 +55,6 @@
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.CopyFilebtn = new System.Windows.Forms.Button();
-            this.Checkoutbtn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -150,6 +150,38 @@
             this.tabPage2.Text = "生成二开更新包";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(896, 32);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(80, 24);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "自动签入";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
+            // 
+            // Checkoutbtn
+            // 
+            this.Checkoutbtn.Location = new System.Drawing.Point(896, 5);
+            this.Checkoutbtn.Name = "Checkoutbtn";
+            this.Checkoutbtn.Size = new System.Drawing.Size(80, 24);
+            this.Checkoutbtn.TabIndex = 18;
+            this.Checkoutbtn.Text = "签出编辑";
+            this.Checkoutbtn.UseVisualStyleBackColor = true;
+            this.Checkoutbtn.Visible = false;
+            this.Checkoutbtn.Click += new System.EventHandler(this.Checkoutbtn_Click);
+            // 
+            // CopyFilebtn
+            // 
+            this.CopyFilebtn.Location = new System.Drawing.Point(810, 6);
+            this.CopyFilebtn.Name = "CopyFilebtn";
+            this.CopyFilebtn.Size = new System.Drawing.Size(80, 24);
+            this.CopyFilebtn.TabIndex = 17;
+            this.CopyFilebtn.Text = "复制";
+            this.CopyFilebtn.UseVisualStyleBackColor = true;
+            this.CopyFilebtn.Visible = false;
+            this.CopyFilebtn.Click += new System.EventHandler(this.CopyFilebtn_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.isTrueCheckoutRadioBtn);
@@ -160,6 +192,7 @@
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "是否编辑签出二开";
+            this.groupBox2.Visible = false;
             // 
             // isTrueCheckoutRadioBtn
             // 
@@ -192,7 +225,7 @@
             this.groupBox1.Size = new System.Drawing.Size(166, 50);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "是否复制到二开环境";
+            this.groupBox1.Text = "是否读取时直接复制并签出";
             // 
             // isTrueCopyRadioBtn
             // 
@@ -297,36 +330,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "生成索引删除脚本";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // CopyFilebtn
-            // 
-            this.CopyFilebtn.Location = new System.Drawing.Point(810, 6);
-            this.CopyFilebtn.Name = "CopyFilebtn";
-            this.CopyFilebtn.Size = new System.Drawing.Size(80, 24);
-            this.CopyFilebtn.TabIndex = 17;
-            this.CopyFilebtn.Text = "复制";
-            this.CopyFilebtn.UseVisualStyleBackColor = true;
-            this.CopyFilebtn.Click += new System.EventHandler(this.CopyFilebtn_Click);
-            // 
-            // Checkoutbtn
-            // 
-            this.Checkoutbtn.Location = new System.Drawing.Point(896, 5);
-            this.Checkoutbtn.Name = "Checkoutbtn";
-            this.Checkoutbtn.Size = new System.Drawing.Size(80, 24);
-            this.Checkoutbtn.TabIndex = 18;
-            this.Checkoutbtn.Text = "签出编辑";
-            this.Checkoutbtn.UseVisualStyleBackColor = true;
-            this.Checkoutbtn.Click += new System.EventHandler(this.Checkoutbtn_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(896, 32);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 24);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "自动签入";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
             // 
             // DeleteIndexFrom
             // 

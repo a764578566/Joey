@@ -71,6 +71,7 @@
     <Compile Include="DeleteIndexFrom.Designer.cs">
       <DependentUpon>DeleteIndexFrom.cs</DependentUpon>
     </Compile>
+    <Compile Include="MD5Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DeleteIndexFrom.resx">

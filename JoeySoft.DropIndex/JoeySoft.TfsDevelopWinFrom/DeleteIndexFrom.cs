@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -71,7 +72,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             //是否直接复制到指定目录 否
             this.isFalseCopyRadioBtn.Select();
             //是否直接签入二开 否
-            this.isFalseCheckoutRadioBtn.Select();
+            this.isTrueCheckoutRadioBtn.Select();
 
             this.tabPage1.Parent = null;
         }
@@ -455,6 +456,8 @@ namespace JoeySoft.TfsDevelopWinFrom
                 }
                 else
                 {
+                    this.CopyFilebtn.Enabled = false;
+                    this.customizebtn.Enabled = false;
                     MessageBox.Show("复制成功！");
                 }
             }
@@ -465,12 +468,13 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private bool CopyUpdateFile()
         {
-            if (this.updateFiles == null || this.updateFiles.Count == 0)
+            if (this.updateFiles == null)
             {
-                MessageBox.Show("请选择产品目录！");
+                MessageBox.Show("请选择读取产品修改信息！");
                 return false;
             }
             //复制文件
+            List<FileInfo> removeFiles = new List<FileInfo>();
             foreach (var updateFile in this.updateFiles)
             {
                 var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
@@ -483,6 +487,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         fi.Attributes = FileAttributes.Normal;
                     }
+                    //如果相同文件没有修改过
+                    if (MD5Helper.CompareFile(updateFile.FullName, fileName))
+                    {
+                        removeFiles.Add(updateFile);
+                        continue;
+                    }
                 }
                 else
                 {
@@ -493,7 +503,20 @@ namespace JoeySoft.TfsDevelopWinFrom
                         Directory.CreateDirectory(dir);
                     }
                 }
-                File.Copy(updateFile.FullName, fileName, true);
+                try
+                {
+                    File.Copy(updateFile.FullName, fileName, true);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+            }
+
+            foreach (var removeFile in removeFiles)
+            {
+                this.updateFiles.Remove(removeFile);
             }
             return true;
         }
@@ -503,15 +526,20 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private bool Checkout()
         {
-            if (this.updateFiles == null || this.updateFiles.Count == 0)
+            if (this.updateFiles == null)
             {
                 MessageBox.Show("请选择产品目录！");
+                return false;
+            }
+            if (this.updateFiles.Count == 0)
+            {
+                MessageBox.Show("没有需要签入的文件！");
                 return false;
             }
             //Tfs帮助类
             TFSHelper tfsHelper =
                 tfsHelper = new TFSHelper(Directory.GetParent(rootCustomizePath).FullName, CustomizeSlnFileName);
-            //复制文件
+            //签出编辑
             foreach (var updateFile in this.updateFiles)
             {
                 var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
@@ -539,12 +567,16 @@ namespace JoeySoft.TfsDevelopWinFrom
             {
                 MessageBox.Show("签出编辑成功！");
             }
+            this.CopyFilebtn.Enabled = true;
+            this.customizebtn.Enabled = true;
         }
 
         private void CopyFilebtn_Click(object sender, EventArgs e)
         {
             if (CopyUpdateFile())
             {
+                this.CopyFilebtn.Enabled = false;
+                this.customizebtn.Enabled = false;
                 MessageBox.Show("复制成功！");
             }
         }
