@@ -25,10 +25,10 @@ namespace JoeySofy.TFS
         {
             ////连接TFS
             string tpcURL = "http://10.5.10.70:8080/tfs";
-
+            var uICredentialsProvider = new UICredentialsProvider();
             //登录服务器
             TfsConfigurationServer tfs = TfsConfigurationServerFactory.GetConfigurationServer(new Uri(tpcURL),
-                new UICredentialsProvider());
+                uICredentialsProvider);
 
             //登录服务前，如果没有登录过会弹出提示框登录，登录过会直接跳过
             tfs.EnsureAuthenticated();

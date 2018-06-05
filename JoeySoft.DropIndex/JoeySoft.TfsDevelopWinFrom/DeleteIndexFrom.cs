@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JoeySofy.TFS;
-using Microsoft.TeamFoundation.Client;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -445,7 +444,11 @@ namespace JoeySoft.TfsDevelopWinFrom
                 return;
             }
             //Tfs帮助类
-            TFSHelper tfsHelper = new TFSHelper();
+            TFSHelper tfsHelper = null;
+            if (this.isTrueCheckoutRadioBtn.Checked)
+            {
+                tfsHelper = new TFSHelper();
+            }
             //复制文件
             foreach (var updateFile in this.updateFiles)
             {
@@ -473,9 +476,14 @@ namespace JoeySoft.TfsDevelopWinFrom
                 if (this.isTrueCheckoutRadioBtn.Checked)
                 {
                     tfsHelper.CheckOut(fileName);
-                    MessageBox.Show("复制成功，并签出编辑！");
-                    return;
                 }
+            }
+            if (this.isTrueCheckoutRadioBtn.Checked)
+            {
+                MessageBox.Show("复制成功，并签出编辑！");
+            }
+            else
+            {
                 MessageBox.Show("复制成功！");
             }
         }

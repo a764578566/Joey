@@ -4,5 +4,7 @@
 3.目前bin 目录只有产品dll会被签入
  
 4.读取产品修改文件、复制到二开文件、签出编辑、自动签入分步骤完成
+
+5.复制到多个二开环境
  
 TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
