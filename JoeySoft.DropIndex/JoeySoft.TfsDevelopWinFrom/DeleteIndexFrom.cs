@@ -445,15 +445,17 @@ namespace JoeySoft.TfsDevelopWinFrom
             //复制文件
             if (CopyUpdateFile())
             {
-                MessageBox.Show("复制成功！");
-
                 if (this.isTrueCheckoutRadioBtn.Checked)
                 {
                     //签出编辑
                     if (Checkout())
                     {
-                        MessageBox.Show("复制成功并，签出编辑成功！");
+                        MessageBox.Show("复制成功并签出编辑成功！");
                     }
+                }
+                else
+                {
+                    MessageBox.Show("复制成功！");
                 }
             }
         }
