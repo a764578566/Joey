@@ -562,8 +562,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 return false;
             }
             //Tfs帮助类
-            TFSHelper tfsHelper =
-                tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
+            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
             //签出编辑
             foreach (var updateFile in this.updateFiles)
             {
