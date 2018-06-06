@@ -9,6 +9,8 @@ using Microsoft.TeamFoundation.Framework.Client;
 using Microsoft.TeamFoundation.Framework.Common;
 using Microsoft.TeamFoundation.Server;
 using Microsoft.TeamFoundation.VersionControl.Client;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace JoeySoft.TfsDevelop
 {
@@ -16,6 +18,14 @@ namespace JoeySoft.TfsDevelop
     {
         static void Main(string[] args)
         {
+            string sln =
+                File.ReadAllText(
+                    "E:\\mysoft\\tfs_new\\10.5.10.70\\星河二开项目\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\材料供应链二开整体解决方案.sln");
+
+            string regex = @"SccTeamFoundationServer = (.+)\r";
+
+            var math2 = Regex.Matches(sln, regex, RegexOptions.IgnoreCase);
+
             ////连接TFS
             string tpcURL = "http://10.5.10.70:8080/tfs";
 

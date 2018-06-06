@@ -98,6 +98,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JoeySofy.TFS\JoeySofy.TFS.csproj">
+      <Project>{DFDEE644-0D25-4355-86DC-230458C7E034}</Project>
+      <Name>JoeySofy.TFS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

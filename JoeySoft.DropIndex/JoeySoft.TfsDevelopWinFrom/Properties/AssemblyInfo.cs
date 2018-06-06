@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("JoeySoft.TfsDevelopWinFrom")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mysoft")]
+[assembly: AssemblyCompany("JoeySoft")]
 [assembly: AssemblyProduct("JoeySoft.TfsDevelopWinFrom")]
 [assembly: AssemblyCopyright("Copyright © mysoft 2018")]
 [assembly: AssemblyTrademark("")]

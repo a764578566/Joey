@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JoeySofy.TFS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,7 @@ namespace JoeySoft.DropIndexWinFrom
 
         public DeleteIndexFrom()
         {
+            TFSHelper tfs = new TFSHelper();
             InitializeComponent();
 
             textTemplateSqlText = File.ReadAllText("TextTemplate.txt");
