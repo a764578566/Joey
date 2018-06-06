@@ -37,6 +37,7 @@
             this.OutputBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.customizePathCBX = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.Checkoutbtn = new System.Windows.Forms.Button();
             this.CopyFilebtn = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.isTrueCopyRadioBtn = new System.Windows.Forms.RadioButton();
             this.isFalseCopyRadioBtn = new System.Windows.Forms.RadioButton();
             this.updateFilesTV = new System.Windows.Forms.TreeView();
-            this.customizePathTBx = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.updateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.customizebtn = new System.Windows.Forms.Button();
@@ -129,13 +129,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.customizePathCBX);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.Checkoutbtn);
             this.tabPage2.Controls.Add(this.CopyFilebtn);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.updateFilesTV);
-            this.tabPage2.Controls.Add(this.customizePathTBx);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.updateDateTimePicker);
             this.tabPage2.Controls.Add(this.customizebtn);
@@ -149,6 +149,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "生成二开更新包";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // customizePathCBX
+            // 
+            this.customizePathCBX.FormattingEnabled = true;
+            this.customizePathCBX.Location = new System.Drawing.Point(6, 653);
+            this.customizePathCBX.Name = "customizePathCBX";
+            this.customizePathCBX.Size = new System.Drawing.Size(674, 20);
+            this.customizePathCBX.TabIndex = 20;
             // 
             // button3
             // 
@@ -256,14 +264,6 @@
             this.updateFilesTV.Size = new System.Drawing.Size(798, 600);
             this.updateFilesTV.TabIndex = 11;
             // 
-            // customizePathTBx
-            // 
-            this.customizePathTBx.Location = new System.Drawing.Point(6, 654);
-            this.customizePathTBx.Name = "customizePathTBx";
-            this.customizePathTBx.Size = new System.Drawing.Size(671, 21);
-            this.customizePathTBx.TabIndex = 6;
-            this.customizePathTBx.TextChanged += new System.EventHandler(this.customizePathTBx_TextChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -282,7 +282,7 @@
             // 
             // customizebtn
             // 
-            this.customizebtn.Location = new System.Drawing.Point(695, 652);
+            this.customizebtn.Location = new System.Drawing.Point(695, 653);
             this.customizebtn.Name = "customizebtn";
             this.customizebtn.Size = new System.Drawing.Size(111, 23);
             this.customizebtn.TabIndex = 3;
@@ -371,7 +371,6 @@
         private System.Windows.Forms.RichTextBox updateFilesRTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker updateDateTimePicker;
-        private System.Windows.Forms.TextBox customizePathTBx;
         private System.Windows.Forms.RadioButton isTrueCopyRadioBtn;
         private System.Windows.Forms.RadioButton isFalseCopyRadioBtn;
         private System.Windows.Forms.TreeView updateFilesTV;
@@ -382,6 +381,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button Checkoutbtn;
         private System.Windows.Forms.Button CopyFilebtn;
+        private System.Windows.Forms.ComboBox customizePathCBX;
     }
 }
 
