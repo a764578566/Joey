@@ -43,15 +43,42 @@ namespace JoeySofy.TFS
             version = pjc.GetService<VersionControlServer>();
 
             //获取工作区
+            wf = GetWorkspace(vsPath);
+        }
+
+        /// <summary>
+        /// 获取工作区
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private WorkingFolder GetWorkspace(string vsPath)
+        {
+            WorkingFolder workingFolder = null;
+            //获取工作区
             Workspace[] wss = version.QueryWorkspaces(Environment.MachineName, version.AuthenticatedUser,
-                Environment.MachineName); //查询工作区
+                    Environment.MachineName); //查询工作区
 
             ws = wss.FirstOrDefault();
 
             if (ws.Folders.Count() > 0)
             {
-                wf = ws.Folders[0];
+                foreach (var folder in ws.Folders)
+                {
+                    if (vsPath.IndexOf(folder.LocalItem) == 0)
+                    {
+                        workingFolder = folder;
+                    }
+                }
+                if (workingFolder == null)
+                {
+                    throw new Exception("请确认TFS工作区的正确性！");
+                }
             }
+            else
+            {
+                throw new Exception("请确认解决方案连接了TFS！");
+            }
+            return workingFolder;
         }
 
         /// <summary>
