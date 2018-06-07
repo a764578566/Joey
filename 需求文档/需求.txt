@@ -23,5 +23,6 @@
 
 2.判断文件是否为别人签出编辑，提示用户
 
+3.复制并签出编辑前 获取TFS最新代码
 
 TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
