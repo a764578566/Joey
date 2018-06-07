@@ -1,4 +1,0 @@
-﻿--{2}
-IF EXISTS(select * from sysindexes where id=object_id('{0}') 
-AND name='{1}') 
-DROP INDEX {1} ON {0}

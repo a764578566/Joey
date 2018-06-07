@@ -1,5 +1,4 @@
-﻿using JoeySofy.TFS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,22 +24,15 @@ namespace JoeySoft.DropIndexWinFrom
 
         public DeleteIndexFrom()
         {
-            TFSHelper tfs = new TFSHelper();
             InitializeComponent();
 
             textTemplateSqlText = File.ReadAllText("TextTemplate.txt");
-
-            this.updateDateTimePicker.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
             //如果目录不存在 创建
             if (!Directory.Exists(DeleteIndexDirectory))
             {
                 Directory.CreateDirectory(DeleteIndexDirectory);
             }
-            this.customizePathTBx.Text = rootCustomizePath;
-            FileUserHelper.SetAccess("Users", rootCustomizePath);
-            //是否直接复制到指定目录 否
-            this.isFalseCopyRadioBtn.Select();
         }
 
         /// <summary>
@@ -56,14 +48,15 @@ namespace JoeySoft.DropIndexWinFrom
             {
                 return;
             }
+            this.delIndexRtb.Text = string.Empty;
             string[] sqlIndexs = sqlText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             //匹配索引
-            string regexIndexText = @"CREATE [a-zA-Z]+ INDEX ([1-9a-zA-Z_]+)";
+            string regexIndexText = @"CREATE\s+[a-zA-Z]+\s+INDEX\s+([1-9a-zA-Z_]+)";
             //匹配表
-            string regexTableText = @"ON ([1-9a-zA-Z_\[.\]]+) \(";
+            string regexTableText = @"ON\s+([1-9a-zA-Z_\[.\]]+)\s+\(";
 
             //匹配索引与表
-            string regexIndexTableText = @"CREATE [a-zA-Z]+ INDEX ([1-9a-zA-Z_]+) ON ([1-9a-zA-Z_\[.\]]+) \(";
+            string regexIndexTableText = @"CREATE\s+[a-zA-Z]+\sINDEX\s+([1-9a-zA-Z_]+)\s+ON\s+([1-9a-zA-Z_\[.\]]+)\s+\(";
             //匹配说明
             string regexRemarkText = @"--(.*)";
             string indexName = "", remark = "";
@@ -118,6 +111,7 @@ namespace JoeySoft.DropIndexWinFrom
         /// <param name="e"></param>
         private void OpenFile_Click(object sender, EventArgs e)
         {
+            this.sqlRtb.Text = string.Empty;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "sql文件|*.sql|文本文件|*.*";
             openFileDialog.RestoreDirectory = true;
@@ -165,283 +159,5 @@ namespace JoeySoft.DropIndexWinFrom
         }
 
         #endregion
-
-        #region 生成二开更新包
-
-        //获取修改当前日期
-        private DateTime dt;
-        //更新目录
-        private string _metadata = "_metadata";
-        private string _clgyl = "Clgyl";
-        private string _bin = "bin";
-
-        //产品地址
-        string rootProductPath = @"E:\mysoft\tfs_new\10.5.10.96\WH-ProductDev\住宅ERP-新平台\ERP-V1.0\60_材料供应链系统\03_主干-开发分支\00_根目录";
-        //二开地址
-        private string rootCustomizePath = @"E:\mysoft\tfs_new\10.5.10.70\星河二开项目\总部星河\明源云ERPv1.0SP5星河孵化\源代码\分支1\00-ERP站点";
-
-        //需要更新的文件信息
-        private List<FileInfo> updateFiles;
-
-        /// <summary>
-        /// 打开更新的文件目录
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RootFileBtn_Click(object sender, EventArgs e)
-        {
-            this.updateFiles = new List<FileInfo>();
-            this.updateFilesTV.Nodes.Clear();
-            //获取修改当前日期
-            dt = DateTime.Parse(DateTime.Parse(this.updateDateTimePicker.Text).ToString("yyyy/MM/dd"));
-            //选择文件夹
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.SelectedPath = rootProductPath;
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                //选择的文件夹
-                string openFileName = folderBrowserDialog.SelectedPath;
-                this.pathTBx.Text = openFileName;
-                if (!File.Exists(openFileName + "\\Web.config"))
-                {
-                    MessageBox.Show("请选择产品根目录！");
-                }
-                else
-                {
-                    updateFiles.AddRange(GetMetadataFiles(openFileName));
-                    updateFiles.AddRange(GetClgylJsFiles(openFileName));
-                    updateFiles.AddRange(GetBinFiles(openFileName));
-
-                    IEnumerable<IGrouping<string, FileInfo>> dictionarys = updateFiles.GroupBy(n => n.DirectoryName);
-                    if (updateFiles != null && updateFiles.Count > 0)
-                    {
-                        foreach (var dictionary in dictionarys)
-                        {
-                            TreeNode treeNode1 = new TreeNode();
-                            treeNode1.Text = dictionary.Key.Replace(openFileName + "\\", "");
-                            foreach (var metadataFile in dictionary)
-                            {
-                                TreeNode treeNode2 = new TreeNode();
-                                treeNode2.Text = metadataFile.Name;
-                                treeNode1.Nodes.Add(treeNode2);
-                            }
-                            this.updateFilesTV.Nodes.Add(treeNode1);
-                        }
-
-                        if (this.isTrueCopyRadioBtn.Checked)
-                        {
-                            CopyUpdateFile();
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取元数据内信息
-        /// </summary>
-        /// <param name="openFileName"></param>
-        /// <returns></returns>
-        private List<FileInfo> GetMetadataFiles(string openFileName)
-        {
-            openFileName = Path.Combine(openFileName, _metadata);
-
-            List<FileInfo> metadataFiles = new List<FileInfo>();
-
-            string[] directoryNames = new string[]
-            {
-                "AppForm", //表单
-                "AppGrid", //列表
-                "AppTreeGrid", //树列表
-                "AppCard", //卡片
-                "Entity", //实体
-                "View", //视图
-                "MetadataRelationship" //关系
-            };
-            if (!Directory.Exists(openFileName))
-            {
-                MessageBox.Show("请选择产品根目录！");
-            }
-            else
-            {
-                foreach (var directoryName in directoryNames)
-                {
-                    string[] fileNameAppForm = Directory.GetFiles(Path.Combine(openFileName, directoryName));
-                    foreach (var fileName in fileNameAppForm)
-                    {
-                        FileInfo file = new FileInfo(fileName);
-                        //判断修改时间是否大于当前时间
-                        if (file.LastWriteTime >= dt)
-                        {
-                            metadataFiles.Add(file);
-                        }
-                    }
-                }
-
-            }
-            return metadataFiles;
-        }
-
-
-        /// <summary>
-        /// 获取js信息
-        /// </summary>
-        /// <param name="openFileName"></param>
-        /// <returns></returns>
-        private List<FileInfo> GetClgylJsFiles(string openFileName)
-        {
-            openFileName = Path.Combine(openFileName, _clgyl);
-            List<FileInfo> metadataFiles = new List<FileInfo>();
-            List<string> directoryFileNamelist = new List<string>() { openFileName };
-
-            GetDirectorie(openFileName, directoryFileNamelist);
-
-            if (!Directory.Exists(openFileName))
-            {
-                MessageBox.Show("请选择产品根目录！");
-            }
-            else
-            {
-                foreach (var directoryName in directoryFileNamelist)
-                {
-                    string[] fileNameAppForm = Directory.GetFiles(Path.Combine(openFileName, directoryName));
-                    foreach (var fileName in fileNameAppForm)
-                    {
-                        FileInfo file = new FileInfo(fileName);
-                        //判断修改时间是否大于当前时间
-                        if (file.LastWriteTime >= dt)
-                        {
-                            metadataFiles.Add(file);
-                        }
-                    }
-                }
-
-            }
-            return metadataFiles;
-        }
-
-        /// <summary>
-        /// 获取js信息
-        /// </summary>
-        /// <param name="openFileName"></param>
-        /// <returns></returns>
-        private List<FileInfo> GetBinFiles(string openFileName)
-        {
-            openFileName = Path.Combine(openFileName, _bin);
-            List<FileInfo> metadataFiles = new List<FileInfo>();
-            List<string> directoryFileNamelist = new List<string>() { openFileName };
-
-            GetDirectorie(openFileName, directoryFileNamelist);
-
-            if (!Directory.Exists(openFileName))
-            {
-                MessageBox.Show("请选择产品根目录！");
-            }
-            else
-            {
-                foreach (var directoryName in directoryFileNamelist)
-                {
-                    string[] fileNameAppForm = Directory.GetFiles(Path.Combine(openFileName, directoryName));
-                    foreach (var fileName in fileNameAppForm)
-                    {
-                        FileInfo file = new FileInfo(fileName);
-                        //判断修改时间是否大于当前时间
-                        if (file.LastWriteTime >= dt && file.Name.IndexOf("Fakes") == -1 && file.Name.IndexOf("UnitTest") == -1)
-                        {
-                            if (file.Name.IndexOf("Web_Clgyl") == -1 && file.Name.IndexOf("License.xml") == -1)
-                            {
-                                metadataFiles.Add(file);
-                            }
-                        }
-                    }
-                }
-
-            }
-            return metadataFiles;
-        }
-
-        /// <summary>
-        /// 递归获取文件目录
-        /// </summary>
-        /// <returns></returns>
-        private void GetDirectorie(string directorieName, List<string> directoryFileNamelist)
-        {
-            string[] directoryNames = Directory.GetDirectories(directorieName);
-            if (directoryNames != null && directoryNames.Count() > 0)
-            {
-                directoryFileNamelist.AddRange(directoryNames);
-                foreach (var directoryName in directoryNames)
-                {
-                    GetDirectorie(directoryName, directoryFileNamelist);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 复制到指定目录
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void customizebtn_Click(object sender, EventArgs e)
-        {
-            //是否是空 如果是空就去打开选择地址
-            if (string.IsNullOrEmpty(this.customizePathTBx.Text))
-            {
-                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-                folderBrowserDialog.SelectedPath = rootCustomizePath;
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //选择的文件夹
-                    string openFileName = folderBrowserDialog.SelectedPath;
-                    FileUserHelper.SetAccess("Users", openFileName);
-                    this.customizePathTBx.Text = openFileName;
-                    if (!File.Exists(openFileName + "\\Web.config"))
-                    {
-                        MessageBox.Show("请选择二开根目录！");
-                    }
-                    else
-                    {
-                        CopyUpdateFile();
-                    }
-                }
-            }
-            else
-            {
-                CopyUpdateFile();
-            }
-        }
-
-        /// <summary>
-        /// 复制更新文件
-        /// </summary>
-        private void CopyUpdateFile()
-        {
-            //复制文件
-            foreach (var updateFile in this.updateFiles)
-            {
-                var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
-                var fileName = Path.Combine(this.customizePathTBx.Text, directoryName, updateFile.Name);
-                if (File.Exists(fileName))
-                {
-                    FileInfo fi = new FileInfo(fileName);
-                    if ((fi.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-                    {
-                        fi.Attributes = FileAttributes.Normal;
-                    }
-                }
-                File.Copy(updateFile.FullName, fileName, true);
-            }
-            MessageBox.Show("复制成功！");
-
-            //是否签入
-            if (this.isTrueCheckInRadioBtn.Checked)
-            {
-
-            }
-        }
-
-
-        #endregion
-
     }
 }
