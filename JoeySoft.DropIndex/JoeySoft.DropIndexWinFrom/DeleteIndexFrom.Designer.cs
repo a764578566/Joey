@@ -47,7 +47,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.sqlRtb.Location = new System.Drawing.Point(3, 36);
             this.sqlRtb.Name = "sqlRtb";
-            this.sqlRtb.Size = new System.Drawing.Size(450, 600);
+            this.sqlRtb.Size = new System.Drawing.Size(493, 600);
             this.sqlRtb.TabIndex = 0;
             this.sqlRtb.Text = "";
             // 
@@ -129,6 +129,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DeleteIndexFrom";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "生成索引删除脚本";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

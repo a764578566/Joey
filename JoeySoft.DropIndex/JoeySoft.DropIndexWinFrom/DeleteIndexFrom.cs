@@ -48,6 +48,7 @@ namespace JoeySoft.DropIndexWinFrom
             {
                 return;
             }
+            this.delIndexRtb.Text = string.Empty;
             string[] sqlIndexs = sqlText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             //匹配索引
             string regexIndexText = @"CREATE\s+[a-zA-Z]+\s+INDEX\s+([1-9a-zA-Z_]+)";
@@ -110,6 +111,7 @@ namespace JoeySoft.DropIndexWinFrom
         /// <param name="e"></param>
         private void OpenFile_Click(object sender, EventArgs e)
         {
+            this.sqlRtb.Text = string.Empty;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "sql文件|*.sql|文本文件|*.*";
             openFileDialog.RestoreDirectory = true;
