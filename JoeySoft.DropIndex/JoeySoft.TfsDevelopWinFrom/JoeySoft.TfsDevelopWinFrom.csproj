@@ -77,7 +77,6 @@
     <Compile Include="TfsDevelopFrom.Designer.cs">
       <DependentUpon>TfsDevelopFrom.cs</DependentUpon>
     </Compile>
-    <Compile Include="MD5Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomizeFilesFrom.resx">
@@ -112,6 +111,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JoeySoft.Core\JoeySoft.Core.csproj">
+      <Project>{5d55eca0-96e1-4696-8abf-7fc7da42350f}</Project>
+      <Name>JoeySoft.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JoeySofy.TFS\JoeySofy.TFS.csproj">
       <Project>{dfdee644-0d25-4355-86dc-230458c7e034}</Project>
       <Name>JoeySofy.TFS</Name>

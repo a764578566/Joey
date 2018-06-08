@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JoeySofy.TFS;
+using JoeySoft.Core;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -343,20 +344,21 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private void CopyUpdateFileAndCheckout()
         {
+            //Tfs帮助类
+            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
             //复制文件
-            if (CopyUpdateFile())
+            if (CopyUpdateFile(tfsHelper))
             {
                 if (this.isTrueCheckoutRadioBtn.Checked)
                 {
                     //签出编辑
-                    if (Checkout())
+                    if (Checkout(tfsHelper))
                     {
                         MessageBox.Show("复制成功并签出编辑成功！");
                     }
                 }
                 else
                 {
-                    this.CopyFilebtn.Enabled = false;
                     this.customizebtn.Enabled = false;
                     MessageBox.Show("复制成功！");
                 }
@@ -371,7 +373,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <summary>
         /// 复制更新文件并签出编辑
         /// </summary>
-        private bool CopyUpdateFile()
+        private bool CopyUpdateFile(TFSHelper tfsHelper)
         {
             if (this._updateFiles == null)
             {
@@ -384,6 +386,9 @@ namespace JoeySoft.TfsDevelopWinFrom
             {
                 var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
                 var fileName = Path.Combine(this.customizePathCBX.Text, directoryName, updateFile.Name);
+                //获取文件所在目录的最新版本
+                tfsHelper.GetLatest(fileName);
+
                 if (File.Exists(fileName))
                 {
                     FileInfo fi = new FileInfo(fileName);
@@ -429,7 +434,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <summary>
         /// 签出编辑
         /// </summary>
-        private bool Checkout()
+        private bool Checkout(TFSHelper tfsHelper)
         {
             if (this._updateFiles == null)
             {
@@ -441,8 +446,6 @@ namespace JoeySoft.TfsDevelopWinFrom
                 MessageBox.Show("没有需要签入的文件！");
                 return false;
             }
-            //Tfs帮助类
-            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
             //签出编辑
             foreach (var updateFile in this._updateFiles)
             {
@@ -451,26 +454,6 @@ namespace JoeySoft.TfsDevelopWinFrom
                 tfsHelper.CheckOut(fileName);
             }
             return true;
-        }
-
-        private void Checkoutbtn_Click(object sender, EventArgs e)
-        {
-            if (Checkout())
-            {
-                MessageBox.Show("签出编辑成功！");
-            }
-            this.CopyFilebtn.Enabled = true;
-            this.customizebtn.Enabled = true;
-        }
-
-        private void CopyFilebtn_Click(object sender, EventArgs e)
-        {
-            if (CopyUpdateFile())
-            {
-                this.CopyFilebtn.Enabled = false;
-                this.customizebtn.Enabled = false;
-                MessageBox.Show("复制成功！");
-            }
         }
 
         /// <summary>

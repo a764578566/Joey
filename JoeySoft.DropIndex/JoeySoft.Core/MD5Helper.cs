@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JoeySoft.TfsDevelopWinFrom
+namespace JoeySoft.Core
 {
     public static class MD5Helper
     {
