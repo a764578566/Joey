@@ -110,8 +110,7 @@ namespace JoeySoft.TfsDevelop
 
             ItemSet its = version.GetItems("$/总部星河/明源云ERPv1.0SP5星河孵化/源代码/分支1/00-ERP站点/Clgyl/OrderMng/M02210303", RecursionType.Full);
 
-            tfsHelper.GetLatest("E:\\mysoft\\tfs_new\\10.5.10.70\\星河二开项目\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\00-ERP站点\\Clgyl\\OrderMng\\M02210303\\ApplyMng.js",
-                   its);
+            tfsHelper.GetLatest("E:\\mysoft\\tfs_new\\10.5.10.70\\星河二开项目\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\00-ERP站点\\Clgyl\\OrderMng\\M02210303\\ApplyMng.js");
 
             #endregion
 

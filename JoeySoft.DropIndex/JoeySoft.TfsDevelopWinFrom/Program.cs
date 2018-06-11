@@ -16,7 +16,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TfsDevelopFrom());
+            Application.Run(new CheckInForm());
         }
     }
 }

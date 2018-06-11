@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TfsDevelopFrom));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.showCustomizeFileBtn = new System.Windows.Forms.Button();
@@ -47,6 +48,8 @@
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -55,6 +58,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.showCustomizeFileBtn);
             this.tabPage2.Controls.Add(this.customizePathCBX);
             this.tabPage2.Controls.Add(this.button3);
@@ -237,6 +241,15 @@
             this.tabControl1.Size = new System.Drawing.Size(1024, 760);
             this.tabControl1.TabIndex = 5;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(833, 653);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // TfsDevelopFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -277,6 +290,8 @@
         private System.Windows.Forms.TextBox pathTBx;
         private System.Windows.Forms.Button ReadRootFileBtn;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Button button1;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 }
 
