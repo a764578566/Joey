@@ -36,6 +36,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         //二开解决方案名称
         private string CustomizeSlnFileName;
 
+        private string[] notContainFileNames;
+
         public TfsDevelopFrom()
         {
             InitializeComponent();
@@ -51,6 +53,17 @@ namespace JoeySoft.TfsDevelopWinFrom
                 CustomizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
 
                 _updateDirectorys = ConfigurationManager.AppSettings["UpdateDirectory"].Split(',').ToList();
+
+                string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
+
+                if (string.IsNullOrEmpty(notContainFileNameStr) == false)
+                {
+                    notContainFileNames = notContainFileNameStr.Split(',');
+                }
+                else
+                {
+                    notContainFileNames = new string[0];
+                }
             }
             catch (Exception e)
             {
@@ -248,7 +261,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         FileInfo file = new FileInfo(fileName);
                         //判断修改时间是否大于当前时间
-                        if (file.LastWriteTime >= _dt)
+                        if (file.LastWriteTime >= _dt && !notContainFileNames.Contains(file.Name))
                         {
                             filesInfo.Add(file);
                         }
