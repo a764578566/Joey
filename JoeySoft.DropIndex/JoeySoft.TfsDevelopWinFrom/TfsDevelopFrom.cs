@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using JoeySofy.TFS;
 using JoeySoft.Core;
+using JoeySoft.FromCore;
 using SmartSolutions.Controls;
 
 namespace JoeySoft.TfsDevelopWinFrom
@@ -88,6 +89,7 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         //提示是否有没签入的产品元数据
         bool isTip = false;
+
         /// <summary>
         /// 打开更新的文件目录
         /// </summary>
@@ -364,7 +366,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private void CopyUpdateFileAndCheckout()
         {
-            this._updateFiles = GetTreeNodeChecked();
+            this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
             //Tfs帮助类
             TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
             //复制文件
@@ -530,7 +532,7 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         private void CheckInBtn_Click(object sender, EventArgs e)
         {
-            CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, this._updateFiles);
+            CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
 
             checkInForm.ShowDialog();
         }
@@ -574,44 +576,5 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
         }
 
-        /// <summary>
-        /// 获取要编辑签入的文件信息
-        /// </summary>
-        /// <returns></returns>
-        private List<FileInfo> GetTreeNodeChecked()
-        {
-            List<FileInfo> fileInfos = new List<FileInfo>();
-            List<TriStateTreeNode> treeNodes = new List<TriStateTreeNode>();
-            foreach (TriStateTreeNode treeNode in this.updateTriSatateTreeView.Nodes)
-            {
-                treeNodes.AddRange(GetCheckedNodes(treeNode));
-            }
-            foreach (var treeNode in treeNodes)
-            {
-                if (treeNode.Tag is FileInfo)
-                {
-                    fileInfos.Add(treeNode.Tag as FileInfo);
-                }
-            }
-            return fileInfos;
-        }
-
-        /// <summary>
-        /// 获取子集
-        /// </summary>
-        /// <returns></returns>
-        private List<TriStateTreeNode> GetCheckedNodes(TriStateTreeNode treeNode)
-        {
-            List<TriStateTreeNode> childNodeList = new List<TriStateTreeNode>();
-            foreach (TriStateTreeNode childNode in treeNode.Nodes)
-            {
-                childNodeList.AddRange(GetCheckedNodes(childNode));
-            }
-            if (treeNode.Nodes.Count == 0 && treeNode.Checked == true)
-            {
-                childNodeList.Add(treeNode);
-            }
-            return childNodeList;
-        }
     }
 }

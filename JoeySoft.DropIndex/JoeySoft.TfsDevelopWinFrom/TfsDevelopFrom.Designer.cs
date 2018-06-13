@@ -85,7 +85,6 @@
             this.CheckInBtn.TabIndex = 22;
             this.CheckInBtn.Text = "签入";
             this.CheckInBtn.UseVisualStyleBackColor = true;
-            this.CheckInBtn.Visible = false;
             this.CheckInBtn.Click += new System.EventHandler(this.CheckInBtn_Click);
             // 
             // showCustomizeFileBtn

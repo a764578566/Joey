@@ -30,21 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckInForm));
-            this.button1 = new System.Windows.Forms.Button();
+            this.checkInbtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.remarktbx = new System.Windows.Forms.TextBox();
             this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
-            // button1
+            // checkInbtn
             // 
-            this.button1.Location = new System.Drawing.Point(618, 145);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "签入";
-            this.button1.UseVisualStyleBackColor = true;
+            this.checkInbtn.Location = new System.Drawing.Point(618, 145);
+            this.checkInbtn.Name = "checkInbtn";
+            this.checkInbtn.Size = new System.Drawing.Size(75, 23);
+            this.checkInbtn.TabIndex = 1;
+            this.checkInbtn.Text = "签入";
+            this.checkInbtn.UseVisualStyleBackColor = true;
+            this.checkInbtn.Click += new System.EventHandler(this.checkInbtn_Click);
             // 
             // label1
             // 
@@ -55,13 +56,13 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "签入说明：";
             // 
-            // textBox1
+            // remarktbx
             // 
-            this.textBox1.Location = new System.Drawing.Point(618, 27);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 112);
-            this.textBox1.TabIndex = 3;
+            this.remarktbx.Location = new System.Drawing.Point(618, 27);
+            this.remarktbx.Multiline = true;
+            this.remarktbx.Name = "remarktbx";
+            this.remarktbx.Size = new System.Drawing.Size(154, 112);
+            this.remarktbx.TabIndex = 3;
             // 
             // updateTriSatateTreeView
             // 
@@ -77,10 +78,6 @@
             this.updateTriSatateTreeView.TabIndex = 0;
             this.updateTriSatateTreeView.UncheckedImageIndex = 5;
             this.updateTriSatateTreeView.UseCustomImages = true;
-            this.updateTriSatateTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterCollapse);
-            this.updateTriSatateTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterExpand);
-            this.updateTriSatateTreeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.updateTriSatateTreeView_BeforeSelect);
-            this.updateTriSatateTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterSelect);
             // 
             // imageList1
             // 
@@ -99,20 +96,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.updateTriSatateTreeView);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.remarktbx);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.checkInbtn);
             this.Name = "CheckInForm";
-            this.Text = "CheckInForm";
+            this.Text = "签入窗体";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button checkInbtn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox remarktbx;
         private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
         private System.Windows.Forms.ImageList imageList1;
     }

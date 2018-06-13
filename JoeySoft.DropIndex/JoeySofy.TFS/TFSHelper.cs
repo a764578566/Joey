@@ -239,5 +239,47 @@ namespace JoeySofy.TFS
             //获取添加服务地址
             return ServerPath.Replace(wf.ServerItem, wf.LocalItem + "\\").Replace('/', '\\').Replace("/", "//"); ;
         }
+
+
+        /// <summary>
+        /// 获取挂起的更改
+        /// </summary>
+        /// <returns></returns>
+        public List<FileInfo> GetPendingChange()
+        {
+            List<FileInfo> fileInfos = new List<FileInfo>();
+
+            PendingChange[] pendingChanges = ws.GetPendingChanges();
+
+            foreach (var pendingChange in pendingChanges)
+            {
+                fileInfos.Add(new FileInfo(pendingChange.LocalItem));
+            }
+
+            return fileInfos;
+        }
+
+        /// <summary>
+        /// 签入二开
+        /// </summary>
+        /// <param name="checkInFileInfos">签入的文件信息</param>
+        /// <param name="checkInRemark">签入说明</param>
+        /// <returns></returns>
+        public bool CheckIn(List<FileInfo> checkInFileInfos, string checkInRemark)
+        {
+            ItemSpec[] itemSpecs = new ItemSpec[checkInFileInfos.Count];
+            for (int i = 0; i < checkInFileInfos.Count; i++)
+            {
+                itemSpecs[i] = new ItemSpec(checkInFileInfos[i].FullName, RecursionType.Full);
+            }
+            WorkspaceCheckInParameters wscip = new WorkspaceCheckInParameters(itemSpecs, "产品迁移二开工具：" + checkInRemark);
+            int changeSetId = ws.CheckIn(wscip);//签入。
+
+            if (changeSetId != -1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
