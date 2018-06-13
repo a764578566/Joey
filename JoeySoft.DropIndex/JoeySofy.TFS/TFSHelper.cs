@@ -95,7 +95,7 @@ namespace JoeySofy.TFS
             string filePath = Path.Combine(vsPath, fileName);
             if (!File.Exists(filePath))
             {
-                throw new Exception("请选择正确的产品地址或解决方案名称！");
+                throw new Exception("请选择正确的地址或解决方案名称！");
             }
 
             //解决方案数据

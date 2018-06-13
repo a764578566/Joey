@@ -532,9 +532,25 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         private void CheckInBtn_Click(object sender, EventArgs e)
         {
-            CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
+            if (string.IsNullOrEmpty(this.customizePathCBX.Text) || !Directory.Exists(this.customizePathCBX.Text))
+            {
+                MessageBox.Show("请输入正确二开地址！");
+                return;
+            }
+            //获取解决方案地址
+            string filePath = Path.Combine(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
 
-            checkInForm.ShowDialog();
+            if (File.Exists(filePath))
+            {
+                CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
+
+                checkInForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("请输入正确二开地址！");
+                return;
+            }
         }
 
         /// <summary>

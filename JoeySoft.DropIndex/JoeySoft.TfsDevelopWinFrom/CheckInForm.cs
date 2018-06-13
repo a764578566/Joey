@@ -28,9 +28,16 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             this.updateTriSatateTreeView.Nodes.Clear();
 
-            //Tfs帮助类
-            tfsHelper = new TFSHelper(Directory.GetParent(path).FullName, customizeSlnFileName);
-
+            try
+            {
+                //Tfs帮助类
+                tfsHelper = new TFSHelper(Directory.GetParent(path).FullName, customizeSlnFileName);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
             List<FileInfo> fileInfos = tfsHelper.GetPendingChange();
 
             if (fileInfos != null && fileInfos.Count > 0)
@@ -79,11 +86,14 @@ namespace JoeySoft.TfsDevelopWinFrom
                     return;
                 }
 
-
                 if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
                 {
                     MessageBox.Show("有文件没有签入，请打开VS查看详情！");
                     return;
+                }
+                else
+                {
+                    this.Close();
                 }
             }
         }
