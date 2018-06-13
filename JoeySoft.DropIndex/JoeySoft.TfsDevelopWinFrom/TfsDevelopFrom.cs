@@ -12,6 +12,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JoeySofy.TFS;
+using JoeySoft.Core;
+using JoeySoft.FromCore;
+using SmartSolutions.Controls;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -84,6 +87,9 @@ namespace JoeySoft.TfsDevelopWinFrom
         //二开的元数据文件路径
         private List<FileInfo> _metadataCustomizeFilePath = new List<FileInfo>();
 
+        //提示是否有没签入的产品元数据
+        bool isTip = false;
+
         /// <summary>
         /// 打开更新的文件目录
         /// </summary>
@@ -92,7 +98,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void RootFileBtn_Click(object sender, EventArgs e)
         {
             this._updateFiles = new List<FileInfo>();
-            this.updateFilesTV.Nodes.Clear();
+            this.updateTriSatateTreeView.Nodes.Clear();
             //获取修改当前日期
             _dt = DateTime.Parse(DateTime.Parse(this.updateDateTimePicker.Text).ToString("yyyy/MM/dd"));
             if (string.IsNullOrEmpty(this.pathTBx.Text))
@@ -114,6 +120,13 @@ namespace JoeySoft.TfsDevelopWinFrom
             else
             {
                 _updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
+                if (isTip)
+                {
+                    _updateFiles = null;
+                    MessageBox.Show("产品有未签入的元数据，不可以迁移二开！");
+                    return;
+                }
+
                 _updateFiles.AddRange(GetBinFiles(this.pathTBx.Text));
 
                 //获取需要更新的文件夹信息
@@ -129,15 +142,19 @@ namespace JoeySoft.TfsDevelopWinFrom
                 {
                     foreach (var dictionary in dictionarys)
                     {
-                        TreeNode treeNode1 = new TreeNode();
+                        TriStateTreeNode treeNode1 = new TriStateTreeNode();
                         treeNode1.Text = dictionary.Key.Replace(this.pathTBx.Text + "\\", "");
+                        treeNode1.CheckboxVisible = true;
+                        treeNode1.Checked = true;
+                        treeNode1.IsContainer = true;//文件夹
                         foreach (var metadataFile in dictionary)
                         {
-                            TreeNode treeNode2 = new TreeNode();
-                            treeNode2.Text = metadataFile.Name;
+                            TriStateTreeNode treeNode2 = new TriStateTreeNode(metadataFile.Name, 2, 2);
+                            treeNode2.Checked = true;
+                            treeNode2.Tag = metadataFile;
                             treeNode1.Nodes.Add(treeNode2);
                         }
-                        this.updateFilesTV.Nodes.Add(treeNode1);
+                        this.updateTriSatateTreeView.Nodes.Add(treeNode1);
                     }
 
                     if (this.isTrueCopyRadioBtn.Checked)
@@ -155,6 +172,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <returns></returns>
         private List<FileInfo> GetMetadataFiles(string openFileName)
         {
+            isTip = false;
+
             openFileName = Path.Combine(openFileName, _metadata);
 
             List<FileInfo> metadataFiles = new List<FileInfo>();
@@ -192,6 +211,10 @@ namespace JoeySoft.TfsDevelopWinFrom
                             if (file.LastWriteTime >= _dt)
                             {
                                 metadataFiles.Add(file);
+                            }
+                            if (fileName.IndexOf(".design.") != -1)
+                            {
+                                isTip = true;
                             }
                         }
                     }
@@ -343,20 +366,22 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private void CopyUpdateFileAndCheckout()
         {
+            this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+            //Tfs帮助类
+            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
             //复制文件
-            if (CopyUpdateFile())
+            if (CopyUpdateFile(tfsHelper))
             {
                 if (this.isTrueCheckoutRadioBtn.Checked)
                 {
                     //签出编辑
-                    if (Checkout())
+                    if (Checkout(tfsHelper))
                     {
                         MessageBox.Show("复制成功并签出编辑成功！");
                     }
                 }
                 else
                 {
-                    this.CopyFilebtn.Enabled = false;
                     this.customizebtn.Enabled = false;
                     MessageBox.Show("复制成功！");
                 }
@@ -371,7 +396,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <summary>
         /// 复制更新文件并签出编辑
         /// </summary>
-        private bool CopyUpdateFile()
+        private bool CopyUpdateFile(TFSHelper tfsHelper)
         {
             if (this._updateFiles == null)
             {
@@ -384,6 +409,9 @@ namespace JoeySoft.TfsDevelopWinFrom
             {
                 var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
                 var fileName = Path.Combine(this.customizePathCBX.Text, directoryName, updateFile.Name);
+                //获取文件所在目录的最新版本
+                tfsHelper.GetLatest(fileName);
+
                 if (File.Exists(fileName))
                 {
                     FileInfo fi = new FileInfo(fileName);
@@ -429,7 +457,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <summary>
         /// 签出编辑
         /// </summary>
-        private bool Checkout()
+        private bool Checkout(TFSHelper tfsHelper)
         {
             if (this._updateFiles == null)
             {
@@ -441,8 +469,6 @@ namespace JoeySoft.TfsDevelopWinFrom
                 MessageBox.Show("没有需要签入的文件！");
                 return false;
             }
-            //Tfs帮助类
-            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
             //签出编辑
             foreach (var updateFile in this._updateFiles)
             {
@@ -451,26 +477,6 @@ namespace JoeySoft.TfsDevelopWinFrom
                 tfsHelper.CheckOut(fileName);
             }
             return true;
-        }
-
-        private void Checkoutbtn_Click(object sender, EventArgs e)
-        {
-            if (Checkout())
-            {
-                MessageBox.Show("签出编辑成功！");
-            }
-            this.CopyFilebtn.Enabled = true;
-            this.customizebtn.Enabled = true;
-        }
-
-        private void CopyFilebtn_Click(object sender, EventArgs e)
-        {
-            if (CopyUpdateFile())
-            {
-                this.CopyFilebtn.Enabled = false;
-                this.customizebtn.Enabled = false;
-                MessageBox.Show("复制成功！");
-            }
         }
 
         /// <summary>
@@ -523,5 +529,52 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
             return true;
         }
+
+        private void CheckInBtn_Click(object sender, EventArgs e)
+        {
+            CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
+
+            checkInForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// 取消选中或选中事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateTriSatateTreeView_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            //只处理鼠标点击引起的状态变化  
+            if (e.Action == TreeViewAction.ByMouse)
+            {
+                if (e.Node is TriStateTreeNode)
+                {
+                    List<TreeNode> fileTreeNodes = new List<TreeNode>();
+                    TriStateTreeNode tsTreeNode = e.Node as TriStateTreeNode;
+                    if (tsTreeNode.Nodes.Count == 0)
+                    {
+                        fileTreeNodes.Add(tsTreeNode);
+                    }
+                    if (tsTreeNode.Checked == false)
+                    {
+                        List<FileInfo> updateFileInfo = new List<FileInfo>();
+                        foreach (var updatefile in this._updateFiles)
+                        {
+                            if (fileTreeNodes.Exists(n => n.Text == updatefile.Name))
+                            {
+                                updateFileInfo.Add(updatefile);
+                            }
+
+                        }
+
+                        foreach (var updateFile in updateFileInfo)
+                        {
+                            this._updateFiles.Remove(updateFile);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

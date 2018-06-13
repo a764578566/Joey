@@ -51,6 +51,9 @@
     <ApplicationIcon>Snail.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SmartSolutions.Controls">
+      <HintPath>..\JoeySoft.FromCore\TreeNodeDLL\SmartSolutions.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -65,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckInForm.Designer.cs">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomizeFilesFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,9 +86,11 @@
     <Compile Include="TfsDevelopFrom.Designer.cs">
       <DependentUpon>TfsDevelopFrom.cs</DependentUpon>
     </Compile>
-    <Compile Include="MD5Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CheckInForm.resx">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomizeFilesFrom.resx">
       <DependentUpon>CustomizeFilesFrom.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +123,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JoeySoft.Core\JoeySoft.Core.csproj">
+      <Project>{5d55eca0-96e1-4696-8abf-7fc7da42350f}</Project>
+      <Name>JoeySoft.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JoeySoft.FromCore\JoeySoft.FromCore.csproj">
+      <Project>{70416e0b-01bd-414e-8779-b49c98e14e35}</Project>
+      <Name>JoeySoft.FromCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JoeySofy.TFS\JoeySofy.TFS.csproj">
       <Project>{dfdee644-0d25-4355-86dc-230458c7e034}</Project>
       <Name>JoeySofy.TFS</Name>

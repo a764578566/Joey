@@ -23,6 +23,7 @@ namespace JoeySofy.TFS
 
         private Dictionary<string, ItemSet> dic = new Dictionary<string, ItemSet>();
 
+        public int UpdateNumber { get; private set; } = 0;
 
         /// <summary>
         /// Tfs初始化
@@ -55,28 +56,31 @@ namespace JoeySofy.TFS
         {
             WorkingFolder workingFolder = null;
             //获取工作区
-            Workspace[] wss = version.QueryWorkspaces(Environment.MachineName, version.AuthenticatedUser,
+            Workspace[] workspaces = version.QueryWorkspaces(null, version.AuthenticatedUser,
                     Environment.MachineName); //查询工作区
 
-            ws = wss.FirstOrDefault();
-
-            if (ws.Folders.Count() > 0)
+            foreach (var workspace in workspaces)
             {
-                foreach (var folder in ws.Folders)
+                if (workspace.Folders.Count() > 0)
                 {
-                    if (vsPath.IndexOf(folder.LocalItem) == 0)
+                    foreach (var folder in workspace.Folders)
                     {
-                        workingFolder = folder;
+                        if (vsPath.IndexOf(folder.LocalItem) == 0)
+                        {
+                            ws = workspace;
+                            workingFolder = folder;
+                            break;
+                        }
                     }
                 }
-                if (workingFolder == null)
+                else
                 {
-                    throw new Exception("请确认TFS工作区的正确性！");
+                    throw new Exception("请确认解决方案连接了TFS！");
                 }
             }
-            else
+            if (workingFolder == null || ws == null)
             {
-                throw new Exception("请确认解决方案连接了TFS！");
+                throw new Exception("请确认TFS工作区的正确性！");
             }
             return workingFolder;
         }
@@ -115,16 +119,19 @@ namespace JoeySofy.TFS
         public void CheckOut(string localPath)
         {
             //获取添加服务地址
-            string serverPath = localPath.Replace(wf.LocalItem, wf.ServerItem).Replace('\\', '/').Replace("//", "/");
+            string serverPath = GetServerPathByLocalPath(localPath);
 
             //获取文件目录
             string dir = Path.GetDirectoryName(serverPath);
 
             if (!dic.ContainsKey(dir))
             {
-                ItemSet its = version.GetItems(dir, RecursionType.OneLevel);
+                //获取服务器上
+                ItemSet its = version.GetItems(dir, RecursionType.Full);
+
                 dic.Add(dir, its);
             }
+
             bool isExist = false;
             foreach (var item in dic[dir].Items)
             {
@@ -151,7 +158,7 @@ namespace JoeySofy.TFS
         private void Edit(string localPath)
         {
             //编辑
-            int pend = ws.PendEdit(localPath);
+            this.UpdateNumber += ws.PendEdit(localPath, RecursionType.Full);
         }
 
         /// <summary>
@@ -161,11 +168,118 @@ namespace JoeySofy.TFS
         private void Add(string localPath)
         {
             //获取添加服务地址
-            string serverPath = localPath.Replace(wf.LocalItem, wf.ServerItem).Replace('\\', '/').Replace("//", "/");
+            string serverPath = GetServerPathByLocalPath(localPath);
 
             ws.Map(serverPath, localPath);
             //编辑
-            int pend = ws.PendAdd(localPath);
+            this.UpdateNumber += ws.PendAdd(localPath);
+        }
+
+        /// <summary>
+        /// 获取文件所在目录的最新版本
+        /// </summary>
+        /// <param name="its"></param>
+        public void GetLatest(string localPath)
+        {
+            //获取文件目录
+            string serverPath = Path.GetDirectoryName(GetServerPathByLocalPath(localPath));
+
+            GetLatesByServerPath(serverPath);
+        }
+
+        /// <summary>
+        /// 获取TFS服务器该目录的最新版本
+        /// </summary>
+        /// <param name="serverPath"></param>
+        public void GetLatesByServerPath(string serverPath)
+        {
+            ItemSet its = version.GetItems(serverPath, RecursionType.Full);
+
+            if (!dic.ContainsKey(serverPath))
+            {
+                dic.Add(serverPath, its);
+
+                foreach (var item in its.Items)
+                {
+                    string localItem = GetLocalPathByServerPath(item.ServerItem);
+                    if (item.ItemType == ItemType.Folder)
+                    {
+                        if (!Directory.Exists(localItem))//判断目录是否存在
+                        {
+                            Directory.CreateDirectory(localItem);
+                        }
+                    }
+                    else if (item.ItemType == ItemType.File)
+                    {
+                        item.DownloadFile(localItem);//下载最新版本
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根据本地文件地址，获取TFS服务地址
+        /// </summary>
+        /// <param name="localPath"></param>
+        /// <returns></returns>
+        public string GetServerPathByLocalPath(string localPath)
+        {
+            //获取添加服务地址
+            return localPath.Replace(wf.LocalItem, wf.ServerItem).Replace('\\', '/').Replace("//", "/");
+        }
+
+
+        /// <summary>
+        /// 根据TFS服务的文件地址，获取本地映射地址
+        /// </summary>
+        /// <param name="ServerPath"></param>
+        /// <returns></returns>
+        public string GetLocalPathByServerPath(string ServerPath)
+        {
+            //获取添加服务地址
+            return ServerPath.Replace(wf.ServerItem, wf.LocalItem + "\\").Replace('/', '\\').Replace("/", "//"); ;
+        }
+
+
+        /// <summary>
+        /// 获取挂起的更改
+        /// </summary>
+        /// <returns></returns>
+        public List<FileInfo> GetPendingChange()
+        {
+            List<FileInfo> fileInfos = new List<FileInfo>();
+
+            PendingChange[] pendingChanges = ws.GetPendingChanges();
+
+            foreach (var pendingChange in pendingChanges)
+            {
+                fileInfos.Add(new FileInfo(pendingChange.LocalItem));
+            }
+
+            return fileInfos;
+        }
+
+        /// <summary>
+        /// 签入二开
+        /// </summary>
+        /// <param name="checkInFileInfos">签入的文件信息</param>
+        /// <param name="checkInRemark">签入说明</param>
+        /// <returns></returns>
+        public bool CheckIn(List<FileInfo> checkInFileInfos, string checkInRemark)
+        {
+            ItemSpec[] itemSpecs = new ItemSpec[checkInFileInfos.Count];
+            for (int i = 0; i < checkInFileInfos.Count; i++)
+            {
+                itemSpecs[i] = new ItemSpec(checkInFileInfos[i].FullName, RecursionType.Full);
+            }
+            WorkspaceCheckInParameters wscip = new WorkspaceCheckInParameters(itemSpecs, "产品迁移二开工具：" + checkInRemark);
+            int changeSetId = ws.CheckIn(wscip);//签入。
+
+            if (changeSetId != -1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
