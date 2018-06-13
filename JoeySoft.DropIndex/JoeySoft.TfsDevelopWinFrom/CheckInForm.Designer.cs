@@ -28,101 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("节点3");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("节点0", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("节点4");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("节点1", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("节点6");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("节点9");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("节点5", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("节点2", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("节点10");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("节点15");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("节点13", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("节点17");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("节点18");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("节点16", new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("节点14", new System.Windows.Forms.TreeNode[] {
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("节点11", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("节点12");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("节点7", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("节点8");
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckInForm));
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
-            // 
-            // treeView1
-            // 
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Location = new System.Drawing.Point(12, 12);
-            this.treeView1.Name = "treeView1";
-            treeNode1.Name = "节点3";
-            treeNode1.Text = "节点3";
-            treeNode2.Name = "节点0";
-            treeNode2.Text = "节点0";
-            treeNode3.Name = "节点4";
-            treeNode3.Text = "节点4";
-            treeNode4.Name = "节点1";
-            treeNode4.Text = "节点1";
-            treeNode5.Name = "节点6";
-            treeNode5.Text = "节点6";
-            treeNode6.Name = "节点9";
-            treeNode6.Text = "节点9";
-            treeNode7.Name = "节点5";
-            treeNode7.Text = "节点5";
-            treeNode8.Name = "节点2";
-            treeNode8.Text = "节点2";
-            treeNode9.Name = "节点10";
-            treeNode9.Text = "节点10";
-            treeNode10.Name = "节点15";
-            treeNode10.Text = "节点15";
-            treeNode11.Name = "节点13";
-            treeNode11.Text = "节点13";
-            treeNode12.Name = "节点17";
-            treeNode12.Text = "节点17";
-            treeNode13.Name = "节点18";
-            treeNode13.Text = "节点18";
-            treeNode14.Name = "节点16";
-            treeNode14.Text = "节点16";
-            treeNode15.Name = "节点14";
-            treeNode15.Text = "节点14";
-            treeNode16.Name = "节点11";
-            treeNode16.Text = "节点11";
-            treeNode17.Name = "节点12";
-            treeNode17.Text = "节点12";
-            treeNode18.Name = "节点7";
-            treeNode18.Text = "节点7";
-            treeNode19.Name = "节点8";
-            treeNode19.Text = "节点8";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode4,
-            treeNode8,
-            treeNode18,
-            treeNode19});
-            this.treeView1.Size = new System.Drawing.Size(598, 538);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            this.treeView1.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView1_DrawNode);
-            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseClick);
             // 
             // button1
             // 
@@ -150,15 +63,45 @@
             this.textBox1.Size = new System.Drawing.Size(154, 112);
             this.textBox1.TabIndex = 3;
             // 
+            // updateTriSatateTreeView
+            // 
+            this.updateTriSatateTreeView.CheckBoxes = true;
+            this.updateTriSatateTreeView.CheckedImageIndex = 3;
+            this.updateTriSatateTreeView.ImageKey = "TIM图片20180612182821.ico";
+            this.updateTriSatateTreeView.ImageList = this.imageList1;
+            this.updateTriSatateTreeView.IndeterminateImageIndex = 4;
+            this.updateTriSatateTreeView.Location = new System.Drawing.Point(12, 12);
+            this.updateTriSatateTreeView.Name = "updateTriSatateTreeView";
+            this.updateTriSatateTreeView.SelectedImageIndex = 1;
+            this.updateTriSatateTreeView.Size = new System.Drawing.Size(598, 538);
+            this.updateTriSatateTreeView.TabIndex = 0;
+            this.updateTriSatateTreeView.UncheckedImageIndex = 5;
+            this.updateTriSatateTreeView.UseCustomImages = true;
+            this.updateTriSatateTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterCollapse);
+            this.updateTriSatateTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterExpand);
+            this.updateTriSatateTreeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.updateTriSatateTreeView_BeforeSelect);
+            this.updateTriSatateTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "TIM图片20180612182821.ico");
+            this.imageList1.Images.SetKeyName(1, "TIM图片20180612183126.ico");
+            this.imageList1.Images.SetKeyName(2, "企业微信截图_15287984943050.ico");
+            this.imageList1.Images.SetKeyName(3, "TIM图片20180612181930.ico");
+            this.imageList1.Images.SetKeyName(4, "TIM图片20180612181859.ico");
+            this.imageList1.Images.SetKeyName(5, "TIM图片20180612182002.ico");
+            // 
             // CheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.updateTriSatateTreeView);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.treeView1);
             this.Name = "CheckInForm";
             this.Text = "CheckInForm";
             this.ResumeLayout(false);
@@ -167,10 +110,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
+        private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

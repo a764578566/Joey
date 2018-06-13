@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TfsDevelopFrom));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.CheckInBtn = new System.Windows.Forms.Button();
             this.showCustomizeFileBtn = new System.Windows.Forms.Button();
             this.customizePathCBX = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -40,16 +41,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.isTrueCopyRadioBtn = new System.Windows.Forms.RadioButton();
             this.isFalseCopyRadioBtn = new System.Windows.Forms.RadioButton();
-            this.updateFilesTV = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.updateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.customizebtn = new System.Windows.Forms.Button();
-            this.updateFilesRTB = new System.Windows.Forms.RichTextBox();
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -58,17 +57,16 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.updateTriSatateTreeView);
+            this.tabPage2.Controls.Add(this.CheckInBtn);
             this.tabPage2.Controls.Add(this.showCustomizeFileBtn);
             this.tabPage2.Controls.Add(this.customizePathCBX);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.updateFilesTV);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.updateDateTimePicker);
             this.tabPage2.Controls.Add(this.customizebtn);
-            this.tabPage2.Controls.Add(this.updateFilesRTB);
             this.tabPage2.Controls.Add(this.pathTBx);
             this.tabPage2.Controls.Add(this.ReadRootFileBtn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -78,6 +76,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "生成二开更新包";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CheckInBtn
+            // 
+            this.CheckInBtn.Location = new System.Drawing.Point(833, 653);
+            this.CheckInBtn.Name = "CheckInBtn";
+            this.CheckInBtn.Size = new System.Drawing.Size(75, 23);
+            this.CheckInBtn.TabIndex = 22;
+            this.CheckInBtn.Text = "签入";
+            this.CheckInBtn.UseVisualStyleBackColor = true;
+            this.CheckInBtn.Visible = false;
+            this.CheckInBtn.Click += new System.EventHandler(this.CheckInBtn_Click);
             // 
             // showCustomizeFileBtn
             // 
@@ -174,13 +183,6 @@
             this.isFalseCopyRadioBtn.Text = "否";
             this.isFalseCopyRadioBtn.UseVisualStyleBackColor = true;
             // 
-            // updateFilesTV
-            // 
-            this.updateFilesTV.Location = new System.Drawing.Point(6, 35);
-            this.updateFilesTV.Name = "updateFilesTV";
-            this.updateFilesTV.Size = new System.Drawing.Size(798, 600);
-            this.updateFilesTV.TabIndex = 11;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -206,14 +208,6 @@
             this.customizebtn.Text = "复制并签出编辑";
             this.customizebtn.UseVisualStyleBackColor = true;
             this.customizebtn.Click += new System.EventHandler(this.customizebtn_Click);
-            // 
-            // updateFilesRTB
-            // 
-            this.updateFilesRTB.Location = new System.Drawing.Point(6, 35);
-            this.updateFilesRTB.Name = "updateFilesRTB";
-            this.updateFilesRTB.Size = new System.Drawing.Size(800, 600);
-            this.updateFilesRTB.TabIndex = 2;
-            this.updateFilesRTB.Text = "";
             // 
             // pathTBx
             // 
@@ -241,14 +235,32 @@
             this.tabControl1.Size = new System.Drawing.Size(1024, 760);
             this.tabControl1.TabIndex = 5;
             // 
-            // button1
+            // updateTriSatateTreeView
             // 
-            this.button1.Location = new System.Drawing.Point(833, 653);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.updateTriSatateTreeView.CheckBoxes = true;
+            this.updateTriSatateTreeView.CheckedImageIndex = 3;
+            this.updateTriSatateTreeView.ImageKey = "TIM图片20180612182821.ico";
+            this.updateTriSatateTreeView.ImageList = this.imageList1;
+            this.updateTriSatateTreeView.IndeterminateImageIndex = 4;
+            this.updateTriSatateTreeView.Location = new System.Drawing.Point(6, 35);
+            this.updateTriSatateTreeView.Name = "updateTriSatateTreeView";
+            this.updateTriSatateTreeView.SelectedImageIndex = 1;
+            this.updateTriSatateTreeView.Size = new System.Drawing.Size(798, 600);
+            this.updateTriSatateTreeView.TabIndex = 23;
+            this.updateTriSatateTreeView.UncheckedImageIndex = 5;
+            this.updateTriSatateTreeView.UseCustomImages = true;
+            this.updateTriSatateTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterCheck);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "TIM图片20180612182821.ico");
+            this.imageList1.Images.SetKeyName(1, "TIM图片20180612183126.ico");
+            this.imageList1.Images.SetKeyName(2, "企业微信截图_15287984943050.ico");
+            this.imageList1.Images.SetKeyName(3, "TIM图片20180612181930.ico");
+            this.imageList1.Images.SetKeyName(4, "TIM图片20180612181859.ico");
+            this.imageList1.Images.SetKeyName(5, "TIM图片20180612182002.ico");
             // 
             // TfsDevelopFrom
             // 
@@ -282,16 +294,15 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton isTrueCopyRadioBtn;
         private System.Windows.Forms.RadioButton isFalseCopyRadioBtn;
-        private System.Windows.Forms.TreeView updateFilesTV;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker updateDateTimePicker;
         private System.Windows.Forms.Button customizebtn;
-        private System.Windows.Forms.RichTextBox updateFilesRTB;
         private System.Windows.Forms.TextBox pathTBx;
         private System.Windows.Forms.Button ReadRootFileBtn;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button button1;
-        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button CheckInBtn;
+        private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

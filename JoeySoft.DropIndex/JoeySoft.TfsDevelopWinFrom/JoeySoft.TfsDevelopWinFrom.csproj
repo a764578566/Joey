@@ -51,6 +51,9 @@
     <ApplicationIcon>Snail.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SmartSolutions.Controls">
+      <HintPath>..\JoeySoft.FromCore\TreeNodeDLL\SmartSolutions.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />

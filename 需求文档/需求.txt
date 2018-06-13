@@ -30,4 +30,7 @@
 
 2.显示全部二开元数据
 
+鲁依依
+1.分支合并提交功能
+
 TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/

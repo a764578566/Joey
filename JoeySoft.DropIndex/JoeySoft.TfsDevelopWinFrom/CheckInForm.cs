@@ -4,19 +4,43 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SmartSolutions.Controls;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
     public partial class CheckInForm : Form
     {
-        public CheckInForm()
+        public CheckInForm(string path, List<FileInfo> _metadataCustomizeFilePath)
         {
             InitializeComponent();
-            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.updateTriSatateTreeView.Nodes.Clear();
+            ConfigureTreeView(path, _metadataCustomizeFilePath);
+        }
+
+        private void ConfigureTreeView(string path, List<FileInfo> _metadataCustomizeFilePath)
+        {
+            IEnumerable<IGrouping<string, FileInfo>> dictionarys = _metadataCustomizeFilePath.GroupBy(n => n.DirectoryName);
+            if (_metadataCustomizeFilePath != null && _metadataCustomizeFilePath.Count > 0)
+            {
+                foreach (var dictionary in dictionarys)
+                {
+                    TriStateTreeNode treeNode = new TriStateTreeNode();
+                    treeNode.Text = dictionary.Key.Replace(path + "\\", "");
+                    treeNode.CheckboxVisible = true;
+                    treeNode.IsContainer = true;//文件夹
+                    foreach (var metadataFile in dictionary)
+                    {
+                        TriStateTreeNode treeNode2 = new TriStateTreeNode(metadataFile.Name, 2, 2);
+                        treeNode.Nodes.Add(treeNode2);
+                    }
+                    this.updateTriSatateTreeView.Nodes.Add(treeNode);
+                }
+            }
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -176,6 +200,40 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             e.Node.Checked = !e.Node.Checked;
             UpdateChildNodes(e.Node);
+        }
+        
+        private void updateTriSatateTreeView_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+            e.Node.ImageIndex = 1;
+        }
+
+        private void updateTriSatateTreeView_AfterCollapse(object sender, TreeViewEventArgs e)
+        {
+            e.Node.ImageIndex = 0;
+        }
+
+        private void updateTriSatateTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (e.Node is TriStateTreeNode)
+            {
+                TriStateTreeNode node = e.Node as TriStateTreeNode;
+                if (node.IsContainer)
+                {
+                    if (e.Node.IsExpanded)
+                    {
+                        e.Node.ImageIndex = 1;
+                    }
+                    else
+                    {
+                        e.Node.ImageIndex = 0;
+                    }
+                }
+            }
+        }
+
+        private void updateTriSatateTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            e.Node.Expand();
         }
     }
 }
