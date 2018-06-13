@@ -170,6 +170,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <returns></returns>
         private List<FileInfo> GetMetadataFiles(string openFileName)
         {
+            isTip = false;
+
             openFileName = Path.Combine(openFileName, _metadata);
 
             List<FileInfo> metadataFiles = new List<FileInfo>();
