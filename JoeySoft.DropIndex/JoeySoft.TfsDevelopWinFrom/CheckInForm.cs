@@ -65,12 +65,21 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             if (tfsHelper != null)
             {
+                List<FileInfo> fileInfos = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+
+                if (fileInfos.Count == 0)
+                {
+                    MessageBox.Show("没有要签入的文件！");
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(this.remarktbx.Text))
                 {
                     MessageBox.Show("请输入签入说明！");
                     return;
                 }
-                List<FileInfo> fileInfos = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+
+
                 if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
                 {
                     MessageBox.Show("有文件没有签入，请打开VS查看详情！");

@@ -100,6 +100,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkInbtn);
             this.Name = "CheckInForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "签入窗体";
             this.ResumeLayout(false);
             this.PerformLayout();
