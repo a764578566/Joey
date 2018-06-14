@@ -273,12 +273,21 @@ namespace JoeySofy.TFS
                 itemSpecs[i] = new ItemSpec(checkInFileInfos[i].FullName, RecursionType.Full);
             }
             WorkspaceCheckInParameters wscip = new WorkspaceCheckInParameters(itemSpecs, "产品迁移二开工具：" + checkInRemark);
-            int changeSetId = ws.CheckIn(wscip);//签入。
-
-            if (changeSetId != -1)
+            try
             {
-                return true;
+                int changeSetId = ws.CheckIn(wscip);//签入。
+                if (changeSetId != -1)
+                {
+                    return true;
+                }
             }
+            catch (Exception)
+            {
+                throw new Exception("可能有冲突，请打开VS解决冲突！");
+            }
+
+
+
             return false;
         }
     }

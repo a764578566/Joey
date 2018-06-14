@@ -86,14 +86,22 @@ namespace JoeySoft.TfsDevelopWinFrom
                     return;
                 }
 
-                if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
+                try
                 {
-                    MessageBox.Show("有文件没有签入，请打开VS查看详情！");
-                    return;
+                    if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
+                    {
+                        MessageBox.Show("有文件没有签入，请打开VS查看详情！");
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("签入成功！");
+                        this.Close();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    this.Close();
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
