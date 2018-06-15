@@ -35,11 +35,12 @@
             this.remarktbx = new System.Windows.Forms.TextBox();
             this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.undobtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkInbtn
             // 
-            this.checkInbtn.Location = new System.Drawing.Point(618, 145);
+            this.checkInbtn.Location = new System.Drawing.Point(616, 145);
             this.checkInbtn.Name = "checkInbtn";
             this.checkInbtn.Size = new System.Drawing.Size(75, 23);
             this.checkInbtn.TabIndex = 1;
@@ -90,16 +91,28 @@
             this.imageList1.Images.SetKeyName(4, "TIM图片20180612181859.ico");
             this.imageList1.Images.SetKeyName(5, "TIM图片20180612182002.ico");
             // 
+            // undobtn
+            // 
+            this.undobtn.Location = new System.Drawing.Point(697, 145);
+            this.undobtn.Name = "undobtn";
+            this.undobtn.Size = new System.Drawing.Size(75, 23);
+            this.undobtn.TabIndex = 4;
+            this.undobtn.Text = "撤消";
+            this.undobtn.UseVisualStyleBackColor = true;
+            this.undobtn.Click += new System.EventHandler(this.undobtn_Click);
+            // 
             // CheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.undobtn);
             this.Controls.Add(this.updateTriSatateTreeView);
             this.Controls.Add(this.remarktbx);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkInbtn);
             this.Name = "CheckInForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "签入窗体";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -112,5 +125,6 @@
         private System.Windows.Forms.TextBox remarktbx;
         private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button undobtn;
     }
 }

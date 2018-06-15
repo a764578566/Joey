@@ -95,7 +95,7 @@ namespace JoeySofy.TFS
             string filePath = Path.Combine(vsPath, fileName);
             if (!File.Exists(filePath))
             {
-                throw new Exception("请选择正确的产品地址或解决方案名称！");
+                throw new Exception("请选择正确的地址或解决方案名称！");
             }
 
             //解决方案数据
@@ -273,11 +273,45 @@ namespace JoeySofy.TFS
                 itemSpecs[i] = new ItemSpec(checkInFileInfos[i].FullName, RecursionType.Full);
             }
             WorkspaceCheckInParameters wscip = new WorkspaceCheckInParameters(itemSpecs, "产品迁移二开工具：" + checkInRemark);
-            int changeSetId = ws.CheckIn(wscip);//签入。
-
-            if (changeSetId != -1)
+            try
             {
-                return true;
+                int changeSetId = ws.CheckIn(wscip);//签入。
+                if (changeSetId != -1)
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("可能有冲突，请打开VS解决冲突！");
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// 撤销挂起
+        /// </summary>
+        /// <param name="checkInFileInfos"></param>
+        /// <returns></returns>
+        public bool Undo(List<FileInfo> checkInFileInfos)
+        {
+            ItemSpec[] itemSpecs = new ItemSpec[checkInFileInfos.Count];
+            for (int i = 0; i < checkInFileInfos.Count; i++)
+            {
+                itemSpecs[i] = new ItemSpec(checkInFileInfos[i].FullName, RecursionType.Full);
+            }
+            try
+            {
+                int count = ws.Undo(itemSpecs);//签入。
+                if (count == checkInFileInfos.Count)
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("撤销失败，请打开VS查看详情！");
             }
             return false;
         }

@@ -28,9 +28,16 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             this.updateTriSatateTreeView.Nodes.Clear();
 
-            //Tfs帮助类
-            tfsHelper = new TFSHelper(Directory.GetParent(path).FullName, customizeSlnFileName);
-
+            try
+            {
+                //Tfs帮助类
+                tfsHelper = new TFSHelper(Directory.GetParent(path).FullName, customizeSlnFileName);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
             List<FileInfo> fileInfos = tfsHelper.GetPendingChange();
 
             if (fileInfos != null && fileInfos.Count > 0)
@@ -65,16 +72,73 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             if (tfsHelper != null)
             {
+                List<FileInfo> fileInfos = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+
+                if (fileInfos.Count == 0)
+                {
+                    MessageBox.Show("没有要签入的文件！");
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(this.remarktbx.Text))
                 {
                     MessageBox.Show("请输入签入说明！");
                     return;
                 }
-                List<FileInfo> fileInfos = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
-                if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
+
+                try
                 {
-                    MessageBox.Show("有文件没有签入，请打开VS查看详情！");
+                    if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
+                    {
+                        MessageBox.Show("有文件没有签入，请打开VS查看详情！");
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("签入成功！");
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 撤销挂起的更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void undobtn_Click(object sender, EventArgs e)
+        {
+            if (tfsHelper != null)
+            {
+                List<FileInfo> fileInfos = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+
+                if (fileInfos.Count == 0)
+                {
+                    MessageBox.Show("没有要撤销的文件！");
                     return;
+                }
+
+                try
+                {
+                    if (tfsHelper.Undo(fileInfos) == false)
+                    {
+                        MessageBox.Show("有文件没有撤销，请打开VS查看详情！");
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("撤销成功！");
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

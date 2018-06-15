@@ -46,7 +46,7 @@
             this.Controls.Add(this.customizeFiletView);
             this.Name = "CustomizeFilesFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "二开过的元数据";
+            this.Text = "二开文件（js、元数据）";
             this.ResumeLayout(false);
 
         }

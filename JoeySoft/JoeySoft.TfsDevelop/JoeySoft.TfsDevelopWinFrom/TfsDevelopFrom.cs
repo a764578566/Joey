@@ -36,6 +36,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         //二开解决方案名称
         private string CustomizeSlnFileName;
 
+        private string[] notContainFileNames;
+
         public TfsDevelopFrom()
         {
             InitializeComponent();
@@ -51,6 +53,17 @@ namespace JoeySoft.TfsDevelopWinFrom
                 CustomizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
 
                 _updateDirectorys = ConfigurationManager.AppSettings["UpdateDirectory"].Split(',').ToList();
+
+                string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
+
+                if (string.IsNullOrEmpty(notContainFileNameStr) == false)
+                {
+                    notContainFileNames = notContainFileNameStr.Split(',');
+                }
+                else
+                {
+                    notContainFileNames = new string[0];
+                }
             }
             catch (Exception e)
             {
@@ -76,6 +89,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         private DateTime _dt;
         //更新目录
         private string _metadata = "_metadata";
+        private string _clgyl = "Clgyl";
         private string _bin = "bin";
 
         //更新文件夹
@@ -85,7 +99,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         private List<FileInfo> _updateFiles;
 
         //二开的元数据文件路径
-        private List<FileInfo> _metadataCustomizeFilePath = new List<FileInfo>();
+        private List<FileInfo> _customizeFilePath = new List<FileInfo>();
 
         //提示是否有没签入的产品元数据
         bool isTip = false;
@@ -248,7 +262,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         FileInfo file = new FileInfo(fileName);
                         //判断修改时间是否大于当前时间
-                        if (file.LastWriteTime >= _dt)
+                        if (file.LastWriteTime >= _dt && !notContainFileNames.Contains(file.Name))
                         {
                             filesInfo.Add(file);
                         }
@@ -387,7 +401,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 }
             }
 
-            if (CustomizeFileIsTrue() && this._metadataCustomizeFilePath.Count > 0)
+            if (CustomizeFileIsTrue() && this._customizeFilePath.Count > 0)
             {
                 MessageBox.Show("有二开文件，请点击“显示二开元数据”查看详情信息！");
             }
@@ -486,17 +500,17 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void showCustomizeFileBtn_Click(object sender, EventArgs e)
         {
-            _metadataCustomizeFilePath = new List<FileInfo>();
+            _customizeFilePath = new List<FileInfo>();
             //校验是否二开过
             if (CustomizeFileIsTrue())
             {
-                if (_metadataCustomizeFilePath.Count == 0)
+                if (_customizeFilePath.Count == 0)
                 {
                     MessageBox.Show("没有二开过的元数据！");
                     return;
                 }
 
-                CustomizeFilesFrom customizeFilesFrom = new CustomizeFilesFrom(this.customizePathCBX.Text, _metadataCustomizeFilePath);
+                CustomizeFilesFrom customizeFilesFrom = new CustomizeFilesFrom(this.customizePathCBX.Text, _customizeFilePath);
 
                 customizeFilesFrom.ShowDialog();
             }
@@ -523,18 +537,49 @@ namespace JoeySoft.TfsDevelopWinFrom
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
-                        _metadataCustomizeFilePath.Add(fileInfo);
+                        _customizeFilePath.Add(fileInfo);
+                    }
+                }
+                //判断二开js
+                if (directoryName.IndexOf(_clgyl) == 0)
+                {
+                    var filePath = Path.Combine(this.customizePathCBX.Text, directoryName.Replace(_clgyl, "Customize\\" + _clgyl), updateFile.Name);
+                    if (File.Exists(filePath))
+                    {
+                        FileInfo fileInfo = new FileInfo(filePath);
+                        _customizeFilePath.Add(fileInfo);
                     }
                 }
             }
             return true;
         }
 
+        /// <summary>
+        /// 显示二开签入文件信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckInBtn_Click(object sender, EventArgs e)
         {
-            CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
+            if (string.IsNullOrEmpty(this.customizePathCBX.Text) || !Directory.Exists(this.customizePathCBX.Text))
+            {
+                MessageBox.Show("请输入正确二开地址！");
+                return;
+            }
+            //获取解决方案地址
+            string filePath = Path.Combine(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
 
-            checkInForm.ShowDialog();
+            if (File.Exists(filePath))
+            {
+                CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
+
+                checkInForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("请输入正确二开地址！");
+                return;
+            }
         }
 
         /// <summary>
