@@ -285,9 +285,34 @@ namespace JoeySofy.TFS
             {
                 throw new Exception("可能有冲突，请打开VS解决冲突！");
             }
+            return false;
+        }
 
 
-
+        /// <summary>
+        /// 撤销挂起
+        /// </summary>
+        /// <param name="checkInFileInfos"></param>
+        /// <returns></returns>
+        public bool Undo(List<FileInfo> checkInFileInfos)
+        {
+            ItemSpec[] itemSpecs = new ItemSpec[checkInFileInfos.Count];
+            for (int i = 0; i < checkInFileInfos.Count; i++)
+            {
+                itemSpecs[i] = new ItemSpec(checkInFileInfos[i].FullName, RecursionType.Full);
+            }
+            try
+            {
+                int count = ws.Undo(itemSpecs);//签入。
+                if (count == checkInFileInfos.Count)
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("撤销失败，请打开VS查看详情！");
+            }
             return false;
         }
     }

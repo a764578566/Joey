@@ -105,5 +105,42 @@ namespace JoeySoft.TfsDevelopWinFrom
                 }
             }
         }
+
+        /// <summary>
+        /// 撤销挂起的更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void undobtn_Click(object sender, EventArgs e)
+        {
+            if (tfsHelper != null)
+            {
+                List<FileInfo> fileInfos = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+
+                if (fileInfos.Count == 0)
+                {
+                    MessageBox.Show("没有要撤销的文件！");
+                    return;
+                }
+
+                try
+                {
+                    if (tfsHelper.Undo(fileInfos) == false)
+                    {
+                        MessageBox.Show("有文件没有撤销，请打开VS查看详情！");
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("撤销成功！");
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
     }
 }

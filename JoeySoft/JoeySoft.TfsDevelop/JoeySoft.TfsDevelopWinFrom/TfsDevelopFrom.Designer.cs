@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TfsDevelopFrom));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.CheckInBtn = new System.Windows.Forms.Button();
             this.showCustomizeFileBtn = new System.Windows.Forms.Button();
             this.customizePathCBX = new System.Windows.Forms.ComboBox();
@@ -47,8 +49,6 @@
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -77,6 +77,33 @@
             this.tabPage2.Text = "生成二开更新包";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // updateTriSatateTreeView
+            // 
+            this.updateTriSatateTreeView.CheckBoxes = true;
+            this.updateTriSatateTreeView.CheckedImageIndex = 3;
+            this.updateTriSatateTreeView.ImageKey = "TIM图片20180612182821.ico";
+            this.updateTriSatateTreeView.ImageList = this.imageList1;
+            this.updateTriSatateTreeView.IndeterminateImageIndex = 4;
+            this.updateTriSatateTreeView.Location = new System.Drawing.Point(6, 35);
+            this.updateTriSatateTreeView.Name = "updateTriSatateTreeView";
+            this.updateTriSatateTreeView.SelectedImageIndex = 1;
+            this.updateTriSatateTreeView.Size = new System.Drawing.Size(798, 600);
+            this.updateTriSatateTreeView.TabIndex = 23;
+            this.updateTriSatateTreeView.UncheckedImageIndex = 5;
+            this.updateTriSatateTreeView.UseCustomImages = true;
+            this.updateTriSatateTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterCheck);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "TIM图片20180612182821.ico");
+            this.imageList1.Images.SetKeyName(1, "TIM图片20180612183126.ico");
+            this.imageList1.Images.SetKeyName(2, "企业微信截图_15287984943050.ico");
+            this.imageList1.Images.SetKeyName(3, "TIM图片20180612181930.ico");
+            this.imageList1.Images.SetKeyName(4, "TIM图片20180612181859.ico");
+            this.imageList1.Images.SetKeyName(5, "TIM图片20180612182002.ico");
+            // 
             // CheckInBtn
             // 
             this.CheckInBtn.Location = new System.Drawing.Point(833, 653);
@@ -93,7 +120,7 @@
             this.showCustomizeFileBtn.Name = "showCustomizeFileBtn";
             this.showCustomizeFileBtn.Size = new System.Drawing.Size(111, 23);
             this.showCustomizeFileBtn.TabIndex = 21;
-            this.showCustomizeFileBtn.Text = "显示二开元数据";
+            this.showCustomizeFileBtn.Text = "显示二开文件";
             this.showCustomizeFileBtn.UseVisualStyleBackColor = true;
             this.showCustomizeFileBtn.Click += new System.EventHandler(this.showCustomizeFileBtn_Click);
             // 
@@ -233,33 +260,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1024, 760);
             this.tabControl1.TabIndex = 5;
-            // 
-            // updateTriSatateTreeView
-            // 
-            this.updateTriSatateTreeView.CheckBoxes = true;
-            this.updateTriSatateTreeView.CheckedImageIndex = 3;
-            this.updateTriSatateTreeView.ImageKey = "TIM图片20180612182821.ico";
-            this.updateTriSatateTreeView.ImageList = this.imageList1;
-            this.updateTriSatateTreeView.IndeterminateImageIndex = 4;
-            this.updateTriSatateTreeView.Location = new System.Drawing.Point(6, 35);
-            this.updateTriSatateTreeView.Name = "updateTriSatateTreeView";
-            this.updateTriSatateTreeView.SelectedImageIndex = 1;
-            this.updateTriSatateTreeView.Size = new System.Drawing.Size(798, 600);
-            this.updateTriSatateTreeView.TabIndex = 23;
-            this.updateTriSatateTreeView.UncheckedImageIndex = 5;
-            this.updateTriSatateTreeView.UseCustomImages = true;
-            this.updateTriSatateTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterCheck);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "TIM图片20180612182821.ico");
-            this.imageList1.Images.SetKeyName(1, "TIM图片20180612183126.ico");
-            this.imageList1.Images.SetKeyName(2, "企业微信截图_15287984943050.ico");
-            this.imageList1.Images.SetKeyName(3, "TIM图片20180612181930.ico");
-            this.imageList1.Images.SetKeyName(4, "TIM图片20180612181859.ico");
-            this.imageList1.Images.SetKeyName(5, "TIM图片20180612182002.ico");
             // 
             // TfsDevelopFrom
             // 
