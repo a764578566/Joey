@@ -23,18 +23,20 @@ namespace JoeySoft.TfsDevelopWinFrom
         private string openFileName;
 
         //产品目录
-        private string KeyProduct = "ProductRootPath";
+        private readonly string KeyProduct = "ProductRootPath";
         private string rootProductPath;
 
         //二开目录
-        private string KeyCustomize = "CustomizeRootPath";
+        private readonly string KeyCustomize = "CustomizeRootPath";
         private string[] rootCustomizePaths;
 
         //迁移元数据目录
         private string metadataDirectory;
 
         //二开解决方案名称
-        private string CustomizeSlnFileName;
+        private string customizeSlnFileName;
+        //产品解决方案名称
+        private string productSlnFileName;
 
         private string[] notContainFileNames;
 
@@ -50,7 +52,8 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                 metadataDirectory = ConfigurationManager.AppSettings["MetadataDirectory"];
 
-                CustomizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
+                customizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
+                productSlnFileName = ConfigurationManager.AppSettings["ProductSlnFileName"];
 
                 _updateDirectorys = ConfigurationManager.AppSettings["UpdateDirectory"].Split(',').ToList();
 
@@ -126,18 +129,20 @@ namespace JoeySoft.TfsDevelopWinFrom
                     this.pathTBx.Text = folderBrowserDialog.SelectedPath;
                 }
             }
-            this.pathTBx.Text = this.pathTBx.Text;
             if (!File.Exists(this.pathTBx.Text + "\\Web.config"))
             {
                 MessageBox.Show("请选择产品根目录！");
             }
             else
             {
+                //产品TFS
+                TFSHelper tfs = new TFSHelper(Directory.GetParent(this.pathTBx.Text).FullName, productSlnFileName);
                 _updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
-                if (isTip)
+                //判断产品TFS是否全部签入
+                if (isTip || tfs.GetPendingChange().Count > 0)
                 {
                     _updateFiles = null;
-                    MessageBox.Show("产品有未签入的元数据，不可以迁移二开！");
+                    MessageBox.Show("产品有未签入的数据，不可以迁移二开！");
                     return;
                 }
 
@@ -362,17 +367,16 @@ namespace JoeySoft.TfsDevelopWinFrom
                     if (!File.Exists(openFileName + "\\Web.config"))
                     {
                         MessageBox.Show("请选择二开根目录！");
-                    }
-                    else
-                    {
-                        CopyUpdateFileAndCheckout();
+                        return;
                     }
                 }
+                else
+                {
+                    return;
+                }
             }
-            else
-            {
-                CopyUpdateFileAndCheckout();
-            }
+            //复制更新文件
+            CopyUpdateFileAndCheckout();
         }
 
         /// <summary>
@@ -382,7 +386,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
             //Tfs帮助类
-            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
+            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, customizeSlnFileName);
             //复制文件
             if (CopyUpdateFile(tfsHelper))
             {
@@ -567,11 +571,11 @@ namespace JoeySoft.TfsDevelopWinFrom
                 return;
             }
             //获取解决方案地址
-            string filePath = Path.Combine(Directory.GetParent(this.customizePathCBX.Text).FullName, CustomizeSlnFileName);
+            string filePath = Path.Combine(Directory.GetParent(this.customizePathCBX.Text).FullName, customizeSlnFileName);
 
             if (File.Exists(filePath))
             {
-                CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, CustomizeSlnFileName);
+                CheckInForm checkInForm = new CheckInForm(this.customizePathCBX.Text, customizeSlnFileName);
 
                 checkInForm.ShowDialog();
             }
