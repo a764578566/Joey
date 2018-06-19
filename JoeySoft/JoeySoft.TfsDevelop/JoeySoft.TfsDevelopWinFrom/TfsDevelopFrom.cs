@@ -139,10 +139,16 @@ namespace JoeySoft.TfsDevelopWinFrom
                 TFSHelper tfs = new TFSHelper(Directory.GetParent(this.pathTBx.Text).FullName, productSlnFileName);
                 _updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
                 //判断产品TFS是否全部签入
-                if (isTip || tfs.GetPendingChange().Count > 0)
+                if (tfs.GetPendingChange().Count > 0)
                 {
                     _updateFiles = null;
                     MessageBox.Show("产品有未签入的数据，不可以迁移二开！");
+                    return;
+                }
+                if (isTip)
+                {
+                    _updateFiles = null;
+                    MessageBox.Show("产品有未签入的元数据，请在建模平台签入后迁移二开！");
                     return;
                 }
 
@@ -217,11 +223,23 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                     List<string> directoryFileNamelist = new List<string>() { parentDirectoryName };
 
+                    //判断文件是否存在
+                    if (!Directory.Exists(parentDirectoryName))
+                    {
+                        //todo 记录日志
+                        continue;
+                    }
                     //_metadata下子级目录下目录
                     GetDirectorie(parentDirectoryName, directoryFileNamelist);
 
                     foreach (var directoryFileName in directoryFileNamelist)
                     {
+                        //判断文件是否存在
+                        if (!Directory.Exists(Path.Combine(parentDirectoryName, directoryFileName)))
+                        {
+                            //todo 记录日志
+                            break;
+                        }
                         string[] fileNames = Directory.GetFiles(Path.Combine(parentDirectoryName, directoryFileName));
                         foreach (var fileName in fileNames)
                         {

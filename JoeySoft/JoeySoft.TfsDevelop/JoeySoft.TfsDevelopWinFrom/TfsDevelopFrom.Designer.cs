@@ -36,7 +36,6 @@
             this.CheckInBtn = new System.Windows.Forms.Button();
             this.showCustomizeFileBtn = new System.Windows.Forms.Button();
             this.customizePathCBX = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.isTrueCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
             this.isFalseCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
@@ -61,7 +60,6 @@
             this.tabPage2.Controls.Add(this.CheckInBtn);
             this.tabPage2.Controls.Add(this.showCustomizeFileBtn);
             this.tabPage2.Controls.Add(this.customizePathCBX);
-            this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label1);
@@ -131,16 +129,6 @@
             this.customizePathCBX.Name = "customizePathCBX";
             this.customizePathCBX.Size = new System.Drawing.Size(674, 20);
             this.customizePathCBX.TabIndex = 20;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(813, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 24);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "自动签入";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
             // 
             // groupBox2
             // 
@@ -286,7 +274,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button showCustomizeFileBtn;
         private System.Windows.Forms.ComboBox customizePathCBX;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton isTrueCheckoutRadioBtn;
         private System.Windows.Forms.RadioButton isFalseCheckoutRadioBtn;
