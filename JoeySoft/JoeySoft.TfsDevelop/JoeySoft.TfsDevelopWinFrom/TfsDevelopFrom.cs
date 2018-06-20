@@ -226,7 +226,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                     //判断文件是否存在
                     if (!Directory.Exists(parentDirectoryName))
                     {
-                        //todo 记录日志
+                        //todo 记录错误日志
                         continue;
                     }
                     //_metadata下子级目录下目录
@@ -237,7 +237,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                         //判断文件是否存在
                         if (!Directory.Exists(Path.Combine(parentDirectoryName, directoryFileName)))
                         {
-                            //todo 记录日志
+                            //todo 记录错误日志
                             break;
                         }
                         string[] fileNames = Directory.GetFiles(Path.Combine(parentDirectoryName, directoryFileName));

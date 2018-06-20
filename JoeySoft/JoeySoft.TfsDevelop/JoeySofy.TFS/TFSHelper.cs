@@ -21,6 +21,8 @@ namespace JoeySofy.TFS
 
         private VersionControlServer version;
 
+        private string vsPath;
+
         private Dictionary<string, ItemSet> dic = new Dictionary<string, ItemSet>();
 
         public int UpdateNumber { get; private set; } = 0;
@@ -42,6 +44,8 @@ namespace JoeySofy.TFS
             pjc.EnsureAuthenticated();
 
             version = pjc.GetService<VersionControlServer>();
+
+            this.vsPath = vsPath;
 
             //获取工作区
             wf = GetWorkspace(vsPath);
@@ -315,5 +319,23 @@ namespace JoeySofy.TFS
             }
             return false;
         }
+
+        /// <summary>
+        /// 获取历史变更集
+        /// </summary>
+        public void GetHistory()
+        {
+            //查询历史版本
+            var histories = version.QueryHistory(this.vsPath, VersionSpec.Latest, 0, RecursionType.OneLevel, null, null, null, int.MaxValue, true, false);
+
+            foreach (Changeset changeSet in histories)
+            {
+                foreach (Change change in changeSet.Changes)//每个历史版本下修改了几个文件
+                {
+
+                }
+            }
+        }
+
     }
 }

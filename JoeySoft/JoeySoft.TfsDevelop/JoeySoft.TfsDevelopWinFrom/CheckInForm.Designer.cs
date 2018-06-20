@@ -36,6 +36,7 @@
             this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.undobtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkInbtn
@@ -101,11 +102,22 @@
             this.undobtn.UseVisualStyleBackColor = true;
             this.undobtn.Click += new System.EventHandler(this.undobtn_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(618, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.undobtn);
             this.Controls.Add(this.updateTriSatateTreeView);
             this.Controls.Add(this.remarktbx);
@@ -126,5 +138,6 @@
         private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button undobtn;
+        private System.Windows.Forms.Button button1;
     }
 }
