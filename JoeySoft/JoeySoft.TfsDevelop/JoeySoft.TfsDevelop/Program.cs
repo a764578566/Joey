@@ -77,7 +77,6 @@ namespace JoeySoft.TfsDevelop
             TfsTeamProjectCollection pjc = new TfsTeamProjectCollection(new Uri(tpcURL + "/szzb"), tfi.Descriptor);
             VersionControlServer version = pjc.GetService<VersionControlServer>();
 
-            string path = "$/";
             //获取文件夹目录 ItemSet
             //ItemSet its = version.GetItems("$/", RecursionType.OneLevel);
 

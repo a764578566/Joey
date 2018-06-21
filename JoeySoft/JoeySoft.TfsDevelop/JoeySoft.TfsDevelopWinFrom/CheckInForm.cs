@@ -95,13 +95,15 @@ namespace JoeySoft.TfsDevelopWinFrom
                     }
                     else
                     {
+                        JoeyLog.Logging.WriteLog("签入成功！说明：" + this.remarktbx.Text);
                         MessageBox.Show("签入成功！");
                         this.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    JoeyLog.Logging.WriteErrorLog(ex);
+                    MessageBox.Show("可能有冲突，请打开VS解决冲突！");
                 }
             }
         }
@@ -132,15 +134,22 @@ namespace JoeySoft.TfsDevelopWinFrom
                     }
                     else
                     {
+                        JoeyLog.Logging.WriteLog("撤销成功！");
                         MessageBox.Show("撤销成功！");
                         this.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    JoeyLog.Logging.WriteErrorLog(ex);
+                    MessageBox.Show("可能有冲突，请打开VS解决冲突！");
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tfsHelper.GetHistory();
         }
     }
 }

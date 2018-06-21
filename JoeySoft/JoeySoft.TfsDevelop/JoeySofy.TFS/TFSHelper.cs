@@ -15,11 +15,13 @@ namespace JoeySofy.TFS
 
         private Workspace ws;
 
-        private string rootPath = "$/";
-
         private WorkingFolder wf;
 
         private VersionControlServer version;
+
+        private TfsTeamProjectCollection pjc;
+
+        private string vsPath;
 
         private Dictionary<string, ItemSet> dic = new Dictionary<string, ItemSet>();
 
@@ -36,12 +38,14 @@ namespace JoeySofy.TFS
             string tpcURL = GetTfsUrl(vsPath, fileName);
 
             //登录服务器指定tfs项目
-            TfsTeamProjectCollection pjc = new TfsTeamProjectCollection(new Uri(tpcURL));
+            pjc = new TfsTeamProjectCollection(new Uri(tpcURL));
 
             //登录服务前，如果没有登录过会弹出提示框登录，登录过会直接跳过
             pjc.EnsureAuthenticated();
 
             version = pjc.GetService<VersionControlServer>();
+
+            this.vsPath = vsPath;
 
             //获取工作区
             wf = GetWorkspace(vsPath);
@@ -281,9 +285,9 @@ namespace JoeySofy.TFS
                     return true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("可能有冲突，请打开VS解决冲突！");
+                throw ex;
             }
             return false;
         }
@@ -315,5 +319,23 @@ namespace JoeySofy.TFS
             }
             return false;
         }
+
+        /// <summary>
+        /// 获取历史变更集
+        /// </summary>
+        public void GetHistory()
+        {
+            //查询历史版本
+            var histories = version.QueryHistory(this.vsPath, VersionSpec.Latest, 0, RecursionType.OneLevel, null, null, null, int.MaxValue, true, false);
+
+            foreach (Changeset changeSet in histories)
+            {
+                foreach (Change change in changeSet.Changes)//每个历史版本下修改了几个文件
+                {
+
+                }
+            }
+        }
+
     }
 }

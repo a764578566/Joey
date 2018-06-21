@@ -36,7 +36,6 @@
             this.CheckInBtn = new System.Windows.Forms.Button();
             this.showCustomizeFileBtn = new System.Windows.Forms.Button();
             this.customizePathCBX = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.isTrueCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
             this.isFalseCheckoutRadioBtn = new System.Windows.Forms.RadioButton();
@@ -49,6 +48,7 @@
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.worker = new System.ComponentModel.BackgroundWorker();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -61,7 +61,6 @@
             this.tabPage2.Controls.Add(this.CheckInBtn);
             this.tabPage2.Controls.Add(this.showCustomizeFileBtn);
             this.tabPage2.Controls.Add(this.customizePathCBX);
-            this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label1);
@@ -131,16 +130,7 @@
             this.customizePathCBX.Name = "customizePathCBX";
             this.customizePathCBX.Size = new System.Drawing.Size(674, 20);
             this.customizePathCBX.TabIndex = 20;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(813, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 24);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "自动签入";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
+            this.customizePathCBX.TextChanged += new System.EventHandler(this.customizePathCBX_TextChanged);
             // 
             // groupBox2
             // 
@@ -241,6 +231,7 @@
             this.pathTBx.Name = "pathTBx";
             this.pathTBx.Size = new System.Drawing.Size(701, 21);
             this.pathTBx.TabIndex = 1;
+            this.pathTBx.TextChanged += new System.EventHandler(this.pathTBx_TextChanged);
             // 
             // ReadRootFileBtn
             // 
@@ -261,6 +252,11 @@
             this.tabControl1.Size = new System.Drawing.Size(1024, 760);
             this.tabControl1.TabIndex = 5;
             // 
+            // worker
+            // 
+            this.worker.WorkerReportsProgress = true;
+            this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
             // TfsDevelopFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -271,6 +267,7 @@
             this.Name = "TfsDevelopFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "产品更新二开";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TfsDevelopFrom_FormClosed);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -286,7 +283,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button showCustomizeFileBtn;
         private System.Windows.Forms.ComboBox customizePathCBX;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton isTrueCheckoutRadioBtn;
         private System.Windows.Forms.RadioButton isFalseCheckoutRadioBtn;
@@ -302,6 +298,7 @@
         private System.Windows.Forms.Button CheckInBtn;
         private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
         private System.Windows.Forms.ImageList imageList1;
+        private System.ComponentModel.BackgroundWorker worker;
     }
 }
 
