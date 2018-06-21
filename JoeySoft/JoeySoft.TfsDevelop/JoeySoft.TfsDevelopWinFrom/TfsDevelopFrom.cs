@@ -48,7 +48,7 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         private string[] notContainFileNames;
 
-        private int progressValue = 0;
+        private decimal progressValue = 0;
 
         public TfsDevelopFrom()
         {
@@ -487,11 +487,11 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
             //复制文件
             List<FileInfo> removeFiles = new List<FileInfo>();
-            int progressAddValue = 90 / this._updateFiles.Count;
+            decimal progressAddValue = 90M / this._updateFiles.Count;
             foreach (var updateFile in this._updateFiles)
             {
                 progressValue += progressAddValue;
-                this.worker.ReportProgress(progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
+                this.worker.ReportProgress((int)progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
                 var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
                 //获取文件所在目录的最新版本
@@ -555,12 +555,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                 MessageBox.Show("没有需要签入的文件！");
                 return false;
             }
-            int progressAddValue = 10 / this._updateFiles.Count;
+            decimal progressAddValue = 10M / this._updateFiles.Count;
             //签出编辑
             foreach (var updateFile in this._updateFiles)
             {
                 progressValue += progressAddValue;
-                this.worker.ReportProgress(progressValue, "开始签出编辑文件" + updateFile.Name + "，请稍后.....");
+                this.worker.ReportProgress((int)progressValue, "开始签出编辑文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
                 var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
                 tfsHelper.CheckOut(fileName);
