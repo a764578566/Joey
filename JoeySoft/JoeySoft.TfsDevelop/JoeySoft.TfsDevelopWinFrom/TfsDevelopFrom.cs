@@ -29,6 +29,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         //二开目录
         private readonly string KeyCustomize = "CustomizeRootPath";
         private string[] rootCustomizePaths;
+        private string firstCustomizePath;
 
         //迁移元数据目录
         private string metadataDirectory;
@@ -79,7 +80,6 @@ namespace JoeySoft.TfsDevelopWinFrom
             this.pathTBx.Text = rootProductPath;
 
             this.customizePathCBX.Text = rootCustomizePaths[0];
-
             this.customizePathCBX.Items.AddRange(rootCustomizePaths);
 
             //是否直接复制到指定目录 否
@@ -643,5 +643,56 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
         }
 
+        /// <summary>
+        /// 产品地址值改变事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pathTBx_TextChanged(object sender, EventArgs e)
+        {
+            string text = this.pathTBx.Text;
+            if (!string.IsNullOrEmpty(text) && text != rootProductPath)
+            {
+                //判断是否是产品目录
+                if (!File.Exists(text + "\\Web.config"))
+                {
+                    MessageBox.Show("请选择产品根目录！");
+                    return;
+                }
+                DialogResult dr = MessageBox.Show("是否替换原产品地址？", "提示", MessageBoxButtons.YesNo);
+                if (dr == DialogResult.Yes)
+                {
+                    AppConfigHelper.UpdateAppConfig(KeyProduct, text);
+                    rootProductPath = text;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 二开地址值改变事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customizePathCBX_TextChanged(object sender, EventArgs e)
+        {
+            string text = this.customizePathCBX.Text;
+            //在下拉框中找不到该地址
+            if (!string.IsNullOrEmpty(text) && rootCustomizePaths.FirstOrDefault(n => n == text) == null)
+            {
+                //判断是否是产品目录
+                if (!File.Exists(text + "\\Web.config"))
+                {
+                    MessageBox.Show("请选择二开根目录！");
+                    return;
+                }
+                DialogResult dr = MessageBox.Show("是否添加二开地址？", "提示", MessageBoxButtons.YesNo);
+                if (dr == DialogResult.Yes)
+                {
+                    List<string> customizePaths = rootCustomizePaths.ToList();
+                    customizePaths.Add(text);
+                    AppConfigHelper.UpdateAppConfig(KeyProduct, string.Join(",", customizePaths));
+                }
+            }
+        }
     }
 }
