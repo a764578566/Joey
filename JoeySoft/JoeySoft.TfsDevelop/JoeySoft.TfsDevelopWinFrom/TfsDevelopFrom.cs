@@ -24,12 +24,19 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         //产品目录
         private readonly string KeyProduct = "ProductRootPath";
-        private string rootProductPath;
+
+        /// <summary>
+        /// 产品根目录
+        /// </summary>
+        public string rootProductPath { get; private set; }
 
         //二开目录
         private readonly string KeyCustomize = "CustomizeRootPath";
         private string[] rootCustomizePaths;
-        private string firstCustomizePath;
+        /// <summary>
+        /// 二开目录
+        /// </summary>
+        public string customizePath { get; private set; }
 
         //迁移元数据目录
         private string metadataDirectory;
@@ -40,6 +47,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         private string productSlnFileName;
 
         private string[] notContainFileNames;
+
+        private int progressValue = 0;
 
         public TfsDevelopFrom()
         {
@@ -393,8 +402,17 @@ namespace JoeySoft.TfsDevelopWinFrom
                     return;
                 }
             }
-            //复制更新文件
-            CopyUpdateFileAndCheckout();
+            this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+            if (this._updateFiles == null)
+            {
+                MessageBox.Show("请选择产品修改的信息！");
+                return;
+            }
+            progressValue = 0;
+            customizePath = this.customizePathCBX.Text;
+            this.worker.RunWorkerAsync(); // 运行 backgroundWorker 组件
+            ProgressBar form = new ProgressBar(this.worker);// 显示进度条窗体
+            form.ShowDialog(this);
         }
 
         /// <summary>
@@ -402,9 +420,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private void CopyUpdateFileAndCheckout()
         {
-            this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
             //Tfs帮助类
-            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(this.customizePathCBX.Text).FullName, customizeSlnFileName);
+            TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(customizePath).FullName, customizeSlnFileName);
             //复制文件
             if (CopyUpdateFile(tfsHelper))
             {
@@ -441,10 +458,13 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
             //复制文件
             List<FileInfo> removeFiles = new List<FileInfo>();
+            int progressAddValue = 90 / this._updateFiles.Count;
             foreach (var updateFile in this._updateFiles)
             {
+                progressValue += progressAddValue;
+                this.worker.ReportProgress(progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
-                var fileName = Path.Combine(this.customizePathCBX.Text, directoryName, updateFile.Name);
+                var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
                 //获取文件所在目录的最新版本
                 tfsHelper.GetLatest(fileName);
 
@@ -502,16 +522,21 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
             if (this._updateFiles.Count == 0)
             {
+                this.worker.ReportProgress(100, "完成");
                 MessageBox.Show("没有需要签入的文件！");
                 return false;
             }
+            int progressAddValue = 10 / this._updateFiles.Count;
             //签出编辑
             foreach (var updateFile in this._updateFiles)
             {
-                var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
-                var fileName = Path.Combine(this.customizePathCBX.Text, directoryName, updateFile.Name);
+                progressValue += progressAddValue;
+                this.worker.ReportProgress(progressValue, "开始签出编辑文件" + updateFile.Name + "，请稍后.....");
+                var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
+                var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
                 tfsHelper.CheckOut(fileName);
             }
+            this.worker.ReportProgress(100, "完成");
             return true;
         }
 
@@ -555,7 +580,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断是否是元数据
                 if (directoryName.IndexOf(_metadata) == 0)
                 {
-                    var filePath = Path.Combine(this.customizePathCBX.Text, directoryName.Replace(_metadata, "Customize\\x_MetaData"), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_metadata, "Customize\\x_MetaData"), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
@@ -565,7 +590,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断二开js
                 if (directoryName.IndexOf(_clgyl) == 0)
                 {
-                    var filePath = Path.Combine(this.customizePathCBX.Text, directoryName.Replace(_clgyl, "Customize\\" + _clgyl), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, "Customize\\" + _clgyl), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
@@ -693,6 +718,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                     AppConfigHelper.UpdateAppConfig(KeyProduct, string.Join(",", customizePaths));
                 }
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //复制更新文件
+            CopyUpdateFileAndCheckout();
         }
     }
 }

@@ -48,6 +48,7 @@
             this.pathTBx = new System.Windows.Forms.TextBox();
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.worker = new System.ComponentModel.BackgroundWorker();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -251,6 +252,11 @@
             this.tabControl1.Size = new System.Drawing.Size(1024, 760);
             this.tabControl1.TabIndex = 5;
             // 
+            // worker
+            // 
+            this.worker.WorkerReportsProgress = true;
+            this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
             // TfsDevelopFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -291,6 +297,7 @@
         private System.Windows.Forms.Button CheckInBtn;
         private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
         private System.Windows.Forms.ImageList imageList1;
+        private System.ComponentModel.BackgroundWorker worker;
     }
 }
 

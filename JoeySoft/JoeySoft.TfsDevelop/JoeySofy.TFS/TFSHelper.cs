@@ -15,8 +15,6 @@ namespace JoeySofy.TFS
 
         private Workspace ws;
 
-        private string rootPath = "$/";
-
         private WorkingFolder wf;
 
         private VersionControlServer version;
