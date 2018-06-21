@@ -140,6 +140,10 @@
       <Project>{70416e0b-01bd-414e-8779-b49c98e14e35}</Project>
       <Name>JoeySoft.FromCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj">
+      <Project>{932d5c75-cf34-4961-bdb4-c9aa668c7d34}</Project>
+      <Name>JoeySoft.JoeyLog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JoeySofy.TFS\JoeySofy.TFS.csproj">
       <Project>{dfdee644-0d25-4355-86dc-230458c7e034}</Project>
       <Name>JoeySofy.TFS</Name>

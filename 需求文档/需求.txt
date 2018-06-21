@@ -45,9 +45,11 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 
 
 6-19
-1、处理地址修改时，保存到APP.config的功能
+--1、处理地址修改时，保存到APP.config的功能
 
 
 6-20
 1.签入成功后，如果还有要签入的信息，不关闭提示 是否撤销
-2.添加进度条
+--2.添加进度条
+
+

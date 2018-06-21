@@ -19,6 +19,8 @@ namespace JoeySofy.TFS
 
         private VersionControlServer version;
 
+        private TfsTeamProjectCollection pjc;
+
         private string vsPath;
 
         private Dictionary<string, ItemSet> dic = new Dictionary<string, ItemSet>();
@@ -36,7 +38,7 @@ namespace JoeySofy.TFS
             string tpcURL = GetTfsUrl(vsPath, fileName);
 
             //登录服务器指定tfs项目
-            TfsTeamProjectCollection pjc = new TfsTeamProjectCollection(new Uri(tpcURL));
+            pjc = new TfsTeamProjectCollection(new Uri(tpcURL));
 
             //登录服务前，如果没有登录过会弹出提示框登录，登录过会直接跳过
             pjc.EnsureAuthenticated();
@@ -283,9 +285,9 @@ namespace JoeySofy.TFS
                     return true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("可能有冲突，请打开VS解决冲突！");
+                throw ex;
             }
             return false;
         }

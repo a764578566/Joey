@@ -267,6 +267,7 @@
             this.Name = "TfsDevelopFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "产品更新二开";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TfsDevelopFrom_FormClosed);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
