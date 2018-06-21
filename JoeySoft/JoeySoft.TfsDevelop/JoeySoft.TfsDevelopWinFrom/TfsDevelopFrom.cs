@@ -194,7 +194,22 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                     if (this.isTrueCopyRadioBtn.Checked)
                     {
-                        CopyUpdateFileAndCheckout();
+                        this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
+                        if (this._updateFiles == null)
+                        {
+                            MessageBox.Show("请选择产品修改的信息！");
+                            return;
+                        }
+                        if (this._updateFiles.Count == 0)
+                        {
+                            MessageBox.Show("没有要复制编辑签出的文件！");
+                            return;
+                        }
+                        progressValue = 0;
+                        customizePath = this.customizePathCBX.Text;
+                        this.worker.RunWorkerAsync(); // 运行 backgroundWorker 组件
+                        ProgressBar form = new ProgressBar(this.worker);// 显示进度条窗体
+                        form.ShowDialog(this);
                     }
                 }
             }
