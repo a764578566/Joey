@@ -53,3 +53,6 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 --2.添加进度条
 
 
+6-25
+如果还有冲突处理：1.先主动撤销，再编辑签出
+
