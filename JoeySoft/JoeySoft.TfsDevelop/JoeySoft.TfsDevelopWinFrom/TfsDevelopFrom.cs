@@ -423,7 +423,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             this._updateFiles = TriStateTreeNodeHelper.GetTreeNodeChecked(this.updateTriSatateTreeView.Nodes);
             if (this._updateFiles == null)
             {
-                MessageBox.Show("请选择产品修改的信息！");
+                MessageBox.Show("请选择读取产品修改信息！");
                 return;
             }
             if (this._updateFiles.Count == 0)
@@ -445,23 +445,29 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             //Tfs帮助类
             TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(customizePath).FullName, customizeSlnFileName);
-            //复制文件
-            if (CopyUpdateFile(tfsHelper))
+
+            //先复制新的文件
+            if (!CopyNewFile(tfsHelper))
             {
-                if (this.isTrueCheckoutRadioBtn.Checked)
-                {
-                    //签出编辑
-                    if (Checkout(tfsHelper))
-                    {
-                        MessageBox.Show("复制成功并签出编辑成功！");
-                    }
-                }
-                else
-                {
-                    this.customizebtn.Enabled = false;
-                    MessageBox.Show("复制成功！");
-                }
+                return;
             }
+            //签出编辑
+            if (!Checkout(tfsHelper))
+            {
+                return;
+            }
+            //复制文件
+            if (!CopyUpdateFile(tfsHelper))
+            {
+                return;
+            }
+            //判断是否有编辑签入文件
+            if (this._updateFiles.Count == 0)
+            {
+                MessageBox.Show("没有要编辑签出的文件夹！");
+                return;
+            }
+            MessageBox.Show("复制成功并签出编辑成功！");
 
             if (CustomizeFileIsTrue() && this._customizeFilePath.Count > 0)
             {
@@ -471,31 +477,61 @@ namespace JoeySoft.TfsDevelopWinFrom
         }
 
         /// <summary>
-        /// 复制更新文件并签出编辑
+        /// 复制新的文件
         /// </summary>
-        private bool CopyUpdateFile(TFSHelper tfsHelper)
+        private bool CopyNewFile(TFSHelper tfsHelper)
         {
-            if (this._updateFiles == null)
-            {
-                MessageBox.Show("请选择读取产品修改信息！");
-                return false;
-            }
-            if (this._updateFiles.Count == 0)
-            {
-                MessageBox.Show("没有要复制编辑签出的文件！");
-                return false;
-            }
             //复制文件
-            List<FileInfo> removeFiles = new List<FileInfo>();
-            decimal progressAddValue = 90M / this._updateFiles.Count;
+            decimal progressAddValue = 10M / this._updateFiles.Count;
             foreach (var updateFile in this._updateFiles)
             {
                 progressValue += progressAddValue;
                 this.worker.ReportProgress((int)progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
-                var directoryName = updateFile.DirectoryName.Replace(this.pathTBx.Text + "\\", "");
+                var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
                 var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
-                //获取文件所在目录的最新版本
-                tfsHelper.GetLatest(fileName);
+
+                if (!File.Exists(fileName))
+                {
+                    //生成新目录
+                    string dir = Path.GetDirectoryName(fileName);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+                try
+                {
+                    JoeyLog.Logging.WriteLog("复制新的文件" + fileName);
+                    File.Copy(updateFile.FullName, fileName, true);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 复制更新文件并签出编辑
+        /// </summary>
+        private bool CopyUpdateFile(TFSHelper tfsHelper)
+        {
+            //复制文件
+            List<FileInfo> removeFiles = new List<FileInfo>();
+            List<FileInfo> undoFiles = new List<FileInfo>();
+            decimal progressAddValue = 10M / this._updateFiles.Count;
+            foreach (var updateFile in this._updateFiles)
+            {
+                progressValue += progressAddValue;
+                this.worker.ReportProgress((int)progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
+                var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
+                var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
 
                 if (File.Exists(fileName))
                 {
@@ -509,16 +545,9 @@ namespace JoeySoft.TfsDevelopWinFrom
                     if (MD5Helper.CompareFile(updateFile.FullName, fileName))
                     {
                         removeFiles.Add(updateFile);
+                        //撤销签出编辑
+                        undoFiles.Add(new FileInfo(fileName));
                         continue;
-                    }
-                }
-                else
-                {
-                    //生成新目录
-                    string dir = Path.GetDirectoryName(fileName);
-                    if (!Directory.Exists(dir))
-                    {
-                        Directory.CreateDirectory(dir);
                     }
                 }
                 try
@@ -531,11 +560,15 @@ namespace JoeySoft.TfsDevelopWinFrom
                     return false;
                 }
             }
-
-            foreach (var removeFile in removeFiles)
+            if (undoFiles.Count > 0)
             {
-                this._updateFiles.Remove(removeFile);
+                tfsHelper.Undo(undoFiles);
+                foreach (var item in removeFiles)
+                {
+                    this._updateFiles.Remove(item);
+                }
             }
+            this.worker.ReportProgress(100, "完成");
             return true;
         }
 
@@ -544,18 +577,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private bool Checkout(TFSHelper tfsHelper)
         {
-            if (this._updateFiles == null)
-            {
-                MessageBox.Show("请选择产品目录！");
-                return false;
-            }
-            if (this._updateFiles.Count == 0)
-            {
-                this.worker.ReportProgress(100, "完成");
-                MessageBox.Show("没有需要签入的文件！");
-                return false;
-            }
-            decimal progressAddValue = 10M / this._updateFiles.Count;
+            decimal progressAddValue = 80M / this._updateFiles.Count;
             //签出编辑
             foreach (var updateFile in this._updateFiles)
             {
@@ -563,9 +585,10 @@ namespace JoeySoft.TfsDevelopWinFrom
                 this.worker.ReportProgress((int)progressValue, "开始签出编辑文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
                 var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
+                //获取文件所在目录的最新版本
+                tfsHelper.GetLatest(fileName);
                 tfsHelper.CheckOut(fileName);
             }
-            this.worker.ReportProgress(100, "完成");
             return true;
         }
 
@@ -751,12 +774,22 @@ namespace JoeySoft.TfsDevelopWinFrom
             }
         }
 
+        /// <summary>
+        /// 进度条后台工作任务
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             //复制更新文件
             CopyUpdateFileAndCheckout();
         }
 
+        /// <summary>
+        /// 窗体关闭事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TfsDevelopFrom_FormClosed(object sender, FormClosedEventArgs e)
         {
             JoeyLog.Logging.WriteLog("关闭程序");
