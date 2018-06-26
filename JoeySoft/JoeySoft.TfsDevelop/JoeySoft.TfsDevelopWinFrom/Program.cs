@@ -16,6 +16,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //获取最新版本信息
             Application.Run(new TfsDevelopFrom());
         }
     }

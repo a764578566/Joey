@@ -795,5 +795,11 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             Logging.WriteLog("关闭程序");
         }
+
+        
+        private void TfsDevelopFrom_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
