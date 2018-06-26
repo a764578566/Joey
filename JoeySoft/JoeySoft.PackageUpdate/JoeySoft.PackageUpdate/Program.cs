@@ -19,8 +19,8 @@ namespace JoeySoft.PackageUpdate
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:80", "http://*:80")
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:80")
                 .Build();
     }
 }
