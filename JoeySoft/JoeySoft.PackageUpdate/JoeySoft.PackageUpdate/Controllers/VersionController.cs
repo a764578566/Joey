@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JoeySoft.Common;
 using JoeySoft.PackageUpdate.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace JoeySoft.PackageUpdate.Controllers
 {
@@ -75,6 +77,7 @@ namespace JoeySoft.PackageUpdate.Controllers
             }
 
             //todo 保存到json中
+            JsonHelper.WriteJson(this.joeySoftVersions, "VersionJson/Version.json");
         }
 
         // DELETE: api/ApiWithActions/5

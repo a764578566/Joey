@@ -1,4 +1,5 @@
-﻿using JoeySoft.PackageUpdate.Model;
+﻿using JoeySoft.Common;
+using JoeySoft.PackageUpdate.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +24,7 @@ namespace JoeySoft.PackageUpdate
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var joeySoftVersions = JsonConvert.DeserializeObject<List<JoeySoftVersion>>(File.ReadAllText("VersionJson/Version.json"));
+            var joeySoftVersions = JsonHelper.ReadJson<List<JoeySoftVersion>>("VersionJson/Version.json");
             services.AddSingleton(joeySoftVersions);
             services.AddSwaggerGen(c =>
             {
