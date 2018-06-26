@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using JoeySofy.TFS;
+using JoeySoft.TFS;
 using SmartSolutions.Controls;
 
 namespace JoeySoft.TfsDevelopWinFrom

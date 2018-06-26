@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -11,18 +12,31 @@ namespace JoeySoft.PackageUpdate.Controllers
     [Route("api/Package")]
     public class PackageController : Controller
     {
-        // GET: api/Package
+        // GET api/values
+        /// <summary>
+        /// 获取所有包信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Package/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/values/5
+        /// <summary>
+        /// 获取指定所有包信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{packageName}")]
+        public IActionResult Get(string packageName)
         {
-            return "value";
+            string ext = Path.GetExtension(packageName);
+
+            byte[] by = System.IO.File.ReadAllBytes(Path.Combine("Package", packageName));
+
+            return File(by, "application/octet-stream", Guid.NewGuid().ToString() + ext);
         }
         
         // POST: api/Package

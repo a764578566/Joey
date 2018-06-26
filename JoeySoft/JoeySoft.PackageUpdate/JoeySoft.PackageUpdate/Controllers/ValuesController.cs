@@ -12,10 +12,6 @@ namespace JoeySoft.PackageUpdate.Controllers
     public class ValuesController : Controller
     {
         // GET api/values
-        /// <summary>
-        /// 获取所有包信息
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -23,19 +19,10 @@ namespace JoeySoft.PackageUpdate.Controllers
         }
 
         // GET api/values/5
-        /// <summary>
-        /// 获取指定所有包信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{packageName}")]
-        public IActionResult Get(string packageName)
+        [HttpGet("{id}")]
+        public string Get(int id)
         {
-            string ext = Path.GetExtension(packageName);
-
-            byte[] by = System.IO.File.ReadAllBytes(Path.Combine("Package", packageName));
-
-            return File(by, "application/octet-stream", Guid.NewGuid().ToString() + ext);
+            return "value1";
         }
 
         // POST api/values

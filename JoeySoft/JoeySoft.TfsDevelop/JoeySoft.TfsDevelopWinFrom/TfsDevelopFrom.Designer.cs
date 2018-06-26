@@ -107,9 +107,9 @@
             // 
             this.CheckInBtn.Location = new System.Drawing.Point(833, 653);
             this.CheckInBtn.Name = "CheckInBtn";
-            this.CheckInBtn.Size = new System.Drawing.Size(75, 23);
+            this.CheckInBtn.Size = new System.Drawing.Size(111, 23);
             this.CheckInBtn.TabIndex = 22;
-            this.CheckInBtn.Text = "签入";
+            this.CheckInBtn.Text = "查看正在挂起更改";
             this.CheckInBtn.UseVisualStyleBackColor = true;
             this.CheckInBtn.Click += new System.EventHandler(this.CheckInBtn_Click);
             // 

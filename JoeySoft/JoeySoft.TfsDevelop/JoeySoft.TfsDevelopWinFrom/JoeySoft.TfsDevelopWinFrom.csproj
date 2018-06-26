@@ -11,6 +11,8 @@
     <AssemblyName>JoeySoftTfsTool</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,10 +25,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -141,12 +141,12 @@
       <Name>JoeySoft.FromCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj">
-      <Project>{932d5c75-cf34-4961-bdb4-c9aa668c7d34}</Project>
+      <Project>{932D5C75-CF34-4961-BDB4-C9AA668C7D34}</Project>
       <Name>JoeySoft.JoeyLog</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JoeySofy.TFS\JoeySofy.TFS.csproj">
+    <ProjectReference Include="..\JoeySofy.TFS\JoeySoft.TFS.csproj">
       <Project>{dfdee644-0d25-4355-86dc-230458c7e034}</Project>
-      <Name>JoeySofy.TFS</Name>
+      <Name>JoeySoft.TFS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

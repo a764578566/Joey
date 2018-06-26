@@ -11,9 +11,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using JoeySofy.TFS;
+using JoeySoft.TFS;
 using JoeySoft.Core;
 using JoeySoft.FromCore;
+using JoeySoft.JoeyLog;
 using SmartSolutions.Controls;
 
 namespace JoeySoft.TfsDevelopWinFrom
@@ -739,7 +740,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 DialogResult dr = MessageBox.Show("是否替换原产品地址？", "提示", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
-                    JoeyLog.Logging.WriteLog("替换产品地址，原地址为：" + rootProductPath + "，新产品地址：" + text);
+                    Logging.WriteLog("替换产品地址，原地址为：" + rootProductPath + "，新产品地址：" + text);
                     AppConfigHelper.UpdateAppConfig(KeyProduct, text);
                     rootProductPath = text;
                 }
@@ -792,7 +793,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void TfsDevelopFrom_FormClosed(object sender, FormClosedEventArgs e)
         {
-            JoeyLog.Logging.WriteLog("关闭程序");
+            Logging.WriteLog("关闭程序");
         }
     }
 }

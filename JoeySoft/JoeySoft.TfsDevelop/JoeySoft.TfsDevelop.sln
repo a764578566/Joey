@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.TfsDevelop", "Joey
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.TfsDevelopWinFrom", "JoeySoft.TfsDevelopWinFrom\JoeySoft.TfsDevelopWinFrom.csproj", "{632B76A3-FBD5-407C-9B9B-C01540A4E18F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySofy.TFS", "JoeySofy.TFS\JoeySofy.TFS.csproj", "{DFDEE644-0D25-4355-86DC-230458C7E034}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.TFS", "JoeySofy.TFS\JoeySoft.TFS.csproj", "{DFDEE644-0D25-4355-86DC-230458C7E034}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.JoeyLog", "JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj", "{932D5C75-CF34-4961-BDB4-C9AA668C7D34}"
 EndProject
