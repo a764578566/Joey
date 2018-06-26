@@ -36,4 +36,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Package\产品迁移二开工具V0.0.0.9.3.rar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

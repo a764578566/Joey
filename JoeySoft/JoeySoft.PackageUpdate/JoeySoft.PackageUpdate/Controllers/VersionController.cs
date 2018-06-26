@@ -56,9 +56,19 @@ namespace JoeySoft.PackageUpdate.Controllers
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
-        public void Post([FromBody]JoeySoftVersion value)
+        public IActionResult Post([FromBody]JoeySoftVersion value)
         {
-
+            var joeySoft = this.joeySoftVersions.FirstOrDefault(n => n.JoeySoftName == value.JoeySoftName);
+            if (joeySoft == null)
+            {
+                this.joeySoftVersions.Add(value);
+                JsonHelper.WriteJson(this.joeySoftVersions, "VersionJson/Version.json");
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("当前软件已存在不可以新增！");
+            }
         }
 
         // PUT: api/Version/5
