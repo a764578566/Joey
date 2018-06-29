@@ -35,9 +35,8 @@ namespace JoeySoft.UpdatePackageClient
                     (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
                 httpClient.Dispose();
             }
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JoeySoftTfsTool.exe"));
-            string version = myFileVersionInfo.FileVersion;
-            if (joeySoftVersion.Version != version)
+            string exeFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JoeySoftTfsTool.exe");
+            if (!File.Exists(exeFileName))
             {
                 //执行exe程序
                 worker = new BackgroundWorker();
@@ -48,7 +47,21 @@ namespace JoeySoft.UpdatePackageClient
             }
             else
             {
-                MessageBox.Show("已经是最新版本" + version);
+                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(exeFileName);
+                string version = myFileVersionInfo.FileVersion;
+                if (joeySoftVersion.Version != version)
+                {
+                    //执行exe程序
+                    worker = new BackgroundWorker();
+                    worker.WorkerReportsProgress = true;
+                    worker.DoWork += Worker_DoWork;
+                    worker.RunWorkerAsync();
+                    Application.Run(new ProgressBar(worker));
+                }
+                else
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                }
             }
         }
 

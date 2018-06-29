@@ -21,6 +21,9 @@ namespace JoeySoft.TfsDevelopWinFrom
 {
     public partial class TfsDevelopFrom : Form
     {
+        //是否关闭窗体
+        private bool isClose = false;
+
         private string openFileName;
 
         //产品目录
@@ -57,40 +60,21 @@ namespace JoeySoft.TfsDevelopWinFrom
             JoeyLog.Logging.WriteLog("启动程序");
             try
             {
+                string error = "";
                 rootProductPath = ConfigurationManager.AppSettings[KeyProduct];
-                if (string.IsNullOrEmpty(rootProductPath))
-                {
-                    MessageBox.Show("请配置APP.config的“" + KeyProduct + "”节点！详情：");
-                    return;
-                }
+                InitErrorLog(rootProductPath, "请配置APP.config的“产品根目录" + KeyProduct + "”节点！");
                 rootCustomizePaths = ConfigurationManager.AppSettings[KeyCustomize].Split(',');
-                if (string.IsNullOrEmpty(rootProductPath))
-                {
-                    MessageBox.Show("请配置APP.config的“" + KeyCustomize + "”节点！详情：");
-                    return;
-                }
+                InitErrorLog(rootCustomizePaths, "请配置APP.config的“产品根目录" + KeyProduct + "”节点！");
                 metadataDirectory = ConfigurationManager.AppSettings["MetadataDirectory"];
-                if (string.IsNullOrEmpty(metadataDirectory))
-                {
-                    MessageBox.Show("请配置APP.config的“MetadataDirectory”节点！详情：");
-                    return;
-                }
+                InitErrorLog(metadataDirectory, "请配置APP.config的“元数据目录MetadataDirectory”节点！");
                 customizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
-                if (string.IsNullOrEmpty(customizeSlnFileName))
-                {
-                    MessageBox.Show("请配置APP.config的“CustomizeSlnFileName”节点！详情：");
-                    return;
-                }
+                InitErrorLog(customizeSlnFileName, "请配置APP.config的“二开解决方案名称CustomizeSlnFileName”节点！");
                 productSlnFileName = ConfigurationManager.AppSettings["ProductSlnFileName"];
-                if (string.IsNullOrEmpty(productSlnFileName))
-                {
-                    MessageBox.Show("请配置APP.config的“ProductSlnFileName”节点！详情：");
-                    return;
-                }
+                InitErrorLog(productSlnFileName, "请配置APP.config的“产品解决方案名称ProductSlnFileName”节点！");
                 _updateDirectorys = ConfigurationManager.AppSettings["UpdateDirectory"].Split(',').ToList();
+                InitErrorLog(_updateDirectorys, "请配置APP.config的“更新文件夹UpdateDirectory”节点！");
 
                 string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
-
                 if (string.IsNullOrEmpty(notContainFileNameStr) == false)
                 {
                     notContainFileNames = notContainFileNameStr.Split(',');
@@ -118,6 +102,27 @@ namespace JoeySoft.TfsDevelopWinFrom
             this.isFalseCopyRadioBtn.Select();
             //是否直接签入二开 否
             this.isTrueCheckoutRadioBtn.Select();
+        }
+
+        private void InitErrorLog(string data, string error)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                JoeyLog.Logging.WriteLog(error);
+                MessageBox.Show(error);
+                isClose = true;
+            }
+        }
+        private void InitErrorLog(string[] data, string error)
+        {
+            if (data == null || data.Count() == 0)
+            {
+                InitErrorLog(string.Empty, error);
+            }
+        }
+        private void InitErrorLog(List<string> data, string error)
+        {
+            InitErrorLog(data.ToArray(), error);
         }
 
         //获取修改当前日期
@@ -820,7 +825,10 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         private void TfsDevelopFrom_Load(object sender, EventArgs e)
         {
-
+            if (isClose)
+            {
+                this.Close();
+            }
         }
     }
 }
