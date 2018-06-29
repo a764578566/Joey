@@ -12,7 +12,7 @@ using Microsoft.TeamFoundation.VersionControl.Client;
 using System.IO;
 using System.Text.RegularExpressions;
 using JoeySoft.Core;
-using JoeySofy.TFS;
+using JoeySoft.TFS;
 
 namespace JoeySoft.TfsDevelop
 {

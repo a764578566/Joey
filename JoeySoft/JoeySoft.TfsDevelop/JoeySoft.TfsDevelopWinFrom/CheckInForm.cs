@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using JoeySofy.TFS;
+using JoeySoft.TFS;
 using SmartSolutions.Controls;
 
 namespace JoeySoft.TfsDevelopWinFrom
@@ -103,7 +103,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 catch (Exception ex)
                 {
                     JoeyLog.Logging.WriteErrorLog(ex);
-                    MessageBox.Show("可能有冲突，请打开VS解决冲突！");
+                    MessageBox.Show("可能有冲突，请先撤销签出编辑，再复制编辑签入！");
                 }
             }
         }

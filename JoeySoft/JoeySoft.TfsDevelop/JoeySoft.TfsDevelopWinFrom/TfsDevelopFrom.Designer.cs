@@ -107,9 +107,9 @@
             // 
             this.CheckInBtn.Location = new System.Drawing.Point(833, 653);
             this.CheckInBtn.Name = "CheckInBtn";
-            this.CheckInBtn.Size = new System.Drawing.Size(75, 23);
+            this.CheckInBtn.Size = new System.Drawing.Size(111, 23);
             this.CheckInBtn.TabIndex = 22;
-            this.CheckInBtn.Text = "签入";
+            this.CheckInBtn.Text = "查看正在挂起更改";
             this.CheckInBtn.UseVisualStyleBackColor = true;
             this.CheckInBtn.Click += new System.EventHandler(this.CheckInBtn_Click);
             // 
@@ -268,6 +268,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "产品更新二开";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TfsDevelopFrom_FormClosed);
+            this.Load += new System.EventHandler(this.TfsDevelopFrom_Load);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("JoeySofy.TFS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mysoft")]
+[assembly: AssemblyCompany("JoeySoft")]
 [assembly: AssemblyProduct("JoeySofy.TFS")]
-[assembly: AssemblyCopyright("Copyright © mysoft 2018")]
+[assembly: AssemblyCopyright("Copyright © JoeySoft 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -11,6 +11,8 @@
     <AssemblyName>JoeySoftTfsTool</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -21,12 +23,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>0.0.9.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,24 @@
   <PropertyGroup>
     <ApplicationIcon>Snail.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D979FC8BC83B1139B7738FF59CA79E6762623531</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>JoeySoft.TfsDevelopWinFrom_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SmartSolutions.Controls">
       <HintPath>..\JoeySoft.FromCore\TreeNodeDLL\SmartSolutions.Controls.dll</HintPath>
@@ -57,6 +76,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -116,6 +136,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,12 +162,12 @@
       <Name>JoeySoft.FromCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj">
-      <Project>{932d5c75-cf34-4961-bdb4-c9aa668c7d34}</Project>
+      <Project>{932D5C75-CF34-4961-BDB4-C9AA668C7D34}</Project>
       <Name>JoeySoft.JoeyLog</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JoeySofy.TFS\JoeySofy.TFS.csproj">
+    <ProjectReference Include="..\JoeySofy.TFS\JoeySoft.TFS.csproj">
       <Project>{dfdee644-0d25-4355-86dc-230458c7e034}</Project>
-      <Name>JoeySofy.TFS</Name>
+      <Name>JoeySoft.TFS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
