@@ -1,4 +1,4 @@
-﻿namespace JoeySoft.TfsDevelopWinFrom
+﻿namespace JoeySoft.UpdatePackageClient
 {
     partial class ProgressBar
     {

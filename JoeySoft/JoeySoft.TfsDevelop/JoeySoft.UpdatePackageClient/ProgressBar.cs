@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace JoeySoft.TfsDevelopWinFrom
+namespace JoeySoft.UpdatePackageClient
 {
     public partial class ProgressBar : Form
     {
@@ -24,13 +24,17 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.Close();//执行完之后，直接关闭页面
+            this.Invoke(new Action(() => { this.Close(); }));//执行完之后，直接关闭页面
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.progressBar1.Value = e.ProgressPercentage;
-            this.Text = e.UserState.ToString();
+            this.Invoke(new Action(() =>
+            {
+                this.progressBar1.Value = e.ProgressPercentage;
+                this.Text = e.UserState.ToString();
+            }));
+
         }
     }
 }
