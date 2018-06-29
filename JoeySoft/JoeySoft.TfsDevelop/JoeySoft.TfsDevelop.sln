@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.TFS", "JoeySofy.TF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.JoeyLog", "JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj", "{932D5C75-CF34-4961-BDB4-C9AA668C7D34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.UpdatePackageClient", "JoeySoft.UpdatePackageClient\JoeySoft.UpdatePackageClient.csproj", "{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{932D5C75-CF34-4961-BDB4-C9AA668C7D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{932D5C75-CF34-4961-BDB4-C9AA668C7D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{932D5C75-CF34-4961-BDB4-C9AA668C7D34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

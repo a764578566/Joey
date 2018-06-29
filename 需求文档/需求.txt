@@ -56,3 +56,10 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 6-25
 如果还有冲突处理：1.先主动撤销，再编辑签出
 
+
+6-27
+在VS中添加二开迁移扩展，在提交时提示是否迁移二开
+
+6-29
+查看团队签入二开记录
+
