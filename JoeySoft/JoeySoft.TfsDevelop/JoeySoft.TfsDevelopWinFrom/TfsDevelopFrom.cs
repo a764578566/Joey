@@ -58,14 +58,35 @@ namespace JoeySoft.TfsDevelopWinFrom
             try
             {
                 rootProductPath = ConfigurationManager.AppSettings[KeyProduct];
-
+                if (string.IsNullOrEmpty(rootProductPath))
+                {
+                    MessageBox.Show("请配置APP.config的“" + KeyProduct + "”节点！详情：");
+                    return;
+                }
                 rootCustomizePaths = ConfigurationManager.AppSettings[KeyCustomize].Split(',');
-
+                if (string.IsNullOrEmpty(rootProductPath))
+                {
+                    MessageBox.Show("请配置APP.config的“" + KeyCustomize + "”节点！详情：");
+                    return;
+                }
                 metadataDirectory = ConfigurationManager.AppSettings["MetadataDirectory"];
-
+                if (string.IsNullOrEmpty(metadataDirectory))
+                {
+                    MessageBox.Show("请配置APP.config的“MetadataDirectory”节点！详情：");
+                    return;
+                }
                 customizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
+                if (string.IsNullOrEmpty(customizeSlnFileName))
+                {
+                    MessageBox.Show("请配置APP.config的“CustomizeSlnFileName”节点！详情：");
+                    return;
+                }
                 productSlnFileName = ConfigurationManager.AppSettings["ProductSlnFileName"];
-
+                if (string.IsNullOrEmpty(productSlnFileName))
+                {
+                    MessageBox.Show("请配置APP.config的“ProductSlnFileName”节点！详情：");
+                    return;
+                }
                 _updateDirectorys = ConfigurationManager.AppSettings["UpdateDirectory"].Split(',').ToList();
 
                 string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
@@ -82,7 +103,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             catch (Exception ex)
             {
                 JoeyLog.Logging.WriteErrorLog(ex);
-                MessageBox.Show("请配置APP.config节点！");
+                MessageBox.Show("请配置APP.config节点！详情：" + ex.Message);
                 return;
             }
 
@@ -796,7 +817,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             Logging.WriteLog("关闭程序");
         }
 
-        
+
         private void TfsDevelopFrom_Load(object sender, EventArgs e)
         {
 

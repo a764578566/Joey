@@ -1,16 +1,12 @@
-﻿using JoeySoft.Core;
-using JoeySoft.UpdatePackageClient.Model;
+﻿using JoeySoft.UpdatePackageClient.Model;
 using Newtonsoft.Json;
 using SharpCompress.Readers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JoeySoft.UpdatePackageClient
@@ -39,7 +35,7 @@ namespace JoeySoft.UpdatePackageClient
                     (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
                 httpClient.Dispose();
             }
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(tfsDevelopExePath, "JoeySoftTfsTool.exe"));
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JoeySoftTfsTool.exe"));
             string version = myFileVersionInfo.FileVersion;
             if (joeySoftVersion.Version != version)
             {
@@ -50,19 +46,24 @@ namespace JoeySoft.UpdatePackageClient
                 worker.RunWorkerAsync();
                 Application.Run(new ProgressBar(worker));
             }
+            else
+            {
+                MessageBox.Show("已经是最新版本" + version);
+            }
         }
 
         private static void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             //解压到
-            string temp = @"d:\temp";
+            string temp = AppDomain.CurrentDomain.BaseDirectory;
+            string fileName = "产品迁移二开工具V" + joeySoftVersion.Version + ".rar";
             if (!Directory.Exists(temp))
             {
                 Directory.CreateDirectory(temp);
             }
 
             string versionAddress = AppConfigHelper.GetAppConfig("PackageAddress");
-            Uri uir = new Uri(api + "/" + versionAddress + "/" + "产品迁移二开工具V" + joeySoftVersion.Version + ".rar");
+            Uri uir = new Uri(api + "/" + versionAddress + "/" + fileName);
 
             worker.ReportProgress(10, "开始更新！");
             //下载
@@ -70,11 +71,11 @@ namespace JoeySoft.UpdatePackageClient
             {
                 client.DownloadProgressChanged += client_DownloadProgressChanged;
                 client.DownloadFileCompleted += client_DownloadFileCompleted;
-                client.DownloadFileTaskAsync(uir, "d://产品迁移二开工具V" + joeySoftVersion.Version + ".rar").Wait();
+                client.DownloadFileTaskAsync(uir, fileName).Wait();
             }
             worker.ReportProgress(90, "开始解压！");
             //解压 更新 复制信息
-            using (Stream stream = File.OpenRead(@"d://产品迁移二开工具V" + joeySoftVersion.Version + ".rar"))
+            using (Stream stream = File.OpenRead(fileName))
             {
                 var reader = ReaderFactory.Open(stream);
                 while (reader.MoveToNextEntry())
@@ -86,6 +87,8 @@ namespace JoeySoft.UpdatePackageClient
                     });
                 }
             }
+            //删除压缩包
+            File.Delete(Path.Combine(temp, fileName));
             worker.ReportProgress(100, "更新完成！");
         }
 

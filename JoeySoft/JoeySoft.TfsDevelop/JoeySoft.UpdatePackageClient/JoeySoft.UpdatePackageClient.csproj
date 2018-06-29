@@ -39,6 +39,7 @@
       <HintPath>..\packages\SharpCompress.0.21.1\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigHelper.cs" />
     <Compile Include="Model\JoeySoftVersion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBar.cs">
@@ -85,12 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\JoeySoft.Core\JoeySoft.Core.csproj">
-      <Project>{5d55eca0-96e1-4696-8abf-7fc7da42350f}</Project>
-      <Name>JoeySoft.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="NeedFile.txt" />
