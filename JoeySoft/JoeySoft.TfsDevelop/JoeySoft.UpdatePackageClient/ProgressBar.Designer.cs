@@ -62,6 +62,7 @@
             this.Name = "ProgressBar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "进度条";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProgressBar_FormClosed);
             this.ResumeLayout(false);
 
         }

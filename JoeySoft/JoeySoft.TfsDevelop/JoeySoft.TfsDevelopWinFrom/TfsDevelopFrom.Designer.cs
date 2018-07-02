@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TfsDevelopFrom));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.updateTriSatateTreeView = new SmartSolutions.Controls.TriStateTreeView();
+            this.contextMenuStripTV = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.allSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.CheckInBtn = new System.Windows.Forms.Button();
             this.showCustomizeFileBtn = new System.Windows.Forms.Button();
@@ -49,10 +52,17 @@
             this.ReadRootFileBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.worker = new System.ComponentModel.BackgroundWorker();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.feedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2.SuspendLayout();
+            this.contextMenuStripTV.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage2
@@ -80,6 +90,7 @@
             // 
             this.updateTriSatateTreeView.CheckBoxes = true;
             this.updateTriSatateTreeView.CheckedImageIndex = 3;
+            this.updateTriSatateTreeView.ContextMenuStrip = this.contextMenuStripTV;
             this.updateTriSatateTreeView.ImageKey = "TIM图片20180612182821.ico";
             this.updateTriSatateTreeView.ImageList = this.imageList1;
             this.updateTriSatateTreeView.IndeterminateImageIndex = 4;
@@ -91,6 +102,28 @@
             this.updateTriSatateTreeView.UncheckedImageIndex = 5;
             this.updateTriSatateTreeView.UseCustomImages = true;
             this.updateTriSatateTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.updateTriSatateTreeView_AfterCheck);
+            // 
+            // contextMenuStripTV
+            // 
+            this.contextMenuStripTV.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allSelectToolStripMenuItem,
+            this.noSelectToolStripMenuItem});
+            this.contextMenuStripTV.Name = "contextMenuStripTV";
+            this.contextMenuStripTV.Size = new System.Drawing.Size(113, 48);
+            // 
+            // allSelectToolStripMenuItem
+            // 
+            this.allSelectToolStripMenuItem.Name = "allSelectToolStripMenuItem";
+            this.allSelectToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.allSelectToolStripMenuItem.Text = "全选";
+            this.allSelectToolStripMenuItem.Click += new System.EventHandler(this.allSelectToolStripMenuItem_Click);
+            // 
+            // noSelectToolStripMenuItem
+            // 
+            this.noSelectToolStripMenuItem.Name = "noSelectToolStripMenuItem";
+            this.noSelectToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.noSelectToolStripMenuItem.Text = "全不选";
+            this.noSelectToolStripMenuItem.Click += new System.EventHandler(this.noSelectToolStripMenuItem_Click);
             // 
             // imageList1
             // 
@@ -257,13 +290,56 @@
             this.worker.WorkerReportsProgress = true;
             this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.帮助ToolStripMenuItem,
+            this.feedbackToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1136, 25);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkVersionToolStripMenuItem,
+            this.versionToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // checkVersionToolStripMenuItem
+            // 
+            this.checkVersionToolStripMenuItem.Name = "checkVersionToolStripMenuItem";
+            this.checkVersionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.checkVersionToolStripMenuItem.Text = "检查最新版本";
+            this.checkVersionToolStripMenuItem.Click += new System.EventHandler(this.checkVersionToolStripMenuItem_Click);
+            // 
+            // versionToolStripMenuItem
+            // 
+            this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.versionToolStripMenuItem.Text = "关于工具";
+            this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
+            // 
+            // feedbackToolStripMenuItem
+            // 
+            this.feedbackToolStripMenuItem.Name = "feedbackToolStripMenuItem";
+            this.feedbackToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.feedbackToolStripMenuItem.Text = "反馈";
+            this.feedbackToolStripMenuItem.Click += new System.EventHandler(this.feedbackToolStripMenuItem_Click);
+            // 
             // TfsDevelopFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 826);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "TfsDevelopFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "产品更新二开";
@@ -271,12 +347,16 @@
             this.Load += new System.EventHandler(this.TfsDevelopFrom_Load);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.contextMenuStripTV.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -300,6 +380,14 @@
         private SmartSolutions.Controls.TriStateTreeView updateTriSatateTreeView;
         private System.Windows.Forms.ImageList imageList1;
         private System.ComponentModel.BackgroundWorker worker;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripTV;
+        private System.Windows.Forms.ToolStripMenuItem allSelectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noSelectToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkVersionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem feedbackToolStripMenuItem;
     }
 }
 
