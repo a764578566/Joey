@@ -15,6 +15,20 @@ namespace JoeySoft.FromCore
     public static class TriStateTreeNodeHelper
     {
         /// <summary>
+        /// 选择
+        /// </summary>
+        /// <param name="treeNodeCollection"></param>
+        /// <param name="isChecked"></param>
+        public static void Checked(TriStateTreeView tstv, bool isChecked)
+        {
+            foreach (TriStateTreeNode node in tstv.Nodes)
+            {
+                node.Checked = isChecked;
+            }
+            tstv.Refresh();
+        }
+
+        /// <summary>
         /// 获取要编辑签入的文件信息
         /// </summary>
         /// <returns></returns>

@@ -91,5 +91,11 @@
   <ItemGroup>
     <Content Include="NeedFile.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj">
+      <Project>{932d5c75-cf34-4961-bdb4-c9aa668c7d34}</Project>
+      <Name>JoeySoft.JoeyLog</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

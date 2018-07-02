@@ -16,6 +16,9 @@ using JoeySoft.Core;
 using JoeySoft.FromCore;
 using JoeySoft.JoeyLog;
 using SmartSolutions.Controls;
+using JoeySoft.TfsDevelopWinFrom.model;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -28,6 +31,10 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         //产品目录
         private readonly string KeyProduct = "ProductRootPath";
+
+        private string version;
+        //是否更新
+        private bool isUpdate = false;
 
         /// <summary>
         /// 产品根目录
@@ -90,6 +97,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 MessageBox.Show("请配置APP.config节点！详情：" + ex.Message);
                 return;
             }
+            this.version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             this.updateDateTimePicker.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
@@ -137,6 +145,9 @@ namespace JoeySoft.TfsDevelopWinFrom
 
         //需要更新的文件信息
         private List<FileInfo> _updateFiles;
+
+        //需要新增的文件信息
+        private List<FileInfo> _addFiles;
 
         //二开的元数据文件路径
         private List<FileInfo> _customizeFilePath = new List<FileInfo>();
@@ -508,6 +519,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         private bool CopyNewFile(TFSHelper tfsHelper)
         {
+            _addFiles = new List<FileInfo>();
             //复制文件
             decimal progressAddValue = 10M / this._updateFiles.Count;
             foreach (var updateFile in this._updateFiles)
@@ -532,6 +544,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 }
                 try
                 {
+                    _addFiles.Add(updateFile);
                     JoeyLog.Logging.WriteLog("复制新的文件" + fileName);
                     File.Copy(updateFile.FullName, fileName, true);
                 }
@@ -569,7 +582,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                         fi.Attributes = FileAttributes.Normal;
                     }
                     //如果相同文件没有修改过
-                    if (MD5Helper.CompareFile(updateFile.FullName, fileName))
+                    if (MD5Helper.CompareFile(updateFile.FullName, fileName) && _addFiles.FirstOrDefault(n => n == updateFile) == null)
                     {
                         removeFiles.Add(updateFile);
                         //撤销签出编辑
@@ -820,15 +833,99 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void TfsDevelopFrom_FormClosed(object sender, FormClosedEventArgs e)
         {
             Logging.WriteLog("关闭程序");
+            if (isUpdate)
+            {
+                string updateFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigClass.UpdateServicePathName,
+                   ConfigClass.UpdateServiceExeName);
+                if (File.Exists(updateFilePath))
+                {
+                    System.Diagnostics.Process.Start(updateFilePath);
+                }
+                else
+                {
+                    Logging.WriteLog("不存在更新文件：" + updateFilePath);
+                    MessageBox.Show("不存在更新文件请联系，Email：zhoujr01@mysoft.com.cn");
+                }
+            }
         }
 
 
         private void TfsDevelopFrom_Load(object sender, EventArgs e)
         {
+            //加载后后台更新更新包
+            Task.Run(() =>
+            {
+                var joeySoftVersion = UpdateService.CheckUpdateClientVersion();
+                if (UpdateService.GetUpdateClientVersion() != joeySoftVersion.Version)
+                {
+                    UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
+                }
+            });
+
             if (isClose)
             {
                 this.Close();
             }
+        }
+
+        /// <summary>
+        /// 全选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void allSelectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, true);
+        }
+
+
+        /// <summary>
+        /// 全不选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void noSelectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, false);
+        }
+
+        /// <summary>
+        /// 检查最新版本
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkVersionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
+            if (joeySoftVersion.Version != this.version)
+            {
+                DialogResult dialogResult = MessageBox.Show("当前软件版本Version：" + this.version + "，检查到最新版本" + joeySoftVersion.Version + "，是否需要更新？",
+                    "提示", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    isUpdate = true;
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("已是最新版本Version：" + this.version);
+            }
+        }
+
+        /// <summary>
+        /// 关于工具
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void versionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("版本号（Version）：" + this.version);
+        }
+
+        private void feedbackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Email：zhoujr01@mysoft.com.cn");
         }
     }
 }

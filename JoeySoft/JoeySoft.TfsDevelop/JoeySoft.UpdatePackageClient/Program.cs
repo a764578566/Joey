@@ -1,4 +1,5 @@
-﻿using JoeySoft.UpdatePackageClient.Model;
+﻿using JoeySoft.JoeyLog;
+using JoeySoft.UpdatePackageClient.Model;
 using Newtonsoft.Json;
 using SharpCompress.Readers;
 using System;
@@ -17,6 +18,7 @@ namespace JoeySoft.UpdatePackageClient
         static string joeySofyName = AppConfigHelper.GetAppConfig("JoeySofyName");
         static BackgroundWorker worker;
         static JoeySoftVersion joeySoftVersion;
+        static string joeySoftTfsToolPath;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -35,9 +37,13 @@ namespace JoeySoft.UpdatePackageClient
                     (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
                 httpClient.Dispose();
             }
-            string exeFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JoeySoftTfsTool.exe");
+
+            joeySoftTfsToolPath = Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory));
+            string exeFileName = Path.Combine(joeySoftTfsToolPath, "JoeySoftTfsTool.exe");
+            Logging.WriteLog("读取exe：" + exeFileName);
             if (!File.Exists(exeFileName))
             {
+                Logging.WriteLog("更新版本为：" + joeySoftVersion.Version);
                 //执行exe程序
                 worker = new BackgroundWorker();
                 worker.WorkerReportsProgress = true;
@@ -51,6 +57,7 @@ namespace JoeySoft.UpdatePackageClient
                 string version = myFileVersionInfo.FileVersion;
                 if (joeySoftVersion.Version != version)
                 {
+                    Logging.WriteLog("更新版本为：" + joeySoftVersion.Version);
                     //执行exe程序
                     worker = new BackgroundWorker();
                     worker.WorkerReportsProgress = true;
@@ -68,7 +75,7 @@ namespace JoeySoft.UpdatePackageClient
         private static void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             //解压到
-            string temp = AppDomain.CurrentDomain.BaseDirectory;
+            string temp = joeySoftTfsToolPath;
             string fileName = "产品迁移二开工具V" + joeySoftVersion.Version + ".rar";
             if (!Directory.Exists(temp))
             {
@@ -87,21 +94,39 @@ namespace JoeySoft.UpdatePackageClient
                 client.DownloadFileTaskAsync(uir, fileName).Wait();
             }
             worker.ReportProgress(90, "开始解压！");
-            //解压 更新 复制信息
-            using (Stream stream = File.OpenRead(fileName))
+            try
             {
-                var reader = ReaderFactory.Open(stream);
-                while (reader.MoveToNextEntry())
+                //解压 更新 复制信息
+                using (Stream stream = File.OpenRead(fileName))
                 {
-                    reader.WriteEntryToDirectory(temp, new ExtractionOptions()
+                    var reader = ReaderFactory.Open(stream);
+                    while (reader.MoveToNextEntry())
                     {
-                        ExtractFullPath = true,
-                        Overwrite = true
-                    });
+                        reader.WriteEntryToDirectory(temp, new ExtractionOptions()
+                        {
+                            ExtractFullPath = true,
+                            Overwrite = true
+                        });
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Logging.WriteErrorLog(ex);
+            }
             //删除压缩包
-            File.Delete(Path.Combine(temp, fileName));
+            string zipFileName = Path.Combine(joeySoftTfsToolPath, fileName);
+            if (File.Exists(zipFileName))
+            {
+                File.Delete(zipFileName);
+            }
+            else
+            {
+                zipFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+                File.Delete(zipFileName);
+            }
+
+            Logging.WriteLog("删除压缩包：" + zipFileName);
             worker.ReportProgress(100, "更新完成！");
         }
 

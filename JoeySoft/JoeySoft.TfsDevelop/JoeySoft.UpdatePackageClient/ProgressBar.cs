@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace JoeySoft.UpdatePackageClient
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            MessageBox.Show("已更新为最新版本！");
             this.Invoke(new Action(() => { this.Close(); }));//执行完之后，直接关闭页面
         }
 
@@ -35,6 +37,23 @@ namespace JoeySoft.UpdatePackageClient
                 this.Text = e.UserState.ToString();
             }));
 
+        }
+
+        private void ProgressBar_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string joeySoftTfsToolFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JoeySoftTfsTool.exe");
+            if (File.Exists(joeySoftTfsToolFilePath))
+            {
+                System.Diagnostics.Process.Start(joeySoftTfsToolFilePath);
+            }
+            else
+            {
+                joeySoftTfsToolFilePath = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)), "JoeySoftTfsTool.exe");
+                if (File.Exists(joeySoftTfsToolFilePath))
+                {
+                    System.Diagnostics.Process.Start(joeySoftTfsToolFilePath);
+                }
+            }
         }
     }
 }
