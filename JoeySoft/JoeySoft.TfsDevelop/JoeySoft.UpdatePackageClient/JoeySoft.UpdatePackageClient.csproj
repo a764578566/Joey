@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigHelper.cs" />
-    <Compile Include="Model\JoeySoftVersion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBar.cs">
       <SubType>Form</SubType>
@@ -92,10 +91,17 @@
     <Content Include="NeedFile.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JoeySoft.Core\JoeySoft.Core.csproj">
+      <Project>{5D55ECA0-96E1-4696-8ABF-7FC7DA42350F}</Project>
+      <Name>JoeySoft.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JoeySoft.JoeyLog\JoeySoft.JoeyLog.csproj">
       <Project>{932d5c75-cf34-4961-bdb4-c9aa668c7d34}</Project>
       <Name>JoeySoft.JoeyLog</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

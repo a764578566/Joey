@@ -1,17 +1,13 @@
-﻿using JoeySoft.JoeyLog;
+﻿using JoeySoft.Core;
+using JoeySoft.JoeyLog;
 using JoeySoft.TfsDevelopWinFrom.model;
 using Newtonsoft.Json;
 using SharpCompress.Readers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -48,17 +44,17 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// 获取更新工具版本信息
         /// </summary>
         /// <returns></returns>
-        public static string GetUpdateClientVersion()
+        public static FileVersionInfo GetUpdateClientVersion()
         {
             string updateFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigClass.UpdateServicePathName,
                  ConfigClass.UpdateServiceExeName);
 
             if (!File.Exists(updateFilePath))
             {
-                return string.Empty;
+                return null;
             }
             FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(updateFilePath);
-            return myFileVersionInfo.FileVersion;
+            return myFileVersionInfo;
         }
 
         /// <summary>

@@ -67,3 +67,5 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 1.添加选择、不选功能
 2.添加菜单检查最新版本、关于工具、反馈
 
+7-9
+1.添加预发布版 

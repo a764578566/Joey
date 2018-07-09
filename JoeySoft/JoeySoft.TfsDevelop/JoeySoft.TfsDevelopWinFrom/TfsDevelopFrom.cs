@@ -854,7 +854,28 @@ namespace JoeySoft.TfsDevelopWinFrom
             Task.Run(() =>
             {
                 var joeySoftVersion = UpdateService.CheckUpdateClientVersion();
-                if (UpdateService.GetUpdateClientVersion() != joeySoftVersion.Version)
+                var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+                if (myFileVersionInfo.FileMajorPart > joeySoftVersion.FileMajorPart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FileMinorPart > joeySoftVersion.FileMinorPart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FilePrivatePart > joeySoftVersion.FilePrivatePart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FileBuildPart >= joeySoftVersion.FileBuildPart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FileVersion != joeySoftVersion.Version)
                 {
                     UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
                 }

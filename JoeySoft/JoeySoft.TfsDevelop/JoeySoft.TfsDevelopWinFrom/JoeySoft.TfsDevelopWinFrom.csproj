@@ -107,7 +107,6 @@
       <DependentUpon>CustomizeFilesFrom.cs</DependentUpon>
     </Compile>
     <Compile Include="model\ConfigClass.cs" />
-    <Compile Include="model\JoeySoftVersion.cs" />
     <Compile Include="ProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>

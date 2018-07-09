@@ -1,5 +1,5 @@
-﻿using JoeySoft.JoeyLog;
-using JoeySoft.UpdatePackageClient.Model;
+﻿using JoeySoft.Core;
+using JoeySoft.JoeyLog;
 using Newtonsoft.Json;
 using SharpCompress.Readers;
 using System;
@@ -55,6 +55,26 @@ namespace JoeySoft.UpdatePackageClient
             {
                 FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(exeFileName);
                 string version = myFileVersionInfo.FileVersion;
+                if (myFileVersionInfo.FileMajorPart > joeySoftVersion.FileMajorPart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FileMinorPart > joeySoftVersion.FileMinorPart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FilePrivatePart > joeySoftVersion.FilePrivatePart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
+                if (myFileVersionInfo.FileBuildPart >= joeySoftVersion.FileBuildPart)
+                {
+                    MessageBox.Show("已经是最新版本" + version);
+                    return;
+                }
                 if (joeySoftVersion.Version != version)
                 {
                     Logging.WriteLog("更新版本为：" + joeySoftVersion.Version);
