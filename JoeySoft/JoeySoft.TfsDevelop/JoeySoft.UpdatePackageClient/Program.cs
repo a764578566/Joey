@@ -37,7 +37,7 @@ namespace JoeySoft.UpdatePackageClient
                     (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
                 httpClient.Dispose();
             }
-
+            Logging.WriteLog("获取服务器最新版本：" + joeySoftVersion.Version);
             joeySoftTfsToolPath = Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory));
             string exeFileName = Path.Combine(joeySoftTfsToolPath, "JoeySoftTfsTool.exe");
             Logging.WriteLog("读取exe：" + exeFileName);
