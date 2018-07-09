@@ -855,23 +855,15 @@ namespace JoeySoft.TfsDevelopWinFrom
             {
                 var joeySoftVersion = UpdateService.CheckUpdateClientVersion();
                 var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
-                if (myFileVersionInfo.FileMajorPart > joeySoftVersion.FileMajorPart)
+                if (myFileVersionInfo != null)
                 {
-                    return;
+                    if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                    {
+                        Logging.WriteLog("当前版本：" + myFileVersionInfo.FileVersion);
+                        return;
+                    }
                 }
-                if (myFileVersionInfo.FileMinorPart > joeySoftVersion.FileMinorPart)
-                {
-                    return;
-                }
-                if (myFileVersionInfo.FilePrivatePart > joeySoftVersion.FilePrivatePart)
-                {
-                    return;
-                }
-                if (myFileVersionInfo.FileBuildPart >= joeySoftVersion.FileBuildPart)
-                {
-                    return;
-                }
-                if (myFileVersionInfo.FileVersion != joeySoftVersion.Version)
+                if (myFileVersionInfo == null || myFileVersionInfo.FileVersion != joeySoftVersion.Version)
                 {
                     UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
                 }

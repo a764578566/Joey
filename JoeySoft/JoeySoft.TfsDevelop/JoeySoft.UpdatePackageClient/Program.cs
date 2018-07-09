@@ -43,53 +43,32 @@ namespace JoeySoft.UpdatePackageClient
             Logging.WriteLog("读取exe：" + exeFileName);
             if (!File.Exists(exeFileName))
             {
-                Logging.WriteLog("更新版本为：" + joeySoftVersion.Version);
-                //执行exe程序
-                worker = new BackgroundWorker();
-                worker.WorkerReportsProgress = true;
-                worker.DoWork += Worker_DoWork;
-                worker.RunWorkerAsync();
-                Application.Run(new ProgressBar(worker));
+                RunWork();
             }
             else
             {
                 FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(exeFileName);
-                string version = myFileVersionInfo.FileVersion;
-                if (myFileVersionInfo.FileMajorPart > joeySoftVersion.FileMajorPart)
+                if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
                 {
-                    MessageBox.Show("已经是最新版本" + version);
+                    MessageBox.Show("已经是最新版本" + myFileVersionInfo.FileVersion);
                     return;
                 }
-                if (myFileVersionInfo.FileMinorPart > joeySoftVersion.FileMinorPart)
+                if (joeySoftVersion.Version != myFileVersionInfo.FileVersion)
                 {
-                    MessageBox.Show("已经是最新版本" + version);
-                    return;
-                }
-                if (myFileVersionInfo.FilePrivatePart > joeySoftVersion.FilePrivatePart)
-                {
-                    MessageBox.Show("已经是最新版本" + version);
-                    return;
-                }
-                if (myFileVersionInfo.FileBuildPart >= joeySoftVersion.FileBuildPart)
-                {
-                    MessageBox.Show("已经是最新版本" + version);
-                    return;
-                }
-                if (joeySoftVersion.Version != version)
-                {
-                    Logging.WriteLog("更新版本为：" + joeySoftVersion.Version);
-                    //执行exe程序
-                    worker = new BackgroundWorker();
-                    worker.WorkerReportsProgress = true;
-                    worker.DoWork += Worker_DoWork;
-                    worker.RunWorkerAsync();
-                    Application.Run(new ProgressBar(worker));
-                }
-                else
-                {
-                    MessageBox.Show("已经是最新版本" + version);
+                    RunWork();
                 }
             }
+        }
+
+        private static void RunWork()
+        {
+            Logging.WriteLog("更新版本为：" + joeySoftVersion.Version);
+            //执行exe程序
+            worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += Worker_DoWork;
+            worker.RunWorkerAsync();
+            Application.Run(new ProgressBar(worker));
         }
 
         private static void Worker_DoWork(object sender, DoWorkEventArgs e)

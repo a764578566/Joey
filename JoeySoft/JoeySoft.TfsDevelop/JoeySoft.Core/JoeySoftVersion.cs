@@ -65,6 +65,25 @@ namespace JoeySoft.Core
         }
 
         /// <summary>
+        /// 获取该文件关联产品的生成号
+        /// </summary>
+        public int FileBuildPart
+        {
+            get
+            {
+                if (this._fileBuildPart != -1)
+                {
+                    return this._fileBuildPart;
+                }
+                else
+                {
+                    int.TryParse(Version.Split('.')[2], out this._fileBuildPart);
+                }
+                return this._fileBuildPart;
+            }
+        }
+
+        /// <summary>
         /// 获取此文件关联产品的专用部件号
         /// </summary>
 
@@ -78,29 +97,12 @@ namespace JoeySoft.Core
                 }
                 else
                 {
-                    int.TryParse(Version.Split('.')[2], out this._filePrivatePart);
+                    int.TryParse(Version.Split('.')[3], out this._filePrivatePart);
                 }
                 return this._filePrivatePart;
             }
         }
 
-        /// <summary>
-        /// 获取该文件关联产品的生成号
-        /// </summary>
-        public int FileBuildPart
-        {
-            get
-            {
-                if (this._fileBuildPart != -1)
-                {
-                    return this._fileBuildPart;
-                }
-                else
-                {
-                    int.TryParse(Version.Split('.')[3], out this._fileBuildPart);
-                }
-                return this._fileBuildPart;
-            }
-        }
+
     }
 }

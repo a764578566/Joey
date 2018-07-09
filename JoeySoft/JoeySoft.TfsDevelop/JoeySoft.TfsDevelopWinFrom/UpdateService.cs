@@ -70,6 +70,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                     (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
                 httpClient.Dispose();
             }
+            Logging.WriteLog("开始检查更新工具的最新版本：" + joeySoftVersion.Version);
             return joeySoftVersion;
         }
 
