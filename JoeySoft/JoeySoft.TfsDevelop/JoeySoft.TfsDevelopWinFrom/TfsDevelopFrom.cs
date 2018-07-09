@@ -67,7 +67,6 @@ namespace JoeySoft.TfsDevelopWinFrom
             JoeyLog.Logging.WriteLog("启动程序");
             try
             {
-                string error = "";
                 rootProductPath = ConfigurationManager.AppSettings[KeyProduct];
                 InitErrorLog(rootProductPath, "请配置APP.config的“产品根目录" + KeyProduct + "”节点！");
                 rootCustomizePaths = ConfigurationManager.AppSettings[KeyCustomize].Split(',');

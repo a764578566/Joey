@@ -129,8 +129,6 @@ namespace JoeySoft.UpdatePackageClient
             worker.ReportProgress(100, "更新完成！");
         }
 
-        static int value = 0;
-        static object obj = new object();
         private static void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             worker.ReportProgress(e.ProgressPercentage / 10 * 8 + 10, string.Format("当前接收到{0}字节，文件大小总共{1}字节", e.BytesReceived, e.TotalBytesToReceive));
