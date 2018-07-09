@@ -904,7 +904,17 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void checkVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
-            if (joeySoftVersion.Version != this.version)
+            var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+            if (myFileVersionInfo != null)
+            {
+                if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                {
+                    Logging.WriteLog("检查最新版本：" + myFileVersionInfo.FileVersion);
+                    MessageBox.Show("已是最新版本Version：" + this.version);
+                    return;
+                }
+            }
+            if (myFileVersionInfo == null || joeySoftVersion.Version != this.version)
             {
                 DialogResult dialogResult = MessageBox.Show("当前软件版本Version：" + this.version + "，检查到最新版本" + joeySoftVersion.Version + "，是否需要更新？",
                     "提示", MessageBoxButtons.YesNo);
