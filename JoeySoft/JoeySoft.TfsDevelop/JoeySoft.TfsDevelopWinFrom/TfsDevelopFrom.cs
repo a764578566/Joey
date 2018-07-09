@@ -67,19 +67,16 @@ namespace JoeySoft.TfsDevelopWinFrom
             JoeyLog.Logging.WriteLog("启动程序");
             try
             {
-                string error = "";
                 rootProductPath = ConfigurationManager.AppSettings[KeyProduct];
                 InitErrorLog(rootProductPath, "请配置APP.config的“产品根目录" + KeyProduct + "”节点！");
                 rootCustomizePaths = ConfigurationManager.AppSettings[KeyCustomize].Split(',');
                 InitErrorLog(rootCustomizePaths, "请配置APP.config的“产品根目录" + KeyProduct + "”节点！");
-                metadataDirectory = ConfigurationManager.AppSettings["MetadataDirectory"];
-                InitErrorLog(metadataDirectory, "请配置APP.config的“元数据目录MetadataDirectory”节点！");
                 customizeSlnFileName = ConfigurationManager.AppSettings["CustomizeSlnFileName"];
                 InitErrorLog(customizeSlnFileName, "请配置APP.config的“二开解决方案名称CustomizeSlnFileName”节点！");
                 productSlnFileName = ConfigurationManager.AppSettings["ProductSlnFileName"];
                 InitErrorLog(productSlnFileName, "请配置APP.config的“产品解决方案名称ProductSlnFileName”节点！");
-                _updateDirectorys = ConfigurationManager.AppSettings["UpdateDirectory"].Split(',').ToList();
-                InitErrorLog(_updateDirectorys, "请配置APP.config的“更新文件夹UpdateDirectory”节点！");
+                _updateDirectorys = ConfigClass.UpdateDirectory.Split(',').ToList();
+                metadataDirectory = ConfigClass.MetadataDirectory;
 
                 string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
                 if (string.IsNullOrEmpty(notContainFileNameStr) == false)
@@ -856,7 +853,16 @@ namespace JoeySoft.TfsDevelopWinFrom
             Task.Run(() =>
             {
                 var joeySoftVersion = UpdateService.CheckUpdateClientVersion();
-                if (UpdateService.GetUpdateClientVersion() != joeySoftVersion.Version)
+                var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+                if (myFileVersionInfo != null)
+                {
+                    if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                    {
+                        Logging.WriteLog("当前版本：" + myFileVersionInfo.FileVersion);
+                        return;
+                    }
+                }
+                if (myFileVersionInfo == null || myFileVersionInfo.FileVersion != joeySoftVersion.Version)
                 {
                     UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
                 }
@@ -897,7 +903,17 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void checkVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
-            if (joeySoftVersion.Version != this.version)
+            var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+            if (myFileVersionInfo != null)
+            {
+                if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                {
+                    Logging.WriteLog("检查最新版本：" + myFileVersionInfo.FileVersion);
+                    MessageBox.Show("已是最新版本Version：" + this.version);
+                    return;
+                }
+            }
+            if (myFileVersionInfo == null || joeySoftVersion.Version != this.version)
             {
                 DialogResult dialogResult = MessageBox.Show("当前软件版本Version：" + this.version + "，检查到最新版本" + joeySoftVersion.Version + "，是否需要更新？",
                     "提示", MessageBoxButtons.YesNo);

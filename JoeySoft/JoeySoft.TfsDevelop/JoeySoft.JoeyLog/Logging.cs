@@ -29,7 +29,7 @@ namespace JoeySoft.JoeyLog
         /// <param name="message"></param>
         public static void WriteLog(string message)
         {
-            string logContent = string.Format("[{0}] =>{1}", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), message);
+            string logContent = string.Format("[{0}] =>{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message);
             string fileName = DateTime.Now.ToString("yyyy-MM-dd") + logFileName;
             WriteFile(fileName, logContent);
         }
@@ -40,8 +40,8 @@ namespace JoeySoft.JoeyLog
         /// <param name="ex"></param>
         public static void WriteErrorLog(Exception ex)
         {
-            string logContent = string.Format("[{0}]错误发生在：{1}，\r\n 内容信息：{2}", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), ex.Source, ex.Message);
-            logContent += string.Format("\r\n [{0}] 跟踪：{1}", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), ex.StackTrace);
+            string logContent = string.Format("[{0}]错误发生在：{1}，\r\n 内容信息：{2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ex.Source, ex.Message);
+            logContent += string.Format("\r\n [{0}] 跟踪：{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ex.StackTrace);
             string fileName = DateTime.Now.ToString("yyyy-MM-dd") + errorLogFileName;
             WriteFile(fileName, logContent);
         }
