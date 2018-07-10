@@ -16,6 +16,8 @@ namespace JoeySoft.UpdatePackageClient
     {
         static string api = AppConfigHelper.GetAppConfig("UpdateServiceAddress");
         static string joeySofyName = AppConfigHelper.GetAppConfig("JoeySofyName");
+        static string versionAddress = "Version";
+        static string packageAddress = "Package";
         static BackgroundWorker worker;
         static JoeySoftVersion joeySoftVersion;
         static string joeySoftTfsToolPath;
@@ -27,9 +29,7 @@ namespace JoeySoft.UpdatePackageClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            string versionAddress = AppConfigHelper.GetAppConfig("VersionAddress");
             Uri uir = new Uri(api + "/" + versionAddress + "/" + joeySofyName);
-            string tfsDevelopExePath = AppConfigHelper.GetAppConfig("TfsDevelopExePath");
             joeySoftVersion = new JoeySoftVersion();
             using (HttpClient httpClient = new HttpClient())
             {
@@ -75,14 +75,13 @@ namespace JoeySoft.UpdatePackageClient
         {
             //解压到
             string temp = joeySoftTfsToolPath;
-            string fileName = "产品迁移二开工具V" + joeySoftVersion.Version + ".rar";
+            string fileName = "产品迁移二开工具V" + joeySoftVersion.Version + ".zip";
             if (!Directory.Exists(temp))
             {
                 Directory.CreateDirectory(temp);
             }
 
-            string versionAddress = AppConfigHelper.GetAppConfig("PackageAddress");
-            Uri uir = new Uri(api + "/" + versionAddress + "/" + fileName);
+            Uri uir = new Uri(api + "/" + packageAddress + "/" + fileName);
 
             worker.ReportProgress(10, "开始更新！");
             //下载
@@ -101,6 +100,10 @@ namespace JoeySoft.UpdatePackageClient
                     var reader = ReaderFactory.Open(stream);
                     while (reader.MoveToNextEntry())
                     {
+                        if (reader.Entry.IsDirectory == false)
+                        {
+                            Logging.WriteLog("复制文件：" + reader.Entry.Key);
+                        }
                         reader.WriteEntryToDirectory(temp, new ExtractionOptions()
                         {
                             ExtractFullPath = true,
