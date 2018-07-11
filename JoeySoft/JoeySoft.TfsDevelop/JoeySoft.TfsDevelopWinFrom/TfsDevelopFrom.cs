@@ -481,6 +481,14 @@ namespace JoeySoft.TfsDevelopWinFrom
             //Tfs帮助类
             TFSHelper tfsHelper = new TFSHelper(Directory.GetParent(customizePath).FullName, customizeSlnFileName);
 
+            //判断产品TFS是否全部签入
+            if (tfsHelper.GetPendingChange().Count > 0)
+            {
+                _updateFiles = null;
+                MessageBox.Show("二开有未签入的数据，不可以再次签入二开，请先签入二开！");
+                return;
+            }
+
             //先复制新的文件
             if (!CopyNewFile(tfsHelper))
             {

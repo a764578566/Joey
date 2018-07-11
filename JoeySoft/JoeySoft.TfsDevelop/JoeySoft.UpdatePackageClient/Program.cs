@@ -75,7 +75,7 @@ namespace JoeySoft.UpdatePackageClient
         {
             //解压到
             string temp = joeySoftTfsToolPath;
-            string fileName = "产品迁移二开工具V" + joeySoftVersion.Version + ".zip";
+            string fileName = "TfsDevelopV" + joeySoftVersion.Version + ".zip";
             if (!Directory.Exists(temp))
             {
                 Directory.CreateDirectory(temp);

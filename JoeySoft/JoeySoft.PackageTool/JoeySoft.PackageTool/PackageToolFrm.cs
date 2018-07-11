@@ -27,6 +27,7 @@ namespace JoeySoft.PackageTool
 
             this.PackageAdressCBX.Text = PackageAdresses[0];
             this.PackageAdressCBX.Items.AddRange(PackageAdresses);
+
         }
 
         /// <summary>
@@ -77,7 +78,9 @@ namespace JoeySoft.PackageTool
                     this.PackageAdressCBX.Text = openFileDialog.FileName;
                 }
             }
+
             string directoryPath = Directory.GetParent(this.PackageAdressCBX.Text).FullName;
+
             FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(this.PackageAdressCBX.Text);
             using (Stream stream = File.Open(Path.Combine(Directory.GetParent(directoryPath).FullName, joeySoftVersion.JoeySoftName + "V" + myFileVersionInfo.FileVersion + ".zip"), FileMode.OpenOrCreate, FileAccess.Write))
             using (var writer = WriterFactory.Open(stream, ArchiveType.Zip, new WriterOptions(CompressionType.BZip2)
@@ -85,7 +88,11 @@ namespace JoeySoft.PackageTool
                 LeaveStreamOpen = true
             }))
             {
-                writer.WriteAll(directoryPath, "*", SearchOption.AllDirectories);
+                writer.WriteAll(directoryPath, "*",
+                    n => n.StartsWith(Path.Combine(directoryPath, "UpdateService")) == false
+                    && n.StartsWith(Path.Combine(directoryPath, "Log")) == false
+                    && n.EndsWith(".config") == false,
+                    SearchOption.AllDirectories);
             }
 
             MessageBox.Show("打包成功！");
