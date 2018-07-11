@@ -35,5 +35,20 @@ namespace JoeySoft.PackageTool
             }
             return joeySoftVersion;
         }
+
+        /// <summary>
+        /// 更新包版本
+        /// </summary>
+        public static HttpResponseMessage UpdateVersionInfo(PutPackageVersion putPackageVersion)
+        {
+            Uri uir = new Uri(api + "/" + versionActionName + "/" + putPackageVersion.JoeySoftName);
+            HttpResponseMessage httpResponseMessage = null;
+            using (HttpClient httpClient = new HttpClient())
+            {
+                httpResponseMessage = httpClient.PutAsync(uir, new StringContent(JsonConvert.SerializeObject(putPackageVersion), Encoding.UTF8, "application/json-patch+json")).Result;
+                httpClient.Dispose();
+            }
+            return httpResponseMessage;
+        }
     }
 }

@@ -82,7 +82,8 @@ namespace JoeySoft.PackageTool
             string directoryPath = Directory.GetParent(this.PackageAdressCBX.Text).FullName;
 
             FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(this.PackageAdressCBX.Text);
-            using (Stream stream = File.Open(Path.Combine(Directory.GetParent(directoryPath).FullName, joeySoftVersion.JoeySoftName + "V" + myFileVersionInfo.FileVersion + ".zip"), FileMode.OpenOrCreate, FileAccess.Write))
+            string zipAddress = Path.Combine(Directory.GetParent(directoryPath).FullName, joeySoftVersion.JoeySoftName + "V" + myFileVersionInfo.FileVersion + ".zip");
+            using (Stream stream = File.Open(zipAddress, FileMode.OpenOrCreate, FileAccess.Write))
             using (var writer = WriterFactory.Open(stream, ArchiveType.Zip, new WriterOptions(CompressionType.BZip2)
             {
                 LeaveStreamOpen = true
@@ -105,7 +106,40 @@ namespace JoeySoft.PackageTool
         /// <param name="e"></param>
         private void Pushbtn_Click(object sender, EventArgs e)
         {
+            if (this.PackagelistBx.SelectedIndex == -1)
+            {
+                MessageBox.Show("请选择要打包的软件！");
+                return;
+            }
 
+            JoeySoftVersion joeySoftVersion = new JoeySoftVersion();
+
+            if (this.PackagelistBx.SelectedItem is JoeySoftVersion)
+            {
+                joeySoftVersion = this.PackagelistBx.SelectedItem as JoeySoftVersion;
+            }
+
+            string directoryPath = Directory.GetParent(this.PackageAdressCBX.Text).FullName;
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(this.PackageAdressCBX.Text);
+            string zipAddress = Path.Combine(Directory.GetParent(directoryPath).FullName, joeySoftVersion.JoeySoftName + "V" + myFileVersionInfo.FileVersion + ".zip");
+
+            if (!File.Exists(zipAddress))
+            {
+                MessageBox.Show("先打包后，再点推送！");
+            }
+            //上传包
+
+            PutPackageVersion putPackageVersion = new PutPackageVersion();
+            putPackageVersion.Version = myFileVersionInfo.FileVersion;
+            putPackageVersion.JoeySoftName = joeySoftVersion.JoeySoftName;
+            if (PackageUpdateService.UpdateVersionInfo(putPackageVersion).StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show("推包报错！");
+            }
+            else
+            {
+                MessageBox.Show("推包成功！");
+            }
         }
     }
 }

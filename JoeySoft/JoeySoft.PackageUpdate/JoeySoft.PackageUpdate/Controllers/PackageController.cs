@@ -38,19 +38,34 @@ namespace JoeySoft.PackageUpdate.Controllers
 
             return File(by, "application/octet-stream", Guid.NewGuid().ToString() + ext);
         }
-        
+
         // POST: api/Package
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        [Consumes("application/json", "multipart/form-data")]//此处为新增
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<ActionResult> Post(IFormCollection files)
         {
+            foreach (var item in files.Files)
+            {
+                string path = Path.Combine(Environment.CurrentDirectory, "Package", item.FileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await item.CopyToAsync(fileStream);
+                }
+            }
+            return Ok();
         }
-        
+
         // PUT: api/Package/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
