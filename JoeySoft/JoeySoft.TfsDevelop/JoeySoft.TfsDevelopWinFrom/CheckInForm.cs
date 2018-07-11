@@ -88,6 +88,10 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                 try
                 {
+                    foreach (var item in fileInfos)
+                    {
+                        JoeyLog.Logging.WriteLog("签入文件：" + item.FullName);
+                    }
                     if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
                     {
                         MessageBox.Show("有文件没有签入，请打开VS查看详情！");
@@ -127,6 +131,10 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                 try
                 {
+                    foreach (var item in fileInfos)
+                    {
+                        JoeyLog.Logging.WriteLog("撤销文件：" + item.FullName);
+                    }
                     if (tfsHelper.Undo(fileInfos) == false)
                     {
                         MessageBox.Show("有文件没有撤销，请打开VS查看详情！");

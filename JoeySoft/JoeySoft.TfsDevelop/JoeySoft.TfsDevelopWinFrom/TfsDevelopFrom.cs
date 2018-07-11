@@ -592,12 +592,14 @@ namespace JoeySoft.TfsDevelopWinFrom
                         removeFiles.Add(updateFile);
                         //撤销签出编辑
                         undoFiles.Add(new FileInfo(fileName));
+                        JoeyLog.Logging.WriteLog("撤销签出编辑文件：" + fileName);
                         continue;
                     }
                 }
                 try
                 {
                     File.Copy(updateFile.FullName, fileName, true);
+                    JoeyLog.Logging.WriteLog("复制编辑签出文件：" + fileName);
                 }
                 catch (Exception e)
                 {
