@@ -62,16 +62,24 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         public static JoeySoftVersion CheckUpdateClientVersion()
         {
-            Uri uir = new Uri(api + "/" + versionActionName + "/" + updateClientJoeySofyName);
-            JoeySoftVersion joeySoftVersion = new JoeySoftVersion();
-            using (HttpClient httpClient = new HttpClient())
+            try
             {
-                joeySoftVersion = JsonConvert.DeserializeObject<JoeySoftVersion>
-                    (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
-                httpClient.Dispose();
+                Uri uir = new Uri(api + "/" + versionActionName + "/" + updateClientJoeySofyName);
+                JoeySoftVersion joeySoftVersion = new JoeySoftVersion();
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    joeySoftVersion = JsonConvert.DeserializeObject<JoeySoftVersion>
+                        (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
+                    httpClient.Dispose();
+                }
+                Logging.WriteLog("开始检查更新工具的最新版本：" + joeySoftVersion.Version);
+                return joeySoftVersion;
             }
-            Logging.WriteLog("开始检查更新工具的最新版本：" + joeySoftVersion.Version);
-            return joeySoftVersion;
+            catch (Exception ex)
+            {
+                Logging.WriteErrorLog(ex);
+                return null;
+            }
         }
 
         /// <summary>

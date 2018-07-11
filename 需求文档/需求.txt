@@ -73,3 +73,4 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 7-11
 1.产品删除的无法被同步
 2.添加强制更新版本要求
+3.控制上传文件格式

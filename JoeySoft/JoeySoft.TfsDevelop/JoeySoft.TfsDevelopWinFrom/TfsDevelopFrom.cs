@@ -862,18 +862,21 @@ namespace JoeySoft.TfsDevelopWinFrom
             Task.Run(() =>
             {
                 var joeySoftVersion = UpdateService.CheckUpdateClientVersion();
-                var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
-                if (myFileVersionInfo != null)
+                if (joeySoftVersion != null)
                 {
-                    if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                    var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+                    if (myFileVersionInfo != null)
                     {
-                        Logging.WriteLog("当前版本：" + myFileVersionInfo.FileVersion);
-                        return;
+                        if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                        {
+                            Logging.WriteLog("当前版本：" + myFileVersionInfo.FileVersion);
+                            return;
+                        }
                     }
-                }
-                if (myFileVersionInfo == null || myFileVersionInfo.FileVersion != joeySoftVersion.Version)
-                {
-                    UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
+                    if (myFileVersionInfo == null || myFileVersionInfo.FileVersion != joeySoftVersion.Version)
+                    {
+                        UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
+                    }
                 }
             });
 

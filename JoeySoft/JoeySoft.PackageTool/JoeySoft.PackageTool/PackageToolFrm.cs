@@ -126,9 +126,15 @@ namespace JoeySoft.PackageTool
             if (!File.Exists(zipAddress))
             {
                 MessageBox.Show("先打包后，再点推送！");
+                return;
             }
             //上传包
-
+            if (PackageUpdateService.UploadPackage(zipAddress) != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show("上传包错误，请检查网络！");
+                return;
+            }
+ 
             PutPackageVersion putPackageVersion = new PutPackageVersion();
             putPackageVersion.Version = myFileVersionInfo.FileVersion;
             putPackageVersion.JoeySoftName = joeySoftVersion.JoeySoftName;
