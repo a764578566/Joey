@@ -811,10 +811,11 @@ namespace JoeySoft.TfsDevelopWinFrom
                 DialogResult dr = MessageBox.Show("是否添加二开地址？", "提示", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
+                    this.customizePathCBX.Items.Add(text);
                     List<string> customizePaths = rootCustomizePaths.ToList();
                     customizePaths.Add(text);
                     JoeyLog.Logging.WriteLog("添加二开地址：" + text);
-                    AppConfigHelper.UpdateAppConfig(KeyProduct, string.Join(",", customizePaths));
+                    AppConfigHelper.UpdateAppConfig(KeyCustomize, string.Join(",", customizePaths));
                 }
             }
         }
