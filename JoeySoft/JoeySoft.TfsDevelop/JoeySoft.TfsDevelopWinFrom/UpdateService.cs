@@ -82,7 +82,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             Logging.WriteLog("开始下载更新工具的版本：" + version);
             string updateServicePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigClass.UpdateServicePathName);
 
-            string fileName = "UpdateClientV" + version + ".rar";
+            string fileName = "UpdateClientV" + version + ".zip";
             Uri uir = new Uri(api + "/" + packageActionName + "/" + fileName);
             //下载
             using (WebClient client = new WebClient())

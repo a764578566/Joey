@@ -21,23 +21,23 @@ namespace JoeySoft.Core
         public static bool CompareVersion(FileVersionInfo myFileVersionInfo, JoeySoftVersion joeySoftVersion)
         {
             string version = myFileVersionInfo.FileVersion;
-            if (myFileVersionInfo.FileMajorPart > joeySoftVersion.FileMajorPart)
+            if (myFileVersionInfo.FileMajorPart < joeySoftVersion.FileMajorPart)
             {
-                return false;
+                return true;
             }
-            if (myFileVersionInfo.FileMinorPart > joeySoftVersion.FileMinorPart)
+            if (myFileVersionInfo.FileMinorPart < joeySoftVersion.FileMinorPart)
             {
-                return false;
+                return true;
             }
-            if (myFileVersionInfo.FileBuildPart > joeySoftVersion.FileBuildPart)
+            if (myFileVersionInfo.FileBuildPart < joeySoftVersion.FileBuildPart)
             {
-                return false;
+                return true;
             }
-            if (myFileVersionInfo.FilePrivatePart >= joeySoftVersion.FilePrivatePart)
+            if (myFileVersionInfo.FilePrivatePart < joeySoftVersion.FilePrivatePart)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }
