@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PackageToolFrm));
             this.GetPackageVersion = new System.Windows.Forms.Button();
             this.PackagelistBx = new System.Windows.Forms.ListBox();
             this.Packbtn = new System.Windows.Forms.Button();
@@ -105,6 +106,7 @@
             this.Controls.Add(this.Packbtn);
             this.Controls.Add(this.PackagelistBx);
             this.Controls.Add(this.GetPackageVersion);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PackageToolFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "打包工具";
