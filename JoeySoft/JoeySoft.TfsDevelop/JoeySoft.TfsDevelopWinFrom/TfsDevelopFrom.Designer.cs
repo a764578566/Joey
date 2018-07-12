@@ -163,6 +163,7 @@
             this.customizePathCBX.Name = "customizePathCBX";
             this.customizePathCBX.Size = new System.Drawing.Size(674, 20);
             this.customizePathCBX.TabIndex = 20;
+            this.customizePathCBX.SelectedIndexChanged += new System.EventHandler(this.customizePathCBX_SelectedIndexChanged);
             this.customizePathCBX.TextChanged += new System.EventHandler(this.customizePathCBX_TextChanged);
             // 
             // groupBox2

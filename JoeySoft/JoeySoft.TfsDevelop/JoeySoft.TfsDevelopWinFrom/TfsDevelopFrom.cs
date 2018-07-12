@@ -102,7 +102,7 @@ namespace JoeySoft.TfsDevelopWinFrom
 
             this.customizePathCBX.Text = rootCustomizePaths[0];
             this.customizePathCBX.Items.AddRange(rootCustomizePaths);
-
+            customizePath = this.customizePathCBX.Text;
             //是否直接复制到指定目录 否
             this.isFalseCopyRadioBtn.Select();
             //是否直接签入二开 否
@@ -133,9 +133,9 @@ namespace JoeySoft.TfsDevelopWinFrom
         //获取修改当前日期
         private DateTime _dt;
         //更新目录
-        private string _metadata = "_metadata";
-        private string _clgyl = "Clgyl";
-        private string _bin = "bin";
+        private string _metadata = ConfigClass._metadata;
+        private string _clgyl = ConfigClass._clgyl;
+        private string _bin = ConfigClass._bin;
 
         //更新文件夹
         private List<string> _updateDirectorys;
@@ -679,7 +679,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断是否是元数据
                 if (directoryName.IndexOf(_metadata) == 0)
                 {
-                    var filePath = Path.Combine(customizePath, directoryName.Replace(_metadata, "Customize\\x_MetaData"), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_metadata, ConfigClass.x_MetaData), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
@@ -689,7 +689,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断二开js
                 if (directoryName.IndexOf(_clgyl) == 0)
                 {
-                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, "Customize\\" + _clgyl), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, ConfigClass.x_MetaData + "\\" + _clgyl), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
@@ -956,6 +956,11 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void feedbackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Email：zhoujr01@mysoft.com.cn");
+        }
+
+        private void customizePathCBX_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            customizePath = this.customizePathCBX.Text;
         }
     }
 }

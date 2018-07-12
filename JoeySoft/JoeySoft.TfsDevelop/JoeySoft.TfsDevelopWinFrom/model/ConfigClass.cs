@@ -11,6 +11,33 @@ namespace JoeySoft.TfsDevelopWinFrom.model
     /// </summary>
     public static class ConfigClass
     {
+        #region 更新目录
+        /// <summary>
+        /// 元数据文件夹
+        /// </summary>
+        public static string _metadata = "_metadata";
+
+        /// <summary>
+        /// 二开目录文件
+        /// </summary>
+        public static string customize = "Customize";
+
+        /// <summary>
+        /// 二开元数据文件夹
+        /// </summary>
+        public static string x_MetaData = customize + "\\x_MetaData";
+
+
+        /// <summary>
+        /// js文件夹名称
+        /// </summary>
+        public static string _clgyl = "Clgyl";
+        /// <summary>
+        /// bin目录
+        /// </summary>
+        public static string _bin = "bin";
+        #endregion
+
         /// <summary>
         /// 更新包的文件夹名称
         /// </summary>
