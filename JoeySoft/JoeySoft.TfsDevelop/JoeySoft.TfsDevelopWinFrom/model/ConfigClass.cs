@@ -58,5 +58,10 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         /// 需要更新的元数据文件夹
         /// </summary>
         public static string MetadataDirectory = "AppForm,AppGrid,AppTreeGrid,AppCard,Entity,View,MetadataRelationship,EventConfig,FunctionPage,Langs,MyFunction";
+
+        /// <summary>
+        /// 忽略的文件
+        /// </summary>
+        public static string NotContainFileName = "customize-module.json";
     }
 }

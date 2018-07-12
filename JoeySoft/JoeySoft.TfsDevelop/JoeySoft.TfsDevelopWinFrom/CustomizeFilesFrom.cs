@@ -22,8 +22,14 @@ namespace JoeySoft.TfsDevelopWinFrom
 
             this.customizeFiletView.Nodes.Clear();
 
-            //匹配名称说明
+            //匹配名称
             string regexnameText = "name=\"([\\u4e00-\\u9fa5]+)\"";
+
+            //匹配页面名称
+            string regexpageNameText = "pageName=\"([\\u4e00-\\u9fa5]+)\"";
+
+            //匹配表名称
+            string regexDisplayNameText = "DisplayName=\"([\\u4e00-\\u9fa5]+)\"";
 
             IEnumerable<IGrouping<string, FileInfo>> dictionarys = _metadataCustomizeFilePath.GroupBy(n => n.DirectoryName);
             if (_metadataCustomizeFilePath != null && _metadataCustomizeFilePath.Count > 0)
@@ -36,19 +42,50 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         TreeNode treeNode2 = new TreeNode();
                         treeNode2.Text = metadataFile.Name;
-                        //读取元数据界面名称
                         if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData) != -1)
                         {
                             XmlDocument xml = new XmlDocument();
                             xml.Load(metadataFile.FullName);
-                            XmlNode root = xml.SelectSingleNode("/form");
-                            var math2 = Regex.Matches(root.OuterXml, regexnameText, RegexOptions.IgnoreCase);
-                            if (math2.Count > 0)
+                            MatchCollection math2 = null;
+
+                            //读取表实体元数据界面名称
+                            if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\Entity") != -1)
                             {
-                                treeNode2.Text += " 界面名称："+ math2[0].Groups[1].Value;
+                                XmlNode root = xml.SelectSingleNode("/MetadataEntity");
+                                math2 = Regex.Matches(root.OuterXml, regexDisplayNameText, RegexOptions.IgnoreCase);
+                            }
+
+                            //读取表单元数据界面名称
+                            if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\AppForm") != -1)
+                            {
+                                XmlNode root = xml.SelectSingleNode("/form");
+                                math2 = Regex.Matches(root.OuterXml, regexnameText, RegexOptions.IgnoreCase);
+                            }
+                            //读取列表元数据界面名称
+                            if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\AppGrid") != -1)
+                            {
+                                XmlNode root = xml.SelectSingleNode("/grid");
+                                math2 = Regex.Matches(root.OuterXml, regexnameText, RegexOptions.IgnoreCase);
+                            }
+                            //读取树列表元数据界面名称
+                            if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\AppTreeGrid") != -1)
+                            {
+                                XmlNode root = xml.SelectSingleNode("/treeGrid");
+                                math2 = Regex.Matches(root.OuterXml, regexnameText, RegexOptions.IgnoreCase);
+                            }
+
+                            //读取主页面元数据界面名称
+                            if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\FunctionPage") != -1)
+                            {
+                                XmlNode root = xml.SelectSingleNode("/functionPage");
+                                math2 = Regex.Matches(root.OuterXml, regexpageNameText, RegexOptions.IgnoreCase);
+                            }
+
+                            if (math2 != null && math2.Count > 0)
+                            {
+                                treeNode2.Text += " 界面名称：" + math2[0].Groups[1].Value;
                             }
                         }
-
                         treeNode1.Nodes.Add(treeNode2);
                     }
                     this.customizeFiletView.Nodes.Add(treeNode1);

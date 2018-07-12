@@ -57,7 +57,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         //产品解决方案名称
         private string productSlnFileName;
 
-        private string[] notContainFileNames;
+        private List<string> notContainFileNames;
 
         private decimal progressValue = 0;
 
@@ -81,12 +81,13 @@ namespace JoeySoft.TfsDevelopWinFrom
                 string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
                 if (string.IsNullOrEmpty(notContainFileNameStr) == false)
                 {
-                    notContainFileNames = notContainFileNameStr.Split(',');
+                    notContainFileNames = notContainFileNameStr.Split(',').ToList();
                 }
                 else
                 {
-                    notContainFileNames = new string[0];
+                    notContainFileNames = new List<string>();
                 }
+                notContainFileNames.AddRange(ConfigClass.NotContainFileName.Split(',').ToList());
             }
             catch (Exception ex)
             {
@@ -689,7 +690,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断二开js
                 if (directoryName.IndexOf(_clgyl) == 0)
                 {
-                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, ConfigClass.x_MetaData + "\\" + _clgyl), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, ConfigClass.customize + "\\" + _clgyl), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
