@@ -57,7 +57,7 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         /// <summary>
         /// 需要更新的元数据文件夹
         /// </summary>
-        public static string MetadataDirectory = "AppForm,AppGrid,AppTreeGrid,AppCard,Entity,View,MetadataRelationship,EventConfig,FunctionPage,Langs,MyFunction";
+        public static string MetadataDirectory = "AppForm,AppGrid,AppTreeGrid,DataSet,AppCard,Entity,View,MetadataRelationship,EventConfig,FunctionPage,Langs,MyFunction";
 
         /// <summary>
         /// 忽略的文件

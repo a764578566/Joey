@@ -27,6 +27,14 @@ namespace JoeySoft.JoeyLog
         /// 保存普通日志
         /// </summary>
         /// <param name="message"></param>
+        public static void WriteLog(params string[] message)
+        {
+            WriteLog(string.Join("", message));
+        }
+        /// <summary>
+        /// 保存普通日志
+        /// </summary>
+        /// <param name="message"></param>
         public static void WriteLog(string message)
         {
             string logContent = string.Format("[{0}] =>{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message);

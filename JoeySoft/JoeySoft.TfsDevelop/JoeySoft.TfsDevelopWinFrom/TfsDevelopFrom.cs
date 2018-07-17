@@ -184,10 +184,15 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //产品TFS
                 TFSHelper tfs = new TFSHelper(Directory.GetParent(this.pathTBx.Text).FullName, productSlnFileName);
                 _updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
+                var pendingFiles = tfs.GetPendingChange();
                 //判断产品TFS是否全部签入
-                if (tfs.GetPendingChange().Count > 0)
+                if (pendingFiles.Count > 0)
                 {
                     _updateFiles = null;
+                    foreach (var item in pendingFiles)
+                    {
+                        Logging.WriteLog("没有签入的产品文件：", item.FullName);
+                    }
                     MessageBox.Show("产品有未签入的数据，不可以迁移二开！");
                     return;
                 }

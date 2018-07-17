@@ -254,6 +254,8 @@ namespace JoeySoft.TFS
             List<FileInfo> fileInfos = new List<FileInfo>();
 
             PendingChange[] pendingChanges = ws.GetPendingChanges();
+            
+            SavedCheckin savedCheckin = ws.LastSavedCheckin;
 
             foreach (var pendingChange in pendingChanges)
             {
