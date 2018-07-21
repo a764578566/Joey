@@ -41,3 +41,7 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 
 7-17
 1.排除的项在变更项中  https://social.msdn.microsoft.com/Forums/en-US/e97785f4-3595-4ebe-a1f1-db8a9381bc12/change-list-of-files-to-exclude-in-pending-changes
+
+7-20
+1.撤销添加文件的问题
+2.复制二开文件名

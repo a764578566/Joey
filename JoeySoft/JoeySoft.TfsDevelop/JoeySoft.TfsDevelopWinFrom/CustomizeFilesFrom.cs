@@ -92,5 +92,22 @@ namespace JoeySoft.TfsDevelopWinFrom
                 }
             }
         }
+
+        private void customizeFiletView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers.CompareTo(Keys.Control) == 0 && e.KeyCode == Keys.C)
+            {
+                TreeNode treeNode = this.customizeFiletView.SelectedNode;
+                //复制剪切数据
+                Clipboard.SetDataObject(treeNode.Text);
+            }
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TreeNode treeNode = this.customizeFiletView.SelectedNode;
+            //复制剪切数据
+            Clipboard.SetDataObject(treeNode.Text);
+        }
     }
 }

@@ -254,8 +254,6 @@ namespace JoeySoft.TFS
             List<FileInfo> fileInfos = new List<FileInfo>();
 
             PendingChange[] pendingChanges = ws.GetPendingChanges();
-            
-            SavedCheckin savedCheckin = ws.LastSavedCheckin;
 
             foreach (var pendingChange in pendingChanges)
             {
@@ -263,6 +261,15 @@ namespace JoeySoft.TFS
             }
 
             return fileInfos;
+        }
+
+        /// <summary>
+        /// 获取挂起的更改
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<PendingChange> GetPendingChanges()
+        {
+            return ws.GetPendingChangesEnumerable();
         }
 
         /// <summary>

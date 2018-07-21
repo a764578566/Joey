@@ -364,7 +364,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         }
 
         /// <summary>
-        /// 获取js信息
+        /// 获取bin信息
         /// </summary>
         /// <param name="openFileName"></param>
         /// <returns></returns>
@@ -408,7 +408,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             //判断修改时间是否大于当前时间
             if (file.LastWriteTime >= _dt && file.Name.IndexOf("Fakes") == -1 && file.Name.IndexOf("UnitTest") == -1)
             {
-                if (file.Name.IndexOf("Web_Clgyl") == -1 && file.Name.IndexOf("License.xml") == -1)
+                if (file.Name.IndexOf("Web_Clgyl") == -1 && file.Name.IndexOf("License.xml") == -1 && file.Name.IndexOf(".pdb") == -1)
                 {
                     return true;
                 }
