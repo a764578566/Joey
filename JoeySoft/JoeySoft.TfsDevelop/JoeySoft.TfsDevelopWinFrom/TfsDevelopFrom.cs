@@ -137,6 +137,8 @@ namespace JoeySoft.TfsDevelopWinFrom
         private string _metadata = ConfigClass._metadata;
         private string _clgyl = ConfigClass._clgyl;
         private string _bin = ConfigClass._bin;
+        private string _app_Data = ConfigClass._app_Data;
+        private string[] _app_DataContainFileNames = ConfigClass.App_DataContainFileNames.Split(',');
 
         //更新文件夹
         private List<string> _updateDirectorys;
@@ -204,7 +206,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 }
 
                 _updateFiles.AddRange(GetBinFiles(this.pathTBx.Text));
-
+                _updateFiles.AddRange(GetAppDataFiles(this.pathTBx.Text));
                 //获取需要更新的文件夹信息
                 foreach (var updateDirectory in _updateDirectorys)
                 {
@@ -223,7 +225,8 @@ namespace JoeySoft.TfsDevelopWinFrom
                         treeNode1.CheckboxVisible = true;
                         treeNode1.Checked = true;
                         treeNode1.IsContainer = true;//文件夹
-                        foreach (var metadataFile in dictionary)
+                        var list = dictionary.OrderBy(n => n.Name);
+                        foreach (var metadataFile in list)
                         {
                             TriStateTreeNode treeNode2 = new TriStateTreeNode(metadataFile.Name, 2, 2);
                             treeNode2.Checked = true;
@@ -397,6 +400,52 @@ namespace JoeySoft.TfsDevelopWinFrom
 
             }
             return metadataFiles;
+        }
+
+        /// <summary>
+        /// 获取bin信息
+        /// </summary>
+        /// <param name="openFileName"></param>
+        /// <returns></returns>
+        private List<FileInfo> GetAppDataFiles(string openFileName)
+        {
+            openFileName = Path.Combine(openFileName, _app_Data);
+            List<FileInfo> appDataFiles = new List<FileInfo>();
+            List<string> directoryFileNamelist = new List<string>() { openFileName };
+
+            GetDirectorie(openFileName, directoryFileNamelist);
+
+            if (!Directory.Exists(openFileName))
+            {
+                MessageBox.Show("请选择产品根目录！");
+            }
+            else
+            {
+                foreach (var directoryName in directoryFileNamelist)
+                {
+                    string[] fileNameAppForm = Directory.GetFiles(Path.Combine(openFileName, directoryName));
+                    foreach (var fileName in fileNameAppForm)
+                    {
+                        FileInfo file = new FileInfo(fileName);
+                        if (IsAddAppDataFile(file))
+                        {
+                            appDataFiles.Add(file);
+                        }
+                    }
+                }
+
+            }
+            return appDataFiles;
+        }
+
+        /// <summary>
+        /// 包含的AppDataFile
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private bool IsAddAppDataFile(FileInfo file)
+        {
+            return _app_DataContainFileNames.Contains(file.Name);
         }
 
         /// <summary>
@@ -901,7 +950,14 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void allSelectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, true);
+            if (this.updateTriSatateTreeView.SelectedNode != null)
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, this.updateTriSatateTreeView.SelectedNode, true);
+            }
+            else
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, true);
+            }
         }
 
 
@@ -912,7 +968,14 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void noSelectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, false);
+            if (this.updateTriSatateTreeView.SelectedNode != null)
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, this.updateTriSatateTreeView.SelectedNode, false);
+            }
+            else
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, false);
+            }
         }
 
         /// <summary>
@@ -967,6 +1030,34 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void customizePathCBX_SelectedIndexChanged(object sender, EventArgs e)
         {
             customizePath = this.customizePathCBX.Text;
+        }
+
+        private void CancalSelectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.updateTriSatateTreeView.SelectedNode != null)
+            {
+                this.updateTriSatateTreeView.SelectedNode = null;
+            }
+        }
+
+        /// <summary>
+        /// 排序按名称
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OrderByNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        /// <summary>
+        /// 排序按时间
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OrderByUpdateTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

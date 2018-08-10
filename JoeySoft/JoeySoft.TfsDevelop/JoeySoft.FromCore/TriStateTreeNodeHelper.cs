@@ -19,6 +19,20 @@ namespace JoeySoft.FromCore
         /// </summary>
         /// <param name="treeNodeCollection"></param>
         /// <param name="isChecked"></param>
+        public static void Checked(TriStateTreeView tstv, TreeNode tNode, bool isChecked)
+        {
+            foreach (TriStateTreeNode node in tNode.Nodes)
+            {
+                node.Checked = isChecked;
+            }
+            tstv.Refresh();
+        }
+
+        /// <summary>
+        /// 选择
+        /// </summary>
+        /// <param name="treeNodeCollection"></param>
+        /// <param name="isChecked"></param>
         public static void Checked(TriStateTreeView tstv, bool isChecked)
         {
             foreach (TriStateTreeNode node in tstv.Nodes)

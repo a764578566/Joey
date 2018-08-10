@@ -335,6 +335,20 @@ namespace JoeySoft.TFS
         public void GetHistory()
         {
             //查询历史版本
+            var histories = version.QueryHistory(this.vsPath, VersionSpec.Latest, 0, RecursionType.OneLevel, null, null, null, int.MaxValue, true, false).Cast<Changeset>();
+
+            foreach (Changeset changeSet in histories)
+            {
+                foreach (Change change in changeSet.Changes)//每个历史版本下修改了几个文件
+                {
+
+                }
+            }
+        }
+
+        public void GetDelete()
+        {
+            //查询历史版本
             var histories = version.QueryHistory(this.vsPath, VersionSpec.Latest, 0, RecursionType.OneLevel, null, null, null, int.MaxValue, true, false);
 
             foreach (Changeset changeSet in histories)

@@ -23,7 +23,7 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 1.签入成功后，如果还有要签入的信息，不关闭提示 是否撤销
 
 6-25
-如果还有冲突处理：1.先主动撤销，再编辑签出
+--如果还有冲突处理：1.先主动撤销，再编辑签出
 
 6-27
 在VS中添加二开迁移扩展，在提交时提示是否迁移二开
@@ -43,5 +43,5 @@ TFS二开参考URL：http://blogs.microsoft.co.il/shair/tag/tfs-api/page/3/
 1.排除的项在变更项中  https://social.msdn.microsoft.com/Forums/en-US/e97785f4-3595-4ebe-a1f1-db8a9381bc12/change-list-of-files-to-exclude-in-pending-changes
 
 7-20
-1.撤销添加文件的问题
-2.复制二开文件名
+--1.撤销添加文件的问题
+--2.复制二开文件名

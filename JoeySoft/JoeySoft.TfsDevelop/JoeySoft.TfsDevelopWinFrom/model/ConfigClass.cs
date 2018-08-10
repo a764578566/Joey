@@ -36,6 +36,16 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         /// bin目录
         /// </summary>
         public static string _bin = "bin";
+
+        /// <summary>
+        /// App_Data目录
+        /// </summary>
+        public static string _app_Data = "App_Data";
+
+        /// <summary>
+        /// App_Data目录下文件
+        /// </summary>
+        public static string App_DataContainFileNames = "BuildInDesktopParts.config";
         #endregion
 
         /// <summary>
@@ -62,6 +72,6 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         /// <summary>
         /// 忽略的文件
         /// </summary>
-        public static string NotContainFileName = "customize-module.json";
+        public static string NotContainFileName = "customize-module.json,navbartools.js";
     }
 }
