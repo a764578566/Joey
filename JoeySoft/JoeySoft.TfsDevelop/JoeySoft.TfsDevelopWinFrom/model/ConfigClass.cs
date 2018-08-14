@@ -73,5 +73,10 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         /// 忽略的文件
         /// </summary>
         public static string NotContainFileName = "customize-module.json,navbartools.js";
+
+        /// <summary>
+        /// 需要更新的更目录文件
+        /// </summary>
+        public static string RootContainFileName = "ErpInit.html,Gruntfile.js,MysoftVersion_MAP.config";
     }
 }

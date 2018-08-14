@@ -164,6 +164,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             this._updateFiles = new List<FileInfo>();
             this.updateTriSatateTreeView.Nodes.Clear();
+            string rootPath = this.pathTBx.Text;
             //获取修改当前日期
             _dt = DateTime.Parse(DateTime.Parse(this.updateDateTimePicker.Text).ToString("yyyy/MM/dd"));
             if (string.IsNullOrEmpty(this.pathTBx.Text))
@@ -177,15 +178,16 @@ namespace JoeySoft.TfsDevelopWinFrom
                     this.pathTBx.Text = folderBrowserDialog.SelectedPath;
                 }
             }
-            if (!File.Exists(this.pathTBx.Text + "\\Web.config"))
+            if (!File.Exists(rootPath + "\\Web.config"))
             {
                 MessageBox.Show("请选择产品根目录！");
             }
             else
             {
                 //产品TFS
-                TFSHelper tfs = new TFSHelper(Directory.GetParent(this.pathTBx.Text).FullName, productSlnFileName);
-                _updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
+                TFSHelper tfs = new TFSHelper(Directory.GetParent(rootPath).FullName, productSlnFileName);
+                _updateFiles.AddRange(GetRootFileName(rootPath));
+                _updateFiles.AddRange(GetMetadataFiles(rootPath));
                 var pendingFiles = tfs.GetPendingChange();
                 //判断产品TFS是否全部签入
                 if (pendingFiles.Count > 0)
@@ -205,12 +207,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                     return;
                 }
 
-                _updateFiles.AddRange(GetBinFiles(this.pathTBx.Text));
-                _updateFiles.AddRange(GetAppDataFiles(this.pathTBx.Text));
+                _updateFiles.AddRange(GetBinFiles(rootPath));
+                _updateFiles.AddRange(GetAppDataFiles(rootPath));
                 //获取需要更新的文件夹信息
                 foreach (var updateDirectory in _updateDirectorys)
                 {
-                    openFileName = Path.Combine(this.pathTBx.Text, updateDirectory);
+                    openFileName = Path.Combine(rootPath, updateDirectory);
                     _updateFiles.AddRange(GetUpdateFiles(openFileName));
                 }
 
@@ -222,6 +224,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         TriStateTreeNode treeNode1 = new TriStateTreeNode();
                         treeNode1.Text = dictionary.Key.Replace(this.pathTBx.Text + "\\", "");
+                        treeNode1.Text = treeNode1.Text.Replace(this.pathTBx.Text.Replace("00_根目录", ""), "");
                         treeNode1.CheckboxVisible = true;
                         treeNode1.Checked = true;
                         treeNode1.IsContainer = true;//文件夹
@@ -257,6 +260,34 @@ namespace JoeySoft.TfsDevelopWinFrom
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取元数据内信息
+        /// </summary>
+        /// <param name="openFileName"></param>
+        /// <returns></returns>
+        private List<FileInfo> GetRootFileName(string openFileName)
+        {
+            string[] directoryFileNamelist = Directory.GetFiles(openFileName);
+            string[] rootFileNames = ConfigClass.RootContainFileName.Split(',');
+
+            List<FileInfo> fileInfos = new List<FileInfo>();
+
+            foreach (var item in rootFileNames)
+            {
+                string pathFileName = Path.Combine(openFileName, item);
+                if (directoryFileNamelist.Contains(pathFileName))
+                {
+                    FileInfo file = new FileInfo(pathFileName);
+                    //判断修改时间是否大于当前时间
+                    if (file.LastWriteTime >= _dt)
+                    {
+                        fileInfos.Add(file);
+                    }
+                }
+            }
+            return fileInfos;
         }
 
         /// <summary>
@@ -1047,7 +1078,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void OrderByNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         /// <summary>
