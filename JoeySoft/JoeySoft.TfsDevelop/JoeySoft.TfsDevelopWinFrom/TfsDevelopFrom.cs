@@ -1017,7 +1017,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void checkVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
-            var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+            var myFileVersionInfo = UpdateService.GetTfsDevelopVersion();
             if (myFileVersionInfo != null)
             {
                 if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)

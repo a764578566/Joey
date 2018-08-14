@@ -58,6 +58,22 @@ namespace JoeySoft.TfsDevelopWinFrom
         }
 
         /// <summary>
+        /// 获取更新工具版本信息
+        /// </summary>
+        /// <returns></returns>
+        public static FileVersionInfo GetTfsDevelopVersion()
+        {
+            string updateFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigClass.JoeySoftTfsToolExeName);
+
+            if (!File.Exists(updateFilePath))
+            {
+                return null;
+            }
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(updateFilePath);
+            return myFileVersionInfo;
+        }
+
+        /// <summary>
         /// 检查最新版本号判断是否需要更新
         /// </summary>
         public static JoeySoftVersion CheckUpdateClientVersion()

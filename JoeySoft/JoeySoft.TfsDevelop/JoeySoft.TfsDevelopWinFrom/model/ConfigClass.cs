@@ -59,6 +59,11 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         public static string UpdateServiceExeName = "JoeySoft.UpdatePackageClient.exe";
 
         /// <summary>
+        /// 应用程序exe名称
+        /// </summary>
+        public static string JoeySoftTfsToolExeName = "JoeySoftTfsTool.exe";
+
+        /// <summary>
         /// 需要更新的文件夹
         /// </summary>
         public static string UpdateDirectory = "_base,_frontend,modeling,MyWorkflow,PubPlatform,Report,Clgyl";
@@ -77,6 +82,6 @@ namespace JoeySoft.TfsDevelopWinFrom.model
         /// <summary>
         /// 需要更新的更目录文件
         /// </summary>
-        public static string RootContainFileName = "ErpInit.html,Gruntfile.js,MysoftVersion_MAP.config";
+        public static string RootContainFileName = "ErpInit.html,Gruntfile.js,MysoftVersion_MAP.config,MysoftVersion.config";
     }
 }
