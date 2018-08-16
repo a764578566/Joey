@@ -717,10 +717,20 @@ namespace JoeySoft.TfsDevelopWinFrom
                 progressValue += progressAddValue;
                 this.worker.ReportProgress((int)progressValue, "开始签出编辑文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
-                var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
-                //获取文件所在目录的最新版本
-                tfsHelper.GetLatest(fileName);
-                tfsHelper.CheckOut(fileName);
+                if (directoryName.Contains(rootProductPath))
+                {
+                    directoryName = updateFile.DirectoryName.Replace(rootProductPath, "");
+                    var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
+                    tfsHelper.GetLatest(fileName, Microsoft.TeamFoundation.VersionControl.Client.RecursionType.OneLevel);
+                    tfsHelper.CheckOut(fileName);
+                }
+                else
+                {
+                    var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
+                    //获取文件所在目录的最新版本
+                    tfsHelper.GetLatest(fileName);
+                    tfsHelper.CheckOut(fileName);
+                }
             }
             return true;
         }

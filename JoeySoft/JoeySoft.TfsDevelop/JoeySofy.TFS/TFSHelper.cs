@@ -183,21 +183,21 @@ namespace JoeySoft.TFS
         /// 获取文件所在目录的最新版本
         /// </summary>
         /// <param name="its"></param>
-        public void GetLatest(string localPath)
+        public void GetLatest(string localPath, RecursionType recursionType = RecursionType.Full)
         {
             //获取文件目录
             string serverPath = Path.GetDirectoryName(GetServerPathByLocalPath(localPath));
 
-            GetLatesByServerPath(serverPath);
+            GetLatesByServerPath(serverPath, recursionType);
         }
 
         /// <summary>
         /// 获取TFS服务器该目录的最新版本
         /// </summary>
         /// <param name="serverPath"></param>
-        public void GetLatesByServerPath(string serverPath)
+        public void GetLatesByServerPath(string serverPath, RecursionType recursionType = RecursionType.Full)
         {
-            ItemSet its = version.GetItems(serverPath, RecursionType.Full);
+            ItemSet its = version.GetItems(serverPath, recursionType);
 
             if (!dic.ContainsKey(serverPath))
             {

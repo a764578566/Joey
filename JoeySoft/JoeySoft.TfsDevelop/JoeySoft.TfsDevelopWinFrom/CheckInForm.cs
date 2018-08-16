@@ -49,6 +49,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 {
                     TriStateTreeNode treeNode1 = new TriStateTreeNode();
                     treeNode1.Text = dictionary.Key.Replace(path + "\\", "");
+                    treeNode1.Text = dictionary.Key.Replace(path, "");
                     treeNode1.CheckboxVisible = true;
                     treeNode1.Checked = true;
                     treeNode1.IsContainer = true;//文件夹
