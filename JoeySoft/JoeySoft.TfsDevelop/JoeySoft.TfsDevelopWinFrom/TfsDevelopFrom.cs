@@ -662,6 +662,10 @@ namespace JoeySoft.TfsDevelopWinFrom
                 progressValue += progressAddValue;
                 this.worker.ReportProgress((int)progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
+                if (directoryName.Contains(rootProductPath))
+                {
+                    directoryName = updateFile.DirectoryName.Replace(rootProductPath, "");
+                }
                 var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
 
                 if (File.Exists(fileName))
