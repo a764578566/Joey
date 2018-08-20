@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using JoeySoft.TFS;
 using SmartSolutions.Controls;
-using Microsoft.TeamFoundation.VersionControl.Client;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -137,7 +136,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         JoeyLog.Logging.WriteLog("撤销文件：" + item.FullName);
                     }
-                    List<PendingChange> isAddPendingChanges = tfsHelper.GetPendingChanges().Where(n => n.IsAdd == true).ToList();
+                    List<string> addPendingChangesFilePaths = tfsHelper.GetAddPendingChanges();
 
                     if (tfsHelper.Undo(fileInfos) == false)
                     {
@@ -146,12 +145,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                     }
                     else
                     {
-                        foreach (var item in isAddPendingChanges)
+                        foreach (var filePath in addPendingChangesFilePaths)
                         {
-                            if (File.Exists(item.LocalItem))
+                            if (File.Exists(filePath))
                             {
-                                File.Delete(item.LocalItem);
-                                JoeyLog.Logging.WriteLog("删除新增才文件：" + item.LocalItem);
+                                File.Delete(filePath);
+                                JoeyLog.Logging.WriteLog("删除新增才文件：" + filePath);
                             }
                         }
                         JoeyLog.Logging.WriteLog("撤销成功！");

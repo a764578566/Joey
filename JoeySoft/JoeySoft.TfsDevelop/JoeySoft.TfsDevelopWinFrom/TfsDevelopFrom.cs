@@ -19,6 +19,7 @@ using SmartSolutions.Controls;
 using JoeySoft.TfsDevelopWinFrom.model;
 using System.Net.Http;
 using Newtonsoft.Json;
+using JoeySofy.TFS;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -725,7 +726,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 {
                     directoryName = updateFile.DirectoryName.Replace(rootProductPath, "");
                     var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
-                    tfsHelper.GetLatest(fileName, Microsoft.TeamFoundation.VersionControl.Client.RecursionType.OneLevel);
+                    tfsHelper.GetLatest(fileName, JoeyRecursionType.OneLevel);
                     tfsHelper.CheckOut(fileName);
                 }
                 else
