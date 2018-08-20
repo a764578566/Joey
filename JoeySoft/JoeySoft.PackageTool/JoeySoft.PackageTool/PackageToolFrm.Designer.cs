@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PackageToolFrm));
             this.GetPackageVersion = new System.Windows.Forms.Button();
             this.PackagelistBx = new System.Windows.Forms.ListBox();
             this.Packbtn = new System.Windows.Forms.Button();
@@ -38,7 +39,7 @@
             // 
             // GetPackageVersion
             // 
-            this.GetPackageVersion.Location = new System.Drawing.Point(16, 21);
+            this.GetPackageVersion.Location = new System.Drawing.Point(12, 21);
             this.GetPackageVersion.Name = "GetPackageVersion";
             this.GetPackageVersion.Size = new System.Drawing.Size(99, 23);
             this.GetPackageVersion.TabIndex = 0;
@@ -54,6 +55,7 @@
             this.PackagelistBx.Name = "PackagelistBx";
             this.PackagelistBx.Size = new System.Drawing.Size(651, 100);
             this.PackagelistBx.TabIndex = 1;
+            this.PackagelistBx.SelectedIndexChanged += new System.EventHandler(this.PackagelistBx_SelectedIndexChanged);
             // 
             // Packbtn
             // 
@@ -72,6 +74,7 @@
             this.PackageAdressCBX.Name = "PackageAdressCBX";
             this.PackageAdressCBX.Size = new System.Drawing.Size(651, 20);
             this.PackageAdressCBX.TabIndex = 3;
+            this.PackageAdressCBX.SelectedIndexChanged += new System.EventHandler(this.PackageAdressCBX_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -96,13 +99,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 442);
+            this.ClientSize = new System.Drawing.Size(784, 322);
             this.Controls.Add(this.Pushbtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PackageAdressCBX);
             this.Controls.Add(this.Packbtn);
             this.Controls.Add(this.PackagelistBx);
             this.Controls.Add(this.GetPackageVersion);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PackageToolFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "打包工具";

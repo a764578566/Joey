@@ -48,6 +48,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 {
                     TriStateTreeNode treeNode1 = new TriStateTreeNode();
                     treeNode1.Text = dictionary.Key.Replace(path + "\\", "");
+                    treeNode1.Text = dictionary.Key.Replace(path, "");
                     treeNode1.CheckboxVisible = true;
                     treeNode1.Checked = true;
                     treeNode1.IsContainer = true;//文件夹
@@ -88,6 +89,10 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                 try
                 {
+                    foreach (var item in fileInfos)
+                    {
+                        JoeyLog.Logging.WriteLog("签入文件：" + item.FullName);
+                    }
                     if (tfsHelper.CheckIn(fileInfos, this.remarktbx.Text) == false)
                     {
                         MessageBox.Show("有文件没有签入，请打开VS查看详情！");
@@ -127,6 +132,12 @@ namespace JoeySoft.TfsDevelopWinFrom
 
                 try
                 {
+                    foreach (var item in fileInfos)
+                    {
+                        JoeyLog.Logging.WriteLog("撤销文件：" + item.FullName);
+                    }
+                    List<string> addPendingChangesFilePaths = tfsHelper.GetAddPendingChanges();
+
                     if (tfsHelper.Undo(fileInfos) == false)
                     {
                         MessageBox.Show("有文件没有撤销，请打开VS查看详情！");
@@ -134,6 +145,14 @@ namespace JoeySoft.TfsDevelopWinFrom
                     }
                     else
                     {
+                        foreach (var filePath in addPendingChangesFilePaths)
+                        {
+                            if (File.Exists(filePath))
+                            {
+                                File.Delete(filePath);
+                                JoeyLog.Logging.WriteLog("删除新增才文件：" + filePath);
+                            }
+                        }
                         JoeyLog.Logging.WriteLog("撤销成功！");
                         MessageBox.Show("撤销成功！");
                         this.Close();

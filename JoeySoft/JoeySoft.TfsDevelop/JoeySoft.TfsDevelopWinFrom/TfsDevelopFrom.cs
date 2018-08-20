@@ -19,6 +19,7 @@ using SmartSolutions.Controls;
 using JoeySoft.TfsDevelopWinFrom.model;
 using System.Net.Http;
 using Newtonsoft.Json;
+using JoeySofy.TFS;
 
 namespace JoeySoft.TfsDevelopWinFrom
 {
@@ -57,7 +58,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         //产品解决方案名称
         private string productSlnFileName;
 
-        private string[] notContainFileNames;
+        private List<string> notContainFileNames;
 
         private decimal progressValue = 0;
 
@@ -81,12 +82,13 @@ namespace JoeySoft.TfsDevelopWinFrom
                 string notContainFileNameStr = ConfigurationManager.AppSettings["NotContainFileName"];
                 if (string.IsNullOrEmpty(notContainFileNameStr) == false)
                 {
-                    notContainFileNames = notContainFileNameStr.Split(',');
+                    notContainFileNames = notContainFileNameStr.Split(',').ToList();
                 }
                 else
                 {
-                    notContainFileNames = new string[0];
+                    notContainFileNames = new List<string>();
                 }
+                notContainFileNames.AddRange(ConfigClass.NotContainFileName.Split(',').ToList());
             }
             catch (Exception ex)
             {
@@ -102,7 +104,7 @@ namespace JoeySoft.TfsDevelopWinFrom
 
             this.customizePathCBX.Text = rootCustomizePaths[0];
             this.customizePathCBX.Items.AddRange(rootCustomizePaths);
-
+            customizePath = this.customizePathCBX.Text;
             //是否直接复制到指定目录 否
             this.isFalseCopyRadioBtn.Select();
             //是否直接签入二开 否
@@ -133,9 +135,11 @@ namespace JoeySoft.TfsDevelopWinFrom
         //获取修改当前日期
         private DateTime _dt;
         //更新目录
-        private string _metadata = "_metadata";
-        private string _clgyl = "Clgyl";
-        private string _bin = "bin";
+        private string _metadata = ConfigClass._metadata;
+        private string _clgyl = ConfigClass._clgyl;
+        private string _bin = ConfigClass._bin;
+        private string _app_Data = ConfigClass._app_Data;
+        private string[] _app_DataContainFileNames = ConfigClass.App_DataContainFileNames.Split(',');
 
         //更新文件夹
         private List<string> _updateDirectorys;
@@ -161,6 +165,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         {
             this._updateFiles = new List<FileInfo>();
             this.updateTriSatateTreeView.Nodes.Clear();
+            string rootPath = this.pathTBx.Text;
             //获取修改当前日期
             _dt = DateTime.Parse(DateTime.Parse(this.updateDateTimePicker.Text).ToString("yyyy/MM/dd"));
             if (string.IsNullOrEmpty(this.pathTBx.Text))
@@ -174,19 +179,25 @@ namespace JoeySoft.TfsDevelopWinFrom
                     this.pathTBx.Text = folderBrowserDialog.SelectedPath;
                 }
             }
-            if (!File.Exists(this.pathTBx.Text + "\\Web.config"))
+            if (!File.Exists(rootPath + "\\Web.config"))
             {
                 MessageBox.Show("请选择产品根目录！");
             }
             else
             {
                 //产品TFS
-                TFSHelper tfs = new TFSHelper(Directory.GetParent(this.pathTBx.Text).FullName, productSlnFileName);
-                _updateFiles.AddRange(GetMetadataFiles(this.pathTBx.Text));
+                TFSHelper tfs = new TFSHelper(Directory.GetParent(rootPath).FullName, productSlnFileName);
+                _updateFiles.AddRange(GetRootFileName(rootPath));
+                _updateFiles.AddRange(GetMetadataFiles(rootPath));
+                var pendingFiles = tfs.GetPendingChange();
                 //判断产品TFS是否全部签入
-                if (tfs.GetPendingChange().Count > 0)
+                if (pendingFiles.Count > 0)
                 {
                     _updateFiles = null;
+                    foreach (var item in pendingFiles)
+                    {
+                        Logging.WriteLog("没有签入的产品文件：", item.FullName);
+                    }
                     MessageBox.Show("产品有未签入的数据，不可以迁移二开！");
                     return;
                 }
@@ -197,12 +208,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                     return;
                 }
 
-                _updateFiles.AddRange(GetBinFiles(this.pathTBx.Text));
-
+                _updateFiles.AddRange(GetBinFiles(rootPath));
+                _updateFiles.AddRange(GetAppDataFiles(rootPath));
                 //获取需要更新的文件夹信息
                 foreach (var updateDirectory in _updateDirectorys)
                 {
-                    openFileName = Path.Combine(this.pathTBx.Text, updateDirectory);
+                    openFileName = Path.Combine(rootPath, updateDirectory);
                     _updateFiles.AddRange(GetUpdateFiles(openFileName));
                 }
 
@@ -214,10 +225,12 @@ namespace JoeySoft.TfsDevelopWinFrom
                     {
                         TriStateTreeNode treeNode1 = new TriStateTreeNode();
                         treeNode1.Text = dictionary.Key.Replace(this.pathTBx.Text + "\\", "");
+                        treeNode1.Text = treeNode1.Text.Replace(this.pathTBx.Text.Replace("00_根目录", ""), "");
                         treeNode1.CheckboxVisible = true;
                         treeNode1.Checked = true;
                         treeNode1.IsContainer = true;//文件夹
-                        foreach (var metadataFile in dictionary)
+                        var list = dictionary.OrderBy(n => n.Name);
+                        foreach (var metadataFile in list)
                         {
                             TriStateTreeNode treeNode2 = new TriStateTreeNode(metadataFile.Name, 2, 2);
                             treeNode2.Checked = true;
@@ -248,6 +261,34 @@ namespace JoeySoft.TfsDevelopWinFrom
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取元数据内信息
+        /// </summary>
+        /// <param name="openFileName"></param>
+        /// <returns></returns>
+        private List<FileInfo> GetRootFileName(string openFileName)
+        {
+            string[] directoryFileNamelist = Directory.GetFiles(openFileName);
+            string[] rootFileNames = ConfigClass.RootContainFileName.Split(',');
+
+            List<FileInfo> fileInfos = new List<FileInfo>();
+
+            foreach (var item in rootFileNames)
+            {
+                string pathFileName = Path.Combine(openFileName, item);
+                if (directoryFileNamelist.Contains(pathFileName))
+                {
+                    FileInfo file = new FileInfo(pathFileName);
+                    //判断修改时间是否大于当前时间
+                    if (file.LastWriteTime >= _dt)
+                    {
+                        fileInfos.Add(file);
+                    }
+                }
+            }
+            return fileInfos;
         }
 
         /// <summary>
@@ -358,7 +399,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         }
 
         /// <summary>
-        /// 获取js信息
+        /// 获取bin信息
         /// </summary>
         /// <param name="openFileName"></param>
         /// <returns></returns>
@@ -394,6 +435,52 @@ namespace JoeySoft.TfsDevelopWinFrom
         }
 
         /// <summary>
+        /// 获取bin信息
+        /// </summary>
+        /// <param name="openFileName"></param>
+        /// <returns></returns>
+        private List<FileInfo> GetAppDataFiles(string openFileName)
+        {
+            openFileName = Path.Combine(openFileName, _app_Data);
+            List<FileInfo> appDataFiles = new List<FileInfo>();
+            List<string> directoryFileNamelist = new List<string>() { openFileName };
+
+            GetDirectorie(openFileName, directoryFileNamelist);
+
+            if (!Directory.Exists(openFileName))
+            {
+                MessageBox.Show("请选择产品根目录！");
+            }
+            else
+            {
+                foreach (var directoryName in directoryFileNamelist)
+                {
+                    string[] fileNameAppForm = Directory.GetFiles(Path.Combine(openFileName, directoryName));
+                    foreach (var fileName in fileNameAppForm)
+                    {
+                        FileInfo file = new FileInfo(fileName);
+                        if (IsAddAppDataFile(file))
+                        {
+                            appDataFiles.Add(file);
+                        }
+                    }
+                }
+
+            }
+            return appDataFiles;
+        }
+
+        /// <summary>
+        /// 包含的AppDataFile
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private bool IsAddAppDataFile(FileInfo file)
+        {
+            return _app_DataContainFileNames.Contains(file.Name);
+        }
+
+        /// <summary>
         /// 是否添加DLL目录下该文件
         /// </summary>
         /// <param name="fileName"></param>
@@ -402,7 +489,7 @@ namespace JoeySoft.TfsDevelopWinFrom
             //判断修改时间是否大于当前时间
             if (file.LastWriteTime >= _dt && file.Name.IndexOf("Fakes") == -1 && file.Name.IndexOf("UnitTest") == -1)
             {
-                if (file.Name.IndexOf("Web_Clgyl") == -1 && file.Name.IndexOf("License.xml") == -1)
+                if (file.Name.IndexOf("Web_Clgyl") == -1 && file.Name.IndexOf("License.xml") == -1 && file.Name.IndexOf(".pdb") == -1)
                 {
                     return true;
                 }
@@ -576,6 +663,10 @@ namespace JoeySoft.TfsDevelopWinFrom
                 progressValue += progressAddValue;
                 this.worker.ReportProgress((int)progressValue, "开始复制文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
+                if (directoryName.Contains(rootProductPath))
+                {
+                    directoryName = updateFile.DirectoryName.Replace(rootProductPath, "");
+                }
                 var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
 
                 if (File.Exists(fileName))
@@ -592,12 +683,14 @@ namespace JoeySoft.TfsDevelopWinFrom
                         removeFiles.Add(updateFile);
                         //撤销签出编辑
                         undoFiles.Add(new FileInfo(fileName));
+                        JoeyLog.Logging.WriteLog("撤销签出编辑文件：" + fileName);
                         continue;
                     }
                 }
                 try
                 {
                     File.Copy(updateFile.FullName, fileName, true);
+                    JoeyLog.Logging.WriteLog("复制编辑签出文件：" + fileName);
                 }
                 catch (Exception e)
                 {
@@ -629,10 +722,20 @@ namespace JoeySoft.TfsDevelopWinFrom
                 progressValue += progressAddValue;
                 this.worker.ReportProgress((int)progressValue, "开始签出编辑文件" + updateFile.Name + "，请稍后.....");
                 var directoryName = updateFile.DirectoryName.Replace(rootProductPath + "\\", "");
-                var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
-                //获取文件所在目录的最新版本
-                tfsHelper.GetLatest(fileName);
-                tfsHelper.CheckOut(fileName);
+                if (directoryName.Contains(rootProductPath))
+                {
+                    directoryName = updateFile.DirectoryName.Replace(rootProductPath, "");
+                    var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
+                    tfsHelper.GetLatest(fileName, JoeyRecursionType.OneLevel);
+                    tfsHelper.CheckOut(fileName);
+                }
+                else
+                {
+                    var fileName = Path.Combine(customizePath, directoryName, updateFile.Name);
+                    //获取文件所在目录的最新版本
+                    tfsHelper.GetLatest(fileName);
+                    tfsHelper.CheckOut(fileName);
+                }
             }
             return true;
         }
@@ -677,7 +780,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断是否是元数据
                 if (directoryName.IndexOf(_metadata) == 0)
                 {
-                    var filePath = Path.Combine(customizePath, directoryName.Replace(_metadata, "Customize\\x_MetaData"), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_metadata, ConfigClass.x_MetaData), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
@@ -687,7 +790,7 @@ namespace JoeySoft.TfsDevelopWinFrom
                 //判断二开js
                 if (directoryName.IndexOf(_clgyl) == 0)
                 {
-                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, "Customize\\" + _clgyl), updateFile.Name);
+                    var filePath = Path.Combine(customizePath, directoryName.Replace(_clgyl, ConfigClass.customize + "\\" + _clgyl), updateFile.Name);
                     if (File.Exists(filePath))
                     {
                         FileInfo fileInfo = new FileInfo(filePath);
@@ -862,18 +965,21 @@ namespace JoeySoft.TfsDevelopWinFrom
             Task.Run(() =>
             {
                 var joeySoftVersion = UpdateService.CheckUpdateClientVersion();
-                var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
-                if (myFileVersionInfo != null)
+                if (joeySoftVersion != null)
                 {
-                    if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                    var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+                    if (myFileVersionInfo != null)
                     {
-                        Logging.WriteLog("当前版本：" + myFileVersionInfo.FileVersion);
-                        return;
+                        if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                        {
+                            Logging.WriteLog("当前版本：" + myFileVersionInfo.FileVersion);
+                            return;
+                        }
                     }
-                }
-                if (myFileVersionInfo == null || myFileVersionInfo.FileVersion != joeySoftVersion.Version)
-                {
-                    UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
+                    if (myFileVersionInfo == null || myFileVersionInfo.FileVersion != joeySoftVersion.Version)
+                    {
+                        UpdateService.DownloadUpdateClient(joeySoftVersion.Version);
+                    }
                 }
             });
 
@@ -890,7 +996,14 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void allSelectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, true);
+            if (this.updateTriSatateTreeView.SelectedNode != null)
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, this.updateTriSatateTreeView.SelectedNode, true);
+            }
+            else
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, true);
+            }
         }
 
 
@@ -901,7 +1014,14 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void noSelectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, false);
+            if (this.updateTriSatateTreeView.SelectedNode != null)
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, this.updateTriSatateTreeView.SelectedNode, false);
+            }
+            else
+            {
+                TriStateTreeNodeHelper.Checked(this.updateTriSatateTreeView, false);
+            }
         }
 
         /// <summary>
@@ -912,7 +1032,7 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void checkVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
-            var myFileVersionInfo = UpdateService.GetUpdateClientVersion();
+            var myFileVersionInfo = UpdateService.GetTfsDevelopVersion();
             if (myFileVersionInfo != null)
             {
                 if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
@@ -951,6 +1071,39 @@ namespace JoeySoft.TfsDevelopWinFrom
         private void feedbackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Email：zhoujr01@mysoft.com.cn");
+        }
+
+        private void customizePathCBX_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            customizePath = this.customizePathCBX.Text;
+        }
+
+        private void CancalSelectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.updateTriSatateTreeView.SelectedNode != null)
+            {
+                this.updateTriSatateTreeView.SelectedNode = null;
+            }
+        }
+
+        /// <summary>
+        /// 排序按名称
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OrderByNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 排序按时间
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OrderByUpdateTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -88,8 +88,8 @@ namespace JoeySoft.TfsDevelop
             #region 获取最新版本信息
             ItemSet itemSet = version.GetItems("$\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\00-ERP站点\\Clgyl\\OrderMng\\M02210303", RecursionType.Full);
 
-            string filename =
-                @"E:\mysoft\tfs_new\10.5.10.70\星河二开项目\总部星河\明源云ERPv1.0SP5星河孵化\源代码\分支1\00-ERP站点\Clgyl\OrderMng\M02210303\ApplyEdit.js";
+            //string filename =
+            //    @"E:\mysoft\tfs_new\10.5.10.70\星河二开项目\总部星河\明源云ERPv1.0SP5星河孵化\源代码\分支1\00-ERP站点\Clgyl\OrderMng\M02210303\ApplyEdit.js";
 
             //foreach (var item in itemSet.Items)
             //{

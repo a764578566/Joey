@@ -23,11 +23,15 @@ namespace JoeySoft.PackageTool
         public PackageToolFrm()
         {
             PackageAdresses = ConfigurationManager.AppSettings["PackageAdresses"].Split(',');
+            if (PackageAdresses.Count() <= 0)
+            {
+                MessageBox.Show("配置PackageAdresses节点！");
+            }
             InitializeComponent();
 
             this.PackageAdressCBX.Text = PackageAdresses[0];
             this.PackageAdressCBX.Items.AddRange(PackageAdresses);
-
+            GetPackageVersion_Click(null, null);
         }
 
         /// <summary>
@@ -92,7 +96,7 @@ namespace JoeySoft.PackageTool
                 writer.WriteAll(directoryPath, "*",
                     n => n.StartsWith(Path.Combine(directoryPath, "UpdateService")) == false
                     && n.StartsWith(Path.Combine(directoryPath, "Log")) == false
-                    && n.EndsWith(".config") == false,
+                    && n.EndsWith("JoeySoftTfsTool.exe.config") == false,
                     SearchOption.AllDirectories);
             }
 
@@ -126,8 +130,14 @@ namespace JoeySoft.PackageTool
             if (!File.Exists(zipAddress))
             {
                 MessageBox.Show("先打包后，再点推送！");
+                return;
             }
             //上传包
+            if (PackageUpdateService.UploadPackage(zipAddress) != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show("上传包错误，请检查网络！");
+                return;
+            }
 
             PutPackageVersion putPackageVersion = new PutPackageVersion();
             putPackageVersion.Version = myFileVersionInfo.FileVersion;
@@ -140,6 +150,16 @@ namespace JoeySoft.PackageTool
             {
                 MessageBox.Show("推包成功！");
             }
+        }
+
+        private void PackagelistBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.PackageAdressCBX.SelectedIndex = this.PackagelistBx.SelectedIndex;
+        }
+
+        private void PackageAdressCBX_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.PackagelistBx.SelectedIndex = this.PackageAdressCBX.SelectedIndex;
         }
     }
 }

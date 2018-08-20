@@ -1,4 +1,5 @@
-﻿using Microsoft.TeamFoundation.Client;
+﻿using JoeySofy.TFS;
+using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.VersionControl.Client;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace JoeySoft.TFS
 {
+    /// <summary>
+    /// TFS帮助类
+    /// </summary>
     public class TFSHelper
     {
 
@@ -25,6 +29,9 @@ namespace JoeySoft.TFS
 
         private Dictionary<string, ItemSet> dic = new Dictionary<string, ItemSet>();
 
+        /// <summary>
+        /// 更新数量
+        /// </summary>
         public int UpdateNumber { get; private set; } = 0;
 
         /// <summary>
@@ -54,7 +61,7 @@ namespace JoeySoft.TFS
         /// <summary>
         /// 获取工作区
         /// </summary>
-        /// <param name=""></param>
+        /// <param name="vsPath"></param>
         /// <returns></returns>
         private WorkingFolder GetWorkspace(string vsPath)
         {
@@ -182,22 +189,24 @@ namespace JoeySoft.TFS
         /// <summary>
         /// 获取文件所在目录的最新版本
         /// </summary>
-        /// <param name="its"></param>
-        public void GetLatest(string localPath)
+        /// <param name="localPath"></param>
+        /// <param name="recursionType">JoeyRecursionType</param>
+        public void GetLatest(string localPath, JoeyRecursionType recursionType = JoeyRecursionType.Full)
         {
             //获取文件目录
             string serverPath = Path.GetDirectoryName(GetServerPathByLocalPath(localPath));
 
-            GetLatesByServerPath(serverPath);
+            GetLatesByServerPath(serverPath, recursionType);
         }
 
         /// <summary>
         /// 获取TFS服务器该目录的最新版本
         /// </summary>
         /// <param name="serverPath"></param>
-        public void GetLatesByServerPath(string serverPath)
+        /// <param name="recursionType"></param>
+        public void GetLatesByServerPath(string serverPath, JoeyRecursionType recursionType = JoeyRecursionType.Full)
         {
-            ItemSet its = version.GetItems(serverPath, RecursionType.Full);
+            ItemSet its = version.GetItems(serverPath, (RecursionType)(int)recursionType);
 
             if (!dic.ContainsKey(serverPath))
             {
@@ -264,6 +273,30 @@ namespace JoeySoft.TFS
         }
 
         /// <summary>
+        /// 获取挂起的更改
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<PendingChange> GetPendingChanges()
+        {
+            return ws.GetPendingChangesEnumerable();
+        }
+
+        /// <summary>
+        /// 获取挂起的更改
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetAddPendingChanges()
+        {
+            List<PendingChange> isAddPendingChanges = GetPendingChanges().Where(n => n.IsAdd == true).ToList();
+            List<string> filePath = new List<string>();
+            foreach (var item in isAddPendingChanges)
+            {
+                filePath.Add(item.LocalItem);
+            }
+            return filePath;
+        }
+
+        /// <summary>
         /// 签入二开
         /// </summary>
         /// <param name="checkInFileInfos">签入的文件信息</param>
@@ -324,6 +357,23 @@ namespace JoeySoft.TFS
         /// 获取历史变更集
         /// </summary>
         public void GetHistory()
+        {
+            //查询历史版本
+            var histories = version.QueryHistory(this.vsPath, VersionSpec.Latest, 0, RecursionType.OneLevel, null, null, null, int.MaxValue, true, false).Cast<Changeset>();
+
+            foreach (Changeset changeSet in histories)
+            {
+                foreach (Change change in changeSet.Changes)//每个历史版本下修改了几个文件
+                {
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取删除的数据
+        /// </summary>
+        public void GetDelete()
         {
             //查询历史版本
             var histories = version.QueryHistory(this.vsPath, VersionSpec.Latest, 0, RecursionType.OneLevel, null, null, null, int.MaxValue, true, false);

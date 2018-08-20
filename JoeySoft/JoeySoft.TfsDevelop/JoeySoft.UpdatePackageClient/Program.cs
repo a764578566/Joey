@@ -29,6 +29,16 @@ namespace JoeySoft.UpdatePackageClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if (string.IsNullOrEmpty(api))
+            {
+                MessageBox.Show("配置UpdateServiceAddress更新服务器地址！");
+                return;
+            }
+            if (string.IsNullOrEmpty(joeySofyName))
+            {
+                MessageBox.Show("配置joeySofyName更新软件名称！");
+                return;
+            }
             Uri uir = new Uri(api + "/" + versionAddress + "/" + joeySofyName);
             joeySoftVersion = new JoeySoftVersion();
             using (HttpClient httpClient = new HttpClient())

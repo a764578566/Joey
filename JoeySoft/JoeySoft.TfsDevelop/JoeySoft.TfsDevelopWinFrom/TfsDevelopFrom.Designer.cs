@@ -57,6 +57,10 @@
             this.checkVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.feedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrderByToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrderByNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrderByUpdateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CancalSelectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2.SuspendLayout();
             this.contextMenuStripTV.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -106,22 +110,24 @@
             // contextMenuStripTV
             // 
             this.contextMenuStripTV.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CancalSelectToolStripMenuItem,
             this.allSelectToolStripMenuItem,
-            this.noSelectToolStripMenuItem});
+            this.noSelectToolStripMenuItem,
+            this.OrderByToolStripMenuItem});
             this.contextMenuStripTV.Name = "contextMenuStripTV";
-            this.contextMenuStripTV.Size = new System.Drawing.Size(113, 48);
+            this.contextMenuStripTV.Size = new System.Drawing.Size(181, 114);
             // 
             // allSelectToolStripMenuItem
             // 
             this.allSelectToolStripMenuItem.Name = "allSelectToolStripMenuItem";
-            this.allSelectToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.allSelectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allSelectToolStripMenuItem.Text = "全选";
             this.allSelectToolStripMenuItem.Click += new System.EventHandler(this.allSelectToolStripMenuItem_Click);
             // 
             // noSelectToolStripMenuItem
             // 
             this.noSelectToolStripMenuItem.Name = "noSelectToolStripMenuItem";
-            this.noSelectToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.noSelectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.noSelectToolStripMenuItem.Text = "全不选";
             this.noSelectToolStripMenuItem.Click += new System.EventHandler(this.noSelectToolStripMenuItem_Click);
             // 
@@ -163,6 +169,7 @@
             this.customizePathCBX.Name = "customizePathCBX";
             this.customizePathCBX.Size = new System.Drawing.Size(674, 20);
             this.customizePathCBX.TabIndex = 20;
+            this.customizePathCBX.SelectedIndexChanged += new System.EventHandler(this.customizePathCBX_SelectedIndexChanged);
             this.customizePathCBX.TextChanged += new System.EventHandler(this.customizePathCBX_TextChanged);
             // 
             // groupBox2
@@ -313,14 +320,14 @@
             // checkVersionToolStripMenuItem
             // 
             this.checkVersionToolStripMenuItem.Name = "checkVersionToolStripMenuItem";
-            this.checkVersionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.checkVersionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checkVersionToolStripMenuItem.Text = "检查最新版本";
             this.checkVersionToolStripMenuItem.Click += new System.EventHandler(this.checkVersionToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
             // 
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.versionToolStripMenuItem.Text = "关于工具";
             this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
             // 
@@ -331,10 +338,42 @@
             this.feedbackToolStripMenuItem.Text = "反馈";
             this.feedbackToolStripMenuItem.Click += new System.EventHandler(this.feedbackToolStripMenuItem_Click);
             // 
+            // OrderByToolStripMenuItem
+            // 
+            this.OrderByToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OrderByNameToolStripMenuItem,
+            this.OrderByUpdateTimeToolStripMenuItem});
+            this.OrderByToolStripMenuItem.Name = "OrderByToolStripMenuItem";
+            this.OrderByToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OrderByToolStripMenuItem.Text = "排序";
+            this.OrderByToolStripMenuItem.Visible = false;
+            // 
+            // OrderByNameToolStripMenuItem
+            // 
+            this.OrderByNameToolStripMenuItem.Name = "OrderByNameToolStripMenuItem";
+            this.OrderByNameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OrderByNameToolStripMenuItem.Text = "名称";
+            this.OrderByNameToolStripMenuItem.Click += new System.EventHandler(this.OrderByNameToolStripMenuItem_Click);
+            // 
+            // OrderByUpdateTimeToolStripMenuItem
+            // 
+            this.OrderByUpdateTimeToolStripMenuItem.Name = "OrderByUpdateTimeToolStripMenuItem";
+            this.OrderByUpdateTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OrderByUpdateTimeToolStripMenuItem.Text = "修改时间";
+            this.OrderByUpdateTimeToolStripMenuItem.Click += new System.EventHandler(this.OrderByUpdateTimeToolStripMenuItem_Click);
+            // 
+            // CancalSelectToolStripMenuItem
+            // 
+            this.CancalSelectToolStripMenuItem.Name = "CancalSelectToolStripMenuItem";
+            this.CancalSelectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CancalSelectToolStripMenuItem.Text = "取消选中";
+            this.CancalSelectToolStripMenuItem.Click += new System.EventHandler(this.CancalSelectToolStripMenuItem_Click);
+            // 
             // TfsDevelopFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1136, 826);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
@@ -388,6 +427,10 @@
         private System.Windows.Forms.ToolStripMenuItem checkVersionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem feedbackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrderByToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrderByNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrderByUpdateTimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CancalSelectToolStripMenuItem;
     }
 }
 
