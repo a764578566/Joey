@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.JoeyLog", "JoeySof
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.UpdatePackageClient", "JoeySoft.UpdatePackageClient\JoeySoft.UpdatePackageClient.csproj", "{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.Test", "JoeySoft.Test\JoeySoft.Test.csproj", "{A004C1DD-C1CC-4487-A4FD-321F0D18DF0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joey.Git", "Joey.Git\Joey.Git.csproj", "{A24D4610-DBE0-4EBE-BE0B-D6ECF053A821}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7532DB7-C592-45B1-BA86-11C75E2A3C4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A004C1DD-C1CC-4487-A4FD-321F0D18DF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A004C1DD-C1CC-4487-A4FD-321F0D18DF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A004C1DD-C1CC-4487-A4FD-321F0D18DF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A004C1DD-C1CC-4487-A4FD-321F0D18DF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A24D4610-DBE0-4EBE-BE0B-D6ECF053A821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A24D4610-DBE0-4EBE-BE0B-D6ECF053A821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A24D4610-DBE0-4EBE-BE0B-D6ECF053A821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A24D4610-DBE0-4EBE-BE0B-D6ECF053A821}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
