@@ -26,7 +26,7 @@ namespace Joey.Git
         /// <returns></returns>
         public string Pull()
         {
-            return RunCommand("Pull");
+            return RunCommand("pull");
         }
 
         public string CommitHash
@@ -123,9 +123,23 @@ namespace Joey.Git
         {
             _gitProcess.StartInfo.Arguments = args;
             _gitProcess.Start();
+            _gitProcess.OutputDataReceived += _gitProcess_OutputDataReceived;
             string output = _gitProcess.StandardOutput.ReadToEnd().Trim();
             _gitProcess.WaitForExit();
             return output;
+        }
+
+        /// <summary>
+        /// 接受到数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _gitProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.Data))
+            {
+
+            }
         }
 
         private bool _disposed;
