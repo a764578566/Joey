@@ -21,6 +21,26 @@ namespace Joey.Git
         }
 
         /// <summary>
+        /// 提交代码,并推送服务器
+        /// </summary>
+        /// <returns></returns>
+        public string Add(string remark)
+        {
+            RunCommand("add .");
+            RunCommand("commit -m " + remark);
+            return RunCommand("push");
+        }
+
+        /// <summary>
+        /// 推送到指定服务器
+        /// </summary>
+        /// <returns></returns>
+        public string push()
+        {
+            return RunCommand("push");
+        }
+
+        /// <summary>
         /// 拉取最新代码
         /// </summary>
         /// <returns></returns>
@@ -123,23 +143,9 @@ namespace Joey.Git
         {
             _gitProcess.StartInfo.Arguments = args;
             _gitProcess.Start();
-            _gitProcess.OutputDataReceived += _gitProcess_OutputDataReceived;
             string output = _gitProcess.StandardOutput.ReadToEnd().Trim();
             _gitProcess.WaitForExit();
             return output;
-        }
-
-        /// <summary>
-        /// 接受到数据
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _gitProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-
-            }
         }
 
         private bool _disposed;

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joey.Git", "Joey.Git\Joey.G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joey.GitTest", "Joey.GitTest\Joey.GitTest.csproj", "{52882599-100B-4EE2-9439-65343CCD0FC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joey.GitDevelop", "Joey.GitDevelop\Joey.GitDevelop.csproj", "{BB52E147-3E96-4420-B052-E6D58C0BDB3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{52882599-100B-4EE2-9439-65343CCD0FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52882599-100B-4EE2-9439-65343CCD0FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52882599-100B-4EE2-9439-65343CCD0FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB52E147-3E96-4420-B052-E6D58C0BDB3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB52E147-3E96-4420-B052-E6D58C0BDB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB52E147-3E96-4420-B052-E6D58C0BDB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB52E147-3E96-4420-B052-E6D58C0BDB3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
