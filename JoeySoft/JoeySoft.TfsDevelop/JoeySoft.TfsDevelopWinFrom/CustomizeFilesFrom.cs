@@ -26,7 +26,10 @@ namespace JoeySoft.TfsDevelopWinFrom
             string regexnameText = "name=\"([\\u4e00-\\u9fa5]+)\"";
 
             //匹配页面名称
-            string regexpageNameText = "pageName=\"([\\u4e00-\\u9fa5]+)\"";
+            string functionPageText = "pageName=\"([\\u4e00-\\u9fa5]+)\"";
+
+            //匹配页面名称
+            string functionNameText = "functionName=\"([\\u4e00-\\u9fa5]+)\"";
 
             //匹配表名称
             string regexDisplayNameText = "DisplayName=\"([\\u4e00-\\u9fa5]+)\"";
@@ -78,7 +81,14 @@ namespace JoeySoft.TfsDevelopWinFrom
                             if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\FunctionPage") != -1)
                             {
                                 XmlNode root = xml.SelectSingleNode("/functionPage");
-                                math2 = Regex.Matches(root.OuterXml, regexpageNameText, RegexOptions.IgnoreCase);
+                                math2 = Regex.Matches(root.OuterXml, functionPageText, RegexOptions.IgnoreCase);
+                            }
+
+                            //读取主页面元数据界面名称
+                            if (metadataFile.FullName.IndexOf(ConfigClass.x_MetaData + "\\MyFunction") != -1)
+                            {
+                                XmlNode root = xml.SelectSingleNode("/myFunction");
+                                math2 = Regex.Matches(root.OuterXml, functionNameText, RegexOptions.IgnoreCase);
                             }
 
                             if (math2 != null && math2.Count > 0)
