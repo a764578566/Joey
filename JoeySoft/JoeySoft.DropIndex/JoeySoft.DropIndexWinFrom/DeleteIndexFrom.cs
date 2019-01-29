@@ -92,10 +92,7 @@ namespace JoeySoft.DropIndexWinFrom
                 var maths = Regex.Matches(sqlText, regexStr, RegexOptions.IgnoreCase);
                 if (maths.Count > 0)
                 {
-                    foreach (var math in maths)
-                    {
-                        this.IndexCountLabel.Text = (int.Parse(this.IndexCountLabel.Text) + 1).ToString();
-                    }
+                    this.IndexCountLabel.Text = (int.Parse(this.IndexCountLabel.Text) + maths.Count).ToString();
                 }
                 this.sqlRtb.AppendText(sqlText);
             }
