@@ -145,5 +145,18 @@ namespace JoeySoft.DropIndexWPF
                 File.WriteAllText(localFilePath, sqlText, Encoding.GetEncoding("GB2312"));
             }
         }
+
+        /// <summary>
+        /// 鼠标拖动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
     }
 }
