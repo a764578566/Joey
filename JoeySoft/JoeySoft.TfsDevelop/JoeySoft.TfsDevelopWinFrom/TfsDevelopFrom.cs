@@ -1031,31 +1031,39 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// <param name="e"></param>
         private void checkVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
-            var myFileVersionInfo = UpdateService.GetTfsDevelopVersion();
-            if (myFileVersionInfo != null)
+            try
             {
-                if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                var joeySoftVersion = UpdateService.CheckTfsDevelopVersion();
+                var myFileVersionInfo = UpdateService.GetTfsDevelopVersion();
+                if (myFileVersionInfo != null)
                 {
-                    Logging.WriteLog("检查最新版本：" + myFileVersionInfo.FileVersion);
+                    if (VersionHelper.CompareVersion(myFileVersionInfo, joeySoftVersion) == false)
+                    {
+                        Logging.WriteLog("检查最新版本：" + myFileVersionInfo.FileVersion);
+                        MessageBox.Show("已是最新版本Version：" + this.version);
+                        return;
+                    }
+                }
+                if (myFileVersionInfo == null || joeySoftVersion.Version != this.version)
+                {
+                    DialogResult dialogResult = MessageBox.Show("当前软件版本Version：" + this.version + "，检查到最新版本" + joeySoftVersion.Version + "，是否需要更新？",
+                        "提示", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        isUpdate = true;
+                        this.Close();
+                    }
+                }
+                else
+                {
                     MessageBox.Show("已是最新版本Version：" + this.version);
-                    return;
                 }
             }
-            if (myFileVersionInfo == null || joeySoftVersion.Version != this.version)
+            catch (Exception ex)
             {
-                DialogResult dialogResult = MessageBox.Show("当前软件版本Version：" + this.version + "，检查到最新版本" + joeySoftVersion.Version + "，是否需要更新？",
-                    "提示", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    isUpdate = true;
-                    this.Close();
-                }
+                MessageBox.Show(ex.Message);
             }
-            else
-            {
-                MessageBox.Show("已是最新版本Version：" + this.version);
-            }
+           
         }
 
         /// <summary>

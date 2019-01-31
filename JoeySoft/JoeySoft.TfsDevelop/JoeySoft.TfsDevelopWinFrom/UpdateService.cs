@@ -29,12 +29,20 @@ namespace JoeySoft.TfsDevelopWinFrom
         /// </summary>
         public static JoeySoftVersion CheckTfsDevelopVersion()
         {
-            Uri uir = new Uri(api + "/" + versionActionName + "/" + tfsDevelopJoeySofyName);
+            Uri uri = new Uri(api + "/" + versionActionName + "/" + tfsDevelopJoeySofyName);
             JoeySoftVersion joeySoftVersion = new JoeySoftVersion();
             using (HttpClient httpClient = new HttpClient())
             {
-                joeySoftVersion = JsonConvert.DeserializeObject<JoeySoftVersion>
-                    (httpClient.GetAsync(uir).Result.Content.ReadAsStringAsync().Result);
+                HttpResponseMessage httpResponseMessage = httpClient.GetAsync(uri).Result;
+                if (httpResponseMessage.StatusCode == HttpStatusCode.OK)
+                {
+                    joeySoftVersion = JsonConvert.DeserializeObject<JoeySoftVersion>(httpResponseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    httpClient.Dispose();
+                    throw new Exception("无法连接服务器URL:" + uri.AbsoluteUri + "，请联系管理员QQ:764578566");
+                }
                 httpClient.Dispose();
             }
             return joeySoftVersion;

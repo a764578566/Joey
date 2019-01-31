@@ -32,8 +32,17 @@ namespace JoeySoft.PackageTool
             List<JoeySoftVersion> joeySoftVersion = new List<JoeySoftVersion>();
             using (HttpClient httpClient = new HttpClient())
             {
-                joeySoftVersion = JsonConvert.DeserializeObject<List<JoeySoftVersion>>
+                HttpResponseMessage httpResponseMessage = httpClient.GetAsync(uri).Result;
+                if (httpResponseMessage.StatusCode == HttpStatusCode.OK)
+                {
+                    joeySoftVersion = JsonConvert.DeserializeObject<List<JoeySoftVersion>>
                     (httpClient.GetAsync(uri).Result.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    httpClient.Dispose();
+                    throw new Exception("无法连接服务器URL:" + uri.AbsoluteUri + "，请联系管理员QQ:764578566");
+                }
                 httpClient.Dispose();
             }
             return joeySoftVersion;
