@@ -58,7 +58,7 @@ namespace JoeySoft.DropIndexWPF
             openFileDialog.RestoreDirectory = true;
             openFileDialog.InitialDirectory = @"F:\公司文档\clerp\01 SQL提交\02 SQL提交-重构V1.0\性能优化脚本";
             openFileDialog.FilterIndex = 1;
-
+            this.sqlRtb.IsReadOnly = true;
             if (openFileDialog.ShowDialog().Value == true)
             {
                 this.IndexCountLabel.Content = "0";
@@ -104,7 +104,7 @@ namespace JoeySoft.DropIndexWPF
                 {
                     if (maths[i].Groups.Count > 3)
                     {
-                        var textSqlText = string.Format(textTemplateSqlText, maths[i].Groups[4].Value, maths[i].Groups[5].Value, "删除" + maths[i].Groups[1].Value);
+                        var textSqlText = string.Format(textTemplateSqlText, maths[i].Groups[5].Value, maths[i].Groups[4].Value, "删除" + maths[i].Groups[1].Value);
                         Run r = new Run(textSqlText + "\r\n");
                         paragraph.Inlines.Add(r);
                         this.DeleteIndexCountLabel.Content = (int.Parse(this.DeleteIndexCountLabel.Content.ToString()) + 1).ToString();

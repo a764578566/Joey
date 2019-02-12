@@ -58,7 +58,7 @@ namespace JoeySoft.DropIndexWinFrom
                 {
                     if (maths[i].Groups.Count > 3)
                     {
-                        var textSqlText = string.Format(textTemplateSqlText, maths[i].Groups[2].Value, maths[i].Groups[3].Value, "删除" + maths[i].Groups[1].Value);
+                        var textSqlText = string.Format(textTemplateSqlText, maths[i].Groups[3].Value, maths[i].Groups[2].Value, "删除" + maths[i].Groups[1].Value);
                         this.delIndexRtb.AppendText(textSqlText + "\n");
                         this.DeleteIndexCountLabel.Text = (int.Parse(this.DeleteIndexCountLabel.Text) + 1).ToString();
                     }

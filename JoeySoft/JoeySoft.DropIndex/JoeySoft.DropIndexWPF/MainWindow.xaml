@@ -33,7 +33,7 @@
                     <Button Click="DeleteIndexbtn_Click" Name="DeleteIndexbtn" Grid.Row="1" Content="生成" HorizontalAlignment="Left" Margin="715,5,0,0" VerticalAlignment="Top" Width="75" Height="27"/>
                     <Button Click="OutputBtn_Click" Name="OutputBtn" Grid.Row="1" Content="导出脚本" HorizontalAlignment="Left" Margin="805,5,0,0" VerticalAlignment="Top" Width="90" Height="27"/>
                     <DockPanel Grid.Row="2" Margin="10">
-                        <RichTextBox VerticalScrollBarVisibility="Auto" DockPanel.Dock="Left" Name="sqlRtb" HorizontalAlignment="Left" Margin="0,0,0,0" Height="550" Width="450" IsReadOnly="True" />
+                        <RichTextBox VerticalScrollBarVisibility="Auto" DockPanel.Dock="Left" Name="sqlRtb" HorizontalAlignment="Left" Margin="0,0,0,0" Height="550" Width="450" />
                         <RichTextBox VerticalScrollBarVisibility="Auto"  DockPanel.Dock="Left" Name="delIndexRtb" HorizontalAlignment="Right"  Margin="0,0,0,0" Height="550" Width="450"/>
                     </DockPanel>
                     <Grid Grid.Row="3">
