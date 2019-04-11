@@ -21,6 +21,7 @@ namespace JoeySoft.DropIndexWinFrom
 
         private string openFileName;
 
+        private string regexStr = @"--(.*)[\n]+IF\s+NOT\s+EXISTS\s*\(.+\)\s*\nCREATE\s+[a-zA-Z\s]+INDEX\s+([1-9a-zA-Z_]+)\s+ON\s+([1-9a-zA-Z_\[.\]]+)\s*\(";
 
         public DeleteIndexFrom()
         {
@@ -49,56 +50,17 @@ namespace JoeySoft.DropIndexWinFrom
                 return;
             }
             this.delIndexRtb.Text = string.Empty;
-            string[] sqlIndexs = sqlText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            //匹配索引
-            string regexIndexText = @"CREATE\s+[a-zA-Z]+\s+INDEX\s+([1-9a-zA-Z_]+)";
-            //匹配表
-            string regexTableText = @"ON\s+([1-9a-zA-Z_\[.\]]+)\s+\(";
-
-            //匹配索引与表
-            string regexIndexTableText = @"CREATE\s+[a-zA-Z]+\sINDEX\s+([1-9a-zA-Z_]+)\s+ON\s+([1-9a-zA-Z_\[.\]]+)\s+\(";
-            //匹配说明
-            string regexRemarkText = @"--(.*)";
-            string indexName = "", remark = "";
-            foreach (var sqlIndex in sqlIndexs)
+            this.DeleteIndexCountLabel.Text = "0";
+            var maths = Regex.Matches(sqlText, regexStr, RegexOptions.IgnoreCase);
+            if (maths.Count > 0)
             {
-                var math2 = Regex.Matches(sqlIndex, regexRemarkText, RegexOptions.IgnoreCase);
-                if (math2.Count > 0)
+                for (int i = 0; i < maths.Count; i++)
                 {
-                    if (math2[0].Groups.Count > 1)
+                    if (maths[i].Groups.Count > 3)
                     {
-                        remark = math2[0].Groups[1].Value;
-                        continue;
-                    }
-                }
-                var math3 = Regex.Matches(sqlIndex, regexIndexTableText, RegexOptions.IgnoreCase);
-                if (math3.Count > 0)
-                {
-                    if (math3[0].Groups.Count > 1)
-                    {
-                        var textSqlText = string.Format(textTemplateSqlText, math3[0].Groups[2].Value, math3[0].Groups[1].Value, "删除" + remark);
+                        var textSqlText = string.Format(textTemplateSqlText, maths[i].Groups[3].Value, maths[i].Groups[2].Value, "删除" + maths[i].Groups[1].Value);
                         this.delIndexRtb.AppendText(textSqlText + "\n");
-                        continue;
-                    }
-                }
-
-                var match = Regex.Matches(sqlIndex, regexIndexText, RegexOptions.IgnoreCase);
-                if (match.Count > 0)
-                {
-                    if (match[0].Groups.Count > 1)
-                    {
-                        indexName = match[0].Groups[1].Value;
-                        continue;
-                    }
-                }
-                var match1 = Regex.Matches(sqlIndex, regexTableText, RegexOptions.IgnoreCase);
-                if (match1.Count > 0)
-                {
-                    if (match1[0].Groups.Count > 1)
-                    {
-                        var textSqlText = string.Format(textTemplateSqlText, match1[0].Groups[1].Value, indexName, "删除" + remark);
-                        this.delIndexRtb.AppendText(textSqlText + "\n");
-                        continue;
+                        this.DeleteIndexCountLabel.Text = (int.Parse(this.DeleteIndexCountLabel.Text) + 1).ToString();
                     }
                 }
             }
@@ -117,13 +79,21 @@ namespace JoeySoft.DropIndexWinFrom
             openFileDialog.RestoreDirectory = true;
             openFileDialog.InitialDirectory = "F:\\公司文档\\clerp\\01 SQL提交-重构\\性能优化脚本";
             openFileDialog.FilterIndex = 1;
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                this.IndexCountLabel.Text = "0";
+
                 openFileName = openFileDialog.FileName;
                 this.filePathTbx.Text = openFileName;
                 //读取文件
                 string sqlText = File.ReadAllText(openFileName, Encoding.GetEncoding("GB2312"));
 
+                var maths = Regex.Matches(sqlText, regexStr, RegexOptions.IgnoreCase);
+                if (maths.Count > 0)
+                {
+                    this.IndexCountLabel.Text = (int.Parse(this.IndexCountLabel.Text) + maths.Count).ToString();
+                }
                 this.sqlRtb.AppendText(sqlText);
             }
         }

@@ -37,6 +37,10 @@
             this.OutputBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.IndexCountLabel = new System.Windows.Forms.Label();
+            this.DeleteIndexCountLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -107,6 +111,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.DeleteIndexCountLabel);
+            this.tabPage1.Controls.Add(this.IndexCountLabel);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.delIndexRtb);
             this.tabPage1.Controls.Add(this.OutputBtn);
             this.tabPage1.Controls.Add(this.sqlRtb);
@@ -120,6 +128,42 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "生成索引删除脚本";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 663);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "数量：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(520, 663);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "数量：";
+            // 
+            // IndexCountLabel
+            // 
+            this.IndexCountLabel.AutoSize = true;
+            this.IndexCountLabel.Location = new System.Drawing.Point(53, 663);
+            this.IndexCountLabel.Name = "IndexCountLabel";
+            this.IndexCountLabel.Size = new System.Drawing.Size(11, 12);
+            this.IndexCountLabel.TabIndex = 7;
+            this.IndexCountLabel.Text = "0";
+            // 
+            // DeleteIndexCountLabel
+            // 
+            this.DeleteIndexCountLabel.AutoSize = true;
+            this.DeleteIndexCountLabel.Location = new System.Drawing.Point(567, 663);
+            this.DeleteIndexCountLabel.Name = "DeleteIndexCountLabel";
+            this.DeleteIndexCountLabel.Size = new System.Drawing.Size(11, 12);
+            this.DeleteIndexCountLabel.TabIndex = 7;
+            this.DeleteIndexCountLabel.Text = "0";
             // 
             // DeleteIndexFrom
             // 
@@ -148,6 +192,10 @@
         private System.Windows.Forms.Button OutputBtn;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label DeleteIndexCountLabel;
+        private System.Windows.Forms.Label IndexCountLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

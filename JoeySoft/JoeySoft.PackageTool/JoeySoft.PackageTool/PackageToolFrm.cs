@@ -41,9 +41,16 @@ namespace JoeySoft.PackageTool
         /// <param name="e"></param>
         private void GetPackageVersion_Click(object sender, EventArgs e)
         {
-            List<JoeySoftVersion> joeySoftVersions = PackageUpdateService.GetVersionInfo();
-            this.PackagelistBx.DataSource = joeySoftVersions;
-            this.PackagelistBx.DisplayMember = nameof(JoeySoftVersion.Show);
+            try
+            {
+                List<JoeySoftVersion> joeySoftVersions = PackageUpdateService.GetVersionInfo();
+                this.PackagelistBx.DataSource = joeySoftVersions;
+                this.PackagelistBx.DisplayMember = nameof(JoeySoftVersion.Show);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
