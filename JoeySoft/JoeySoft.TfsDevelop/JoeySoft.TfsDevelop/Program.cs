@@ -22,14 +22,14 @@ namespace JoeySoft.TfsDevelop
         {
             string sln =
                 File.ReadAllText(
-                    "E:\\mysoft\\tfs_new\\10.5.10.70\\星河二开项目\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\材料供应链二开整体解决方案.sln");
+                    "解决方案.sln");//解决方案路径
 
             string regex = @"SccTeamFoundationServer = (.+)\r";
 
             var math2 = Regex.Matches(sln, regex, RegexOptions.IgnoreCase);
 
             ////连接TFS
-            string tpcURL = "http://10.5.10.70:8080/tfs";
+            string tpcURL = "http://localhost:8080/tfs";//地址
 
             //登录服务器
             TfsConfigurationServer tfs = TfsConfigurationServerFactory.GetConfigurationServer(new Uri(tpcURL),
@@ -86,10 +86,10 @@ namespace JoeySoft.TfsDevelop
             Workspace ws = wss.FirstOrDefault();
 
             #region 获取最新版本信息
-            ItemSet itemSet = version.GetItems("$\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\00-ERP站点\\Clgyl\\OrderMng\\M02210303", RecursionType.Full);
+            ItemSet itemSet = version.GetItems("$\\本地地址路径", RecursionType.Full);
 
             //string filename =
-            //    @"E:\mysoft\tfs_new\10.5.10.70\星河二开项目\总部星河\明源云ERPv1.0SP5星河孵化\源代码\分支1\00-ERP站点\Clgyl\OrderMng\M02210303\ApplyEdit.js";
+            //    @"";
 
             //foreach (var item in itemSet.Items)
             //{
@@ -105,11 +105,11 @@ namespace JoeySoft.TfsDevelop
 
             #region TFS获取最新版本
 
-            TFSHelper tfsHelper = new TFSHelper("E:\\mysoft\\tfs_new\\10.5.10.70\\星河二开项目\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1", "材料供应链二开整体解决方案.sln");
+            TFSHelper tfsHelper = new TFSHelper("分支1", "解决方案.sln");
 
-            ItemSet its = version.GetItems("$/总部星河/明源云ERPv1.0SP5星河孵化/源代码/分支1/00-ERP站点/Clgyl/OrderMng/M02210303", RecursionType.Full);
+            ItemSet its = version.GetItems("$/本地地址路径", RecursionType.Full);
 
-            tfsHelper.GetLatest("E:\\mysoft\\tfs_new\\10.5.10.70\\星河二开项目\\总部星河\\明源云ERPv1.0SP5星河孵化\\源代码\\分支1\\00-ERP站点\\Clgyl\\OrderMng\\M02210303\\ApplyMng.js");
+            tfsHelper.GetLatest("本地文件");
 
             #endregion
 
