@@ -13,7 +13,7 @@ namespace OpenEdit
         private static void Main(string[] args)
         {
             //站点根目录
-            string rootPath = @"D:\workplace\10.5.10.96\住宅ERP-新平台\ERP-V1.0\60_材料供应链系统\00_主干-01星河分支\00_根目录";
+            string rootPath = @"E:\mysoft\git\clxt V1.7\clxt\src\00_根目录";
 
             //元数据文件夹
             string metadataDirectoryName = Path.Combine(rootPath, "_metadata");
