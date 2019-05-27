@@ -37,6 +37,9 @@ namespace OpenEdit.WPF
         //ASPX页面数量
         private Dictionary<string, FunctionPage> metadataAspxFunctionPages { get; set; } = new Dictionary<string, FunctionPage>();
 
+        //图标页面数量
+        private Dictionary<string, FunctionPage> metadataChartFunctionPages { get; set; } = new Dictionary<string, FunctionPage>();
+
         //自定义页面数量
         private Dictionary<string, FunctionPage> metadataCustomizeFunctionPages { get; set; } = new Dictionary<string, FunctionPage>();
 
@@ -99,6 +102,7 @@ namespace OpenEdit.WPF
             metadataNotAllowEditFunctionPages = new Dictionary<string, FunctionPage>();
             metadataAllowAddFunctionPages = new Dictionary<string, FunctionPage>();
             metadataAspxFunctionPages = new Dictionary<string, FunctionPage>();
+            metadataChartFunctionPages = new Dictionary<string, FunctionPage>();
             metadataCustomizeFunctionPages = new Dictionary<string, FunctionPage>();
             metadataParamFunctionPages = new Dictionary<string, FunctionPage>();
             List<string> applictionCodes = myApplication.ApplictionCode.Split(';').ToList();
@@ -126,10 +130,15 @@ namespace OpenEdit.WPF
                     {
                         metadataAspxFunctionPages.Add(metadatafunctionPagFile, functionPag);
                     }
+                    else if (functionPag.PageType == "4")
+                    {
+                        metadataChartFunctionPages.Add(metadatafunctionPagFile, functionPag);
+                    }
                     else if (functionPag.PageType == "5")
                     {
                         metadataCustomizeFunctionPages.Add(metadatafunctionPagFile, functionPag);
                     }
+
                 }
             }
 
@@ -177,6 +186,7 @@ namespace OpenEdit.WPF
             this.NotAllow.Content = metadataNotAllowEditFunctionPages.Count;
 
             this.Aspx.Content = metadataAspxFunctionPages.Count;
+            this.Chart.Content = metadataChartFunctionPages.Count;
             this.Customize.Content = metadataCustomizeFunctionPages.Count;
             this.Param.Content = metadataParamFunctionPages.Count;
 
@@ -188,7 +198,9 @@ namespace OpenEdit.WPF
             foreach (var item in metadataNotAllowEditFunctionPages)
             {
                 //不是业务参数页面、不是Aspx界面
-                if (metadataParamFunctionPages.ContainsKey(item.Key) == false && metadataAspxFunctionPages.ContainsKey(item.Key) == false)
+                if (metadataParamFunctionPages.ContainsKey(item.Key) == false
+                    && metadataAspxFunctionPages.ContainsKey(item.Key) == false
+                    && metadataChartFunctionPages.ContainsKey(item.Key) == false)
                 {
                     XmlHelper.ModifyAttribute(item.Key, "functionPage", "isAllowEdit", "true");
                     XmlHelper.ModifyAttribute(item.Key, "functionPage", "editMode", "AllowAll");

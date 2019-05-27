@@ -8,11 +8,10 @@
         Title="页面开放程度修改" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="163*"/>
-            <ColumnDefinition Width="101*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="选择站点目录" HorizontalAlignment="Left" Margin="131,118,0,0" VerticalAlignment="Top" Width="86" Click="Button_Click" Grid.Column="1"/>
-        <TextBox Name="rootPath" HorizontalAlignment="Left" Height="23" Margin="36,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="561" RenderTransformOrigin="0.464,0.542" Grid.ColumnSpan="2"/>
+        <Button Content="选择站点目录" HorizontalAlignment="Left" Margin="620,118,0,0" VerticalAlignment="Top" Width="86" Click="Button_Click"/>
+        <TextBox Name="rootPath" HorizontalAlignment="Left" Height="23" Margin="36,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="561" RenderTransformOrigin="0.464,0.542"/>
         <Label Content="页面总数量：" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top"/>
         <Label Content="完全开放页面数量：" HorizontalAlignment="Left" Margin="36,200,0,0" VerticalAlignment="Top"/>
         <Label Content="部分开发页面数量：" HorizontalAlignment="Left" Margin="36,240,0,0" VerticalAlignment="Top"/>
@@ -22,15 +21,17 @@
         <Label Name="AllowAdd" Content="" HorizontalAlignment="Left" Margin="181,240,0,0" VerticalAlignment="Top"/>
         <Label Name="NotAllow" Content="" HorizontalAlignment="Left" Margin="181,280,0,0" VerticalAlignment="Top"/>
         <Label Content="Aspx页面数量：" HorizontalAlignment="Left" Margin="367,160,0,0" VerticalAlignment="Top"/>
-        <Label Name="Aspx" Content="" HorizontalAlignment="Left" Margin="12,160,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Name="Aspx" Content="" HorizontalAlignment="Left" Margin="516,160,0,0" VerticalAlignment="Top" />
         <Label Content="自定义页面数量：" HorizontalAlignment="Left" Margin="367,200,0,0" VerticalAlignment="Top"/>
-        <Label Name="Customize" Content="" HorizontalAlignment="Left" Margin="12,200,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Name="Customize" Content="" HorizontalAlignment="Left" Margin="516,200,0,0" VerticalAlignment="Top" />
         <Label Content="业务参数页面数量：" HorizontalAlignment="Left" Margin="367,280,0,0" VerticalAlignment="Top"/>
-        <Label Name="Param" Content="" HorizontalAlignment="Left" Margin="12,280,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label Content="将页面开放程度为不开放跟部分开放的页面修改为完全开放页面(除业务参数页面)" HorizontalAlignment="Left" Margin="36,320,0,0" VerticalAlignment="Top"/>
-        <Button Content="点击按钮修改" HorizontalAlignment="Left" Margin="1,320,0,0" VerticalAlignment="Top" Width="78" Click="Button_Click_1" Grid.Column="1"/>
+        <Label Name="Param" Content="" HorizontalAlignment="Left" Margin="516,280,0,0" VerticalAlignment="Top" />
+        <Label Content="将页面开放程度为不开放跟部分开放的页面修改为完全开放页面(除业务参数页面、ASPX页面、图表页面)" HorizontalAlignment="Left" Margin="36,320,0,0" VerticalAlignment="Top"/>
+        <Button Content="点击按钮修改" HorizontalAlignment="Left" Margin="620,320,0,0" VerticalAlignment="Top" Width="78" Click="Button_Click_1"/>
         <ComboBox Name="xtComboBox" HorizontalAlignment="Left" Margin="111,65,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="ApplicationName" SelectionChanged="XtComboBox_SelectionChanged"></ComboBox>
         <Label Content="系统名称：" HorizontalAlignment="Left" Margin="36,65,0,0" VerticalAlignment="Top"/>
         <Label Content="注意修改后，本地站点校验是否生效需要回收应用程序池。校验没有问题后，提交元数据。" HorizontalAlignment="Left" Margin="36,351,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="Red"/>
+        <Label Content="图表页面数量：" HorizontalAlignment="Left" Margin="367,240,0,0" VerticalAlignment="Top"/>
+        <Label Name="Chart" Content="" HorizontalAlignment="Left" Margin="516,240,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
