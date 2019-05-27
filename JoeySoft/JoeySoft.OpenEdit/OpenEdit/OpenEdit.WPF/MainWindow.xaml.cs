@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
 using OpenEdit.WPF.Model;
+using System.Configuration;
 
 namespace OpenEdit.WPF
 {
@@ -45,26 +46,35 @@ namespace OpenEdit.WPF
         public MainWindow()
         {
             InitializeComponent();
+#if  DEBUG
             this.rootPath.Text = defalutRootPath;
-            LoadFunctionPag(this.rootPath.Text);
+#endif
+            var myApplications = (ConfigurationManager.GetSection("MyApplications") as MyApplicationConfigurationSection)?.Items.Cast<MyApplication>().ToList();
+            this.xtComboBox.ItemsSource = myApplications;
+            this.xtComboBox.SelectedIndex = 0;
         }
 
         private string defalutRootPath = @"E:\mysoft\git\clxt V1.7\clxt\src\00_根目录";
 
-        private string application = "0221";
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (this.xtComboBox.SelectedIndex == -1)
+            {
+                System.Windows.MessageBox.Show("请选择系统");
+                return;
+            }
+            var myApplication = (MyApplication)this.xtComboBox.SelectedItem;
+
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.SelectedPath = this.rootPath.Text;
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.rootPath.Text = folderBrowserDialog.SelectedPath;
-                LoadFunctionPag(this.rootPath.Text);
+                LoadFunctionPag(this.rootPath.Text, myApplication);
             }
         }
 
-        private void LoadFunctionPag(string webRootPath)
+        private void LoadFunctionPag(string webRootPath, MyApplication myApplication)
         {
             //元数据文件夹
             string metadataDirectoryName = System.IO.Path.Combine(webRootPath, "_metadata");
@@ -92,11 +102,11 @@ namespace OpenEdit.WPF
             metadataAspxFunctionPages = new Dictionary<string, FunctionPage>();
             metadataCustomizeFunctionPages = new Dictionary<string, FunctionPage>();
             metadataParamFunctionPages = new Dictionary<string, FunctionPage>();
-
+            List<string> applictionCodes = myApplication.ApplictionCode.Split(';').ToList();
             foreach (var metadatafunctionPagFile in functionPagFiles)
             {
                 var functionPag = XmlHelper.DeserializeFilePath<FunctionPage>(metadatafunctionPagFile);
-                if (functionPag.Application == application)
+                if (applictionCodes.Exists(n => n == functionPag.Application))
                 {
                     myFunctionGuids.Add(functionPag.FunctionGUID);
                     if (functionPag.IsAllowEdit == false)
@@ -175,6 +185,7 @@ namespace OpenEdit.WPF
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            int count = 0;
             foreach (var item in metadataNotAllowEditFunctionPages)
             {
                 //不是业务参数页面、不是Aspx界面
@@ -182,6 +193,7 @@ namespace OpenEdit.WPF
                 {
                     XmlHelper.ModifyAttribute(item.Key, "functionPage", "isAllowEdit", "true");
                     XmlHelper.ModifyAttribute(item.Key, "functionPage", "editMode", "AllowAll");
+                    count++;
                 }
             }
 
@@ -191,10 +203,20 @@ namespace OpenEdit.WPF
                 if (metadataParamFunctionPages.ContainsKey(item.Key) == false && metadataAspxFunctionPages.ContainsKey(item.Key) == false)
                 {
                     XmlHelper.ModifyAttribute(item.Key, "functionPage", "editMode", "AllowAll");
+                    count++;
                 }
             }
 
-            System.Windows.MessageBox.Show("修改成功！");
+            System.Windows.MessageBox.Show("修改成功，一共修改" + count + "个页面的开放程度！");
+            LoadFunctionPag(this.rootPath.Text, (MyApplication)this.xtComboBox.SelectedItem);
+        }
+
+        private void XtComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.rootPath.Text) != null && Directory.Exists(this.rootPath.Text))
+            {
+                LoadFunctionPag(this.rootPath.Text, (MyApplication)this.xtComboBox.SelectedItem);
+            }
         }
     }
 }
