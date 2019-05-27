@@ -81,9 +81,8 @@ namespace OpenEdit.WPF
 
             while (Directory.Exists(metadataDirectoryName) == false)
             {
-                Console.WriteLine("请在站点目录下运行，或输入正确的站点目录！");
-                //Console.WriteLine("在当前目录（" + rootPath + "）下没有找到元数据文件夹（_metadata）！");
-                metadataDirectoryName = System.IO.Path.Combine(Console.ReadLine(), "_metadata");
+                System.Windows.MessageBox.Show("请在选择正确的正确的站点目录！");
+                return;
             }
 
             //界面元数据文件夹
