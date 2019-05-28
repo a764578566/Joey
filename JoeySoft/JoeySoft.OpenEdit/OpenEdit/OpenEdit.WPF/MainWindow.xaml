@@ -11,7 +11,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Content="选择站点目录" HorizontalAlignment="Left" Margin="620,118,0,0" VerticalAlignment="Top" Width="86" Click="Button_Click"/>
-        <TextBox Name="rootPath" HorizontalAlignment="Left" Height="23" Margin="36,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="561" RenderTransformOrigin="0.464,0.542"/>
+        <TextBox Name="rootPath" TextChanged="RootPath_TextChanged" HorizontalAlignment="Left" Height="23" Margin="36,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="561" RenderTransformOrigin="0.464,0.542"/>
         <Label Content="页面总数量：" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top"/>
         <Label Content="完全开放页面数量：" HorizontalAlignment="Left" Margin="36,200,0,0" VerticalAlignment="Top"/>
         <Label Content="部分开发页面数量：" HorizontalAlignment="Left" Margin="36,240,0,0" VerticalAlignment="Top"/>

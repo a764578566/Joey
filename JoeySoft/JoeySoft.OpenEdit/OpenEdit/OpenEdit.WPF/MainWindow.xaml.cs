@@ -49,12 +49,12 @@ namespace OpenEdit.WPF
         public MainWindow()
         {
             InitializeComponent();
-#if  DEBUG
-            this.rootPath.Text = defalutRootPath;
-#endif
             var myApplications = (ConfigurationManager.GetSection("MyApplications") as MyApplicationConfigurationSection)?.Items.Cast<MyApplication>().ToList();
             this.xtComboBox.ItemsSource = myApplications;
             this.xtComboBox.SelectedIndex = 0;
+#if DEBUG
+            this.rootPath.Text = defalutRootPath;
+#endif
         }
 
         private string defalutRootPath = @"E:\mysoft\git\clxt V1.7\clxt\src\00_根目录";
@@ -73,7 +73,7 @@ namespace OpenEdit.WPF
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.rootPath.Text = folderBrowserDialog.SelectedPath;
-                LoadFunctionPag(this.rootPath.Text, myApplication);
+                //LoadFunctionPag(this.rootPath.Text, myApplication);
             }
         }
 
@@ -130,10 +130,12 @@ namespace OpenEdit.WPF
                     {
                         metadataAspxFunctionPages.Add(metadatafunctionPagFile, functionPag);
                     }
+                    //图表页面
                     else if (functionPag.PageType == "4")
                     {
                         metadataChartFunctionPages.Add(metadatafunctionPagFile, functionPag);
                     }
+                    //自定义页面
                     else if (functionPag.PageType == "5")
                     {
                         metadataCustomizeFunctionPages.Add(metadatafunctionPagFile, functionPag);
@@ -223,6 +225,14 @@ namespace OpenEdit.WPF
         }
 
         private void XtComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.rootPath.Text) != null && Directory.Exists(this.rootPath.Text))
+            {
+                LoadFunctionPag(this.rootPath.Text, (MyApplication)this.xtComboBox.SelectedItem);
+            }
+        }
+
+        private void RootPath_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(this.rootPath.Text) != null && Directory.Exists(this.rootPath.Text))
             {
