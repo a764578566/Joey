@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace 更错操作代码生成
+namespace 更多操作代码生成
 {
     /// <summary>
     /// App.xaml 的交互逻辑

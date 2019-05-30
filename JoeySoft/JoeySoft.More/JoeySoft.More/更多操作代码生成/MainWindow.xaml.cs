@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 
-namespace 更错操作代码生成
+namespace 更多操作代码生成
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -98,7 +98,17 @@ namespace 更错操作代码生成
             FileInfo[] infos = fileInfos.ToArray();
             FileHelper.SortAsFileCreationTime(ref infos);
 
-            GridComboBox.ItemsSource = infos;
+            fileInfos = new List<FileInfo>();
+
+            foreach (var item in infos)
+            {
+                if (item.Name.Contains("design"))
+                {
+                    fileInfos.Add(item);
+                }
+            }
+
+            GridComboBox.ItemsSource = fileInfos;
             GridComboBox.DisplayMemberPath = "Name";
         }
 
@@ -216,6 +226,14 @@ namespace 更错操作代码生成
                 xmlDoc.Save(file.FullName);
 
                 System.Windows.Forms.MessageBox.Show("添加成功！");
+            }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.rootPath.Text) == false)
+            {
+                LoadGrid(this.rootPath.Text);
             }
         }
     }

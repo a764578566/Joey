@@ -7,11 +7,11 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("更错操作代码生成")]
+[assembly: AssemblyTitle("更多操作代码生成")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mysoft")]
-[assembly: AssemblyProduct("更错操作代码生成")]
+[assembly: AssemblyProduct("更多操作代码生成")]
 [assembly: AssemblyCopyright("Copyright © mysoft 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
