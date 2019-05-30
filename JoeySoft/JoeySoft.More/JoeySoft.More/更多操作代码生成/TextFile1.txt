@@ -1,0 +1,17 @@
+﻿                            <item itemId="{0}" title="更多操作" isHighlight="false" type="menu" iconClassUrl="" iconClass="" id="mMore" rowButtonStyle="2" isMenuButton="false" switchState="false" isHidden="false" isDisabled="false" metadataStatus="Product">
+                                <items>
+                                    <item itemId="{1}" title="打印" isHighlight="false" type="button" iconClassUrl="" iconClass="" id="mPrint" rowButtonStyle="2" isMenuButton="true" switchState="false" isHidden="false" isDisabled="false" metadataStatus="Product">
+                                        <items />
+                                        <events>
+                                            <event name="onclick" functionName="Mysoft.Map6.UI.Template.Grid.print(e)" enabled="true" metadataStatus="Product" />
+                                        </events>
+                                    </item>
+                                    <item itemId="{2}" title="导出" isHighlight="false" type="button" iconClassUrl="" iconClass="" id="mExport" rowButtonStyle="2" isMenuButton="true" switchState="false" isHidden="false" isDisabled="false" metadataStatus="Product">
+                                        <items />
+                                        <events>
+                                            <event name="onclick" functionName="Mysoft.Map6.UI.Template.Grid.exportExcel(e)" enabled="true" metadataStatus="Product" />
+                                        </events>
+                                    </item>
+                                </items>
+                                <events />
+                            </item>
