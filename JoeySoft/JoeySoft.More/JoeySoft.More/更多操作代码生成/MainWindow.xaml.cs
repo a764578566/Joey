@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JoeySoft.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -131,8 +132,6 @@ namespace 更多操作代码生成
                     return;
                 }
 
-                XmlElement element = (XmlElement)xmlDoc.SelectSingleNode(gridName + "/layout/toolbars/toolbar[@type='global']/groups/group[@align='right']/items");
-
                 Guid guid0 = Guid.NewGuid();
                 Guid guid1 = Guid.NewGuid();
                 Guid guid2 = Guid.NewGuid();
@@ -144,13 +143,8 @@ namespace 更多操作代码生成
 
                 this.group1TextBox.Text = this.groupTextBox.Text.Replace("{0}", guid3.ToString());
 
-                XmlDocument xmlDoc1 = new XmlDocument();
-
-                TextReader tr = new StringReader(this.item1TextBox.Text);
-
-                xmlDoc1.Load(tr);
-
-                element.AppendChild(xmlDoc.ImportNode(xmlDoc1.SelectSingleNode("item"), true));
+                //添加更多操作按钮菜单
+                XmlHelper.AppendChild(xmlDoc, this.item1TextBox.Text, gridName + "/layout/toolbars/toolbar[@type='global']/groups/group[@align='right']/items");
 
                 xmlDoc.Save(file.FullName);
 
@@ -176,8 +170,6 @@ namespace 更多操作代码生成
                     return;
                 }
 
-                XmlElement element = (XmlElement)xmlDoc.SelectSingleNode(gridName + "/layout/toolbars/toolbar[@type='global']/groups/group[@align='right']/items");
-
                 Guid guid0 = Guid.NewGuid();
                 Guid guid1 = Guid.NewGuid();
                 Guid guid2 = Guid.NewGuid();
@@ -189,39 +181,16 @@ namespace 更多操作代码生成
 
                 this.group1TextBox.Text = this.groupTextBox.Text.Replace("{0}", guid3.ToString());
 
-                XmlDocument xmlDocItem = new XmlDocument();
-
-                TextReader tr = new StringReader(this.item1TextBox.Text);
-
-                xmlDocItem.Load(tr);
-
-                element.AppendChild(xmlDoc.ImportNode(xmlDocItem.SelectSingleNode("item"), true));
+                //添加更多操作按钮菜单
+                XmlHelper.AppendChild(xmlDoc, this.item1TextBox.Text, gridName + "/layout/toolbars/toolbar[@type='global']/groups/group[@align='right']/items");
 
 
                 //规则配置信息
-                XmlElement configsElement = (XmlElement)xmlDoc.SelectSingleNode(gridName + "/layout/rule/configs");
-
-                XmlDocument xmlDocRule = new XmlDocument();
-
-                TextReader trRule = new StringReader(this.config1TextBox.Text);
-
-                xmlDocRule.Load(trRule);
-                XmlNode xmlNode = xmlDocRule.SelectSingleNode("root");
-                foreach (var ChildNode in xmlNode.ChildNodes)
-                {
-                    configsElement.AppendChild(xmlDoc.ImportNode(((XmlElement)ChildNode), true));
-                }
+                XmlHelper.AppendChild(xmlDoc, this.config1TextBox.Text, gridName + "/layout/rule/configs");
 
 
                 //规则组
-                XmlElement groupsElement = (XmlElement)xmlDoc.SelectSingleNode(gridName + "/layout/rule/groups");
-
-                XmlDocument xmlDocGroup = new XmlDocument();
-
-                TextReader trGroup = new StringReader(this.group1TextBox.Text);
-
-                xmlDocGroup.Load(trGroup);
-                groupsElement.AppendChild(xmlDoc.ImportNode(xmlDocGroup.SelectSingleNode("group"), true));
+                XmlHelper.AppendChild(xmlDoc, this.group1TextBox.Text, gridName + "/layout/rule/groups");
 
                 xmlDoc.Save(file.FullName);
 

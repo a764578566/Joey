@@ -1,5 +1,4 @@
-﻿				<root>                
-				<config id="{4}" title="新规则" controlId="{0}" controlType="toolbaritem" controlSubType="global" controlProp="isHidden" controlName="mMore" metadataStatus="Product">
+﻿				<config id="{4}" title="新规则" controlId="{0}" controlType="toolbaritem" controlSubType="global" controlProp="isHidden" controlName="mMore" metadataStatus="Product">
                     <handles>
                         <handle handleId="{5}" ruleId="{3}" action="show" value="" metadataStatus="Product" />
                     </handles>
@@ -14,4 +13,3 @@
                         <handle handleId="{9}" ruleId="{3}" action="show" value="" metadataStatus="Product" />
                     </handles>
                 </config>
-				</root>   
