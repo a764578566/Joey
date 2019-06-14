@@ -20,7 +20,15 @@ namespace OpenEdit.WPF
         /// <returns></returns>  
         public static T DeserializeFilePath<T>(string path)
         {
-            using (System.IO.FileStream stream = new FileStream(path, FileMode.Open))
+            FileInfo fi = new FileInfo(path);
+
+            //修改文件只读
+            if ((fi.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+            {
+                fi.Attributes = FileAttributes.Normal;
+            }
+
+            using (System.IO.FileStream stream = fi.Open(FileMode.Open))
             {
                 return Deserialize<T>(stream);
             }
