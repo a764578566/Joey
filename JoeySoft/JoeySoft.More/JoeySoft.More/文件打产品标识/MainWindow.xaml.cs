@@ -107,7 +107,7 @@ namespace 文件打产品标识
 
                 if (xmlNode.Attributes["application"] == null)
                 {
-                    XmlHelper.ModifyAttribute(file.FullName, xmlNode.Name, "application", "0221");
+                    XmlHelper.ModifyAttribute(file.FullName, xmlNode.Name, "application", this.application.Text);
                 }
                 System.Windows.MessageBox.Show("单个新增成功！");
             }
@@ -153,7 +153,7 @@ namespace 文件打产品标识
 
                 if (xmlNode.Attributes["application"] == null)
                 {
-                    XmlHelper.ModifyAttribute(fileInfo.FullName, xmlNode.Name, "application", "0221");
+                    XmlHelper.ModifyAttribute(fileInfo.FullName, xmlNode.Name, "application", this.application.Text);
                 }
             }
             System.Windows.MessageBox.Show("全部新增成功！");

@@ -10,12 +10,14 @@
         <TextBox x:Name="rootPath" TextChanged="RootPath_TextChanged" HorizontalAlignment="Left" Height="23" Margin="92,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439"/>
         <Label Content="元数据目录：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,74,0,0"/>
         <Button Click="Button_Click" Content="选择元数据目录" HorizontalAlignment="Left" Margin="566,76,0,0" VerticalAlignment="Top" Width="96"/>
-        <TextBlock HorizontalAlignment="Left" Margin="108,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <ComboBox x:Name="GridComboBox" HorizontalAlignment="Left" Margin="92,134,0,0" VerticalAlignment="Top" Width="439"/>
-        <Label Content="元数据：" HorizontalAlignment="Left" Margin="30,134,0,0" VerticalAlignment="Top"/>
-        <Button Click="Button_Click_2" Content="单个添加材料产品标识" HorizontalAlignment="Left" Margin="566,134,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button Click="Button_Click_3" Content="全部添加材料产品标识" HorizontalAlignment="Left" Margin="566,174,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button Click="Button_Click_1" Content="加载元数据" HorizontalAlignment="Left" Margin="92,180,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="108,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <ComboBox x:Name="GridComboBox" HorizontalAlignment="Left" Margin="92,140,0,0" VerticalAlignment="Top" Width="439"/>
+        <Label Content="元数据：" HorizontalAlignment="Left" Margin="30,140,0,0" VerticalAlignment="Top"/>
+        <Button Click="Button_Click_2" Content="单个添加产品标识" HorizontalAlignment="Left" Margin="566,140,0,0" VerticalAlignment="Top" Width="126"/>
+        <Button Click="Button_Click_3" Content="全部添加产品标识" HorizontalAlignment="Left" Margin="566,180,0,0" VerticalAlignment="Top" Width="126"/>
+        <Button Click="Button_Click_1" Content="加载元数据" HorizontalAlignment="Left" Margin="92,186,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="产品标识：" HorizontalAlignment="Left" Margin="17,105,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="application" HorizontalAlignment="Left" Height="23" Margin="92,107,0,0" TextWrapping="Wrap" Text="0221" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
