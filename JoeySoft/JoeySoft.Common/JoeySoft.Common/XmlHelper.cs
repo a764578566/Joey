@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace OpenEdit.WPF
+namespace JoeySoft.Common
 {
     /// <summary>
-    /// xml帮助类
+    /// Xml帮助类
     /// </summary>
-    public static class XmlHelper
+    public class XmlHelper
     {
         /// <summary>  
         /// 反序列化  
@@ -20,15 +19,7 @@ namespace OpenEdit.WPF
         /// <returns></returns>  
         public static T DeserializeFilePath<T>(string path)
         {
-            FileInfo fi = new FileInfo(path);
-
-            //修改文件只读
-            if ((fi.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-            {
-                fi.Attributes = FileAttributes.Normal;
-            }
-
-            using (System.IO.FileStream stream = fi.Open(FileMode.Open))
+            using (System.IO.FileStream stream = new FileStream(path, FileMode.Open))
             {
                 return Deserialize<T>(stream);
             }
@@ -87,11 +78,12 @@ namespace OpenEdit.WPF
 
 
         /// <summary>
-        /// 新增或修改xml属性
+        /// 新增或修改xml属性，不存在属性新增，存在属性修改
         /// </summary>
-        /// <param name="xmlPath"></param>
-        /// <param name="AttributeName"></param>
-        /// <param name="value"></param>
+        /// <param name="xmlPath">xml地址</param>
+        /// <param name="nodeName">节点名称</param>
+        /// <param name="AttributeName">属性名称</param>
+        /// <param name="value">属性值</param>
         public static void ModifyAttribute(string xmlPath, string nodeName, string AttributeName, string value)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -101,5 +93,27 @@ namespace OpenEdit.WPF
             xmlDoc.Save(xmlPath);
         }
 
+        /// <summary>
+        /// 在Xml节点下新增Xml文本数据
+        /// </summary>
+        /// <param name="xmlDoc">xml文档</param>
+        /// <param name="xmlText">新增的Xml文本数据</param>
+        /// <param name="NodeName">Xml节点名称</param>
+        public static void AppendChild(XmlDocument xmlDoc, string xmlText, string NodeName)
+        {
+            //规则组
+            XmlElement element = (XmlElement)xmlDoc.SelectSingleNode(NodeName);
+
+            XmlDocument xmlDocTemp = new XmlDocument();
+
+            TextReader trRoot = new StringReader("<root>" + xmlText + "</root>");
+
+            xmlDocTemp.Load(trRoot);
+            XmlNode xmlNode = xmlDocTemp.SelectSingleNode("root");
+            foreach (var ChildNode in xmlNode.ChildNodes)
+            {
+                element.AppendChild(xmlDoc.ImportNode((XmlElement)ChildNode, true));
+            }
+        }
     }
 }

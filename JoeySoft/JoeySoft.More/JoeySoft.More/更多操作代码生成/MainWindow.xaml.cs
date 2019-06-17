@@ -76,7 +76,7 @@ namespace 更多操作代码生成
 
             while (Directory.Exists(metadataDirectoryName) == false)
             {
-                System.Windows.MessageBox.Show("请在选择正确的正确的站点目录！");
+                System.Windows.MessageBox.Show("请在选择正确的站点目录！");
                 return;
             }
 

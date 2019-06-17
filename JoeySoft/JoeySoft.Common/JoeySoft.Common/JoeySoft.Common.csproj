@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Joey</Authors>
+    <!--在生成期间自动生成包-->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--带注释文件发布-->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
+    <Version>1.0.0.2</Version>
+  </PropertyGroup>
+
+</Project>
