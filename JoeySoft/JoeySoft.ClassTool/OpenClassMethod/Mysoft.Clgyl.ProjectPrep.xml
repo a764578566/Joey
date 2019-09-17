@@ -1,0 +1,3258 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mysoft.Clgyl.ProjectPrep</name>
+    </assembly>
+    <members>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.CodeFormatAppService">
+            <summary>
+            编码规则设置应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.CodeFormatAppService._codeFormatDomainService">
+            <summary>
+            编码规则设置领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.CodeFormatAppService.GetUiCodeSerialNumber(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet})">
+            <summary>
+            获取UI编码规则模板展示编码
+            </summary>
+            <param name="codeFormatTempletList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.CodeFormatAppService.SaveBuCodeFormatConfig(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormat})">
+            <summary>
+            保存公司编码规则配置设置
+            </summary>
+            <param name="codeFormatList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.CodeFormatAppService.GetCodeSerialNumber(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取编码规则的编码
+            </summary>
+            <param name="postData">提交的键值对数据（postData 必须传递CodeFormatTypeGUID、BuGuid、ProjGuid，传递了ProjGuid可以不传递BuGuid）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.CodeFormatAppService.GetCodeFormat2CodeFormatTemplet(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            获取编码规则设置数据（自定义Handler取数）
+            </summary>
+            <returns>数据集合</returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ContractInvoiceTypeAppService">
+            <summary>
+            票据类型应用服务层
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ContractInvoiceTypeAppService._contractInvoiceTypeDomainService">
+            <summary>
+            材料供应商领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ContractInvoiceTypeAppService._iContractInvoicePublicService">
+            <summary>
+            进项发票接口服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractInvoiceTypeAppService.CheckDelete(System.Guid)">
+            <summary>
+            删除票据类型
+            </summary>
+            <param name="contractInvoiceTypeGUID">提醒类型主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractInvoiceTypeAppService.Delete(System.Guid)">
+            <summary>
+            删除提醒类型
+            </summary>
+            <param name="contractInvoiceTypeGUID">类型GUID</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ContractProviderAppService">
+            <summary>
+            合同甲方应用服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractProviderAppService.Save(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ContractProvider})">
+            <summary>
+            保存采购合同甲方设置
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractProviderAppService.GetDuplidateProviderIndexes(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ContractProvider})">
+            <summary>
+            检查重复供应商
+            </summary>
+            <param name="providerList"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService">
+            <summary>
+            采购合同类别应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService._contractTypeDomainService">
+            <summary>
+            采购合同类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService._iContractPublicService">
+            <summary>
+            合同公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService._iSaleContractPublicService">
+            <summary>
+            销售合同公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存
+            </summary>
+            <param name="data">表单对象</param>
+            <param name="customData">自定义数据</param>
+            <returns>主表主键</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.ThrowIfNotAllowAddChild(System.Guid)">
+            <summary>
+            检查能否添加子级
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.ThrowIfNoParentType(Mysoft.Clgyl.ProjectPrep.Model.ContractType)">
+            <summary>
+            
+            </summary>
+            <param name="parentContractType"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.ThrowIfParentTypeHasUsed(System.Guid)">
+            <summary>
+            当前分类被合同引用，不允许新增下级分类
+            </summary>
+            <param name="parentContractTypeGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.CheckBeforeDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.ContractTypeExists(System.Guid)">
+            <summary>
+            采购合同类别是否存在
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+            <returns>true：存在 false:不存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ContractTypeAppService.GetContractTypeById(System.Guid)">
+            <summary>
+            获取采购合同类别实体
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+            <returns>采购合同类别实体</returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.FundParamAppService">
+            <summary>
+            款项名称与类型服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.FundParamAppService._fundParamDomainService">
+            <summary>
+            合同事项呈批调整单领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.FundParamAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            新增
+            </summary>
+            <param name="data">数据</param>
+            <param name="customData">自定义数据</param>
+            <returns>主键</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.FundParamAppService.CheckBeforeDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="fundParamGUID">主键</param>
+            <exception cref="T:Mysoft.Map6.Platform.Exceptions.BusinessLogicException">异常信息</exception>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.FundParamAppService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="fundParamGUID">主键</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService">
+            <summary>
+            价格政策
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService._pricePolicyDomainService">
+            <summary>
+            价格政策领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService._projectOverviewDomainService">
+            <summary>
+            项目领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService._fileManagerPublicService">
+            <summary>
+            文件管理 公共服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService._iProductCategoryPublicService">
+            <summary>
+            材料分类
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService._iProjectOverviewPublicService">
+            <summary>
+            项目公共服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.CheckSave(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存前校验
+            </summary>
+            <param name="entity"></param>
+            <param name="customData"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存价格政策
+            </summary>
+            <param name="entity">表单数据</param>
+            <param name="customData">自定义数据集</param>
+            <returns>返回主键</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.IsExistsEnabledPricePolicy">
+            <summary>
+            判断是否存在已启用的价格政策
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.UpdateIsEnabledByPricePolicyGuid(System.Guid)">
+            <summary>
+            更改价格政策状态为“启用状态”
+            </summary>
+            <param name="pricePolicyGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.UpdateIsDisableByPricePolicyGuid(System.Guid)">
+            <summary>
+            更改价格政策状态为“禁用状态”
+            </summary>
+            <param name="pricePolicyGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.ValidatePricePolicyRule(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule})">
+            <summary>
+            价格政策规则校验（同一个项目，同一材料，在同一时间段内只可能存在一个价格政策）
+            <param name="list">价格政策规则集合</param>
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.GetPricePolicyFindById(System.Guid)">
+            <summary>
+            根据价格政策主键，获取价格政策实体
+            </summary>
+            <param name="pricePolicyGuid">价格政策主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.GetPricePolicyRuleList(System.Guid)">
+            <summary>
+            根据价格政策GUID,获取价格政策规格实体集合
+            </summary>
+            <param name="pricePolicyGuid">价格政策GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.GetPricePolicyByEnabled">
+            <summary>
+            获取已经启用的价格政策
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.AfterUnApprove(System.Guid)">
+            <summary>
+            审批驳回后
+            </summary>
+            <param name="oid">业务主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.Export(System.Guid)">
+            <summary>
+            导出价格政策规则
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.CheckImport(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            导入前校验
+            </summary>
+            <param name="data"></param>
+            <param name="customData"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.CheckImportRule(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleImportDTO})">
+            <summary>
+            价格政策规则导入DTO
+            </summary>
+            <param name="pricePolicyRuleImportDTOs">导入价格政策规则</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.PricePolicyAppService.Import(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            导入价格政策规则
+            </summary>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService">
+            <summary>
+            项目收货地址
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService._projectAddressDomainService">
+            <summary>
+            服务项目地址领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService._fileManagerPublicService">
+            <summary>
+            文件管理 公共服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService._iCommonPublicService">
+            <summary>
+            公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService._iProductSalePricePublicService">
+            <summary>
+            材料销售价公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.Export">
+            <summary>
+            导出模版
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.Import(Mysoft.Map6.Platform.Entities.FormEntity)">
+            <summary>
+            导入数据
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.ImportErrorHandle(Mysoft.Clgyl.Component.Office.Excel.Import.Import{Mysoft.Clgyl.ProjectPrep.Model.DTO.ProjectAddressExeclDTO},Mysoft.Clgyl.Utility.Model.Excel.ImportFileInfo)">
+            <summary>
+            失败处理
+            </summary>
+            <param name="import"></param>
+            <param name="fileInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.ImportSuccessHandle(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.ProjectAddressExeclDTO})">
+            <summary>
+            成功处理
+            </summary>
+            <param name="execlData"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.CheckDistrict(System.String,System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.District})">
+            <summary>
+            检查地区是否是标准的
+            </summary>
+            <param name="districtName"></param>
+            <param name="districtList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存项目地址信息
+            </summary>
+            <param name="data">项目地址信息</param>
+            <param name="customData">用户自定义数据</param>
+            <returns>主键GUID</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectAddressAppService.GetProjectAddressByProjectGUID(System.Guid)">
+            <summary>
+            根据项目GUID获取项目地址
+            </summary>
+            <param name="projectGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService">
+            <summary>
+            项目概况应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService._projectOverviewDomainService">
+            <summary>
+            项目概况领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService._iProjectPublicService">
+            <summary>
+            项目主数据接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService.IntroduceProject(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.PProject})">
+            <summary>
+            引入项目
+            </summary>
+            <param name="projects"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService.RemoveProjectImportBeforeCheck(System.Guid)">
+            <summary>
+            移除项目引入前校验
+            </summary>
+            <param name="projectId">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService.RemoveProjectImport(System.Guid)">
+            <summary>
+            移除项目引入
+            </summary>
+            <param name="projectId">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService.GetBusinessUnitParentsByBUGUID(System.Guid)">
+            <summary>
+            根据公司GUID获取父级公司GUIDList
+            </summary>
+            <param name="buGUID">公司GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProjectOverviewAppService.GetBusinessUnitParentsByProjGUID(System.Guid)">
+            <summary>
+            根据项目GUID获取父级公司GUIDList
+            </summary>
+            <param name="projGUID">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService">
+            <summary>
+            供应商应用服务层
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService._providerDomainService">
+            <summary>
+            供应商领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService._iContractPublicService">
+            <summary>
+            合同公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService._iHtfkApplyPublicService">
+            <summary>
+            付款申请公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService._iTacticCgAgreementPublicService">
+            <summary>
+            战略协议公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService._iApplyPublicService">
+            <summary>
+            物料申请公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService._iCodeFormatPublicService">
+            <summary>
+            编码规则公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存供应商
+            </summary>
+            <param name="data">表单数据</param>
+            <param name="customData">自定义数据集合</param>
+            <returns>返回主键</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.DeleteProviderById(System.Guid)">
+            <summary>
+            供应商删除
+            </summary>
+            <param name="providerGuid">供应商id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.VerifyDeleteProviderById(System.Guid)">
+            <summary>
+            删除供应商前校验
+            </summary>
+            <param name="providerGuid">供应商id</param>
+            <returns>币种的Guid</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.GetProviderByGuid(System.Guid)">
+            <summary>
+            根据供应商GUID获取供应商实体信息
+            </summary>
+            <param name="providerGUID">供应商Guid</param>
+            <returns>供应商明细</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.GetBankInfoByProviderGuid(System.Guid)">
+            <summary>
+            根据供应商GUID获取银行账户信息
+            </summary>
+            <param name="providerGuid">供应商Guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.GetTypeByProviderGuid(System.Guid)">
+            <summary>
+            获取供应商的类别
+            </summary>
+            <param name="providerGuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderAppService.GetProviderHandler(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            获取供应商（自定义Handler取数）
+            弹出选择供应商的地方调用
+            </summary>
+            <returns>数据集合</returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderTypeAppService">
+            <summary>
+            材料供应商类别应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderTypeAppService._providerTypeDomainService">
+            <summary>
+            材料供应商领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderTypeAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存供应商类别
+            </summary>
+            <param name="fromEntity"></param>
+            <param name="customData"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderTypeAppService.CheckBeforeDeleteProviderType(System.Guid)">
+            <summary>
+            删除供应商类别前  校验
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderTypeAppService.DeleteProviderTypeByGuid(System.Guid)">
+            <summary>
+            删除供应商类别
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.ProviderTypeAppService.GetAllProviderTypes">
+            <summary>
+            获所有供应商类别
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService">
+            <summary>
+            销售合同类别应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService._saleContractTypeDomainService">
+            <summary>
+            销售合同类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService._iSaleContractPublicService">
+            <summary>
+            销售合同公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存
+            </summary>
+            <param name="data">表单对象</param>
+            <param name="customData">自定义数据</param>
+            <returns>主表主键</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.ThrowIfNotAllowAddChild(System.Guid)">
+            <summary>
+            检查能否添加子级
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.ThrowIfNoParentType(Mysoft.Clgyl.ProjectPrep.Model.SaleContractType)">
+            <summary>
+            父级合同类别不存在，不允许保存
+            </summary>
+            <param name="parentContractType"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.ThrowIfParentTypeHasUsed(System.Guid)">
+            <summary>
+            当前分类被合同引用，不允许新增下级分类
+            </summary>
+            <param name="parentGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.CheckDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键s</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.ContractTypeExists(System.Guid)">
+            <summary>
+            销售合同类别是否存在
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+            <returns>true：存在 false:不存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.SaleContractTypeAppService.GetContractTypeById(System.Guid)">
+            <summary>
+            获取销售合同类别实体
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+            <returns>销售合同类别实体</returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.AppServices.TaxItemAppService">
+            <summary>
+            税目设置应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.TaxItemAppService._taxItemDomainService">
+            <summary>
+            目录设置领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.AppServices.TaxItemAppService._providerDomainService">
+            <summary>
+            材料供应商领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.TaxItemAppService.SaveTaxItem(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存税目设置
+            </summary>
+            <param name="data"></param>
+            <param name="customData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.TaxItemAppService.CheckBeforeDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="taxItemGuid">税目类型主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.AppServices.TaxItemAppService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="taxItemGuid">税目类型主键</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService">
+            <summary>
+            编码规则设置领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._codeFormatTypeEntityService">
+            <summary>
+            编码规则类型实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._entityServiceCodeFormatTemplet">
+            <summary>
+            编码规则设置模板实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._entityServiceCodeFormat">
+            <summary>
+            公司编码规则设置实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._codeFormatSeedEntityService">
+            <summary>
+            编码规则种子实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._iOrganizationPublicService">
+            <summary>
+            组织架构接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._iProjectOverviewPublicService">
+            <summary>
+            组织架构接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._contractTypeService">
+            <summary>
+            集团级合同类别实体服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimitSub(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            截取字符
+            </summary>
+            <param name="codeFormatTemplet">编码规则设置对象</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimitRigthCount(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            按位数右至左截取（如果实例数据大于截断长度，则不截取,少则补0）
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimitLeftCount(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            按位数左至右截取（如果实例数据大于截断长度，则不截取）
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimitRigthLevel(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            按层级右至左截取（层级由右到左截取）
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimitLeftLevel(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            按层级左至右截取
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimitSerialNumberCount(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            流水号截取
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetFrontCodeFormatValue(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取编码规则流水号前面和后面的编码，没有流水号部分
+            </summary>
+            <param name="codeFormatTempletList">模板对象集合</param>
+            <param name="businessSerialNumberParam">业务流水</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetFrontCodeFormatValueSub(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取编码规则流水号前面和后面的编码，没有流水号部分
+            </summary>
+            <param name="codeFormatTempletList"></param>
+            <param name="businessSerialNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.FormatLevelLimit(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            格式化字段级(位)数
+            </summary>
+            <param name="codeFormatTemplet">编码规则设置对象</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetCodeSerialNumber(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取编码规则的编码
+            </summary>
+            <param name="postData"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._codeFormatTypeGUID">
+            <summary>
+            编码类型GUID
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._businessCodeFormatInfo">
+            <summary>
+            业务数据的编码信息
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.IsReadOrganizationAndProjectInfo">
+            <summary>
+            是否已经读取了公司和项目信息
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.IsReadDeptInfo">
+            <summary>
+            是否已经读取了部门信息
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.IsReadDateNow">
+            <summary>
+            是否读取了日期时间信息
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.PostCodeFormatKeyValue">
+            <summary>
+            客户端提交过来的编码规则数据
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.CodeFormatKeyValue">
+            <summary>
+            记录处理过的编码规则
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._buGUID">
+            <summary>
+            公司GUID
+            </summary>
+        </member>
+        <member name="P:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.BuGUID">
+            <summary>
+            公司GUID
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService._projGUID">
+            <summary>
+            项目GUID
+            </summary>
+        </member>
+        <member name="P:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ProjGUID">
+            <summary>
+            项目GUID
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.CodeFormatSeedParameter(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            处理编码参数
+            </summary>
+            <param name="postData">提交的键值对数据</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetCodeFormatPostData(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取客户端提交过来的参数键值对，不区分大小写
+            </summary>
+            <param name="postData">客户端提交的编码规则数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.VerifyCodeFormatPostData(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            校验生成编码规则参数传递是否合法
+            </summary>
+            <param name="postData">客户端提交的编码规则数据</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.AddCodeFormatKeyValue(System.String,System.String)">
+            <summary>
+            添加处理过的编码规则
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetCodeFormatConfig(System.Nullable{System.Guid},System.Guid)">
+            <summary>
+            获取编码规则配置，没有配置，则默认使用模版配置
+            </summary>
+            <param name="buGuid">公司GUID</param>
+            <param name="codeFormatTypeGuid">模板类型GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ManageCodeValueFctory(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet})">
+            <summary>
+            处理编码读取值
+            </summary>
+            <param name="codeFormatTempletList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadData(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet})">
+            <summary>
+            读取数据
+            </summary>
+            <param name="codeFormatTempletList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ManageSystemReadCodeValue(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            系统默认取值
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ManageClientValueCodeValue(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            客户端传递取值
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ManageSqlReadCodeValue(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            SQL语句取值
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ManageTextCodeValue(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            文本读取
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadOrganizationAndProjectInfo">
+            <summary>
+            读取公司和项目信息
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadOrganization">
+            <summary>
+            读取公司信息
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadProjectInfo">
+            <summary>
+            读取项目信息
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadDeptInfo(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            读取部门信息
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadHtTypeInfo(Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet)">
+            <summary>
+            读取合同类别信息
+            </summary>
+            <param name="codeFormatTemplet"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.ReadDateNow">
+            <summary>
+            读取当当前日期时间相关信息
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetSeedRestoreCode(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet})">
+            <summary>
+            获取种子复位设置标识（code）
+            </summary>
+            <param name="codeFormatTempletList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetSeedKey(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet})">
+            <summary>
+            获取种子复位设置标识（示例数据）
+            </summary>
+            <param name="codeFormatTempletList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetCodeFormatSeed(System.Nullable{System.Guid},System.Guid,System.String,System.String)">
+            <summary>
+            获取公司编码规则类型的种子实体
+            </summary>
+            <param name="buGuid">公司ID</param>
+            <param name="codeFormatTypeGuid">编码规则类型ID</param>
+            <param name="seedKey">种子复位设置标识</param>
+            <param name="seedRestoreCode">种子复位标识（参与复位字段集合）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.SaveCodeFormatSeed(System.Nullable{System.Guid},System.Guid,System.String,System.String)">
+            <summary>
+            新增一个规则种子
+            </summary>
+            <param name="buGuid">公司ID</param>
+            <param name="codeFormatTypeGuid">编码规则类型ID</param>
+            <param name="seedKey">种子复位设置标识</param>
+            <param name="seedRestoreCode">种子复位标识（参与复位字段集合）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetCodeFormatInfo(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormatTemplet},Mysoft.Clgyl.ProjectPrep.Model.DTO.CodeFormatInfoDTO,Mysoft.Clgyl.ProjectPrep.Model.CodeFormatSeed)">
+            <summary>
+            复位种子没变化，直接使用原来的业务数据种子，否则使用新种子
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.SaveCodeFormat(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.CodeFormat})">
+            <summary>
+            保存公司的编码规则
+            </summary>
+            <param name="codeFormatList">编码规则设置对象集合</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.GetCodeFormat2CodeFormatTemplet(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams,System.Boolean)">
+            <summary>
+            获取编码规则设置数据（自定义Handler取数）
+            </summary>
+            <returns>数据集合</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.UseCodeFormatSeed(Mysoft.Clgyl.ProjectPrep.Model.DTO.CodeFormatInfoDTO)">
+            <summary>
+            使用编码规则种子
+            </summary>
+            <param name="codeFormatInfo">编码规则信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.CodeFormatDomainService.CleanLastSeed(Mysoft.Clgyl.ProjectPrep.Model.DTO.CodeFormatInfoDTO)">
+            <summary>
+            清除最后一个种子值，如果实际流水号与种子不等，则不清除
+            </summary>
+            <param name="codeFormatInfo">编码规则信息</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractInvoiceTypeDomainService">
+            <summary>
+            票据类型设置领域层
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractInvoiceTypeDomainService._entityContractInvoiceType">
+            <summary>
+            预警方案实体
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractInvoiceTypeDomainService.Delete(System.Guid)">
+            <summary>
+            删除票据类型
+            </summary>
+            <param name="contractInvoiceTypeGUID">票据类型主键</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService">
+            <summary>
+            采购合同甲方
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService._providerDomainService">
+            <summary>
+            供应商领域结构
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService._contractProviderEntityService">
+            <summary>
+            采购合同甲方实体服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService.Save(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ContractProvider})">
+            <summary>
+            保存采购合同甲方
+            </summary>
+            <param name="providerList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService.GetAllProviders">
+            <summary>
+            得到全部供应商
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService.GetAllContractProviders">
+            <summary>
+            得到全部供应商
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService.ThrowIfEmptyProvider(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ContractProvider})">
+            <summary>
+            检查供应商非空
+            </summary>
+            <param name="contractProviders"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractProviderDomainService.ThrowIfDuplicatedProviders(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ContractProvider})">
+            <summary>
+            检查是否存在重复项
+            </summary>
+            <param name="contractProviders"></param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService">
+            <summary>
+            采购合同类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService._entityService">
+            <summary>
+            采购合同类别实体服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.Save(Mysoft.Map6.Platform.Entities.FormEntity,Mysoft.Clgyl.ProjectPrep.Model.ContractType)">
+            <summary>
+            保存
+            </summary>
+            <param name="data">表单对象</param>
+            <param name="contractType">采购合同类别实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.CheckBeforeSave(Mysoft.Clgyl.ProjectPrep.Model.ContractType)">
+            <summary>
+            保存前校验
+            <param name="contractType">采购合同类别实体</param>
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.CheckBeforeDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.ContractTypeExists(System.Guid)">
+            <summary>
+            采购合同类别是否存在
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+            <returns>true：存在 false:不存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.GetContractTypeById(System.Guid)">
+            <summary>
+            获取采购合同类别实体
+            </summary>
+            <param name="contractTypeGUID">采购合同类别主键</param>
+            <returns>采购合同类别实体</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.GetContractTypes(System.Guid[])">
+            <summary>
+            获取采购合同类别集合
+            </summary>
+            <param name="contractTypes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.UpdateSubLevelFullCode(System.Guid,System.String)">
+            <summary>
+            更新子级全编码
+            </summary>
+            <param name="contractTypeGUID">合同类别主键</param>
+            <param name="parentContractTypeFullCode">合同类别新编码</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ContractTypeDomainService.GetHtTypeByGuids(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取合同类别
+            </summary>
+            <param name="guids"></param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService">
+            <summary>
+            款项类型及款项名称领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService._entityService">
+            <summary>
+            款项名称实体服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.CheckBeforeSave(Mysoft.Clgyl.ProjectPrep.Model.FundParam)">
+            <summary>
+            新增校验
+            </summary>
+            <param name="fundParam">款项</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.Save(Mysoft.Clgyl.ProjectPrep.Model.FundParam)">
+            <summary>
+            保存
+            </summary>
+            <param name="fundParam">款项</param>
+            <returns>主键</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.CheckBeforeDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="fundParamGUID">主键</param>
+            <exception cref="T:Mysoft.Map6.Platform.Exceptions.BusinessLogicException">错误信息</exception>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="fundParamGUID">主键</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.Clone(System.Guid,System.Guid)">
+            <summary>
+            引入款项类型及款项名称
+            </summary>
+            <param name="srcScopeId">来源公司ID</param>
+            <param name="targetScopeId">目标公司ID</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.GetFundParams(System.Guid)">
+            <summary>
+            获取指定公司下的款项名称
+            </summary>
+            <param name="buGuid">公司GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.FundParamDomainService.GetFundParamByGuid(System.Guid)">
+            <summary>
+            根据款项GUID，获取款项名称信息
+            </summary>
+            <param name="fundParamGuid">款项guid</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService">
+            <summary>
+            价格政策领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._pricePolicyEntityService">
+            <summary>
+            价格政策实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._pricePolicyRuleEntityService">
+            <summary>
+            价格政策规格实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._pricePolicyRule2RangeEntityService">
+            <summary>
+            价格政策规则与适用范围关系表
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._pricePolicyRule2ProductCategoryEntityService">
+            <summary>
+            价格政策规则与材料分类关系表
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._myBusinessUnitEntityService">
+            <summary>
+            组织公司实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._projectOverviewDomainService">
+            <summary>
+            项目领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._pricePolicyRuleDetailEntityService">
+            <summary>
+            价格政策规则明细实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._iProductCategoryPublicService">
+            <summary>
+            材料分类接口服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._iBusinessUnitPublicService">
+            <summary>
+            基础数据接口服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._iSendMessagePublicService">
+            <summary>
+            平台发送接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService._iProjectOverviewPublicService">
+            <summary>
+            项目公共服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyFindById(System.Guid)">
+            <summary>
+            根据价格政策主键，获取价格政策实体
+            </summary>
+            <param name="pricePolicyGuid">价格政策主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyByEnabled">
+            <summary>
+            获取已启用的价格政策实体
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRuleList(System.Guid)">
+            <summary>
+            根据价格政策GUID,获取价格政策规格实体集合
+            </summary>
+            <param name="pricePolicyGuid">价格政策GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.SetAllPricePolicyDisable">
+            <summary>
+            设置所有价格政策，为禁用状态
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.IsExistsEnabledPricePolicy">
+            <summary>
+            判断是否存在已启用的价格政策
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.UpdateIsEnabledTrans(Mysoft.Clgyl.ProjectPrep.Model.PricePolicy)">
+            <summary>
+            更改价格政策状态为“启用状态”事务方法
+            </summary>
+            <param name="pricePolicy"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.TaskUpdatePricePolicyRuleDetail(System.Guid,Mysoft.Clgyl.ProjectPrep.Model.PricePolicy,Mysoft.Clgyl.ProjectPrep.Model.PricePolicy,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRuleDetail})">
+            <summary>
+            异步价格政策规则明细信息
+            </summary>
+            <param name="userGuid">用户信息</param>
+            <param name="pricePolicy"></param>
+            <param name="oldPricePolicy"></param>
+            <param name="pricePolicyRuleDetails"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.DeletePricePolicyRuleDetail(System.Guid)">
+            <summary>
+            删除价格政策规则明细信息
+            </summary>
+            <param name="pricePolicyGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.UpdateIsEnabledByPricePolicyGuid(System.Guid)">
+            <summary>
+            更改价格政策状态为“启用状态”
+            </summary>
+            <param name="pricePolicyGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.UpdateIsDisable(Mysoft.Clgyl.ProjectPrep.Model.PricePolicy)">
+            <summary>
+            更改价格政策状态为“禁用状态”
+            </summary>
+            <param name="pricePolicy"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.UpdateIsDisableByPricePolicyGuid(System.Guid)">
+            <summary>
+            更改价格政策状态为“禁用状态”
+            </summary>
+            <param name="pricePolicyGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ValidatePricePolicyName(Mysoft.Clgyl.ProjectPrep.Model.PricePolicy)">
+            <summary>
+            价格政策名称验证
+            </summary>
+            <param name="entity">价格政策实体</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ValidatePricePolicyRule(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule})">
+            <summary>
+            价格政策规则校验（同一个项目，同一材料，在同一时间段内只可能存在一个价格政策）
+            <param name="list">价格政策规则集合</param>
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRuleData(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule},System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            处理组装“适用范围、材料分类”数据
+            <param name="pricePolicyRules">价格政策规则集合</param>
+            <param name="myBusinessUnit2projectList">组织公司2项目</param>
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ResultPricePolicyRuleData(Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule,System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            将“适用范围、材料分类”数据处理为List集合
+            </summary>
+            <param name="pricePolicyRule">价格政策规格对象</param>
+            <param name="myBusinessUnit2projectList">组织公司2项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllLastProject(Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule,System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            获取所有项目
+            </summary>
+            <param name="pricePolicyRule">价格政策规格</param>
+            <param name="myBusinessUnit2projectList">组织公司2项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllLastProjectToRecursion(System.Nullable{System.Guid},System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleDTO},System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            递归获取所有项目
+            </summary>
+            <param name="projGuid">项目实体集合</param>
+            <param name="resultProjectList">返回结果实体集合</param>
+            <param name="myBusinessUnit2projectList">组织公司</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllLastProductCategory(Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule)">
+            <summary>
+            获取所有材料分类
+            </summary>
+            <param name="pricePolicyRule">价格政策规格</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllLastProductCategoryToRecursion(System.Nullable{System.Guid},System.Collections.Generic.List{Mysoft.Clgyl.ProductMng.Model.ProductCategory},System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleDTO})">
+            <summary>
+            递归获取所有分类集合
+            </summary>
+            <param name="productCategoryGuid">材料分类GUID</param>
+            <param name="productCategoryList">所有材料分类集合</param>
+            <param name="resultProductCategoryList">返回结果实体集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ProductCategoryToPricePolicyRuleDTO(System.Collections.Generic.List{Mysoft.Clgyl.ProductMng.Model.ProductCategory})">
+            <summary>
+            将组织公司项目数据，转换为项目库标准数据
+            </summary>
+            <param name="list">待转换的数据集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.IsExistProductCategory">
+            <summary>
+            价格政策中是否引用了材料分类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.CheckBeforeDeleteProductCategory(System.Guid)">
+            <summary>
+            删除材料分类前校验
+            </summary>
+            <param name="productCategoryGuid">材料类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.CheckServiceProjectInAdditionRate(System.Guid)">
+            <summary>
+            判断工程项目是否存在价格政策中
+            </summary>
+            <param name="serviceProjectGUID">工程项目GUID</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllPricePolicyRuleByEnabled(System.Guid,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取所有已启用价格政策项目对应的材料分类的加成比例
+            </summary>
+            <returns></returns>
+            <param name="projGUID">项目GUID</param>
+            <param name="productCategoryGUIDs">分类GUIDs</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllPricePolicyRuleByEnabled(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取所有已启用价格政策项目对应的材料分类的加成比例
+            </summary>
+            <returns></returns>
+            <param name="productCategoryGUIDs">分类GUIDs</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetEnabledPricePolicyRule">
+            <summary>
+            获取已启用价格政策规则
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.AddProject(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.PProject})">
+            <summary>
+            添加项目到价格政策
+            </summary>
+            <param name="projects"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.DeleteProject(System.Guid)">
+            <summary>
+            删除已经启用的价格政策中的项目
+            </summary>
+            <param name="projectGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllPricePolicyRule(Mysoft.Clgyl.ProjectPrep.Model.PricePolicy)">
+            <summary>
+            根据价格政策项目对应的材料分类的加成比例
+            </summary>
+            <param name="pricePolicy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetHandlePricePolicyData(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule},System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2Range},System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2ProductCategory})">
+            <summary>
+            价格政策数据处理
+            </summary>
+            <param name="pricePolicyRuleList">价格政策规则集合</param>
+            <param name="pricePolicyRule2RangeList">价格政策适用范围集合（包含子集）</param>
+            <param name="pricePolicyRule2ProductCategoryList">价格政策材料分类集合（包含子集）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.AddPricePolicyDTOData(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule},Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2Range,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2ProductCategory})">
+            <summary>
+            添加价格政策DTO数据
+            </summary>
+            <param name="pricePolicyRuleList">价格政策规则集合</param>
+            <param name="pricePolicyRule2Range">适用范围实体</param>
+            <param name="productCategoryList">材料分类集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.AddPricePolicyDTODataByProject(Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule,Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.PProject,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2ProductCategory})">
+            <summary>
+            根据项目生成相关更新实体
+            </summary>
+            <param name="pricePolicyRule"></param>
+            <param name="project"></param>
+            <param name="pricePolicyRule2ProductCategoryList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRule2Range(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule},System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            获取所有价格政策适用范围（包含子集）
+            </summary>
+            <param name="pricePolicyRuleList">价格政策规格集合</param>
+            <param name="myBusinessUnit2projectList">组织公司2项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllPricePolicyRule2Range(System.Guid,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2Range},System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            递归，获取组织公司下所有项目库项目（所有子集）
+            </summary>
+            <param name="pricePolicyRuleGuid">价格政策规则GUID</param>
+            <param name="pricePolicyRule2RangeList">待处理数据（价格政策规则与适用范围关系集合）</param>
+            <param name="myBusinessUnit2projectList">组织公司2项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.PricePolicyRuleToMyBusinessUnit(System.Guid,System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            将组织公司项目数据转，换为价格政策规则与适用范围关系数据
+            </summary>
+            <param name="pricePolicyRuleGuid">价格政策规则GUID</param>
+            <param name="list">待转换的数据集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRule2ProductCategory(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule})">
+            <summary>
+            获取所有价格政策适用范围（包含子集）
+            </summary>
+            <param name="pricePolicyRuleList">价格政策规格集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetAllPricePolicyRule2ProductCategory(System.Guid,System.Collections.Generic.List{Mysoft.Clgyl.ProductMng.Model.ProductCategory},System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2ProductCategory})">
+            <summary>
+            递归，获取材料分类下所有子集
+            </summary>
+            <param name="pricePolicyRuleGuid">价格政策规则GUID</param>
+            <param name="productCategoryList">所有材料分类集合</param>
+            <param name="pricePolicyRule2ProductCategoryList">待处理数据（价格政策规则与材料分类关系集合）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.PricePolicyRule2ProductCategoryToProductCategory(System.Guid,System.Collections.Generic.List{Mysoft.Clgyl.ProductMng.Model.ProductCategory})">
+            <summary>
+            将材料分类数据转，换为价格政策规则与材料分类关系数据
+            </summary>
+            <param name="pricePolicyRuleGuid">价格政策规则GUID</param>
+            <param name="list">待转换的数据集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRule2ProductCategoryByPricePolicyGUID(System.Guid)">
+            <summary>
+            根据价格政策获取材料分类
+            </summary>
+            <param name="pricePolicyGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRule2ProductCategoryByPricePolicyRuleList(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule})">
+            <summary>
+            根据价格政策规则获取材料分类
+            </summary>
+            <param name="pricePolicyRules"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ImportRuleTrans(Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleSaveDTO)">
+            <summary>
+            导入价格政策规则事务方法
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ImportRule(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleImportDTO},Mysoft.Clgyl.ProjectPrep.Model.PricePolicy)">
+            <summary>
+            导入价格政策规则(目前导入功能已经屏蔽了)
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.ImportRulePlugin(Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleImportDTO,Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule)">
+            <summary>
+            导入规则（适用二开加字段扩展）
+            </summary>
+            <param name="item"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.IsExistMyBusinessUnit(System.Guid)">
+            <summary>
+            判断公司是否被引用
+            </summary>
+            <param name="myBusinessUnitGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.UpdateProjectName(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.ProjectInfo2List})">
+            <summary>
+            更新工程项目名称
+            </summary>
+            <param name="projectInfo2List">项目信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyPriceRatio(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleDetailDTO})">
+            <summary>
+            根据项目分类获取加成率
+            </summary>
+            <param name="pricePolicyDTOs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyPriceRatio(Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleDetailDTO,Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyPriceRatioDTO)">
+            <summary>
+            根据项目分类获取加成率
+            </summary>
+            <param name="pricePolicyDTO">价格政策加成率DTO</param>
+            <param name="pricePolicyPriceRatioDTO">包含价格政策加成率DTO、价格政策规则明细、价格政策规则2范围、价格政策规则2分类、所有公司以及引入的项目、所有分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyPriceRatioByProjGUID(System.Guid,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据项目分类获取加成率
+            </summary>
+            <param name="projGUID"></param>
+            <param name="productCategoryGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyPriceRatioByProductCategoryGUID(System.Guid,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据项目分类获取加成率
+            </summary>
+            <param name="productCategoryGUID"></param>
+            <param name="projGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyPriceRatioByProductCategoryGUID(System.Guid,System.Boolean)">
+            <summary>
+            获取材料分类以及是否获取末级分类的加成比例，
+            </summary>
+            <param name="productCategoryGUID"></param>
+            <param name="IsLeftProject">是否拆分到末级项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyPriceRatioDTO">
+            <summary>
+            获取价格政策基础信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRule2Range(System.Guid,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2Range},System.Collections.Generic.List{Mysoft.Clgyl.Common.Model.DTO.myBusinessUnit2projectDTO})">
+            <summary>
+            根据项目GUID，获取对应的价格政策规则2范围信息
+            </summary>
+            <param name="projGUID">项目GUID</param>
+            <param name="pricePolicyRule2Ranges">启用的价格政策规则2范围信息</param>
+            <param name="myBusinessUnit2projectList">所有公司以及引入的项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.PricePolicyDomainService.GetPricePolicyRule2ProductCategory(System.Guid,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.PricePolicyRule2ProductCategory},System.Collections.Generic.List{Mysoft.Clgyl.ProductMng.Model.ProductCategory})">
+            <summary>
+            根据分类GUID，获取对应的价格政策规则2分类
+            </summary>
+            <param name="productCategoryGUID">分类GUID</param>
+            <param name="pricePolicyRule2ProductCategory">启用的价格政策2分类或根据项目查询的价格政策规则2分类</param>
+            <param name="productCategoryList">所有分类</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService">
+            <summary>
+            地址导入领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService._projectAddressEntityService">
+            <summary>
+            收货地址
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService._iCommonPublicService">
+            <summary>
+            公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.GetProjectAddress">
+            <summary>
+            获取所有项目的收货地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.Save(Mysoft.Map6.Platform.Entities.FormEntity,System.String[])">
+            <summary>
+            保存项目地址信息
+            </summary>
+            <param name="data">项目地址信息</param>
+            <param name="customData">用户自定义数据</param>
+            <returns>主键GUID</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.FindById(System.Guid)">
+            <summary>
+            通过主键获取项目地址信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.BulkSave(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.ProjectAddressExeclDTO})">
+            <summary>
+            保存项目地址
+            </summary>
+            <param name="execlDTO"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.GetProjectAddressByProjectGUID(System.Guid)">
+            <summary>
+            获取项目地址
+            </summary>
+            <param name="projectGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.GetProjectAddressList(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取项目城市
+            </summary>
+            <param name="projectGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.GetAllProjectAddressList">
+            <summary>
+            获取所有项目城市
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.GetProjectAddressListByDistrictGUIDs(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据城市获取项目
+            </summary>
+            <param name="districtGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.GetProjectInfoByCityGUID(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据城市获取
+            </summary>
+            <param name="DistrictGUIDs">行政区域</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectAddressDomainService.DeleteProjectAddressByProjectGUID(System.Guid)">
+            <summary>
+            根据项目GUID，删除项目收货地址信息
+            </summary>
+            <param name="projectGUID">项目GUID</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService">
+            <summary>
+            项目概况领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._pricePolicyDomainService">
+            <summary>
+            价格政策领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iOrganizationPublicService">
+            <summary>
+            组织公司
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iProjectPublicService">
+            <summary>
+            项目主数据接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._myBusinessUnitEntityService">
+            <summary>
+            组织公司实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iProductPublicService">
+            <summary>
+            材料公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iTacticCgAgreementPublicService">
+            <summary>
+            战略协议公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iPricePolicyPublicService">
+            <summary>
+            价格政策公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iApplyPublicService">
+            <summary>
+            物料申请公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iContractPublicService">
+            <summary>
+            合同公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iSaleContractPublicService">
+            <summary>
+            销售合同公共服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._myUserProjectMappingEntityService">
+            <summary>
+            用户项目权限映射
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iProductRequirementPublicService">
+            <summary>
+            实际用料计划公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iHtfkApplyPublicService">
+            <summary>
+            付款申请公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iContractPaymentRegisterPublicService">
+            <summary>
+            付款登记公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iReceivablePublicService">
+            <summary>
+            应收款公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iContractReceivablesRegisterPublicService">
+            <summary>
+            收款登记公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iContractInvoicePublicService">
+            <summary>
+            发票公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService._iProjectAddressPublicService">
+            <summary>
+            项目收货地址接口公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.UpdateBuName(System.Guid,System.String)">
+            <summary>
+            更新公司名称
+            </summary>
+            <param name="buGuid">公司GUID</param>
+            <param name="buName">公司名称</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.UpdateProjectName(System.Guid,System.String,Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.ProjectInfo)">
+            <summary>
+            更新工程项目名称
+            </summary>
+            <param name="projGUID">项目GUID</param>
+            <param name="projName">项目名称</param>
+            <param name="projectInfo">项目信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.UpdateProjectNameTrans(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.ProjectInfo2List})">
+            <summary>
+            更新工程项目名称
+            </summary>
+            <param name="projectInfo2List">项目信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetMyBusinessUnitIsCompany">
+            <summary>
+            获取组织架构中的公司
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetPProjectByProjGuid(System.Guid)">
+            <summary>
+            根据项目主键GUID,获取项目实体信息
+            </summary>
+            <param name="projGuid">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetBusinesssUnitAndProject">
+            <summary>
+            组织架构的公司信息与系统对应项目信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.ImportProjects(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.PProject})">
+            <summary>
+            引入项目
+            </summary>
+            <param name="projects">项目GUID集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.ImportProjectsTrans(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            引入项目事务保存方法
+            </summary>
+            <param name="projectIds"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.RemoveProjectImport(System.Guid)">
+            <summary>
+            移除项目引入
+            </summary>
+            <param name="projectId">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.RemoveProjectImportBeforeCheck(System.Guid)">
+            <summary>
+            删除项目或分期前，判断项目是否存在被引用
+            </summary>
+            <param name="projGuid">项目主键GUID</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.IsExistsParentProject(System.Guid)">
+            <summary>
+            判断当前服务项目是否存在分期
+            </summary>
+            <param name="projGuid">项目GUID</param>
+            <returns>true：存在；false：不存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetBusinessUnitParentsByProjGuid(System.Guid)">
+            <summary>
+            根据项目GUID获取父级公司GUIDList
+            </summary>
+            <param name="projGuid">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetBusinessUnitParentsByProjectGUID(System.Guid)">
+            <summary>
+            根据服务项目，找到其所有父级公司
+            </summary>
+            <param name="projGuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetBusinessUnitParentsByBUGUID(System.Guid)">
+            <summary>
+            根据公司GUID获取父级公司GUIDList
+            </summary>
+            <param name="buGUID">公司GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetBusinessUnitParentByBUGUID(System.Collections.Generic.List{Mysoft.PubPlatform.Organization.Model.Organization.MyBusinessUnit},System.Nullable{System.Guid})">
+            <summary>
+            根据公司GUID获取父级公司GUID
+            </summary>
+            <param name="companyList">公司list</param>
+            <param name="buGUID">父级公司GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetAllParentBusinessUnitByBuOrProjGuid(System.Guid)">
+            <summary>
+            根据项目主键获取项目所有父级
+            </summary>
+            <param name="buOrProjGuid">项目GUID或者公司GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProjectOverviewDomainService.GetUserRightProjects">
+            <summary>
+            根据用户获取用户有权限的项目
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService">
+            <summary>
+            供应商领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._entityService">
+            <summary>
+            供应商单实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._provider2TaxItemEntityService">
+            <summary>
+            供应商增值税税目实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._provider2BusinessUnitEntityService">
+            <summary>
+            供应商和所属单位实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._provider2TypeEntityService">
+            <summary>
+            供应商合同类别实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._provider2BankEntityService">
+            <summary>
+            供应商银行帐号实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._provider2LinkManEntityService">
+            <summary>
+            材料供应商联系人实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iTacticCgAgreementPublicService">
+            <summary>
+            战略协议公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iContractPublicService">
+            <summary>
+            合同公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iApplyPublicService">
+            <summary>
+            物料申请公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iOrderPublicService">
+            <summary>
+            订单公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iInvoicePublicService">
+            <summary>
+            发货单公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iContractPaymentRegisterPublicService">
+            <summary>
+            付款登记公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iHtfkApplyPublicService">
+            <summary>
+            付款申请公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iSaleContractPublicService">
+            <summary>
+            销售合同公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._taxItemDomainService">
+            <summary>
+            税目设置领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._providerTypeDomainService">
+            <summary>
+            供应商类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._organizationDomainService">
+            <summary>
+            组织服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService._iProductRequirementPublicService">
+            <summary>
+            实际用料公共接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProviderById(System.Guid)">
+            <summary>
+            获取供应商信息
+            </summary>
+            <param name="providerGUID">供应商Guid</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProvidersByIds(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            通过ProviderGUIDs获得列表
+            </summary>
+            <param name="providerGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProviders(System.Collections.Generic.List{System.String})">
+            <summary>
+            根据供应商名称获取供应商信息
+            </summary>
+            <param name="names"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.Delete(System.Guid)">
+            <summary>
+            删除供应商
+            </summary>
+            <param name="providerGuid">供应商主键GUID</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.DeleteValidation(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="providerGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.MipDeleteValidation(System.Guid,Mysoft.Map6.Core.Event.NotificationResult)">
+            <summary>
+            删除前校验(Mip接口校验)
+            </summary>
+            <param name="providerGuid"></param>
+            <param name="result"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.Save(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            保存供应商
+            </summary>
+            <param name="providerApiDto">供应商信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.SaveScope(System.Boolean,Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderSaveDTO)">
+            <summary>
+            保存事务方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.Update(Mysoft.Clgyl.ProjectPrep.Model.Provider,System.Boolean,System.Guid)">
+            <summary>
+            删除供应商关联信息,更新供应商名称
+            </summary>
+            <param name="provider"></param>
+            <param name="isUpdateName"></param>
+            <param name="providerGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.BulkSave(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO})">
+            <summary>
+            批量保存供应商（批量）
+            </summary>
+            <param name="providerApiDTOList">供应商信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.BulkSaveScope(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderSaveDTO})">
+            <summary>
+            保存事务方法（批量）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.Update(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderSaveDTO})">
+            <summary>
+            删除供应商关联信息,更新供应商名称（批量）
+            </summary>
+            <param name="providerSaveDTOList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ProviderUsedTaxItem(System.Guid)">
+            <summary>
+            校验供应商使用税目
+            </summary>
+            <param name="taxItemGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetBankInfoByProviderGuid(System.Guid)">
+            <summary>
+            根据供应商GUID获取银行账户信息
+            </summary>
+            <param name="providerGuid">供应商Guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetTypeByProviderGuid(System.Guid)">
+            <summary>
+            获取供应商的类别
+            </summary>
+            <param name="providerGuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.VerifyProviderIsExist(Mysoft.Clgyl.ProjectPrep.Model.Provider)">
+            <summary>
+            验证供应商名称是否重复
+            </summary>
+            <param name="provider">供应商对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.IsExistsProviderCode(Mysoft.Clgyl.ProjectPrep.Model.Provider)">
+            <summary>
+            判断是否存在重复编码
+            </summary>
+            <param name="provider">供应商实体</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.VerifySaveProvider2TaxItem(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.Provider2TaxItem},System.Guid)">
+            <summary>
+            供应商保存前校验增值税税目
+            </summary>
+            <param name="provider2TaxItems"></param>
+            <param name="providerGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.IsExistProviderByProviderGUID(System.Guid)">
+            <summary>
+            判断供应商是否存在
+            </summary>
+            <param name="providerGUID">供应商Guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProvider2TaxItemByGUID(System.Guid)">
+            <summary>
+            根据供应商税目GUID获取税目信息
+            </summary>
+            <param name="provider2TaxItemGUID">供应商税目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProvider2TaxItemByTaxRate(System.Guid,System.Decimal)">
+            <summary>
+            根据供应商税目率获取税目信息 
+            </summary>
+            <param name="providerGUID">供应商</param>
+            <param name="taxRate">税目率</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.UpdateProvidersType(System.Collections.Generic.List{System.Guid},System.String,System.String)">
+            <summary>
+            更新供应商表中冗余的类别名称
+            </summary>
+            <param name="providerGuid">供应商guid</param>
+            <param name="newProviderTypeName">新供应商类别名称</param>
+            <param name="oldProviderTypeName">老供应商类别名称</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProvider(Mysoft.Clgyl.ProjectPrep.Model.Provider,Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderDTO)">
+            <summary>
+            供应商转化
+            </summary>
+            / <param name="provider">供应商信息</param>
+            <param name="providerDto">供应商DTO信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProviderBuNameAndType(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            获取供应商公司、类别
+            </summary>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetGetTaxItemListByProviderGUID(System.Guid)">
+            <summary>
+            根据供应商的
+            </summary>
+            <param name="providerGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetGetValidTaxItemsByProviderGUID(System.Guid)">
+            <summary>
+            根据供应商的GUID，获取有效的税目
+            </summary>
+            <param name="providerGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProviderByProviderGUID(System.Guid)">
+            <summary>
+            根据供应商GUID，获取供应商信息
+            </summary>
+            <param name="providerGUID">供应商GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetBanksByProviderGuids(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            通过供应商找到对应的银行账户
+            </summary>
+            <param name="providerGuids">供应商GUIDs</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProviderByBuGuids(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据所属公司GUID集合，获取供应商集合数据
+            </summary>
+            <param name="buGuids">所属公司GUID集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProvider2BusinessUnit(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            获取供应商所属公司
+            </summary>
+            <param name="provider">供应商信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProvider2Type(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            获取供应商类别
+            </summary>
+            <param name="providerDto">供应商信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProvider2Bank(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            获取供应商银行信息
+            </summary>
+            <param name="providerDto">供应商信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProvider2LinkMan(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            获取供应商联系人
+            </summary>
+            <param name="providerDto">供应商信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.ConvertProvider2TaxItem(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderApiDTO)">
+            <summary>
+            获取供应商税率
+            </summary>
+            <param name="providerDto">供应商信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetBusinessUnitAndParentsBuGUIDs(System.Guid)">
+            <summary>
+            依据BuGUID获取所有父级公司（包括自己）如何BuGUID为默认0，那么返回所有
+            </summary>
+            <param name="buGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.GetProviderHandler(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            获取供应商（自定义Handler取数）
+            弹出选择供应商的地方调用
+            </summary>
+            <returns>数据集合</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderDomainService.Merge(Mysoft.Clgyl.ProjectPrep.Model.DTO.ProviderMergeDTO)">
+            <summary>
+            供应商合并
+            </summary>
+            <param name="providerMergeDto"></param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService">
+            <summary>
+            材料供应商类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService._providerTypeEntityService">
+            <summary>
+            供应商类别实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService._provider2TypeEntityService">
+            <summary>
+            材料供应商和供应商类别关系实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService._providerDomainService">
+            <summary>
+            供应商领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.CheckBeforeSaveProviderType(Mysoft.Clgyl.ProjectPrep.Model.ProviderType)">
+            <summary>
+            判断同级供应商类别下是否存在编码或名称重复
+            </summary>
+            <param name="providerType">供应商类别</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.GetProviderTypes(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取供应商类型
+            </summary>
+            <param name="providerTypeGuids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.DeleteProviderType(System.Guid)">
+            <summary>
+            删除供应商类别
+            </summary>
+            <param name="providerTypeGUID">供应商类别GUID</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.GetAllProviderTypes">
+            <summary>
+            获所有供应商类别
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.CheckBeforeDeleteProviderType(System.Guid)">
+            <summary>
+            判断供应商类别是否存在子级 或 关联供应商
+            </summary>
+            <param name="providerTypeGUID">供应商类别GUID</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.CheckBeforeDeleteProviderTypes(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            判断供应商类别是否存在子级 或 关联供应商（批量）
+            </summary>
+            <param name="providerTypeGUIDs">供应商类别GUIDs</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.IsExist(System.Guid)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="providerTypeGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.MipCheckBeforeDeleteProviderType(System.Guid,Mysoft.Map6.Core.Event.NotificationResult)">
+            <summary>
+            判断供应商类别是否存在子级 或 关联供应商(MIP接口校验)
+            </summary>
+            <param name="providerTypeGUID">供应商类别GUID</param>
+            <param name="result">NotificationResult</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.Save(Mysoft.Clgyl.ProjectPrep.Model.ProviderType)">
+            <summary>
+            供应商类别保存
+            </summary>
+            <param name="providerType"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.SaveTrans(Mysoft.Clgyl.ProjectPrep.Model.ProviderType,System.Collections.Generic.List{System.Guid},System.String,System.String,System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ProviderType})">
+            <summary>
+            供应商类别保存(事务)
+            </summary>
+            <param name="model"></param>
+            <param name="providerGuidList"></param>
+            <param name="newTypeName"></param>
+            <param name="oldTypeName"></param>
+            <param name="childTypes"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.SaveChanges(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.ProviderType})">
+            <summary>
+            批量保存
+            </summary>
+            <param name="providerTypeList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.ProviderTypeDomainService.GetChildByAllCode(System.String,System.Guid)">
+            <summary>
+            根据全编码获取该编码下所有子级(不包括当前分类)
+            </summary>
+            <param name="allCode"></param>
+            <param name="providerType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService">
+            <summary>
+            销售合同类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService._entityService">
+             <summary>
+            销售合同类别实体服务
+             </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.Save(Mysoft.Map6.Platform.Entities.FormEntity,Mysoft.Clgyl.ProjectPrep.Model.SaleContractType)">
+            <summary>
+            保存
+            </summary>
+            <param name="data">表单对象</param>
+            <param name="saleContractType">销售合同类别实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.CheckBeforeSave(Mysoft.Clgyl.ProjectPrep.Model.SaleContractType)">
+            <summary>
+            保存前校验
+            <param name="saleContractType">销售合同类别</param>
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.CheckBeforeDelete(System.Guid)">
+            <summary>
+            删除前校验
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.ContractTypeExists(System.Guid)">
+            <summary>
+            销售合同类别是否存在
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+            <returns>true：存在 false:不存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.GetContractTypeById(System.Guid)">
+            <summary>
+            获取销售合同类别实体
+            </summary>
+            <param name="saleContractTypeGUID">销售合同类别主键</param>
+            <returns>集团级合同类别实体</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.GetHtTypeByGuids(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取销售合同类别
+            </summary>
+            <param name="guids"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.SaleContractTypeDomainService.UpdateSubLevelFullCode(System.Guid,System.String)">
+            <summary>
+            更新子级全编码
+            </summary>
+            <param name="saleContractTypeGUID">合同类别主键</param>
+            <param name="parentAllCode">合同类别新编码</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService">
+            <summary>
+            税目设置领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService._entityService">
+            <summary>
+            税目设置实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService._provider2TaxItemEntityService">
+            <summary>
+            供应商增值税税目实体服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService._providerDomainService">
+            <summary>
+            材料供应商领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.GetTaxItemByGUID(System.Guid)">
+            <summary>
+            根据税目GUID获取 税目类型信息
+            </summary>
+            <param name="taxItemGUID">税目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.GetTaxItemListByGUIDs(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据税目GUID获取 税目类型信息list
+            </summary>
+            <param name="taxItemGUIDs">税目GUIDs</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.VerifyTaxItemIsExist(Mysoft.Clgyl.ProjectPrep.Model.TaxItem)">
+            <summary>
+            判断公司下是否存在税目（重名验证）
+            </summary>
+            <param name="taxTiem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="taxItemGuid">税目类型主键</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.Save(Mysoft.Clgyl.ProjectPrep.Model.TaxItem)">
+            <summary>
+            供应商税目保存
+            </summary>
+            <param name="taxItem">税目类别DTO</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.DeleteValidation(Mysoft.Clgyl.ProjectPrep.Model.DTO.TaxItemDTO)">
+            <summary>
+            税目类别删除前校验
+            </summary>
+            <param name="taxItemDTO">税目类别DTO</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.IsExist(System.Guid)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="taxItemGuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.ValidationBeforDelete(Mysoft.Clgyl.ProjectPrep.Model.DTO.TaxItemDTO)">
+            <summary>
+            税目类别删除
+            </summary>
+            <param name="taxItemDTO">税目类别DTO</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.SaveChanges(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.TaxItem})">
+            <summary>
+            批量保存
+            </summary>
+            <param name="taxItemList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.DomainServices.TaxItemDomainService.MipDeleteValidation(System.Guid,Mysoft.Map6.Core.Event.NotificationResult)">
+            <summary>
+            税目类别删除前校验
+            </summary>
+            <param name="taxItemGUID">税目GUID</param>
+            <param name="result">NotificationResult</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.EventPublisher.ProjectPrepPublisher">
+            <summary>
+            项目准备通用事件
+            </summary>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncProviderBaseDataEventSubscribe">
+            <summary>
+            同步供应商基础数据事件订阅
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncProviderBaseDataEventSubscribe._iProviderToCgztbPublicService">
+            <summary>
+            战略协议公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncProviderBaseDataEventSubscribe.Execute(System.Object,Mysoft.Map6.Core.Event.EventArgument{Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderBaseDataDTO,Mysoft.Map6.Core.Event.NotificationResult})">
+            <summary>
+            执行方法
+            </summary>
+            <param name="sender">事件引发者</param>
+            <param name="argument">事件参数</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncJfProviderEventSubscribe">
+            <summary>
+            同步甲方供应商事件订阅
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncJfProviderEventSubscribe._iProviderToCgztbPublicService">
+            <summary>
+            战略协议公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncJfProviderEventSubscribe.Execute(System.Object,Mysoft.Map6.Core.Event.EventArgument{System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderDTO},Mysoft.Map6.Core.Event.NotificationResult})">
+            <summary>
+            执行方法
+            </summary>
+            <param name="sender">事件引发者</param>
+            <param name="argument">事件参数</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.IsUsedProviderEventSubscribe">
+            <summary>
+            供应商是否被引用事件订阅
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.IsUsedProviderEventSubscribe._iProviderToCgztbPublicService">
+            <summary>
+            供应商采招集成公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.IsUsedProviderEventSubscribe.Execute(System.Object,Mysoft.Map6.Core.Event.EventArgument{System.Guid,Mysoft.Map6.Core.Event.NotificationResult})">
+            <summary>
+            执行方法
+            </summary>
+            <param name="sender">事件引发者</param>
+            <param name="argument">事件参数</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncProviderEventSubscribe">
+            <summary>
+            同步供应商事件订阅
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncProviderEventSubscribe._iProviderToCgztbPublicService">
+            <summary>
+            战略协议公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SyncProviderEventSubscribe.Execute(System.Object,Mysoft.Map6.Core.Event.EventArgument{System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderDTO},Mysoft.Map6.Core.Event.NotificationResult})">
+            <summary>
+            执行方法
+            </summary>
+            <param name="sender">事件引发者</param>
+            <param name="argument">事件参数</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SaveServiceProjectAfterEventSubscriber">
+            <summary>
+            工程公司操作后事件订阅
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.EventSubscribeServices.SaveServiceProjectAfterEventSubscriber.Execute(System.Object,System.Object)">
+            <summary>
+            执行方法
+            </summary>
+            <param name="sender">事件引发者</param>
+            <param name="argument">事件参数</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.Handlers.CodeFormatTempletDataApiHandler">
+            <summary>
+            编码规则设置模板自定义取数
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.Handlers.CodeFormatTempletDataApiHandler._codeFormatAppService">
+            <summary>
+            编码规则设置应用服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.CodeFormatTempletDataApiHandler.LoadData(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            列表查询结果
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.CodeFormatTempletDataApiHandler.LoadFields">
+            <summary>
+            数据API字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.CodeFormatTempletDataApiHandler.ListDataApiField">
+            <summary>
+            待显示字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler">
+            <summary>
+            引入项目列表自定义取数
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler._iProjectOverviewPublicService">
+            <summary>
+            项目概况应用服务
+            </summary>
+        </member>
+        <member name="P:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler.ProjectFilter">
+            <summary>
+            是否开启项目控件
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler.LoadData(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            列表查询结果
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler.LoadFields">
+            <summary>
+            数据API字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler.ListDataApiField">
+            <summary>
+            待显示字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler.CreateDataTable">
+            <summary>
+            创建列表DataTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectTreeQueryHandler.BuildNewRow(System.Data.DataTable,Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.ProjectInfo2List)">
+            <summary>
+            
+            </summary>
+            <param name="table"></param>
+            <param name="project"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectImportTreeQueryHandler">
+            <summary>
+            引入项目树自定义取数
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectImportTreeQueryHandler._iProjectOverviewPublicService">
+            <summary>
+            项目概况应用服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectImportTreeQueryHandler.LoadData(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            列表查询结果
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectImportTreeQueryHandler.LoadFields">
+            <summary>
+            数据API字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProjectImportTreeQueryHandler.ListDataApiField">
+            <summary>
+            待显示字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.Handlers.ProviderSelectApiHandler">
+            <summary>
+            供应商选择自定义取数
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.Handlers.ProviderSelectApiHandler._providerAppService">
+            <summary>
+            供应商领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProviderSelectApiHandler.LoadData(Mysoft.Map6.Modeling.DomainServices.Utilities.LoadDataParams)">
+            <summary>
+            加载数据
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProviderSelectApiHandler.LoadFields">
+            <summary>
+            显示返回的字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.Handlers.ProviderSelectApiHandler.ListDataApiField">
+            <summary>
+            待显示字段
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.CodeFormatPubAppService">
+            <summary>
+            编码规则设置公共服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.CodeFormatPubAppService._codeFormatDomainService">
+            <summary>
+            编码规则种子领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.CodeFormatPubAppService.GetCodeSerialNumber(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取编码规则的编码
+            </summary>
+            <param name="postData">提交的键值对数据（postData 必须传递CodeFormatTypeGUID、BuGuid、ProjGuid，传递了ProjGuid可以不传递BuGuid）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.CodeFormatPubAppService.UseCodeFormatSeed(System.String)">
+            <summary>
+            使用编码规则种子
+            </summary>
+            <param name="codeFormatInfoJson">编码规则信息json字符串</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.CodeFormatPubAppService.CleanLastSeed(System.String)">
+            <summary>
+            清除最后一个种子值，如果实际流水号与种子不等，则不清除
+            </summary>
+            <param name="codeFormatInfoJson">编码规则信息json字符串</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ContractProviderPublicService">
+            <summary>
+            采购甲方供应商公共服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ContractProviderPublicService._contractProviderDomainService">
+            <summary>
+            编码规则种子领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ContractProviderPublicService.GetAllProviders">
+            <summary>
+            得到全部业务参数采购甲方
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ContractTypePubilcService">
+            <summary>
+            合同类别公共服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ContractTypePubilcService.GetHtTypeByGuids(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取合同类别
+            </summary>
+            <param name="guids"></param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.FundParamPubAppService">
+            <summary>
+            款项名称 接口服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.FundParamPubAppService._fundParamDomainService">
+            <summary>
+            款项类型及款项名称领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.FundParamPubAppService.GetFundParams(System.Guid)">
+            <summary>
+            获取指定公司下的款项名称
+            </summary>
+            <param name="buGuid">公司GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.FundParamPubAppService.GetFundParamByGuid(System.Guid)">
+            <summary>
+            根据款项GUID，获取款项名称信息
+            </summary>
+            <param name="fundParamGuid">款项guid</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService">
+            <summary>
+            价格政策服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.IsExistMyBusinessUnit(System.Guid)">
+            <summary>
+            判断公司是否被引用
+            </summary>
+            <param name="myBusinessUnitGUID"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.IsExistProductCategory">
+            <summary>
+            价格政策中是否引用了材料分类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.CheckBeforeDeleteProductCategory(System.Guid)">
+            <summary>
+            获取材料分类
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.CheckServiceProjectInAdditionRate(System.Guid)">
+            <summary>
+            判断工程项目是否存在价格政策中
+            </summary>
+            <param name="serviceProjectGUID">工程项目GUID</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.AddProject(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.PProject})">
+             <summary>
+            添加项目到价格政策
+             </summary>
+             <param name="projects"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.DeleteProject(System.Guid)">
+            <summary>
+            删除已经启用的价格政策中的项目
+            </summary>
+            <param name="projectGuid"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.GetAllPricePolicyRuleByEnabled(System.Guid,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取所有已启用价格政策项目对应的材料分类的加成比例
+            </summary>
+            <returns></returns>
+            <param name="projGUID">项目GUID</param>
+            <param name="productCategoryGUIDs">分类GUIDs</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.GetAllPricePolicyRuleByEnabled(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取所有已启用价格政策项目对应的材料分类的加成比例
+            </summary>
+            <returns></returns>
+            <param name="productCategoryGUIDs">分类GUIDs</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.GetPricePolicyPriceRatioByProjGUID(System.Guid,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取项目对应的材料分类的加成比例
+            </summary>
+            <param name="projGUID"></param>
+            <param name="productCategoryGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.GetPricePolicyPriceRatioByProductCategoryGUID(System.Guid,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取材料分类对应项目的加成比例
+            </summary>
+            <param name="productCategoryGUID"></param>
+            <param name="projGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.GetPricePolicyPriceRatioByProductCategoryGUID(System.Guid,System.Boolean)">
+            <summary>
+            获取材料分类以及是否获取末级分类的加成比例，
+            </summary>
+            <param name="productCategoryGUID"></param>
+            <param name="IsLeftProject">是否拆分到末级项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.PricePolicyPubilcService.GetPricePolicyPriceRatio(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.PricePolicyRuleDetailDTO})">
+            <summary>
+            根据项目分类，获取加成比例集合
+            </summary>
+            <param name="pricePolicyDTOs"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService">
+            <summary>
+            项目收货地址接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService._projectAddressDomainService">
+            <summary>
+            服务项目地址领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService.GetProjectAddressByProjectGUID(System.Guid)">
+            <summary>
+            根据项目GUID获取项目地址
+            </summary>
+            <param name="projectGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService.GetProjectAddressList(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            获取收货地址集合
+            </summary>
+            <param name="projectGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService.GetAllProjectAddressList">
+            <summary>
+            获取所有项目城市
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService.GetProjectAddressListByDistrictGUIDs(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据城市获取项目
+            </summary>
+            <param name="districtGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService.GetProjectInfoByCityGUID(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据城市获取项目信息
+            </summary>
+            <param name="DistrictGUIDs">行政区域</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectAddressPublicService.DeleteProjectAddressByProjectGUID(System.Guid)">
+            <summary>
+            根据项目GUID，删除项目收货地址信息
+            </summary>
+            <param name="projectGUID">项目GUID</param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService">
+            <summary>
+            引入项目公共服务接口
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService._projectOverviewDomainService">
+            <summary>
+            项目概况领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService._iProjectRemoteService">
+            <summary>
+            项目概况公共服务接口
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.UpdateBuName(System.Guid,System.String)">
+            <summary>
+            更新工程项目名称
+            </summary>
+            <param name="buGuid">公司GUID</param>
+            <param name="buName">公司名称</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.UpdateProjectName(System.Guid,System.String,Mysoft.Clgyl.ProjectPrep.Model.RemoteDTO.ProjectInfo)">
+            <summary>
+            更新工程项目名称
+            </summary>
+            <param name="projGUID">项目GUID</param>
+            <param name="projName">项目名称</param>
+            <param name="projectInfo">项目信息</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetMyBusinessUnitIsCompany">
+            <summary>
+            获取组织架构中的公司
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetBusinessUnitParentsByProjGuid(System.Guid)">
+            <summary>
+            根据服务项目，找到其所有父级公司
+            </summary>
+            <param name="projGuid">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetPProjectByProjGuid(System.Guid)">
+            <summary>
+            根据项目主键GUID,获取项目实体信息
+            </summary>
+            <param name="projGuid">项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetAllParentBusinessUnitByBuOrProjGuid(System.Guid)">
+            <summary>
+            根据公司或项目GUID，获取所有父级
+            </summary>
+            <param name="buOrProjGuid">公司或项目GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetImportProjects(System.Guid,System.String)">
+            <summary>
+            获取项目集合
+            </summary>
+            <param name="buGuid"></param>
+            <param name="appCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetProjectsByCompany(System.Guid,System.String,System.Guid)">
+            <summary>
+            获取公司应用用户的项目
+            </summary>
+            <param name="companyGuid"></param>
+            <param name="appCode"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetProjectByGuids(System.Collections.Generic.List{System.Guid},System.String)">
+            <summary>
+            获取项目集合
+            </summary>
+            <param name="projectIds"></param>
+            <param name="appCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.QueryProjectsByBUGuid(System.Guid,System.String)">
+            <summary>
+            获取已引入项目集合
+            </summary>
+            <param name="buGuid"></param>
+            <param name="appCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.GetUserRightProjects">
+            <summary>
+            根据用户获取用户有权限的项目
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProjectOverviewPublicService.QueryImpProjectsByBuGuid(System.Guid,System.String,System.Nullable{System.Guid})">
+            <summary>
+            获取可引入的项目（业务系统引入项目树取数）
+            </summary>
+            <param name="buGuid">公司GUID</param>
+            <param name="appCode">系统编码</param>
+            <param name="userId">用户Guid</param>
+            <returns>项目/分期集合</returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService">
+            <summary>
+            供应商公共应用服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService._providerDomainService">
+            <summary>
+            供应商领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService._providerTypeDomainService">
+            <summary>
+            供应商类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService._taxItemDomainService">
+            <summary>
+            供应商税目领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetProviders(System.Collections.Generic.List{System.String})">
+            <summary>
+            根据供应商名称获取供应商信息
+            </summary>
+            <param name="names"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetProvider2TaxItemByTaxRate(System.Guid,System.Decimal)">
+            <summary>
+            根据供应商税目率获取大于有效时间的税目信息 
+            </summary>
+            <param name="providerGUID">供应商</param>
+            <param name="taxRate">税目率</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetGetTaxItemListByProviderGUID(System.Guid)">
+            <summary>
+            根据供应商的GUID,获取供应商税目
+            </summary>
+            <param name="providerGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetGetValidTaxItemsByProviderGUID(System.Guid)">
+            <summary>
+            根据供应商的GUID，获取有效的税目
+            </summary>
+            <param name="providerGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetProviderByProviderGUID(System.Guid)">
+            <summary>
+            根据供应商GUID，获取供应商信息
+            </summary>
+            <param name="providerGUID">供应商GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.SaveValidation(Mysoft.Clgyl.ProjectPrep.Model.Provider)">
+            <summary>
+            数据校验
+            </summary>
+            <param name="providerDto"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.MipSave(System.String)">
+            <summary>
+            保存供应商
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.MipSaveJfProvider(System.String)">
+            <summary>
+            保存甲方单位
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.ConvertMipProviderDTO(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderDTO},System.Boolean)">
+            <summary>
+            MipProviderDTO对象转换成ProviderApiDTO
+            </summary>
+            <param name="mipProviderDTOList">接收对象</param>
+            <param name="isJfProvider">是否是甲方单位</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.ConvertMipProviderInfoDTO(Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderInfoDTO,System.Boolean)">
+            <summary>
+            MipProviderInfoDTO转Provider
+            </summary>
+            <param name="mipProviderInfoDTO">mipProviderInfoDTO</param>
+            <param name="isJfProvider">是否甲方</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.MipDelete(System.String)">
+            <summary>
+            删除供应商
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.MipCheckDelete(System.String)">
+            <summary>
+            校验删除供应商
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetProviderById(System.Guid)">
+            <summary>
+            根据主键查找供应商
+            </summary>
+            <param name="providerGUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderPublicService.GetProvidersByIds(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            通过ProviderGUIDs获得列表
+            </summary>
+            <param name="providerGUIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService">
+            <summary>
+            供应商与采招集成接口（V2.0）
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService._providerDomainService">
+            <summary>
+            供应商领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService._providerTypeDomainService">
+            <summary>
+            供应商类别领域服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService._taxItemDomainService">
+            <summary>
+            供应商税目领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService.SyncProviderBaseData(Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderBaseDataDTO)">
+            <summary>
+            同步供应商基础数据（类别、税目）
+            </summary>
+            <param name="baseDataDTO"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService.SyncProvider(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderDTO})">
+            <summary>
+            同步供应商
+            </summary>
+            <param name="providerDTOList"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService.CheckDeleteProvider(System.Guid,Mysoft.Map6.Core.Event.NotificationResult)">
+             <summary>
+             供应商删除校验
+             </summary>
+             <param name="providerGuid"></param>
+            <param name="result"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService.ConvertToProviderApiDTO(System.Collections.Generic.List{Mysoft.Clgyl.ProjectPrep.Model.DTO.CgztbDTO.CgztbProviderDTO})">
+            <summary>
+            CgztbProviderDTO对象转换成ProviderApiDTO
+            </summary>
+            <param name="cgztbProviderDTOList">接收对象</param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderToCgztbPublicService.SaveValidation(Mysoft.Clgyl.ProjectPrep.Model.Provider)">
+            <summary>
+            数据校验
+            </summary>
+            <param name="providerDto"></param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderTypePubAppService">
+            <summary>
+            供应商类别公共接口服务实现
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderTypePubAppService._providerTypeDomainService">
+            <summary>
+            供应商类别领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderTypePubAppService.SaveValidation(Mysoft.Clgyl.ProjectPrep.Model.ProviderType)">
+            <summary>
+            保存前数据校验
+            </summary>
+            <param name="providerType"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderTypePubAppService.MipSave(System.String)">
+            <summary>
+            同步供应商类别
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderTypePubAppService.MipDelete(System.String)">
+            <summary>
+            删除供应商类别
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.ProviderTypePubAppService.MipCheckDelete(System.String)">
+            <summary>
+            删除供应商类别前校验
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="T:Mysoft.Clgyl.ProjectPrep.PublicServices.TaxItemPublicService">
+            <summary>
+             税目类型公共服务
+            </summary>
+        </member>
+        <member name="F:Mysoft.Clgyl.ProjectPrep.PublicServices.TaxItemPublicService._taxItemDomainService">
+            <summary>
+            税目类型领域服务
+            </summary>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.TaxItemPublicService.MipSave(System.String)">
+            <summary>
+            同步供应商税目
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.TaxItemPublicService.MipDelete(System.String)">
+            <summary>
+            删除税目
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Mysoft.Clgyl.ProjectPrep.PublicServices.TaxItemPublicService.MipCheckDelete(System.String)">
+            <summary>
+            删除税目前校验
+            </summary>
+            <param name="json"></param>
+        </member>
+    </members>
+</doc>

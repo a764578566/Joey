@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestClass1</name>
+    </assembly>
+    <members>
+        <member name="T:TestClass1.Class1">
+            <summary>
+            测试类
+            </summary>
+        </member>
+        <member name="F:TestClass1.Class1._str">
+            <summary>
+            私有属性
+            </summary>
+        </member>
+        <member name="F:TestClass1.Class1._i">
+            <summary>
+            公开方法
+            </summary>
+        </member>
+        <member name="M:TestClass1.Class1.TestMethod(System.String,System.Int32)">
+            <summary>
+            方法描述
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns>返回字符串</returns>
+        </member>
+    </members>
+</doc>

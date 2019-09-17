@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\github\my\Joey\JoeySoft\JoeySoft.ClassTool\TestClass1\TestClass1.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
