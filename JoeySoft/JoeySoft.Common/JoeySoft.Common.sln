@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.Common", "JoeySoft.Common\JoeySoft.Common.csproj", "{40E41C85-1F9E-403A-A98F-6545908B4A4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoeySoft.Common", "JoeySoft.Common\JoeySoft.Common.csproj", "{40E41C85-1F9E-403A-A98F-6545908B4A4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{DDC36F58-E93D-4376-A53C-4627FCDA03B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{40E41C85-1F9E-403A-A98F-6545908B4A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E41C85-1F9E-403A-A98F-6545908B4A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40E41C85-1F9E-403A-A98F-6545908B4A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC36F58-E93D-4376-A53C-4627FCDA03B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC36F58-E93D-4376-A53C-4627FCDA03B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC36F58-E93D-4376-A53C-4627FCDA03B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC36F58-E93D-4376-A53C-4627FCDA03B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
