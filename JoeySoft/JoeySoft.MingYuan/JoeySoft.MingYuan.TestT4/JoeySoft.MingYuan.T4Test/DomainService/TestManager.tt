@@ -1,0 +1,44 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="..\Manager.tt"#>
+
+<# 
+    var className="ProjectPrep";
+    var currentPath = @"E:\mysoft\git\clxt\src\05 项目准备\Mysoft.Clgyl.ProjectPrep.UnitTest";
+
+    var appPath= currentPath.Substring(0, currentPath.LastIndexOf("."));
+    var manager = Manager.Create(Host, GenerationEnvironment);
+
+    foreach(var item in Directory.GetFiles(Path.Combine(appPath,"DomainServices")) )
+    {
+        string templateFile = this.Host.ResolvePath("DomainServiceTestTemplate.tt");
+        string templateContent = File.ReadAllText(templateFile);
+
+        TextTemplatingSession session = new TextTemplatingSession();
+        var fileName = Path.GetFileNameWithoutExtension(item)+"Test";
+
+        session["ClassName"] = className;
+        session["TestName"] = fileName;
+        session["DomainServiceName"]=Path.GetFileNameWithoutExtension(item);
+        session["EntityName"]=Path.GetFileNameWithoutExtension(item).Replace("DomainService","");
+
+        var sessionHost = (ITextTemplatingSessionHost) this.Host;
+        sessionHost.Session = session;
+
+        Engine engine = new Engine();
+        string generatedContent = engine.ProcessTemplate(templateContent, this.Host);
+
+        manager.StartNewFile(fileName+".cs"); 
+
+        this.Write(generatedContent); 
+
+        manager.EndBlock();
+    }
+
+    manager.Process(true);
+ #>

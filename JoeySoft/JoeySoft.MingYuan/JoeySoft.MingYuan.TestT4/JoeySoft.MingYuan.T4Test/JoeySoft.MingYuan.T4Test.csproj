@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8370292-B105-4F2E-AC96-2A9718A6D281}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JoeySoft.MingYuan.T4Test</RootNamespace>
+    <AssemblyName>JoeySoft.MingYuan.T4Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.Common.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.Common.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.Component, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.Component.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ContractInvoiceMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ContractInvoiceMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ContractInvoiceMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ContractInvoiceMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ContractMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ContractMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ContractMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ContractMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.FinancialMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.FinancialMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.FinancialMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.FinancialMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.OrderMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.OrderMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.OrderMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.OrderMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.PayMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.PayMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.PayMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.PayMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.PlanMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.PlanMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.PlanMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.PlanMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ProductMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ProductMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ProductMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ProductMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ProjectPrep, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ProjectPrep.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ProjectPrep.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ProjectPrep.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ReceivableMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ReceivableMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.ReceivableMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.ReceivableMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.Resource, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.Resource.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.SaleMng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.SaleMng.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.SaleMng.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.SaleMng.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Mysoft.Clgyl.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Mysoft.Clgyl.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppService\AppServiceTestManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\CodeFormatAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ContractInvoiceTypeAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ContractProviderAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ContractTypeAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\FundParamAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\PricePolicyAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ProjectAddressAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ProjectOverviewAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ProviderAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\ProviderTypeAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\SaleContractTypeAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\TaxItemAppServiceTest.cs">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\CodeFormatDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ContractInvoiceTypeDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ContractProviderDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ContractTypeDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\DomainServiceTestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainServiceTestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\FundParamDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\PricePolicyDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ProjectAddressDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ProjectOverviewDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ProviderDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\ProviderTypeDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\SaleContractTypeDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainService\TaxItemDomainServiceTest.cs">
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Manager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DomainService\TestManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppService\AppServiceTestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppServiceTestTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppService\AppServiceTestManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AppServiceTestManager.cs</LastGenOutput>
+    </Content>
+    <Content Include="DLL\Mysoft.Clgyl.Common.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.Common.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.Component.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ContractInvoiceMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ContractInvoiceMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ContractMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ContractMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.FinancialMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.FinancialMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.OrderMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.OrderMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.PayMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.PayMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.PlanMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.PlanMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ProductMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ProductMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ProjectPrep.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ProjectPrep.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ReceivableMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.ReceivableMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.Resource.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.SaleMng.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.SaleMng.Model.dll" />
+    <Content Include="DLL\Mysoft.Clgyl.Utility.dll" />
+    <Content Include="DomainService\DomainServiceTestTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainServiceTestTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Manager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Manager.cs</LastGenOutput>
+    </Content>
+    <Content Include="DomainService\TestManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestManager.cs</LastGenOutput>
+    </Content>
+    <Content Include="AppService\AppServiceTestTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AppServiceTestTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fakes\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
+  </Target>
+</Project>

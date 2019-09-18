@@ -1,0 +1,60 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter type="System.string" name="TestName" #>
+<#@ parameter type="System.string" name="ClassName" #>
+<#@ parameter type="System.string" name="AppServiceName" #>
+<#@ parameter type="System.string" name="EntityName" #>
+using Mysoft.Clgyl.<#=        this.ClassName#>.AppServices;
+using Mysoft.Clgyl.<#=        this.ClassName#>.DomainServices;
+using Mysoft.Clgyl.<#=        this.ClassName#>.DomainServices.Fakes;
+using Mysoft.Clgyl.<#=        this.ClassName#>.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.<#=        this.ClassName#>.UnitTest.AppServices
+{
+	/// <summary>
+    /// 单测 
+    /// </summary>
+    [TestFixture]
+    public class <#=        this.TestName #>
+    {
+		private readonly <#=        this.AppServiceName#> _<#=        this.AppServiceName[0].ToString().ToLower()+ this.AppServiceName.Substring(1, this.AppServiceName.Length - 1)#> = new <#=        this.AppServiceName#>();
+
+        private readonly Stub<#=        this.EntityName#>DomainService _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>DomainService = new Stub<#=        this.EntityName#>DomainService();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+
+        private readonly EntityMocker<<#=        this.EntityName#>> _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>Mock = new EntityMocker<<#=        this.EntityName#>>();
+        
+        #region 接口服务
+        #endregion
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+
+            TestMockServiceResolver.RegisterInstance<<#=        this.EntityName#>DomainService, Stub<#=        this.EntityName#>DomainService>(_<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>DomainService);
+
+        }
+
+        [Test(Description = "测试单测")]
+        public void Test1()
+        {
+            
+        }
+	}
+}
