@@ -47,6 +47,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productCategoryMock.LoadData(_productCategoryFileJsonName);
         }
 
+        #region  材料类别领域服务单测 25个方法
         [Test(Description = "修改实体的名称时，修改子级对应的父级信息（例如：名称），同时修改材料中对应的材料分类名称")]
         public void UpdateProductCategory_Test()
         {
@@ -172,6 +173,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

@@ -41,11 +41,12 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
             TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
             TestMockServiceResolver.RegisterInstance<ProductPriceDomainService, StubProductPriceDomainService>(_productPriceDomainService);
         }
-
+        #region  材料价格应用服务单测 1个方法
         [Test(Description = "保存")]
         public void Save_Test()
         {
             
         }
+        #endregion
 	}
 }

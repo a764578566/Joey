@@ -57,6 +57,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productSalePriceMock.LoadData(_productSalePriceFileJsonName);
         }
 
+        #region  材料销售价领域服务单测 4个方法
         [Test(Description = "获取需要同步的销售数据")]
         public void GetProductSalePrice_Test()
         {
@@ -77,6 +78,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

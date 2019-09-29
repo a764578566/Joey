@@ -35,6 +35,8 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
         private readonly StubProductCategoryAttributeDomainService _productCategoryAttributeDomainService = new StubProductCategoryAttributeDomainService();
         private readonly StubProductDomainService _productDomainService = new StubProductDomainService();
         #region 接口服务
+        private readonly StubIFileManagerPublicService _iFileManagerPublicService = new StubIFileManagerPublicService();
+        private readonly StubIPricePolicyPublicService _iPricePolicyPublicService = new StubIPricePolicyPublicService();
         private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
         #endregion
 
@@ -45,9 +47,11 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
             TestMockServiceResolver.RegisterInstance<ProductCategoryDomainService, StubProductCategoryDomainService>(_productCategoryDomainService);
             TestMockServiceResolver.RegisterInstance<ProductCategoryAttributeDomainService, StubProductCategoryAttributeDomainService>(_productCategoryAttributeDomainService);
             TestMockServiceResolver.RegisterInstance<ProductDomainService, StubProductDomainService>(_productDomainService);
+            TestMockServiceResolver.RegisterInstance<IFileManagerPublicService, StubIFileManagerPublicService>(_iFileManagerPublicService);
+            TestMockServiceResolver.RegisterInstance<IPricePolicyPublicService, StubIPricePolicyPublicService>(_iPricePolicyPublicService);
             TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
         }
-
+        #region  材料类别应用服务单测 30个方法
         [Test(Description = "保存校验")]
         public void Save_Test()
         {
@@ -198,5 +202,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
         {
             
         }
+        #endregion
 	}
 }

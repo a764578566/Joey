@@ -44,13 +44,13 @@ namespace Mysoft.Clgyl.<#=        this.ModuleName#>.UnitTest.DomainServices
         private readonly EntityMocker<<#=        this.EntityName#>> _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>Mock = new EntityMocker<<#=        this.EntityName#>>();
         
         private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
-<#for(int i = 0; i < this.DomainServiceNames.Count; i++){ #>
-        <#=DomainServiceNames[i]#>
-<#}#>
+<#    for(int i = 0; i < this.DomainServiceNames.Count; i++){ #>
+        <#=            DomainServiceNames[i]#>
+<#    }#>
         #region 接口服务
-<#for(int i = 0; i < this.PublicServiceNames.Count; i++){ #>
-        <#=PublicServiceNames[i]#>
-<#}#>
+<#    for(int i = 0; i < this.PublicServiceNames.Count; i++){ #>
+        <#=            PublicServiceNames[i]#>
+<#    }#>
         #endregion
 
         private readonly string _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>FileJsonName = "<#=        this.EntityName#>.json";
@@ -59,19 +59,20 @@ namespace Mysoft.Clgyl.<#=        this.ModuleName#>.UnitTest.DomainServices
         public void InitResource()
         {
             TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
-<#for(int i = 0; i < this.TestMockServiceResolvers.Count; i++){ #>
-            <#=TestMockServiceResolvers[i]#>
-<#}#>
+<#    for(int i = 0; i < this.TestMockServiceResolvers.Count; i++){ #>
+            <#=            TestMockServiceResolvers[i]#>
+<#    }#>
             _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>Mock.LoadData(_<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>FileJsonName);
         }
 
-<# for(int i = 0; i < this.MethodNames.Count; i++){ #>
-        [Test(Description = "<#=this.Descriptions[i]#>")]
-        public void <#=this.MethodNames[i]#>_Test()
+        #region  <#=        this.ClassDescription#>单测 <#=    this.MethodNames.Count#>个方法
+<#    for(int i = 0; i < this.MethodNames.Count; i++){ #>
+        [Test(Description = "<#=            this.Descriptions[i]#>")]
+        public void <#=            this.MethodNames[i]#>_Test()
         {
             
         }
-<#}#>
-       
+<#    }#>
+       #endregion
 	}
 }

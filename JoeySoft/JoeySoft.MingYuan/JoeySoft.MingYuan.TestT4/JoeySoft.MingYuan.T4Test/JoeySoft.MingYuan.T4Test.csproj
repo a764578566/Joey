@@ -163,6 +163,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="DomainService\DomainServiceTestTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainServiceTestTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Manager.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

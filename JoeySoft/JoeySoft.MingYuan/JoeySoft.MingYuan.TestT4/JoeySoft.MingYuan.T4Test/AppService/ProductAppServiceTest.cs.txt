@@ -63,7 +63,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
             TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);
             TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
         }
-
+        #region  材料管理应用服务单测 38个方法
         [Test(Description = "保存材料")]
         public void Save_Test()
         {
@@ -254,5 +254,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
         {
             
         }
+        #endregion
 	}
 }

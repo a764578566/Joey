@@ -41,6 +41,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productTransportCostMock.LoadData(_productTransportCostFileJsonName);
         }
 
+        #region  材料运输费领域服务单测 2个方法
         [Test(Description = "根据材料GUIDs，获取运费")]
         public void FindByProductGUIDs_Test()
         {
@@ -51,6 +52,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

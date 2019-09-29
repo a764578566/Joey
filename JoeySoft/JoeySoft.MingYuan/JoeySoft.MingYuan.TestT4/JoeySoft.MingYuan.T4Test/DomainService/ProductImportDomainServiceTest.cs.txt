@@ -51,6 +51,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productImportMock.LoadData(_productImportFileJsonName);
         }
 
+        #region  材料类别属性领域服务单测 16个方法
         [Test(Description = "执行保存结果")]
         public void Execute``1_Test()
         {
@@ -131,6 +132,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

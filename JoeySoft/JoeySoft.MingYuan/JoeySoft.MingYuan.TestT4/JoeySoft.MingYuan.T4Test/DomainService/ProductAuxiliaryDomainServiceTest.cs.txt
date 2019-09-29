@@ -55,6 +55,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productAuxiliaryMock.LoadData(_productAuxiliaryFileJsonName);
         }
 
+        #region  材料赋值信息领域单测 33个方法
         [Test(Description = "删除前校验")]
         public void CheckBeforeDeleteBrand_Test()
         {
@@ -220,6 +221,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

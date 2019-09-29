@@ -63,6 +63,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productMock.LoadData(_productFileJsonName);
         }
 
+        #region  材料领域服务单测 88个方法
         [Test(Description = "保存材料")]
         public void Save_Test()
         {
@@ -503,6 +504,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

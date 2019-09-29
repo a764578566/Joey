@@ -63,7 +63,7 @@ namespace Mysoft.Clgyl.<#=        this.ModuleName#>.UnitTest.AppServices
             <#=            TestMockServiceResolvers[i]#>
 <#    }#>
         }
-
+        #region  <#=        this.ClassDescription#>单测 <#=    this.MethodNames.Count#>个方法
 <#    for(int i = 0; i < this.MethodNames.Count; i++){ #>
         [Test(Description = "<#=            this.Descriptions[i]#>")]
         public void <#=            this.MethodNames[i]#>_Test()
@@ -71,5 +71,6 @@ namespace Mysoft.Clgyl.<#=        this.ModuleName#>.UnitTest.AppServices
             
         }
 <#    }#>
+        #endregion
 	}
 }

@@ -41,7 +41,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
             TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
             TestMockServiceResolver.RegisterInstance<ProductAuxiliaryDomainService, StubProductAuxiliaryDomainService>(_productAuxiliaryDomainService);
         }
-
+        #region  材料辅助信息服务层单测 16个方法
         [Test(Description = "删除品牌前校验")]
         public void CheckBeforeDeleteBrand_Test()
         {
@@ -122,5 +122,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
         {
             
         }
+        #endregion
 	}
 }

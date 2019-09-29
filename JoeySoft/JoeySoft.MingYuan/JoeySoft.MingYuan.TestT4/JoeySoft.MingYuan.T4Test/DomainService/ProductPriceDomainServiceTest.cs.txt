@@ -43,6 +43,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productPriceMock.LoadData(_productPriceFileJsonName);
         }
 
+        #region  材料价格库领域服务单测 14个方法
         [Test(Description = "编码唯一性")]
         public void BusinessParamCodeValication_Test()
         {
@@ -113,6 +114,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }

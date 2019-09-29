@@ -45,6 +45,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             _productCategoryAttributeMock.LoadData(_productCategoryAttributeFileJsonName);
         }
 
+        #region  材料类别领域服务单测 33个方法
         [Test(Description = "获取材料类别属性列表")]
         public void GetCategoryAttribute_Test()
         {
@@ -210,6 +211,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         {
             
         }
-       
+       #endregion
 	}
 }
