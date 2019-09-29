@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JoeySoft.Common, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JoeySoft.Common.1.0.0.4\lib\net45\JoeySoft.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -155,82 +158,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppServiceTestManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="AppService\CodeFormatAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ContractInvoiceTypeAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ContractProviderAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ContractTypeAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\FundParamAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\PricePolicyAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ProjectAddressAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ProjectOverviewAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ProviderAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\ProviderTypeAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\SaleContractTypeAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\TaxItemAppServiceTest.cs">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\CodeFormatDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ContractInvoiceTypeDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ContractProviderDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ContractTypeDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\DomainServiceTestTemplate.cs">
+    <Compile Include="DomainService\DomainServiceTestManager.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DomainServiceTestTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\FundParamDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\PricePolicyDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ProjectAddressDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ProjectOverviewDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ProviderDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\ProviderTypeDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\SaleContractTypeDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DomainService\TaxItemDomainServiceTest.cs">
-      <DependentUpon>TestManager.tt</DependentUpon>
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs">
       <AutoGen>True</AutoGen>
@@ -238,21 +169,31 @@
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DomainService\TestManager.cs">
+    <Compile Include="TestConfig.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TestManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppService\AppServiceTestTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppServiceTestTemplate.tt</DependentUpon>
+      <DependentUpon>TestConfig.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppService\AppServiceTestManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AppServiceTestManager.cs</LastGenOutput>
+    </Content>
+    <Content Include="AppService\ProductAppServiceTest.cs.txt">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="AppService\ProductAuxiliaryAppServiceTest.cs.txt">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="AppService\ProductBusinessParamAppServiceTest.cs.txt">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="AppService\ProductCategoryAppServiceTest.cs.txt">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="AppService\ProductPriceAppServiceTest.cs.txt">
+      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
     </Content>
     <Content Include="DLL\Mysoft.Clgyl.Common.dll" />
     <Content Include="DLL\Mysoft.Clgyl.Common.Model.dll" />
@@ -283,17 +224,48 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DomainServiceTestTemplate.cs</LastGenOutput>
     </Content>
+    <Content Include="DomainService\ProductAuxiliaryDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductCategoryAttributeDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductCategoryDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductImportDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductInstallFeeDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductPriceDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductSalePriceDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
+    <Content Include="DomainService\ProductTransportCostDomainServiceTest.cs.txt">
+      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
+    </Content>
     <Content Include="Manager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Manager.cs</LastGenOutput>
     </Content>
-    <Content Include="DomainService\TestManager.tt">
+    <Content Include="DomainService\DomainServiceTestManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestManager.cs</LastGenOutput>
+      <LastGenOutput>DomainServiceTestManager.cs</LastGenOutput>
     </Content>
     <Content Include="AppService\AppServiceTestTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AppServiceTestTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="TestConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestConfig.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

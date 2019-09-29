@@ -1,0 +1,126 @@
+using Mysoft.Clgyl.ProductMng.AppServices;
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
+{
+	/// <summary>
+    /// 材料辅助信息服务层单测 
+    /// </summary>
+    [TestFixture]
+    public class ProductAuxiliaryAppServiceTest
+    {
+		private readonly ProductAuxiliaryAppService _productAuxiliaryAppService = new ProductAuxiliaryAppService();
+
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+
+        private readonly EntityMocker<ProductAuxiliary> _productAuxiliaryMock = new EntityMocker<ProductAuxiliary>();
+        
+        private readonly StubProductAuxiliaryDomainService _productAuxiliaryDomainService = new StubProductAuxiliaryDomainService();
+        #region 接口服务
+        #endregion
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ProductAuxiliaryDomainService, StubProductAuxiliaryDomainService>(_productAuxiliaryDomainService);
+        }
+
+        [Test(Description = "删除品牌前校验")]
+        public void CheckBeforeDeleteBrand_Test()
+        {
+            
+        }
+        [Test(Description = "保存材料品牌")]
+        public void SaveBrand_Test()
+        {
+            
+        }
+        [Test(Description = "批量删除品牌")]
+        public void DeleteBrand_Test()
+        {
+            
+        }
+        [Test(Description = "根据等级获取品牌")]
+        public void GetProductBrandByLevel_Test()
+        {
+            
+        }
+        [Test(Description = "导入材料品牌")]
+        public void ImportPorductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "品牌导入成功处理")]
+        public void ImportPorductBrandSuccessHandle_Test()
+        {
+            
+        }
+        [Test(Description = "品牌导入失败处理")]
+        public void ImportPorductBrandErrorHandle_Test()
+        {
+            
+        }
+        [Test(Description = "校验准备导入的品牌数据")]
+        public void CheckAddPorductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "导出材料品牌模版")]
+        public void ExportPorductBrandTemplate_Test()
+        {
+            
+        }
+        [Test(Description = "删除等级前校验")]
+        public void CheckBeforeDeleteBrandLevel_Test()
+        {
+            
+        }
+        [Test(Description = "批量保存等级")]
+        public void SaveBrandLevel_Test()
+        {
+            
+        }
+        [Test(Description = "删除计量单位（软删除）")]
+        public void DeleteProductUnits_Test()
+        {
+            
+        }
+        [Test(Description = "删除计量单位（软删除）")]
+        public void DeleteProductUnit_Test()
+        {
+            
+        }
+        [Test(Description = "批量删除档次")]
+        public void DeleteGrade_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料表明细信息")]
+        public void GetProductPriceGroupByProject_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料表明细信息")]
+        public void GetProductSalePriceGroupByProject_Test()
+        {
+            
+        }
+	}
+}

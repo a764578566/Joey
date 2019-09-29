@@ -1,0 +1,136 @@
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 材料类别属性领域服务单测
+    /// </summary>
+    [TestFixture]
+    public class ProductImportDomainServiceTest
+    {
+		private readonly ProductImportDomainService _productImportDomainService = new ProductImportDomainService();
+
+        private readonly EntityMocker<ProductImport> _productImportMock = new EntityMocker<ProductImport>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        private readonly StubProductCategoryDomainService _productCategoryDomainService = new StubProductCategoryDomainService();
+        private readonly StubProductCategoryAttributeDomainService _productCategoryAttributeDomainService = new StubProductCategoryAttributeDomainService();
+        private readonly StubProductDomainService _productDomainService = new StubProductDomainService();
+        private readonly StubProductAuxiliaryDomainService _productAuxiliaryDomainService = new StubProductAuxiliaryDomainService();
+        #region 接口服务
+        private readonly StubIConfigPublicService _iConfigPublicService = new StubIConfigPublicService();
+        #endregion
+
+        private readonly string _productImportFileJsonName = "ProductImport.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ProductCategoryDomainService, StubProductCategoryDomainService>(_productCategoryDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductCategoryAttributeDomainService, StubProductCategoryAttributeDomainService>(_productCategoryAttributeDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductDomainService, StubProductDomainService>(_productDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductAuxiliaryDomainService, StubProductAuxiliaryDomainService>(_productAuxiliaryDomainService);
+            TestMockServiceResolver.RegisterInstance<IConfigPublicService, StubIConfigPublicService>(_iConfigPublicService);
+            _productImportMock.LoadData(_productImportFileJsonName);
+        }
+
+        [Test(Description = "执行保存结果")]
+        public void Execute``1_Test()
+        {
+            
+        }
+        [Test(Description = "是否跳过已存在的材料:二开支撑")]
+        public void IsContinueExistProduct_Test()
+        {
+            
+        }
+        [Test(Description = "初始化数据")]
+        public void InitData``1_Test()
+        {
+            
+        }
+        [Test(Description = "获取产品分类")]
+        public void GetProductCategory_Test()
+        {
+            
+        }
+        [Test(Description = "材料分类校验")]
+        public void ProductCategoryValidation_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料")]
+        public void GetProduct_Test()
+        {
+            
+        }
+        [Test(Description = "获取指标属性")]
+        public void GetAttribute_Test()
+        {
+            
+        }
+        [Test(Description = "获取分类属性")]
+        public void GetProductCategoryAttribute_Test()
+        {
+            
+        }
+        [Test(Description = "获取属性值")]
+        public void GetProductCategoryAttributeValue_Test()
+        {
+            
+        }
+        [Test(Description = "材料指标属性")]
+        public void GetProductAttributeValue_Test()
+        {
+            
+        }
+        [Test(Description = "获取品牌")]
+        public void GetProductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "获取计量单位")]
+        public void GetProductUnit_Test()
+        {
+            
+        }
+        [Test(Description = "获取品牌档次")]
+        public void GetProductGrade_Test()
+        {
+            
+        }
+        [Test(Description = "保存")]
+        public void SaveProduct_Test()
+        {
+            
+        }
+        [Test(Description = "上传材料图片")]
+        public void SaveProductPictures_Test()
+        {
+            
+        }
+        [Test(Description = "更新冗余字段")]
+        public void GetProductAttributeRedundancyFile_Test()
+        {
+            
+        }
+       
+	}
+}

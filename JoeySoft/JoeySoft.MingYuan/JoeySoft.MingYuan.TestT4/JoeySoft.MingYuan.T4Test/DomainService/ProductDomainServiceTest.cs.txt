@@ -1,0 +1,508 @@
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 材料领域服务单测
+    /// </summary>
+    [TestFixture]
+    public class ProductDomainServiceTest
+    {
+		private readonly ProductDomainService _productDomainService = new ProductDomainService();
+
+        private readonly EntityMocker<Product> _productMock = new EntityMocker<Product>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        private readonly StubProductCategoryDomainService _productCategoryDomainService = new StubProductCategoryDomainService();
+        private readonly StubProductCategoryAttributeDomainService _productCategoryAttributeDomainService = new StubProductCategoryAttributeDomainService();
+        private readonly StubProductSalePriceDomainService _productSalePriceDomainService = new StubProductSalePriceDomainService();
+        private readonly StubProductAuxiliaryDomainService _productAuxiliaryDomainService = new StubProductAuxiliaryDomainService();
+        #region 接口服务
+        private readonly StubIProjectOverviewPublicService _iProjectOverviewPublicService = new StubIProjectOverviewPublicService();
+        private readonly StubICommonPublicServicePublicService _iCommonPublicServicePublicService = new StubICommonPublicServicePublicService();
+        private readonly StubIApplyPublicService _iApplyPublicService = new StubIApplyPublicService();
+        private readonly StubITacticCgAgreementPublicService _iTacticCgAgreementPublicService = new StubITacticCgAgreementPublicService();
+        private readonly StubIContractPublicService _iContractPublicService = new StubIContractPublicService();
+        private readonly StubIProductRequirementPublicService _iProductRequirementPublicService = new StubIProductRequirementPublicService();
+        private readonly StubISaleContractPublicService _iSaleContractPublicService = new StubISaleContractPublicService();
+        #endregion
+
+        private readonly string _productFileJsonName = "Product.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ProductCategoryDomainService, StubProductCategoryDomainService>(_productCategoryDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductCategoryAttributeDomainService, StubProductCategoryAttributeDomainService>(_productCategoryAttributeDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductSalePriceDomainService, StubProductSalePriceDomainService>(_productSalePriceDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductAuxiliaryDomainService, StubProductAuxiliaryDomainService>(_productAuxiliaryDomainService);
+            TestMockServiceResolver.RegisterInstance<IProjectOverviewPublicService, StubIProjectOverviewPublicService>(_iProjectOverviewPublicService);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicServicePublicService, StubICommonPublicServicePublicService>(_iCommonPublicServicePublicService);
+            TestMockServiceResolver.RegisterInstance<IApplyPublicService, StubIApplyPublicService>(_iApplyPublicService);
+            TestMockServiceResolver.RegisterInstance<ITacticCgAgreementPublicService, StubITacticCgAgreementPublicService>(_iTacticCgAgreementPublicService);
+            TestMockServiceResolver.RegisterInstance<IContractPublicService, StubIContractPublicService>(_iContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IProductRequirementPublicService, StubIProductRequirementPublicService>(_iProductRequirementPublicService);
+            TestMockServiceResolver.RegisterInstance<ISaleContractPublicService, StubISaleContractPublicService>(_iSaleContractPublicService);
+            _productMock.LoadData(_productFileJsonName);
+        }
+
+        [Test(Description = "保存材料")]
+        public void Save_Test()
+        {
+            
+        }
+        [Test(Description = "保存材料事务方法")]
+        public void SaveTrans_Test()
+        {
+            
+        }
+        [Test(Description = "材料属性处理")]
+        public void HandleAttribute_Test()
+        {
+            
+        }
+        [Test(Description = "分类属性值数据处理")]
+        public void HandleProductAttributeValue_Test()
+        {
+            
+        }
+        [Test(Description = "更改材料状态为“启用”状态")]
+        public void UpdateProductEnabledByProductGuid_Test()
+        {
+            
+        }
+        [Test(Description = "更改材料状态为“禁用”状态")]
+        public void UpdateProductDisableByProductGuid_Test()
+        {
+            
+        }
+        [Test(Description = "批量禁用")]
+        public void Disables_Test()
+        {
+            
+        }
+        [Test(Description = "批量启用")]
+        public void Enables_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料、材料属性值信息")]
+        public void Delete_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料、材料属性值信息")]
+        public void DelProduct_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料分类前校验")]
+        public void CheckBeforeDelete_Test()
+        {
+            
+        }
+        [Test(Description = "判断材料分类属性是否被引用")]
+        public void ProductCategoryAttributeIsUsed_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料分类属性值前校验")]
+        public void CheckDeleteProductCategoryAttributeValueById_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料分类属性值前校验")]
+        public void CheckBeforeAttributeValueList_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料分类属性值前校验")]
+        public void CheckDeleteProductCategoryAttributeValueByIds_Test()
+        {
+            
+        }
+        [Test(Description = "删除前验证")]
+        public void CheckDelete_Test()
+        {
+            
+        }
+        [Test(Description = "是否存在材料")]
+        public void IsExistProduct_Test()
+        {
+            
+        }
+        [Test(Description = "校验材料编码是否重复")]
+        public void VerifyCode_Test()
+        {
+            
+        }
+        [Test(Description = "根据唯一标识，判断材料是否重复")]
+        public void IsExistRepeatProduct_Test()
+        {
+            
+        }
+        [Test(Description = "根据ProductCategoryGUID获取最新编码")]
+        public void GetCode_Test()
+        {
+            
+        }
+        [Test(Description = "根据ProductGUID获取材料信息")]
+        public void GetProductByProductGuid_Test()
+        {
+            
+        }
+        [Test(Description = "根据编码获取材料信息")]
+        public void GetProductByCode_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料编码集合，获取材料信息")]
+        public void GetProductByCodes_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料Id获取对应的分类属性值")]
+        public void GetProductAttributeValueByProductId_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料搜索字段（名称|编码|型号|属性值）")]
+        public void GetProductSrarchText_Test()
+        {
+            
+        }
+        [Test(Description = "根据品牌GUID获取材料")]
+        public void GetProductByBrand_Test()
+        {
+            
+        }
+        [Test(Description = "根据指标属性值ID获取材料ID,用于高级搜索")]
+        public void GetListByAttributeValueGuids_Test()
+        {
+            
+        }
+        [Test(Description = "Product信息是否存在")]
+        public void IsExistProduct_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料GUID集合，获取材料信息")]
+        public void GetProductsByIds_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料基本信息")]
+        public void GetProduct_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料")]
+        public void GetProducts_Test()
+        {
+            
+        }
+        [Test(Description = "获取对象化查询语句SQL")]
+        public void GetSearchParamSQL_Test()
+        {
+            
+        }
+        [Test(Description = "获取查询SQL语句（AND关系)")]
+        public void GetSQLHandleToAnd_Test()
+        {
+            
+        }
+        [Test(Description = "获取查询SQL语句（OR关系)")]
+        public void GetSQLHandleToOr_Test()
+        {
+            
+        }
+        [Test(Description = "合同选择材料使用")]
+        public void GetProductsUseForContract_Test()
+        {
+            
+        }
+        [Test(Description = "补充材料的战略协议价格和销售价格")]
+        public void GetProductDTOSalePrice_Test()
+        {
+            
+        }
+        [Test(Description = "材料对应项目销售价格")]
+        public void GetProductSalePrice_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料属性值获取材料ID")]
+        public void GetProductGuids_Test()
+        {
+            
+        }
+        [Test(Description = "材料分类属性修改修改材料分类信息")]
+        public void UpdateProductCategory_Test()
+        {
+            
+        }
+        [Test(Description = "更新材料价格信息")]
+        public void UpdateProductPrice_Test()
+        {
+            
+        }
+        [Test(Description = "更新材料价格")]
+        public void UpdateProductCurrentPrice_Test()
+        {
+            
+        }
+        [Test(Description = "判断该分类下是否存在材料")]
+        public void IsExistProductByProductCategoryGUID_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料分类")]
+        public void GetProductsByProductCategoryGuids_Test()
+        {
+            
+        }
+        [Test(Description = "更新材料信息")]
+        public void SaveProducts_Test()
+        {
+            
+        }
+        [Test(Description = "更新材料信息")]
+        public void UpdateProducts_Test()
+        {
+            
+        }
+        [Test(Description = "批量插入")]
+        public void BulkInsertProducts_Test()
+        {
+            
+        }
+        [Test(Description = "更新材料信息")]
+        public void UpdateProduct_Test()
+        {
+            
+        }
+        [Test(Description = "保存材料属性值")]
+        public void SaveProductAttributeValues_Test()
+        {
+            
+        }
+        [Test(Description = "获取唯一标识")]
+        public void GetUniqueIdentification_Test()
+        {
+            
+        }
+        [Test(Description = "获取唯一标识")]
+        public void GetUniqueIdentification_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料分类属性GUID获取材料属性值集合")]
+        public void GetProductAttributeValueByCategoryAttributeGUID_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料分类属性值GUID集合获取材料属性值集合")]
+        public void GetProductAttributeValueByPCategoryAttributeValueGUIDs_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料分类属性GUID集合获取材料属性值集合")]
+        public void GetProductAttributeValueByPCategoryAttributeGUIDs_Test()
+        {
+            
+        }
+        [Test(Description = "批量更新材料属性值")]
+        public void BulkSaveProductAttributeValue_Test()
+        {
+            
+        }
+        [Test(Description = "批量新增材料运输费")]
+        public void CreateProductTransportCost_Test()
+        {
+            
+        }
+        [Test(Description = "批量新增材料运输费事务提交")]
+        public void CreateProductTransportCostTrans_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料GUID集合，批量删除当前材料对应的运输费")]
+        public void DeleteProductTransportCostByProductGuid_Test()
+        {
+            
+        }
+        [Test(Description = "根据数据来源GUID，删除当前来源下对应的运输费")]
+        public void DeleteProductTransportCostBySourceGuid_Test()
+        {
+            
+        }
+        [Test(Description = "批量同步安装费")]
+        public void CreateProductInstallFee_Test()
+        {
+            
+        }
+        [Test(Description = "批量新增材料安装费事务提交")]
+        public void CreateProductInstallFeeTrans_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料GUID集合，批量删除当前材料对应的安装费")]
+        public void DeleteProductInstallFeeByProductGuid_Test()
+        {
+            
+        }
+        [Test(Description = "根据数据来源GUID，删除当前来源下对应的安装费")]
+        public void DeleteProductInstallFeeBySourceGuid_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料安装费")]
+        public void DeleteProductInstallFee_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料安装费(批量)")]
+        public void DeleteProductInstallFees_Test()
+        {
+            
+        }
+        [Test(Description = "根据档次GUID集合，批量清空材料对应的档次")]
+        public void DeleteProductGradeByProductGradeGuid_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料GUID,删除对应材料适用区域信息")]
+        public void DeleteProduct2BusinessUnitByProductGuid_Test()
+        {
+            
+        }
+        [Test(Description = "批量新增材料适用区域信息")]
+        public void SaveProduct2BusinessUnit_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料GUID所属城市获取材料运费信息")]
+        public void GetProductTransportCostsByProductCityGUID_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料GUID、所属城市，获取材料安装费信息")]
+        public void GetProductInstallFeeByProductCityGUID_Test()
+        {
+            
+        }
+        [Test(Description = "备选项-材料分类导出信息(用于战采明细DTO)")]
+        public void ProductCategoryExportByTacticCgAgreementProduct_Test()
+        {
+            
+        }
+        [Test(Description = "备选项-材料分类导出信息(用于材料DTO)")]
+        public void ProductCategoryExportByProduct_Test()
+        {
+            
+        }
+        [Test(Description = "备选项-品牌导出信息")]
+        public void ProductBrandExport_Test()
+        {
+            
+        }
+        [Test(Description = "备选项-材料档次导出信息")]
+        public void ProductGradeExport_Test()
+        {
+            
+        }
+        [Test(Description = "备选项-适用区域导出信息")]
+        public void MyBusinessUnitExport_Test()
+        {
+            
+        }
+        [Test(Description = "备选项-计量单位导出信息")]
+        public void ProductUnitExport_Test()
+        {
+            
+        }
+        [Test(Description = "获取当前失效战采中所有材料")]
+        public void GetProductsByInvalidTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "获取当前生效战采中所有材料")]
+        public void GetProductsByEffectiveTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "获取生效战采中所有的材料运费")]
+        public void GetProductTransportCostByEffectiveTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "获取生效战采中所有的材料安装费")]
+        public void GetProductInstallFeeByEffectiveTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "获取生效战采中所有的材料辅助信息")]
+        public void GetProductAuxiliaryByEffectiveTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "获取生效战采中所有的材料适用区域信息")]
+        public void GetProduct2BusinessUnitByEffectiveTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "更新公司名称")]
+        public void UpdateBuName_Test()
+        {
+            
+        }
+        [Test(Description = "判断公司是否被材料引用")]
+        public void IsExistMyBusinessUnit_Test()
+        {
+            
+        }
+        [Test(Description = "更新材料品牌")]
+        public void UpdateProductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "重设材料品牌")]
+        public void ResetProductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "抓取材料属性值")]
+        public void RetrieveAttributeValue_Test()
+        {
+            
+        }
+        [Test(Description = "重设材料UniqueIdentification")]
+        public void ResetProductUniqueIdentification_Test()
+        {
+            
+        }
+        [Test(Description = "尝试重置材料的UniqueIdentification")]
+        public void TryResetBrandUniqueIdentification_Test()
+        {
+            
+        }
+       
+	}
+}

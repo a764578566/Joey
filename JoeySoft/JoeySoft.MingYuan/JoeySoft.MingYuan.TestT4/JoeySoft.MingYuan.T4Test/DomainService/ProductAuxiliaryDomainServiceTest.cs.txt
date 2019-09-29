@@ -1,0 +1,225 @@
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 材料赋值信息领域单测
+    /// </summary>
+    [TestFixture]
+    public class ProductAuxiliaryDomainServiceTest
+    {
+		private readonly ProductAuxiliaryDomainService _productAuxiliaryDomainService = new ProductAuxiliaryDomainService();
+
+        private readonly EntityMocker<ProductAuxiliary> _productAuxiliaryMock = new EntityMocker<ProductAuxiliary>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        private readonly StubProductDomainService _productDomainService = new StubProductDomainService();
+        private readonly StubProductSalePriceDomainService _productSalePriceDomainService = new StubProductSalePriceDomainService();
+        #region 接口服务
+        private readonly StubIProjectAddressPublicService _iProjectAddressPublicService = new StubIProjectAddressPublicService();
+        private readonly StubIProjectOverviewPublicService _iProjectOverviewPublicService = new StubIProjectOverviewPublicService();
+        private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
+        private readonly StubIBusinessUnitPublicService _iBusinessUnitPublicService = new StubIBusinessUnitPublicService();
+        private readonly StubIPricePolicyPublicService _iPricePolicyPublicService = new StubIPricePolicyPublicService();
+        #endregion
+
+        private readonly string _productAuxiliaryFileJsonName = "ProductAuxiliary.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ProductDomainService, StubProductDomainService>(_productDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductSalePriceDomainService, StubProductSalePriceDomainService>(_productSalePriceDomainService);
+            TestMockServiceResolver.RegisterInstance<IProjectAddressPublicService, StubIProjectAddressPublicService>(_iProjectAddressPublicService);
+            TestMockServiceResolver.RegisterInstance<IProjectOverviewPublicService, StubIProjectOverviewPublicService>(_iProjectOverviewPublicService);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
+            TestMockServiceResolver.RegisterInstance<IBusinessUnitPublicService, StubIBusinessUnitPublicService>(_iBusinessUnitPublicService);
+            TestMockServiceResolver.RegisterInstance<IPricePolicyPublicService, StubIPricePolicyPublicService>(_iPricePolicyPublicService);
+            _productAuxiliaryMock.LoadData(_productAuxiliaryFileJsonName);
+        }
+
+        [Test(Description = "删除前校验")]
+        public void CheckBeforeDeleteBrand_Test()
+        {
+            
+        }
+        [Test(Description = "保持品牌")]
+        public void SaveBrand_Test()
+        {
+            
+        }
+        [Test(Description = "批量删除品牌")]
+        public void DeleteBrand_Test()
+        {
+            
+        }
+        [Test(Description = "")]
+        public void GetProductBrandById_Test()
+        {
+            
+        }
+        [Test(Description = "根据等级获取品牌")]
+        public void GetProductBrandByLevels_Test()
+        {
+            
+        }
+        [Test(Description = "根据等级获取品牌")]
+        public void GetProductBrandByLevel_Test()
+        {
+            
+        }
+        [Test(Description = "获取所有材料品牌")]
+        public void GetProductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "批量保存品牌")]
+        public void SaveProductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "导入材料品牌")]
+        public void ImportPorductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "映射材料品牌")]
+        public void MapProductBrand_Test()
+        {
+            
+        }
+        [Test(Description = "删除等级前校验")]
+        public void CheckBeforeDeleteBrandLevel_Test()
+        {
+            
+        }
+        [Test(Description = "保存等级")]
+        public void SaveBrandLevel_Test()
+        {
+            
+        }
+        [Test(Description = "保存等级校验")]
+        public void CheckSaveBrandLevel_Test()
+        {
+            
+        }
+        [Test(Description = "获取所有材料品牌等级")]
+        public void GetProductBrandLevel_Test()
+        {
+            
+        }
+        [Test(Description = "批量更新计量单位")]
+        public void SaveProductUnit_Test()
+        {
+            
+        }
+        [Test(Description = "获取所有有效的计量单位")]
+        public void GetProductUnit_Test()
+        {
+            
+        }
+        [Test(Description = "删除计量单位（软删除）")]
+        public void DeleteProductUnit_Test()
+        {
+            
+        }
+        [Test(Description = "批量删除品牌")]
+        public void DeleteGrade_Test()
+        {
+            
+        }
+        [Test(Description = "批量删除品牌（事务）")]
+        public void DeleteGradeTrans_Test()
+        {
+            
+        }
+        [Test(Description = "获取所有材料档次")]
+        public void GetAllProductGrade_Test()
+        {
+            
+        }
+        [Test(Description = "保存材料档次")]
+        public void SaveProductGrade_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料辅助信息")]
+        public void GetProductAuxiliaryByGuid_Test()
+        {
+            
+        }
+        [Test(Description = "根据战略协议清空材料辅助信息的战略协议")]
+        public void ClearProductAuxiliaryTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "清空材料辅助信息的战略协议")]
+        public void ClearProductAuxiliaryTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "清空材料辅助信息的战略协议")]
+        public void ClearProductAuxiliaryTacticCgAgreement_Test()
+        {
+            
+        }
+        [Test(Description = "创建材料辅助信息")]
+        public void CreateProductAuxiliary_Test()
+        {
+            
+        }
+        [Test(Description = "创建材料辅助信息")]
+        public void CreateProductAuxiliaryList_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料辅助信息")]
+        public void GetProductAuxiliarysByGuids_Test()
+        {
+            
+        }
+        [Test(Description = "以项目为纬度获取材料得价格信息（采购价）")]
+        public void GetProductPriceGroupByProject_Test()
+        {
+            
+        }
+        [Test(Description = "以项目为纬度获取材料得价格信息（销售价）")]
+        public void GetProductSalePriceGroupByProject_Test()
+        {
+            
+        }
+        [Test(Description = "以项目为纬度获取材料得价格信息（采购价）")]
+        public void GetProductPriceDTOGroupByProject_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料得安装费（按城市所有子集汇总）")]
+        public void GetAllChildInstallFees_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料得运输费（按城市所有子集汇总）")]
+        public void GetAllChildTransportCosts_Test()
+        {
+            
+        }
+       
+	}
+}

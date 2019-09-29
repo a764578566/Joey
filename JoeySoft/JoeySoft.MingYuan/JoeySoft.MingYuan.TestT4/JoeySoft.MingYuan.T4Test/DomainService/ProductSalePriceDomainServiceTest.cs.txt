@@ -1,0 +1,82 @@
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 材料销售价领域服务单测
+    /// </summary>
+    [TestFixture]
+    public class ProductSalePriceDomainServiceTest
+    {
+		private readonly ProductSalePriceDomainService _productSalePriceDomainService = new ProductSalePriceDomainService();
+
+        private readonly EntityMocker<ProductSalePrice> _productSalePriceMock = new EntityMocker<ProductSalePrice>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        private readonly StubProductInstallFeeDomainService _productInstallFeeDomainService = new StubProductInstallFeeDomainService();
+        private readonly StubProductTransportCostDomainService _productTransportCostDomainService = new StubProductTransportCostDomainService();
+        private readonly StubProductDomainService _productDomainService = new StubProductDomainService();
+        private readonly StubProductAuxiliaryDomainService _productAuxiliaryDomainService = new StubProductAuxiliaryDomainService();
+        #region 接口服务
+        private readonly StubITacticCgAgreementPublicService _iTacticCgAgreementPublicService = new StubITacticCgAgreementPublicService();
+        private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
+        private readonly StubIPricePolicyPublicService _iPricePolicyPublicService = new StubIPricePolicyPublicService();
+        private readonly StubIProjectAddressPublicService _iProjectAddressPublicService = new StubIProjectAddressPublicService();
+        #endregion
+
+        private readonly string _productSalePriceFileJsonName = "ProductSalePrice.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ProductInstallFeeDomainService, StubProductInstallFeeDomainService>(_productInstallFeeDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductTransportCostDomainService, StubProductTransportCostDomainService>(_productTransportCostDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductDomainService, StubProductDomainService>(_productDomainService);
+            TestMockServiceResolver.RegisterInstance<ProductAuxiliaryDomainService, StubProductAuxiliaryDomainService>(_productAuxiliaryDomainService);
+            TestMockServiceResolver.RegisterInstance<ITacticCgAgreementPublicService, StubITacticCgAgreementPublicService>(_iTacticCgAgreementPublicService);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
+            TestMockServiceResolver.RegisterInstance<IPricePolicyPublicService, StubIPricePolicyPublicService>(_iPricePolicyPublicService);
+            TestMockServiceResolver.RegisterInstance<IProjectAddressPublicService, StubIProjectAddressPublicService>(_iProjectAddressPublicService);
+            _productSalePriceMock.LoadData(_productSalePriceFileJsonName);
+        }
+
+        [Test(Description = "获取需要同步的销售数据")]
+        public void GetProductSalePrice_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料的运费")]
+        public void GetFreightPrice_Test()
+        {
+            
+        }
+        [Test(Description = "计算材料安装费")]
+        public void GetInstallFee_Test()
+        {
+            
+        }
+        [Test(Description = "材料销售价")]
+        public void GetProductSalePriceByProductGUIDs_Test()
+        {
+            
+        }
+       
+	}
+}

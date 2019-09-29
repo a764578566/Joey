@@ -1,0 +1,177 @@
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 材料类别领域服务单测
+    /// </summary>
+    [TestFixture]
+    public class ProductCategoryDomainServiceTest
+    {
+		private readonly ProductCategoryDomainService _productCategoryDomainService = new ProductCategoryDomainService();
+
+        private readonly EntityMocker<ProductCategory> _productCategoryMock = new EntityMocker<ProductCategory>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        private readonly StubProductDomainService _productDomainService = new StubProductDomainService();
+        private readonly StubProductCategoryAttributeDomainService _productCategoryAttributeDomainService = new StubProductCategoryAttributeDomainService();
+        #region 接口服务
+        private readonly StubIProductPublicService _iProductPublicService = new StubIProductPublicService();
+        #endregion
+
+        private readonly string _productCategoryFileJsonName = "ProductCategory.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ProductDomainService, StubProductDomainService>(_productDomainService);
+            TestMockServiceResolver.RegisterInstance<IProductPublicService, StubIProductPublicService>(_iProductPublicService);
+            TestMockServiceResolver.RegisterInstance<ProductCategoryAttributeDomainService, StubProductCategoryAttributeDomainService>(_productCategoryAttributeDomainService);
+            _productCategoryMock.LoadData(_productCategoryFileJsonName);
+        }
+
+        [Test(Description = "修改实体的名称时，修改子级对应的父级信息（例如：名称），同时修改材料中对应的材料分类名称")]
+        public void UpdateProductCategory_Test()
+        {
+            
+        }
+        [Test(Description = "修改实体的名称事物")]
+        public void UpdateProductCategoryTrans_Test()
+        {
+            
+        }
+        [Test(Description = "编码校验")]
+        public void CodeValication_Test()
+        {
+            
+        }
+        [Test(Description = "名称校验")]
+        public void NameValication_Test()
+        {
+            
+        }
+        [Test(Description = "删除材料分类前校验")]
+        public void CheckBeforeDelete_Test()
+        {
+            
+        }
+        [Test(Description = "删除")]
+        public void Delete_Test()
+        {
+            
+        }
+        [Test(Description = "分类删除")]
+        public void DeleteTrans_Test()
+        {
+            
+        }
+        [Test(Description = "获取产品分类")]
+        public void GetProductCategory_Test()
+        {
+            
+        }
+        [Test(Description = "获取产品分类")]
+        public void GetProductCategoryByApi_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料编码获取材料分类信息")]
+        public void GetProductCategoryByProductCode_Test()
+        {
+            
+        }
+        [Test(Description = "根据分类GUID获取材料分类信息")]
+        public void GetProductCategoryByGuid_Test()
+        {
+            
+        }
+        [Test(Description = "根据productCategoryGUID获取entity")]
+        public void FindById_Test()
+        {
+            
+        }
+        [Test(Description = "获取本级分类最后的编码")]
+        public void GetLastCode_Test()
+        {
+            
+        }
+        [Test(Description = "根据材料分类主键GUID，判断是否存在子集材料分类")]
+        public void IsExsitSubsetProductCategory_Test()
+        {
+            
+        }
+        [Test(Description = "更新为父级编码更新")]
+        public void UpdateParent_Test()
+        {
+            
+        }
+        [Test(Description = "修改父级")]
+        public void UpdateParentTrans_Test()
+        {
+            
+        }
+        [Test(Description = "获取本级分类与子级分类信息")]
+        public void GetSubsetProductCategoryOrSelf_Test()
+        {
+            
+        }
+        [Test(Description = "根据全编码获取该编码下所有子级")]
+        public void GetListByAllCode_Test()
+        {
+            
+        }
+        [Test(Description = "保存材料分类信息")]
+        public void Save_Test()
+        {
+            
+        }
+        [Test(Description = "保存材料分类信息事务，便于二开扩展")]
+        public void SaveTrans_Test()
+        {
+            
+        }
+        [Test(Description = "判断末级节点")]
+        public void IsLeaf_Test()
+        {
+            
+        }
+        [Test(Description = "根据全编码创建分类父级关系")]
+        public void ImportCreateParentByAllCode_Test()
+        {
+            
+        }
+        [Test(Description = "导入材料分类数据")]
+        public void Import_Test()
+        {
+            
+        }
+        [Test(Description = "根据全编码获取父级编码，没有父级编码返回null")]
+        public void GetParentCode_Test()
+        {
+            
+        }
+        [Test(Description = "映射材料分类")]
+        public void MapProductCategory_Test()
+        {
+            
+        }
+       
+	}
+}

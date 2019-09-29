@@ -1,0 +1,43 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#+
+    class TestConfig
+    {
+        /// <summary>
+        /// 模块名称
+        /// </summary>
+        public string ModuleName
+        {
+            get
+            {
+                return "ProductMng";
+            }
+        }
+
+        /// <summary>
+        /// 单测地址
+        /// </summary>
+        public string UnitTestPath
+        {
+            get
+            {
+                return @"E:\mysoft\git\clxt\src\01_产品库\Mysoft.Clgyl.ProductMng.UnitTest";
+            }
+        }
+
+        /// <summary>
+        /// 程序集的XML地址
+        /// </summary>
+        public string DllXmlPath
+        {
+            get
+            {
+                return @"E:\mysoft\git\clxt\src\00_根目录\bin\Mysoft.Clgyl.ProductMng.xml";
+            }
+        }
+    }
+#>
