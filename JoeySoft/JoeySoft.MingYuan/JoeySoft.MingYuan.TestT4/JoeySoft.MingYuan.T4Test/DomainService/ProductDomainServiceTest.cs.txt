@@ -1,6 +1,6 @@
-using Mysoft.Clgyl.ProductMng.DomainServices;
-using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
-using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.Clgyl.ProductMng.Model;
 using Mysoft.Clgyl.Utility;
 using Mysoft.Map6.Platform.Services;
 using Mysoft.Map6.Platform.Services.Fakes;
@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
+namespace Mysoft.Clgyl.Clgyl.ProductMng.UnitTest.DomainServices
 {
 	/// <summary>
     /// 材料领域服务单测
@@ -41,6 +41,8 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         private readonly StubIContractPublicService _iContractPublicService = new StubIContractPublicService();
         private readonly StubIProductRequirementPublicService _iProductRequirementPublicService = new StubIProductRequirementPublicService();
         private readonly StubISaleContractPublicService _iSaleContractPublicService = new StubISaleContractPublicService();
+        private readonly StubIRoleAclPublicService _iRoleAclPublicService = new StubIRoleAclPublicService();
+        private readonly StubIUserAuthPublicService _iUserAuthPublicService = new StubIUserAuthPublicService();
         #endregion
 
         private readonly string _productFileJsonName = "Product.json";
@@ -60,10 +62,12 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
             TestMockServiceResolver.RegisterInstance<IContractPublicService, StubIContractPublicService>(_iContractPublicService);
             TestMockServiceResolver.RegisterInstance<IProductRequirementPublicService, StubIProductRequirementPublicService>(_iProductRequirementPublicService);
             TestMockServiceResolver.RegisterInstance<ISaleContractPublicService, StubISaleContractPublicService>(_iSaleContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IRoleAclPublicService, StubIRoleAclPublicService>(_iRoleAclPublicService);
+            TestMockServiceResolver.RegisterInstance<IUserAuthPublicService, StubIUserAuthPublicService>(_iUserAuthPublicService);
             _productMock.LoadData(_productFileJsonName);
         }
 
-        #region  材料领域服务单测 88个方法
+        #region  材料领域服务单测 89个方法
         [Test(Description = "保存材料")]
         public void Save_Test()
         {
@@ -476,6 +480,11 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
         }
         [Test(Description = "判断公司是否被材料引用")]
         public void IsExistMyBusinessUnit_Test()
+        {
+            
+        }
+        [Test(Description = "材料价格查询列表API")]
+        public void QueryProductPrice_Test()
         {
             
         }

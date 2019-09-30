@@ -14,7 +14,7 @@
         {
             get
             {
-                return "ProductMng";
+                return "Clgyl.ProductMng";
             }
         }
 

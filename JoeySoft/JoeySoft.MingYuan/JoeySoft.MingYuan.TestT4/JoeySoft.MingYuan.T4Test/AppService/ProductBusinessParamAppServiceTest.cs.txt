@@ -2,7 +2,6 @@ using Mysoft.Clgyl.ProductMng.AppServices;
 using Mysoft.Clgyl.ProductMng.DomainServices;
 using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
 using Mysoft.Clgyl.ProductMng.Model;
-using Mysoft.Clgyl.Utility;
 using Mysoft.Map6.Platform.Services;
 using Mysoft.Map6.Platform.Services.Fakes;
 using Mysoft.Map6.Platform.Exceptions;

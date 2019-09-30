@@ -163,11 +163,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainService\DomainServiceTestTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DomainServiceTestTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Include="Manager.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,31 +195,6 @@
     <Content Include="AppService\ProductPriceAppServiceTest.cs.txt">
       <DependentUpon>AppServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DLL\Mysoft.Clgyl.Common.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.Common.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.Component.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ContractInvoiceMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ContractInvoiceMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ContractMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ContractMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.FinancialMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.FinancialMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.OrderMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.OrderMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.PayMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.PayMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.PlanMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.PlanMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ProductMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ProductMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ProjectPrep.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ProjectPrep.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ReceivableMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.ReceivableMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.Resource.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.SaleMng.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.SaleMng.Model.dll" />
-    <Content Include="DLL\Mysoft.Clgyl.Utility.dll" />
     <Content Include="DomainService\DomainServiceTestTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DomainServiceTestTemplate.cs</LastGenOutput>

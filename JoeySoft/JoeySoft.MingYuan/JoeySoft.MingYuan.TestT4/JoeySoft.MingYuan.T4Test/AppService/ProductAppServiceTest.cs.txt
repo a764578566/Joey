@@ -2,7 +2,6 @@ using Mysoft.Clgyl.ProductMng.AppServices;
 using Mysoft.Clgyl.ProductMng.DomainServices;
 using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
 using Mysoft.Clgyl.ProductMng.Model;
-using Mysoft.Clgyl.Utility;
 using Mysoft.Map6.Platform.Services;
 using Mysoft.Map6.Platform.Services.Fakes;
 using Mysoft.Map6.Platform.Exceptions;
@@ -63,7 +62,7 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
             TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);
             TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
         }
-        #region  材料管理应用服务单测 38个方法
+        #region  材料管理应用服务单测 39个方法
         [Test(Description = "保存材料")]
         public void Save_Test()
         {
@@ -251,6 +250,11 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
         }
         [Test(Description = "图片批量上传")]
         public void SaveProductPicturesAsync_Test()
+        {
+            
+        }
+        [Test(Description = "材料价格查询列表API")]
+        public void QueryProductPrice_Test()
         {
             
         }

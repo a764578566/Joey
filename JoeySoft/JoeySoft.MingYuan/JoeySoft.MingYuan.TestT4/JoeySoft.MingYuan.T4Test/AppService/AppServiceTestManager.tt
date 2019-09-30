@@ -35,19 +35,19 @@
         session["AppServiceName"]=Path.GetFileNameWithoutExtension(item);
         session["EntityName"]=entityName;
 
-        var classDescriptionNode = xmlDoc.SelectSingleNode($"/doc/members/member[starts-with(@name,'T:Mysoft.Clgyl."+moduleName+".AppServices."+entityName+"AppService')]");
+        var classDescriptionNode = xmlDoc.SelectSingleNode($"/doc/members/member[starts-with(@name,'T:Mysoft."+moduleName+".AppServices."+entityName+"AppService')]");
 
         var classDescription = string.Format("{0}", classDescriptionNode.SelectSingleNode("summary").InnerText.Replace("\r\n", "").Replace(" ", ""));
         session["ClassDescription"]=classDescription;
 
-        var list = xmlDoc.SelectNodes("/doc/members/member[starts-with(@name,'M:Mysoft.Clgyl."+moduleName+".AppServices."+entityName+"AppService')]");
+        var list = xmlDoc.SelectNodes("/doc/members/member[starts-with(@name,'M:Mysoft."+moduleName+".AppServices."+entityName+"AppService')]");
         
         List<string> methodNames = new List<string>();
         List<string> descriptions = new List<string>();
 
         foreach (XmlNode node in list)
         {
-            string method = node.Attributes["name"].InnerText.Replace("M:Mysoft.Clgyl."+moduleName+".AppServices."+entityName+"AppService.", "");
+            string method = node.Attributes["name"].InnerText.Replace("M:Mysoft."+moduleName+".AppServices."+entityName+"AppService.", "");
             if (method.IndexOf('(') == -1)
             {
                 methodNames.Add(string.Format("{0}", method));
@@ -62,7 +62,7 @@
         session["MethodNames"] = methodNames;
         session["Descriptions"] = descriptions;
 
-        var list2 = xmlDoc.SelectNodes($"/doc/members/member[starts-with(@name,'F:Mysoft.Clgyl."+moduleName+".AppServices."+entityName+"AppService.')]");
+        var list2 = xmlDoc.SelectNodes($"/doc/members/member[starts-with(@name,'F:Mysoft."+moduleName+".AppServices."+entityName+"AppService.')]");
 
         List<string> publicServiceNames = new List<string>();
         List<string> domainServiceNames = new List<string>();
@@ -72,7 +72,7 @@
         foreach (XmlNode node in list2)
         {
             //_projectOverviewDomainService
-            string name = node.Attributes["name"].InnerText.Replace($"F:Mysoft.Clgyl."+moduleName+".AppServices."+entityName+"AppService.", "");
+            string name = node.Attributes["name"].InnerText.Replace($"F:Mysoft."+moduleName+".AppServices."+entityName+"AppService.", "");
             if (name.IndexOf("_i") == -1)
             {
                 if (name.ToLower().IndexOf("domainservice") != -1)
