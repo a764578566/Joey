@@ -1,6 +1,6 @@
-using Mysoft.Clgyl.Clgyl.ProductMng.DomainServices;
-using Mysoft.Clgyl.Clgyl.ProductMng.DomainServices.Fakes;
-using Mysoft.Clgyl.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.ProductMng.DomainServices;
+using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
+using Mysoft.Clgyl.ProductMng.Model;
 using Mysoft.Clgyl.Utility;
 using Mysoft.Map6.Platform.Services;
 using Mysoft.Map6.Platform.Services.Fakes;
@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mysoft.Clgyl.Clgyl.ProductMng.UnitTest.DomainServices
+namespace Mysoft.Clgyl.ProductMng.UnitTest.DomainServices
 {
 	/// <summary>
     /// 材料安装费领域服务单测

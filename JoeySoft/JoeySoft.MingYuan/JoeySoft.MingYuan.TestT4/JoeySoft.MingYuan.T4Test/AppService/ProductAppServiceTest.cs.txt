@@ -2,6 +2,7 @@ using Mysoft.Clgyl.ProductMng.AppServices;
 using Mysoft.Clgyl.ProductMng.DomainServices;
 using Mysoft.Clgyl.ProductMng.DomainServices.Fakes;
 using Mysoft.Clgyl.ProductMng.Model;
+using Mysoft.Clgyl.Utility;
 using Mysoft.Map6.Platform.Services;
 using Mysoft.Map6.Platform.Services.Fakes;
 using Mysoft.Map6.Platform.Exceptions;
@@ -28,8 +29,6 @@ namespace Mysoft.Clgyl.ProductMng.UnitTest.AppServices
 
         private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
 
-        private readonly EntityMocker<Product> _productMock = new EntityMocker<Product>();
-        
         private readonly StubProductDomainService _productDomainService = new StubProductDomainService();
         private readonly StubProductCategoryDomainService _productCategoryDomainService = new StubProductCategoryDomainService();
         private readonly StubProductImportDomainService _productImportDomainService = new StubProductImportDomainService();

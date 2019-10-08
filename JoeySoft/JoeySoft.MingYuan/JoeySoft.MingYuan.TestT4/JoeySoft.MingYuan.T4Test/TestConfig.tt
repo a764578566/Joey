@@ -8,13 +8,24 @@
     class TestConfig
     {
         /// <summary>
+        /// 系统名称
+        /// </summary>
+        public string SysName
+        {
+            get
+            {
+                return "Clgyl";
+            }
+        }
+
+        /// <summary>
         /// 模块名称
         /// </summary>
         public string ModuleName
         {
             get
             {
-                return "Clgyl.ProductMng";
+                return "ProductMng";
             }
         }
 

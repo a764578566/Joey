@@ -12,7 +12,7 @@
 <# 
     var testConfig = new TestConfig();
 
-    var moduleName = testConfig.ModuleName;
+    var moduleName =testConfig.SysName + "." + testConfig.ModuleName;
     var currentPath = testConfig.UnitTestPath;
     XmlDocument xmlDoc = new XmlDocument();
     xmlDoc.Load(testConfig.DllXmlPath);
@@ -30,6 +30,7 @@
 
         var entityName=Path.GetFileNameWithoutExtension(item).Replace("AppService","");
 
+        session["SysName"] = testConfig.SysName ;
         session["ModuleName"] = moduleName;
         session["TestName"] = fileName;
         session["AppServiceName"]=Path.GetFileNameWithoutExtension(item);

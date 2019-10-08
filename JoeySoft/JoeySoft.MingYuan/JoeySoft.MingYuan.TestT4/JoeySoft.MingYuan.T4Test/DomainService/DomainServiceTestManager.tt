@@ -11,7 +11,7 @@
 <# 
     var testConfig = new TestConfig();
 
-    var moduleName = testConfig.ModuleName;
+    var moduleName =testConfig.SysName + "." + testConfig.ModuleName;
     var currentPath = testConfig.UnitTestPath;
     XmlDocument xmlDoc = new XmlDocument();
     xmlDoc.Load(testConfig.DllXmlPath);
@@ -28,6 +28,7 @@
         TextTemplatingSession session = new TextTemplatingSession();
         var fileName = Path.GetFileNameWithoutExtension(item)+"Test";
         var entityName=Path.GetFileNameWithoutExtension(item).Replace("DomainService","");
+        session["SysName"] = testConfig.SysName;
         session["ModuleName"] = moduleName;
         session["TestName"] = fileName;
         session["DomainServiceName"]=Path.GetFileNameWithoutExtension(item);
