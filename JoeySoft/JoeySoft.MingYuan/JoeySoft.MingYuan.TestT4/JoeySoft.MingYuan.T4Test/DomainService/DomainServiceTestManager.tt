@@ -9,6 +9,7 @@
 <#@ include file="..\Manager.tt"#>
 <#@ include file="..\TestConfig.tt"#>
 <# 
+    var serviceNames = new string[] { "AggregateService", "DomainService" };
     var testConfig = new TestConfig();
 
     var moduleName =testConfig.SysName + "." + testConfig.ModuleName;
@@ -22,90 +23,97 @@
 
     foreach(var item in Directory.GetFiles(Path.Combine(appPath,"DomainServices")) )
     {
-        string templateFile = this.Host.ResolvePath("DomainServiceTestTemplate.tt");
-        string templateContent = File.ReadAllText(templateFile);
+        foreach (var serviceName in serviceNames)
+        {
+            string templateFile = this.Host.ResolvePath("DomainServiceTestTemplate.tt");
+            string templateContent = File.ReadAllText(templateFile);
 
-        TextTemplatingSession session = new TextTemplatingSession();
-        var fileName = Path.GetFileNameWithoutExtension(item)+"Test";
-        var entityName=Path.GetFileNameWithoutExtension(item).Replace("DomainService","");
-        session["SysName"] = testConfig.SysName;
-        session["ModuleName"] = moduleName;
-        session["TestName"] = fileName;
-        session["DomainServiceName"]=Path.GetFileNameWithoutExtension(item);
-        session["EntityName"]=entityName;
+            TextTemplatingSession session = new TextTemplatingSession();
+            var fileName = Path.GetFileNameWithoutExtension(item)+"Test";
+            var entityName=Path.GetFileNameWithoutExtension(item).Replace(serviceName,"");
+            session["SysName"] = testConfig.SysName;
+            session["ModuleName"] = moduleName;
+            session["TestName"] = fileName;
+            session["DomainServiceName"]=Path.GetFileNameWithoutExtension(item);
+            session["EntityName"]=entityName;
 
-        var classDescriptionNode = xmlDoc.SelectSingleNode($"/doc/members/member[starts-with(@name,'T:Mysoft."+moduleName+".DomainServices."+entityName+"DomainService')]");
+            var classDescriptionNode = xmlDoc.SelectSingleNode($"/doc/members/member[starts-with(@name,'T:Mysoft."+moduleName+".DomainServices."+entityName+serviceName+"')]");
 
-        var classDescription = string.Format("{0}", classDescriptionNode.SelectSingleNode("summary").InnerText.Replace("\r\n", "").Replace(" ", ""));
-        session["ClassDescription"]=classDescription;
+            if(classDescriptionNode==null)
+            {
+                continue;
+            }
+            var classDescription = string.Format("{0}", classDescriptionNode.SelectSingleNode("summary").InnerText.Replace("\r\n", "").Replace(" ", ""));
+            session["ClassDescription"]=classDescription;
 
-        var list = xmlDoc.SelectNodes("/doc/members/member[starts-with(@name,'M:Mysoft."+moduleName+".DomainServices."+entityName+"DomainService')]");
+            var list = xmlDoc.SelectNodes("/doc/members/member[starts-with(@name,'M:Mysoft."+moduleName+".DomainServices."+entityName+serviceName+"')]");
         
-        List<string> methodNames = new List<string>();
-        List<string> descriptions = new List<string>();
+            List<string> methodNames = new List<string>();
+            List<string> descriptions = new List<string>();
 
-        foreach (XmlNode node in list)
-        {
-            string method = node.Attributes["name"].InnerText.Replace("M:Mysoft."+moduleName+".DomainServices."+entityName+"DomainService.", "");
-            if (method.IndexOf('(') == -1)
+            foreach (XmlNode node in list)
             {
-                methodNames.Add(string.Format("{0}", method));
+                string method = node.Attributes["name"].InnerText.Replace("M:Mysoft."+moduleName+".DomainServices."+entityName+serviceName+".", "");
+                if (method.IndexOf('(') == -1)
+                {
+                    methodNames.Add(string.Format("{0}", method));
+                }
+                else
+                {
+                    methodNames.Add(string.Format("{0}", method.Substring(0, method.IndexOf('('))));
+                }
+
+                descriptions.Add(string.Format("{0}", node.SelectSingleNode("summary").InnerText.Replace("\r\n", "").Replace(" ", "")));
             }
-            else
+            session["MethodNames"] = methodNames;
+            session["Descriptions"] = descriptions;
+
+            var list2 = xmlDoc.SelectNodes($"/doc/members/member[starts-with(@name,'F:Mysoft."+moduleName+".DomainServices."+entityName+serviceName+".')]");
+
+            List<string> publicServiceNames = new List<string>();
+            List<string> domainServiceNames = new List<string>();
+
+            List<string> testMockServiceResolvers = new  List<string> ();
+
+            foreach (XmlNode node in list2)
             {
-                methodNames.Add(string.Format("{0}", method.Substring(0, method.IndexOf('('))));
-            }
-
-            descriptions.Add(string.Format("{0}", node.SelectSingleNode("summary").InnerText.Replace("\r\n", "").Replace(" ", "")));
-        }
-        session["MethodNames"] = methodNames;
-        session["Descriptions"] = descriptions;
-
-        var list2 = xmlDoc.SelectNodes($"/doc/members/member[starts-with(@name,'F:Mysoft."+moduleName+".DomainServices."+entityName+"DomainService.')]");
-
-        List<string> publicServiceNames = new List<string>();
-        List<string> domainServiceNames = new List<string>();
-
-        List<string> testMockServiceResolvers = new  List<string> ();
-
-        foreach (XmlNode node in list2)
-        {
                 
-            //_projectOverviewDomainService
-            string name = node.Attributes["name"].InnerText.Replace($"F:Mysoft."+moduleName+".DomainServices."+entityName+"DomainService.", "");
-            if (name.IndexOf("_i") == -1)
-            {
-                if (name.ToLower().IndexOf("domainservice") != -1)
+                //_projectOverviewDomainService
+                string name = node.Attributes["name"].InnerText.Replace($"F:Mysoft."+moduleName+".DomainServices."+entityName+serviceName+".", "");
+                if (name.IndexOf("_i") == -1)
+                {
+                    if (name.ToLower().IndexOf(serviceName) != -1)
+                    {
+                        string str = name.Replace("_", "");
+                        str= str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
+                        domainServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();",str , name));
+                        testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});",str,name));
+                    }
+                }
+                else
                 {
                     string str = name.Replace("_", "");
                     str= str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
-                    domainServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();",str , name));
+                    publicServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();",str, name));
                     testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});",str,name));
                 }
             }
-            else
-            {
-                string str = name.Replace("_", "");
-                str= str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
-                publicServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();",str, name));
-                testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});",str,name));
-            }
+            session["PublicServiceNames"] = publicServiceNames;
+            session["DomainServiceNames"] = domainServiceNames;
+            session["TestMockServiceResolvers"] = testMockServiceResolvers;
+
+            var sessionHost = (ITextTemplatingSessionHost) this.Host;
+            sessionHost.Session = session;
+
+            Engine engine = new Engine();
+            string generatedContent = engine.ProcessTemplate(templateContent, this.Host);
+
+            manager.StartNewFile(fileName+".cs.txt"); 
+
+            this.Write(generatedContent); 
+
+            manager.EndBlock();
         }
-        session["PublicServiceNames"] = publicServiceNames;
-        session["DomainServiceNames"] = domainServiceNames;
-        session["TestMockServiceResolvers"] = testMockServiceResolvers;
-
-        var sessionHost = (ITextTemplatingSessionHost) this.Host;
-        sessionHost.Session = session;
-
-        Engine engine = new Engine();
-        string generatedContent = engine.ProcessTemplate(templateContent, this.Host);
-
-        manager.StartNewFile(fileName+".cs.txt"); 
-
-        this.Write(generatedContent); 
-
-        manager.EndBlock();
     }
 
     manager.Process(true);

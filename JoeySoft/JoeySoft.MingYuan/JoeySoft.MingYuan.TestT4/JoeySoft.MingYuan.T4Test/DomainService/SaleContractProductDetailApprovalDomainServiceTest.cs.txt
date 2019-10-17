@@ -1,0 +1,172 @@
+using Mysoft.Clgyl.SaleMng.DomainServices;
+using Mysoft.Clgyl.SaleMng.DomainServices.Fakes;
+using Mysoft.Clgyl.SaleMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 合同明细审批服务类单测
+    /// </summary>
+    [TestFixture]
+    public class SaleContractProductDetailApprovalDomainServiceTest
+    {
+		private readonly SaleContractProductDetailApprovalDomainService _saleContractProductDetailApprovalDomainService = new SaleContractProductDetailApprovalDomainService();
+
+        private readonly EntityMocker<SaleContractProductDetailApproval> _saleContractProductDetailApprovalMock = new EntityMocker<SaleContractProductDetailApproval>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        #region 接口服务
+        private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
+        private readonly StubIProviderPublicService _iProviderPublicService = new StubIProviderPublicService();
+        private readonly StubICommonContractPublicService _iCommonContractPublicService = new StubICommonContractPublicService();
+        private readonly StubIContractPublicService _iContractPublicService = new StubIContractPublicService();
+        private readonly StubIBcContractPublicService _iBcContractPublicService = new StubIBcContractPublicService();
+        #endregion
+
+        private readonly string _saleContractProductDetailApprovalFileJsonName = "SaleContractProductDetailApproval.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
+            TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);
+            TestMockServiceResolver.RegisterInstance<ICommonContractPublicService, StubICommonContractPublicService>(_iCommonContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IContractPublicService, StubIContractPublicService>(_iContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IBcContractPublicService, StubIBcContractPublicService>(_iBcContractPublicService);
+            _saleContractProductDetailApprovalMock.LoadData(_saleContractProductDetailApprovalFileJsonName);
+        }
+
+        #region  合同明细审批服务类单测 23个方法
+        [Test(Description = "是否合同材料明细校验合格")]
+        public void IsSaleContractProductDetailApprovable_Test()
+        {
+            
+        }
+        [Test(Description = "校验同材料明细校验")]
+        public void CheckSaleContractProductDetailApproval_Test()
+        {
+            
+        }
+        [Test(Description = "校验关联采购合同材料明细审批校验")]
+        public void CheckRelatedContractProductDetailApproval_Test()
+        {
+            
+        }
+        [Test(Description = "检查主合同材料明细")]
+        public void CheckSaleContractProductDetails_Test()
+        {
+            
+        }
+        [Test(Description = "检查保存主合同材料明细")]
+        public void CheckSaveSaleContractProductDetails_Test()
+        {
+            
+        }
+        [Test(Description = "内部方法校验主合同材料明细")]
+        public void InnerCheckSaleContractProductDetails_Test()
+        {
+            
+        }
+        [Test(Description = "检查合同明细")]
+        public void CheckSaleContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "校验采购合同数目")]
+        public void CheckSaleContractCount_Test()
+        {
+            
+        }
+        [Test(Description = "是否补充合同材料明细校验合格")]
+        public void IsSaleBcContractProductDetailApprovable_Test()
+        {
+            
+        }
+        [Test(Description = "是否补充合同材料明细校验合格")]
+        public void CheckSaleBcContractProductDetailApproval_Test()
+        {
+            
+        }
+        [Test(Description = "校验关联采购补充合同材料明细审批校验")]
+        public void CheckRelatedBcContractProductDetailApproval_Test()
+        {
+            
+        }
+        [Test(Description = "检查补充合同所有合同明细")]
+        public void CheckSaleBcContractProductDetails_Test()
+        {
+            
+        }
+        [Test(Description = "检查保存补充合同所有合同明细")]
+        public void CheckSaveSaleBcContractProductDetails_Test()
+        {
+            
+        }
+        [Test(Description = "获得补充合同验证明细上下文")]
+        public void GetSaleBcContractApprovalValidationContext_Test()
+        {
+            
+        }
+        [Test(Description = "检查补充合同")]
+        public void CheckSaleBcContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "检查保存补充合同")]
+        public void CheckSaveSaleBcContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "校验已经保存补充合后，最终材料明细数目")]
+        public void CheckSaleBcContractCount_Test()
+        {
+            
+        }
+        [Test(Description = "校验保存前的（还未保存），最终材料明细数目")]
+        public void CheckSaveBcContractCount_Test()
+        {
+            
+        }
+        [Test(Description = "校验最终生效材料数目")]
+        public void CheckEventuallyEffectiveCount_Test()
+        {
+            
+        }
+        [Test(Description = "没有关联的销售合同")]
+        public void CheckRelatedContract_Test()
+        {
+            
+        }
+        [Test(Description = "校验税率")]
+        public void CheckTaxRate_Test()
+        {
+            
+        }
+        [Test(Description = "校验明细价格，PriceType不含税、含税")]
+        public void CheckPrice_Test()
+        {
+            
+        }
+        [Test(Description = "获得合同明细验证上下文")]
+        public void GetProviderTaxItems_Test()
+        {
+            
+        }
+       #endregion
+	}
+}

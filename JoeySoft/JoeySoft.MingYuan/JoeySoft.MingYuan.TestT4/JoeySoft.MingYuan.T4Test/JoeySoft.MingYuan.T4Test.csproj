@@ -169,56 +169,49 @@
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestConfig1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestConfig.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppService\AppServiceTestManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AppServiceTestManager.cs</LastGenOutput>
     </Content>
-    <Content Include="AppService\ProductAppServiceTest.cs.txt">
+    <Content Include="AppService\OnlineSaleContractProductAppServiceTest.cs.txt">
       <DependentUpon>AppServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="AppService\ProductAuxiliaryAppServiceTest.cs.txt">
+    <Content Include="AppService\SaleBcContractAppServiceTest.cs.txt">
       <DependentUpon>AppServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="AppService\ProductBusinessParamAppServiceTest.cs.txt">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Content>
-    <Content Include="AppService\ProductCategoryAppServiceTest.cs.txt">
-      <DependentUpon>AppServiceTestManager.tt</DependentUpon>
-    </Content>
-    <Content Include="AppService\ProductPriceAppServiceTest.cs.txt">
+    <Content Include="AppService\SaleContractAppServiceTest.cs.txt">
       <DependentUpon>AppServiceTestManager.tt</DependentUpon>
     </Content>
     <Content Include="DomainService\DomainServiceTestTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DomainServiceTestTemplate.cs</LastGenOutput>
     </Content>
-    <Content Include="DomainService\ProductAuxiliaryDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleBcContractDomainServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DomainService\ProductCategoryAttributeDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleBcContractInitialFillinDomainServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DomainService\ProductCategoryDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleContractAggregateServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DomainService\ProductDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleContractCompareAmountDomainServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DomainService\ProductImportDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleContractDomainServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DomainService\ProductInstallFeeDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleContractInitialFillinDomainServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
-    <Content Include="DomainService\ProductPriceDomainServiceTest.cs.txt">
-      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
-    </Content>
-    <Content Include="DomainService\ProductSalePriceDomainServiceTest.cs.txt">
-      <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
-    </Content>
-    <Content Include="DomainService\ProductTransportCostDomainServiceTest.cs.txt">
+    <Content Include="DomainService\SaleContractProductDetailApprovalDomainServiceTest.cs.txt">
       <DependentUpon>DomainServiceTestManager.tt</DependentUpon>
     </Content>
     <Content Include="Manager.tt">

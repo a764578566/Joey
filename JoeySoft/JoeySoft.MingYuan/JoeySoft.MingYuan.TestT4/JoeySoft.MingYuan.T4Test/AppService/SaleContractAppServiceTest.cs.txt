@@ -1,0 +1,296 @@
+using Mysoft.Clgyl.SaleMng.AppServices;
+using Mysoft.Clgyl.SaleMng.DomainServices;
+using Mysoft.Clgyl.SaleMng.DomainServices.Fakes;
+using Mysoft.Clgyl.SaleMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.SaleMng.UnitTest.AppServices
+{
+	/// <summary>
+    /// 销售合同应用服务单测 
+    /// </summary>
+    [TestFixture]
+    public class SaleContractAppServiceTest
+    {
+		private readonly SaleContractAppService _saleContractAppService = new SaleContractAppService();
+
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+
+        private readonly StubSaleContractDomainService _saleContractDomainService = new StubSaleContractDomainService();
+        private readonly StubSaleContractProductDetailApprovalDomainService _saleContractProductDetailApprovalDomainService = new StubSaleContractProductDetailApprovalDomainService();
+        private readonly StubSaleContractCompareAmountDomainService _saleContractCompareAmountDomainService = new StubSaleContractCompareAmountDomainService();
+        private readonly StubSaleBcContractDomainService _saleBcContractDomainService = new StubSaleBcContractDomainService();
+        private readonly StubSaleContractInitialFillinDomainService _saleContractInitialFillinDomainService = new StubSaleContractInitialFillinDomainService();
+        #region 接口服务
+        private readonly StubIContractPublicService _iContractPublicService = new StubIContractPublicService();
+        private readonly StubIProductPricePublicService _iProductPricePublicService = new StubIProductPricePublicService();
+        private readonly StubIReceivablePublicService _iReceivablePublicService = new StubIReceivablePublicService();
+        private readonly StubICommonContractPublicService _iCommonContractPublicService = new StubICommonContractPublicService();
+        private readonly StubIProviderPublicService _iProviderPublicService = new StubIProviderPublicService();
+        private readonly StubIProductPublicService _iProductPublicService = new StubIProductPublicService();
+        private readonly StubIRecipientPublicService _iRecipientPublicService = new StubIRecipientPublicService();
+        private readonly StubIContractInvoicePublicService _iContractInvoicePublicService = new StubIContractInvoicePublicService();
+        private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
+        #endregion
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<SaleContractDomainService, StubSaleContractDomainService>(_saleContractDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleContractProductDetailApprovalDomainService, StubSaleContractProductDetailApprovalDomainService>(_saleContractProductDetailApprovalDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleContractCompareAmountDomainService, StubSaleContractCompareAmountDomainService>(_saleContractCompareAmountDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleBcContractDomainService, StubSaleBcContractDomainService>(_saleBcContractDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleContractInitialFillinDomainService, StubSaleContractInitialFillinDomainService>(_saleContractInitialFillinDomainService);
+            TestMockServiceResolver.RegisterInstance<IContractPublicService, StubIContractPublicService>(_iContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IProductPricePublicService, StubIProductPricePublicService>(_iProductPricePublicService);
+            TestMockServiceResolver.RegisterInstance<IReceivablePublicService, StubIReceivablePublicService>(_iReceivablePublicService);
+            TestMockServiceResolver.RegisterInstance<ICommonContractPublicService, StubICommonContractPublicService>(_iCommonContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);
+            TestMockServiceResolver.RegisterInstance<IProductPublicService, StubIProductPublicService>(_iProductPublicService);
+            TestMockServiceResolver.RegisterInstance<IRecipientPublicService, StubIRecipientPublicService>(_iRecipientPublicService);
+            TestMockServiceResolver.RegisterInstance<IContractInvoicePublicService, StubIContractInvoicePublicService>(_iContractInvoicePublicService);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
+        }
+        #region  销售合同应用服务单测 45个方法
+        [Test(Description = "提交审批前")]
+        public void BeforeApproving_Test()
+        {
+            
+        }
+        [Test(Description = "提交审批后")]
+        public void AfterApproving_Test()
+        {
+            
+        }
+        [Test(Description = "审批通过后")]
+        public void AfterApproved_Test()
+        {
+            
+        }
+        [Test(Description = "审批驳回前")]
+        public void BeforeUnApprove_Test()
+        {
+            
+        }
+        [Test(Description = "审批驳回后")]
+        public void AfterUnApprove_Test()
+        {
+            
+        }
+        [Test(Description = "保存前校验")]
+        public void CheckSave_Test()
+        {
+            
+        }
+        [Test(Description = "保存销售合同")]
+        public void Save_Test()
+        {
+            
+        }
+        [Test(Description = "删除前校验销售合同")]
+        public void CheckDelete_Test()
+        {
+            
+        }
+        [Test(Description = "检查是否关联采购合同")]
+        public void CheckIsRelationContract_Test()
+        {
+            
+        }
+        [Test(Description = "删除销售合同")]
+        public void Delete_Test()
+        {
+            
+        }
+        [Test(Description = "删除销售合同材料前校验")]
+        public void CheckDeleteProduct_Test()
+        {
+            
+        }
+        [Test(Description = "删除销售合同材料")]
+        public void DeleteProduct_Test()
+        {
+            
+        }
+        [Test(Description = "删除销售合同全部材料")]
+        public void DeleteAllProducts_Test()
+        {
+            
+        }
+        [Test(Description = "根据合同材料明细计算合同默认金额")]
+        public void GetAmountByContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "添加销售补充合同前校验")]
+        public void CheckAddSaleBcContract_Test()
+        {
+            
+        }
+        [Test(Description = "更新合同材料")]
+        public void SaveSaleContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "添加销售合同材料明细")]
+        public void AddSaleContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "保存新增材料明细(批量)")]
+        public void InsertProductDetails_Test()
+        {
+            
+        }
+        [Test(Description = "材料价格沉淀")]
+        public void SaveProductPrice_Test()
+        {
+            
+        }
+        [Test(Description = "获取材料价格信息")]
+        public void GetProductPriceDtoList_Test()
+        {
+            
+        }
+        [Test(Description = "关联采购合同前校验")]
+        public void CheckRelationContract_Test()
+        {
+            
+        }
+        [Test(Description = "生成采购合同前校验")]
+        public void CheckCreateContract_Test()
+        {
+            
+        }
+        [Test(Description = "生成采购")]
+        public void CreateContract_Test()
+        {
+            
+        }
+        [Test(Description = "默认新增")]
+        public void GetFillinInfoByDefault_Test()
+        {
+            
+        }
+        [Test(Description = "导出销售合同材料数据")]
+        public void ExportSaleContractProduct_Test()
+        {
+            
+        }
+        [Test(Description = "数据对象转dto")]
+        public void GetSaleContractProductExeclDTOList_Test()
+        {
+            
+        }
+        [Test(Description = "根据乙方单位，获取乙方单位对应的税率")]
+        public void GetTaxList_Test()
+        {
+            
+        }
+        [Test(Description = "销售合同批量调整材料价格")]
+        public void UpdateSaleContractProduct_Test()
+        {
+            
+        }
+        [Test(Description = "失败处理")]
+        public void UpdateSaleContractProductErrorHandle_Test()
+        {
+            
+        }
+        [Test(Description = "根据供应商GUID，获取供应商税目")]
+        public void GetProviderTaxItem_Test()
+        {
+            
+        }
+        [Test(Description = "销售合同批量调整材料价格导入检查")]
+        public void CheckImport_Test()
+        {
+            
+        }
+        [Test(Description = "校验合同数量")]
+        public void CheckCount_Test()
+        {
+            
+        }
+        [Test(Description = "判断是否下拉框中的税率")]
+        public void CheckProductTaxRate_Test()
+        {
+            
+        }
+        [Test(Description = "判断材料是否在合同材料中")]
+        public void CheckSaleContractProducts_Test()
+        {
+            
+        }
+        [Test(Description = "含税价、不含税价必填校验")]
+        public void CheckProductPricOrNotTaxPrice_Test()
+        {
+            
+        }
+        [Test(Description = "根据销售合同GUID集合，获取材料明细")]
+        public void GetSaleContractProductDetailsBySaleContractGUIDs_Test()
+        {
+            
+        }
+        [Test(Description = "根据采购合同GUID获取销售合同材料明细按GUID排序，注意应该场景")]
+        public void GetSaleContractProductDetailBySaleContractGUID_Test()
+        {
+            
+        }
+        [Test(Description = "根据销售合同GUID，获取材料明细不排序，注意应该场景")]
+        public void GetSaleContractProductDetailsSaleContractGUID_Test()
+        {
+            
+        }
+        [Test(Description = "验证合同金额与明细总金额")]
+        public void ValidateSaleContractAmountMatched_Test()
+        {
+            
+        }
+        [Test(Description = "获取销售合同")]
+        public void GetSaleContract_Test()
+        {
+            
+        }
+        [Test(Description = "合并合同材料明细根据MasterDetailGUID")]
+        public void MergeContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "获取最新材料单价、合并数量")]
+        public void MergeSaleContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "转换SaleContractProductDetailDTO")]
+        public void ConvertSaleContractProductDetailDTO_Test()
+        {
+            
+        }
+        [Test(Description = "获得有效的供应商税目")]
+        public void GetProviderTaxItems_Test()
+        {
+            
+        }
+        [Test(Description = "校验销售合同材料明细")]
+        public void CheckSaleContractProductDetailApproval_Test()
+        {
+            
+        }
+        #endregion
+	}
+}

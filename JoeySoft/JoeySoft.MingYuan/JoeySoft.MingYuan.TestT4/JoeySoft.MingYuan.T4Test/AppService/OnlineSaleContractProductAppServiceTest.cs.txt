@@ -1,0 +1,203 @@
+using Mysoft.Clgyl.SaleMng.AppServices;
+using Mysoft.Clgyl.SaleMng.DomainServices;
+using Mysoft.Clgyl.SaleMng.DomainServices.Fakes;
+using Mysoft.Clgyl.SaleMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.SaleMng.UnitTest.AppServices
+{
+	/// <summary>
+    /// 销售合同应用服务单测 
+    /// </summary>
+    [TestFixture]
+    public class OnlineSaleContractProductAppServiceTest
+    {
+		private readonly OnlineSaleContractProductAppService _onlineSaleContractProductAppService = new OnlineSaleContractProductAppService();
+
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+
+        private readonly StubSaleContractDomainService _saleContractDomainService = new StubSaleContractDomainService();
+        private readonly StubSaleBcContractDomainService _saleBcContractDomainService = new StubSaleBcContractDomainService();
+        private readonly StubSaleContractProductDetailApprovalDomainService _saleContractProductDetailApprovalDomainService = new StubSaleContractProductDetailApprovalDomainService();
+        #region 接口服务
+        private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
+        private readonly StubIProviderPublicService _iProviderPublicService = new StubIProviderPublicService();
+        #endregion
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<SaleContractDomainService, StubSaleContractDomainService>(_saleContractDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleBcContractDomainService, StubSaleBcContractDomainService>(_saleBcContractDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleContractProductDetailApprovalDomainService, StubSaleContractProductDetailApprovalDomainService>(_saleContractProductDetailApprovalDomainService);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
+            TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);
+        }
+        #region  销售合同应用服务单测 30个方法
+        [Test(Description = "获得在线合同信息")]
+        public void GetOnlineSaleContract_Test()
+        {
+            
+        }
+        [Test(Description = "生成在线产品")]
+        public void GetOnlineProducts_Test()
+        {
+            
+        }
+        [Test(Description = "验证在线材料明细")]
+        public void ValidateOnlineProducts_Test()
+        {
+            
+        }
+        [Test(Description = "")]
+        public void SaveOnlineProducts_Test()
+        {
+            
+        }
+        [Test(Description = "提取验证消息")]
+        public void ExtractValidationInfos_Test()
+        {
+            
+        }
+        [Test(Description = "得到验证信息")]
+        public void GetValidationInfos_Test()
+        {
+            
+        }
+        [Test(Description = "得到保存验证信息")]
+        public void GetSaveValidationInfos_Test()
+        {
+            
+        }
+        [Test(Description = "获得合同明细上下文")]
+        public void GetOnlineProductContext_Test()
+        {
+            
+        }
+        [Test(Description = "过滤校验有问题的数据")]
+        public void GetInvalidOnlineProducts_Test()
+        {
+            
+        }
+        [Test(Description = "过滤校验有问题的数据")]
+        public void FilterInvalidOnlineProducts_Test()
+        {
+            
+        }
+        [Test(Description = "设置材料最终生效数量")]
+        public void SetEventuallyEffectiveCount_Test()
+        {
+            
+        }
+        [Test(Description = "生成单元格返回结果")]
+        public void NewCellResult_Test()
+        {
+            
+        }
+        [Test(Description = "生成Excel表单内容")]
+        public void GetWorksheetContent_Test()
+        {
+            
+        }
+        [Test(Description = "生成表单列")]
+        public void GetSheetColumns_Test()
+        {
+            
+        }
+        [Test(Description = "生成表格行")]
+        public void GetWorksheetRow_Test()
+        {
+            
+        }
+        [Test(Description = "数目表单列")]
+        public void GetCountSheetColumn_Test()
+        {
+            
+        }
+        [Test(Description = "最终生效数目表单列")]
+        public void GetEventuallyEffectiveCountSheetColumn_Test()
+        {
+            
+        }
+        [Test(Description = "税率表单列")]
+        public void GetTaxRateSheetColumn_Test()
+        {
+            
+        }
+        [Test(Description = "单价不含税表单列")]
+        public void GetTaxInclusivePriceSheetColumn_Test()
+        {
+            
+        }
+        [Test(Description = "单价不含税表单列")]
+        public void GetTaxExclusivePriceSheetColumn_Test()
+        {
+            
+        }
+        [Test(Description = "期望到货日期表单列")]
+        public void GetExpectedArrivalDateSheetColumn_Test()
+        {
+            
+        }
+        [Test(Description = "生成表单列")]
+        public void GetWorksheetColumns_Test()
+        {
+            
+        }
+        [Test(Description = "获得合同乙方有效税率")]
+        public void GetProviderTaxItems_Test()
+        {
+            
+        }
+        [Test(Description = "校验在线材料")]
+        public void CheckOnlineProduct_Test()
+        {
+            
+        }
+        [Test(Description = "将ColumnErrorMessage转换成表单单元格")]
+        public void ConvertCellComment_Test()
+        {
+            
+        }
+        [Test(Description = "依据字段名字定位字段位置")]
+        public void GetSheetCommentColumnIndex_Test()
+        {
+            
+        }
+        [Test(Description = "设置在线产品金额")]
+        public void SetOnlineProductAmount_Test()
+        {
+            
+        }
+        [Test(Description = "设置合同材料明细")]
+        public void SetContractProductDetail_Test()
+        {
+            
+        }
+        [Test(Description = "转换在线合同材料")]
+        public void ConvertOnlineProduct_Test()
+        {
+            
+        }
+        [Test(Description = "获取设置后的合同材料明细")]
+        public void GetSaleContractProductDetails_Test()
+        {
+            
+        }
+        #endregion
+	}
+}

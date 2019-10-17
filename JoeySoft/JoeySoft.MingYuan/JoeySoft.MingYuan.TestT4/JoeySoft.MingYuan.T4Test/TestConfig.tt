@@ -25,7 +25,7 @@
         {
             get
             {
-                return "ProductMng";
+                return "SaleMng";
             }
         }
 
@@ -36,7 +36,7 @@
         {
             get
             {
-                return @"E:\mysoft\git\clxt\src\01_产品库\Mysoft.Clgyl.ProductMng.UnitTest";
+                return @"E:\mysoft\git\clxt\src\06 销售管理\Mysoft.Clgyl.SaleMng.UnitTest";
             }
         }
 
@@ -47,7 +47,7 @@
         {
             get
             {
-                return @"E:\mysoft\git\clxt\src\00_根目录\bin\Mysoft.Clgyl.ProductMng.xml";
+                return @"E:\mysoft\git\clxt\src\06 销售管理\Mysoft.Clgyl.SaleMng\bin\Mysoft.Clgyl.SaleMng.XML";
             }
         }
     }

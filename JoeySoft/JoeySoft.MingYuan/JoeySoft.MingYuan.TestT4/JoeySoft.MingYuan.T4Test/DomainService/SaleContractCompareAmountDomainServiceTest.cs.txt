@@ -1,0 +1,98 @@
+using Mysoft.Clgyl.SaleMng.DomainServices;
+using Mysoft.Clgyl.SaleMng.DomainServices.Fakes;
+using Mysoft.Clgyl.SaleMng.Model;
+using Mysoft.Clgyl.Utility;
+using Mysoft.Map6.Platform.Services;
+using Mysoft.Map6.Platform.Services.Fakes;
+using Mysoft.Map6.Platform.Exceptions;
+using Mysoft.Map6.Core.Pipeline;
+using Mysoft.Map6.TestCore;
+using Mysoft.Map6.Core.Tools;
+using Mysoft.Map6.Core.EntityBase;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
+{
+	/// <summary>
+    /// 销售合同提示领域单测
+    /// </summary>
+    [TestFixture]
+    public class SaleContractCompareAmountDomainServiceTest
+    {
+		private readonly SaleContractCompareAmountDomainService _saleContractCompareAmountDomainService = new SaleContractCompareAmountDomainService();
+
+        private readonly EntityMocker<SaleContractCompareAmount> _saleContractCompareAmountMock = new EntityMocker<SaleContractCompareAmount>();
+        
+        private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        #region 接口服务
+        private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
+        private readonly StubIContractPublicService _iContractPublicService = new StubIContractPublicService();
+        private readonly StubIBcContractPublicService _iBcContractPublicService = new StubIBcContractPublicService();
+        #endregion
+
+        private readonly string _saleContractCompareAmountFileJsonName = "SaleContractCompareAmount.json";
+
+        [SetUp]
+        public void InitResource()
+        {
+            TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
+            TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
+            TestMockServiceResolver.RegisterInstance<IContractPublicService, StubIContractPublicService>(_iContractPublicService);
+            TestMockServiceResolver.RegisterInstance<IBcContractPublicService, StubIBcContractPublicService>(_iBcContractPublicService);
+            _saleContractCompareAmountMock.LoadData(_saleContractCompareAmountFileJsonName);
+        }
+
+        #region  销售合同提示领域单测 9个方法
+        [Test(Description = "合同金额是否匹配")]
+        public void IsSaleContractHtAmountMatched_Test()
+        {
+            
+        }
+        [Test(Description = "补充合同金额是否匹配")]
+        public void IsSaleBcContractHtAmountMatched_Test()
+        {
+            
+        }
+        [Test(Description = "材料明细总金额与合同金额是否匹配")]
+        public void IsTotalProductDetailAmountMatched_Test()
+        {
+            
+        }
+        [Test(Description = "验证单独合同金额")]
+        public void ValidateSaleContractAmount_Test()
+        {
+            
+        }
+        [Test(Description = "验证单独合同金额")]
+        public void ValidateSaleBcContractAmount_Test()
+        {
+            
+        }
+        [Test(Description = "验证联合审批合同金额")]
+        public void ValidateUnionSaleContractAmount_Test()
+        {
+            
+        }
+        [Test(Description = "验证联合审批补充合同金额")]
+        public void ValidateUnionSaleBcContractAmount_Test()
+        {
+            
+        }
+        [Test(Description = "如果合同没有抛出异常")]
+        public void ThrowIfNoSaleContract_Test()
+        {
+            
+        }
+        [Test(Description = "没有关联的销售合同")]
+        public void ThrowIfNoRelatedContract_Test()
+        {
+            
+        }
+       #endregion
+	}
+}
