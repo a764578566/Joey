@@ -48,6 +48,7 @@ namespace Mysoft.<#=        this.ModuleName#>.UnitTest.DomainServices
 <#    for(int i = 0; i < this.DomainServiceNames.Count; i++){ #>
         <#=            DomainServiceNames[i]#>
 <#    }#>
+
         #region 接口服务
 <#    for(int i = 0; i < this.PublicServiceNames.Count; i++){ #>
         <#=            PublicServiceNames[i]#>
