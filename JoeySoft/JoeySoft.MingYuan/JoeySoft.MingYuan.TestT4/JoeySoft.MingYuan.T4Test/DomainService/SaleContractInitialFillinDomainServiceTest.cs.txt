@@ -26,19 +26,19 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
     {
 		private readonly SaleContractInitialFillinDomainService _saleContractInitialFillinDomainService = new SaleContractInitialFillinDomainService();
 
-        private readonly EntityMocker<SaleContractInitialFillin> _saleContractInitialFillinMock = new EntityMocker<SaleContractInitialFillin>();
         
+
         private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+
         #region 接口服务
         #endregion
 
-        private readonly string _saleContractInitialFillinFileJsonName = "SaleContractInitialFillin.json";
-
+  
         [SetUp]
         public void InitResource()
         {
             TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
-            _saleContractInitialFillinMock.LoadData(_saleContractInitialFillinFileJsonName);
+ 
         }
 
         #region  销售合同初始补充单测 7个方法
@@ -47,36 +47,43 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
         {
             
         }
+
         [Test(Description = "从实际用料得到填充信息")]
         public void GetFillinInfoByProductRequirementGUID_Test()
         {
             
         }
+
         [Test(Description = "从采购合同得到填充信息")]
         public void GetFillinInfoByContractGUID_Test()
         {
             
         }
+
         [Test(Description = "设置甲方")]
         public void SetYfProvider_Test()
         {
             
         }
+
         [Test(Description = "通过销售合同设置文档")]
         public void SetOrderDocumentsByContractGUID_Test()
         {
             
         }
+
         [Test(Description = "通过实际用料设置文档")]
         public void SetOrderDocumentsByProductRequirementGUID_Test()
         {
             
         }
+
         [Test(Description = "依据销售合同GUID转换采购合同税目明细")]
         public void GenerateContractTaxItems_Test()
         {
             
         }
+
        #endregion
 	}
 }

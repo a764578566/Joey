@@ -13,7 +13,10 @@
 <#@ parameter type="System.Collections.Generic.List<System.String>" name="Descriptions" #>
 <#@ parameter type="System.Collections.Generic.List<System.String>" name="PublicServiceNames" #>
 <#@ parameter type="System.Collections.Generic.List<System.String>" name="DomainServiceNames" #>
+<#@ parameter type="System.Collections.Generic.List<System.String>" name="EntityServiceNames" #>
 <#@ parameter type="System.Collections.Generic.List<System.String>" name="TestMockServiceResolvers" #>
+<#@ parameter type="System.Collections.Generic.List<System.String>" name="FileJsonNames" #>
+<#@ parameter type="System.Collections.Generic.List<System.String>" name="LoadDataJsons" #>
 using Mysoft.<#=        this.ModuleName#>.DomainServices;
 using Mysoft.<#=        this.ModuleName#>.DomainServices.Fakes;
 using Mysoft.<#=        this.ModuleName#>.Model;
@@ -42,8 +45,10 @@ namespace Mysoft.<#=        this.ModuleName#>.UnitTest.DomainServices
     {
 		private readonly <#=        this.DomainServiceName#> _<#=        this.DomainServiceName[0].ToString().ToLower()+ this.DomainServiceName.Substring(1, this.DomainServiceName.Length - 1)#> = new <#=        this.DomainServiceName#>();
 
-        private readonly EntityMocker<<#=        this.EntityName#>> _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>Mock = new EntityMocker<<#=        this.EntityName#>>();
-        
+<#    for(int i = 0; i < this.EntityServiceNames.Count; i++){ #>
+        <#=            EntityServiceNames[i]#>
+<#    }#>        
+
         private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
 <#    for(int i = 0; i < this.DomainServiceNames.Count; i++){ #>
         <#=            DomainServiceNames[i]#>
@@ -55,8 +60,9 @@ namespace Mysoft.<#=        this.ModuleName#>.UnitTest.DomainServices
 <#    }#>
         #endregion
 
-        private readonly string _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>FileJsonName = "<#=        this.EntityName#>.json";
-
+<#    for(int i = 0; i < this.EntityServiceNames.Count; i++){ #>
+        <#=            FileJsonNames[i]#>
+<#    }#>  
         [SetUp]
         public void InitResource()
         {
@@ -64,7 +70,9 @@ namespace Mysoft.<#=        this.ModuleName#>.UnitTest.DomainServices
 <#    for(int i = 0; i < this.TestMockServiceResolvers.Count; i++){ #>
             <#=            TestMockServiceResolvers[i]#>
 <#    }#>
-            _<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>Mock.LoadData(_<#=        this.EntityName[0].ToString().ToLower()+this.EntityName.Substring(1, this.EntityName.Length - 1)#>FileJsonName);
+<#    for(int i = 0; i < this.EntityServiceNames.Count; i++){ #>
+            <#=            LoadDataJsons[i]#>
+<#    }#> 
         }
 
         #region  <#=        this.ClassDescription#>单测 <#=        this.MethodNames.Count#>个方法
@@ -74,6 +82,7 @@ namespace Mysoft.<#=        this.ModuleName#>.UnitTest.DomainServices
         {
             
         }
+
 <#    }#>
        #endregion
 	}

@@ -31,6 +31,7 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.AppServices
 
         private readonly StubSaleContractDomainService _saleContractDomainService = new StubSaleContractDomainService();
         private readonly StubSaleBcContractDomainService _saleBcContractDomainService = new StubSaleBcContractDomainService();
+        private readonly StubSaleContractAggregateService _saleContractAggregateService = new StubSaleContractAggregateService();
         private readonly StubSaleContractProductDetailApprovalDomainService _saleContractProductDetailApprovalDomainService = new StubSaleContractProductDetailApprovalDomainService();
         #region 接口服务
         private readonly StubICommonPublicService _iCommonPublicService = new StubICommonPublicService();
@@ -43,6 +44,7 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.AppServices
             TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
             TestMockServiceResolver.RegisterInstance<SaleContractDomainService, StubSaleContractDomainService>(_saleContractDomainService);
             TestMockServiceResolver.RegisterInstance<SaleBcContractDomainService, StubSaleBcContractDomainService>(_saleBcContractDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleContractAggregateService, StubSaleContractAggregateService>(_saleContractAggregateService);
             TestMockServiceResolver.RegisterInstance<SaleContractProductDetailApprovalDomainService, StubSaleContractProductDetailApprovalDomainService>(_saleContractProductDetailApprovalDomainService);
             TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
             TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);

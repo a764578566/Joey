@@ -83,6 +83,13 @@
                     domainServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();",str , name));
                     testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});",str,name));
                 }
+                else if (name.ToLower().IndexOf("aggregateservice") != -1)
+                {
+                    string str = name.Replace("_", "");
+                    str = str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
+                    domainServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();", str, name));
+                    testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});", str, name));
+                }
             }
             else
             {
@@ -92,6 +99,7 @@
                 testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});",str,name));
             }
         }
+        
         session["PublicServiceNames"] = publicServiceNames;
         session["DomainServiceNames"] = domainServiceNames;
         session["TestMockServiceResolvers"] = testMockServiceResolvers;

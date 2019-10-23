@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.MingYuan.T4Test", "JoeySoft.MingYuan.T4Test\JoeySoft.MingYuan.T4Test.csproj", "{D8370292-B105-4F2E-AC96-2A9718A6D281}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeySoft.MingYuan.TestT4Debug", "JoeySoft.MingYuan.TestT4Debug\JoeySoft.MingYuan.TestT4Debug.csproj", "{42474C4B-489B-435F-9A87-4490A587477E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D8370292-B105-4F2E-AC96-2A9718A6D281}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8370292-B105-4F2E-AC96-2A9718A6D281}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8370292-B105-4F2E-AC96-2A9718A6D281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42474C4B-489B-435F-9A87-4490A587477E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42474C4B-489B-435F-9A87-4490A587477E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42474C4B-489B-435F-9A87-4490A587477E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42474C4B-489B-435F-9A87-4490A587477E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,8 +27,17 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
 		private readonly SaleContractDomainService _saleContractDomainService = new SaleContractDomainService();
 
         private readonly EntityMocker<SaleContract> _saleContractMock = new EntityMocker<SaleContract>();
+        private readonly EntityMocker<SaleContractOrderInfo> _saleContractOrderInfoMock = new EntityMocker<SaleContractOrderInfo>();
+        private readonly EntityMocker<ContractAndSaleContractRelation> _contractAndSaleContractRelationMock = new EntityMocker<ContractAndSaleContractRelation>();
+        private readonly EntityMocker<SaleContractProductDetail> _saleContractProductDetailMock = new EntityMocker<SaleContractProductDetail>();
+        private readonly EntityMocker<SaleContractTaxItem> _saleContractTaxItemMock = new EntityMocker<SaleContractTaxItem>();
         
+
         private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+        private readonly StubSaleContractAggregateService _saleContractAggregateService = new StubSaleContractAggregateService();
+        private readonly StubSaleBcContractDomainService _saleBcContractDomainService = new StubSaleBcContractDomainService();
+        private readonly StubSaleContractInitialFillinDomainService _saleContractInitialFillinDomainService = new StubSaleContractInitialFillinDomainService();
+
         #region 接口服务
         private readonly StubICommonContractPublicService _iCommonContractPublicService = new StubICommonContractPublicService();
         private readonly StubIWorkflowPublicService _iWorkflowPublicService = new StubIWorkflowPublicService();
@@ -38,6 +47,7 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
         private readonly StubIBusinessUnitPublicService _iBusinessUnitPublicService = new StubIBusinessUnitPublicService();
         private readonly StubIProductRequirementPublicService _iProductRequirementPublicService = new StubIProductRequirementPublicService();
         private readonly StubIProductPublicService _iProductPublicService = new StubIProductPublicService();
+        private readonly StubIProjectOverviewPublicService _iProjectOverviewPublicService = new StubIProjectOverviewPublicService();
         private readonly StubICodeFormatPublicService _iCodeFormatPublicService = new StubICodeFormatPublicService();
         private readonly StubILogPublicService _iLogPublicService = new StubILogPublicService();
         private readonly StubIContractTypePubilcService _iContractTypePubilcService = new StubIContractTypePubilcService();
@@ -51,7 +61,11 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
         #endregion
 
         private readonly string _saleContractFileJsonName = "SaleContract.json";
-
+        private readonly string _saleContractOrderInfoFileJsonName = "SaleContractOrderInfo.json";
+        private readonly string _contractAndSaleContractRelationFileJsonName = "ContractAndSaleContractRelation.json";
+        private readonly string _saleContractProductDetailFileJsonName = "SaleContractProductDetail.json";
+        private readonly string _saleContractTaxItemFileJsonName = "SaleContractTaxItem.json";
+  
         [SetUp]
         public void InitResource()
         {
@@ -64,285 +78,371 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
             TestMockServiceResolver.RegisterInstance<IBusinessUnitPublicService, StubIBusinessUnitPublicService>(_iBusinessUnitPublicService);
             TestMockServiceResolver.RegisterInstance<IProductRequirementPublicService, StubIProductRequirementPublicService>(_iProductRequirementPublicService);
             TestMockServiceResolver.RegisterInstance<IProductPublicService, StubIProductPublicService>(_iProductPublicService);
+            TestMockServiceResolver.RegisterInstance<IProjectOverviewPublicService, StubIProjectOverviewPublicService>(_iProjectOverviewPublicService);
             TestMockServiceResolver.RegisterInstance<ICodeFormatPublicService, StubICodeFormatPublicService>(_iCodeFormatPublicService);
             TestMockServiceResolver.RegisterInstance<ILogPublicService, StubILogPublicService>(_iLogPublicService);
             TestMockServiceResolver.RegisterInstance<IContractTypePubilcService, StubIContractTypePubilcService>(_iContractTypePubilcService);
             TestMockServiceResolver.RegisterInstance<IProductSalePricePublicService, StubIProductSalePricePublicService>(_iProductSalePricePublicService);
             TestMockServiceResolver.RegisterInstance<IProviderPublicService, StubIProviderPublicService>(_iProviderPublicService);
+            TestMockServiceResolver.RegisterInstance<SaleContractAggregateService, StubSaleContractAggregateService>(_saleContractAggregateService);
             TestMockServiceResolver.RegisterInstance<IRecipientPublicService, StubIRecipientPublicService>(_iRecipientPublicService);
             TestMockServiceResolver.RegisterInstance<IReceivablePublicService, StubIReceivablePublicService>(_iReceivablePublicService);
+            TestMockServiceResolver.RegisterInstance<SaleBcContractDomainService, StubSaleBcContractDomainService>(_saleBcContractDomainService);
+            TestMockServiceResolver.RegisterInstance<SaleContractInitialFillinDomainService, StubSaleContractInitialFillinDomainService>(_saleContractInitialFillinDomainService);
             TestMockServiceResolver.RegisterInstance<IContractInvoicePublicService, StubIContractInvoicePublicService>(_iContractInvoicePublicService);
             TestMockServiceResolver.RegisterInstance<IProductPricePublicService, StubIProductPricePublicService>(_iProductPricePublicService);
             TestMockServiceResolver.RegisterInstance<ICommonPublicService, StubICommonPublicService>(_iCommonPublicService);
             _saleContractMock.LoadData(_saleContractFileJsonName);
+            _saleContractOrderInfoMock.LoadData(_saleContractOrderInfoFileJsonName);
+            _contractAndSaleContractRelationMock.LoadData(_contractAndSaleContractRelationFileJsonName);
+            _saleContractProductDetailMock.LoadData(_saleContractProductDetailFileJsonName);
+            _saleContractTaxItemMock.LoadData(_saleContractTaxItemFileJsonName);
+ 
         }
 
-        #region  销售合同领域服务单测 53个方法
+        #region  销售合同领域服务单测 57个方法
         [Test(Description = "销售合同保存")]
         public void Save_Test()
         {
             
         }
+
         [Test(Description = "销售合同保存事务")]
         public void SaveTrans_Test()
         {
             
         }
+
         [Test(Description = "清除材料")]
         public void DeleteOldProductDetailAddNew_Test()
         {
             
         }
+
         [Test(Description = "更新材料金额（含税）合计")]
         public void UpdateProductDetailAmount_Test()
         {
             
         }
+
         [Test(Description = "保存销售合同和采购合同关系")]
         public void SaveContractAndSaleContractRelation_Test()
         {
             
         }
+
         [Test(Description = "将实际用料计划的材料保存到合同中")]
         public void GetProductDetailFromRequirement_Test()
         {
             
         }
+
         [Test(Description = "删除前校验销售合同")]
         public void CheckDelete_Test()
         {
             
         }
+
         [Test(Description = "删除销售合同事务方法")]
         public void DeleteTrans_Test()
         {
             
         }
+
         [Test(Description = "删除销售合同")]
         public void Delete_Test()
         {
             
         }
+
         [Test(Description = "更新销售合同信息")]
         public void UpdateSaleContract_Test()
         {
             
         }
+
         [Test(Description = "保存销售合同批量调价数据")]
         public void SaveSaleContractProductList_Test()
         {
             
         }
+
         [Test(Description = "调整材料价格的事务方法")]
         public void SaveSaleContractProductListTrans_Test()
         {
             
         }
+
         [Test(Description = "保存材料明细")]
         public void SaveChangeProductDetal_Test()
         {
             
         }
+
         [Test(Description = "获取合同下指定材料的最新价格")]
         public void GetNewSaleContractProductPrice_Test()
         {
             
         }
+
+        [Test(Description = "销售合同现在的材料与将要切换的项目的适用区域的材料是否匹配")]
+        public void IsProjectBuUnitChanged_Test()
+        {
+            
+        }
+
+        [Test(Description = "销售合同现在的材料与将要切换项目的适用区域的材料是否匹配")]
+        public void IsBuUnitProductMatched_Test()
+        {
+            
+        }
+
+        [Test(Description = "项目是否更改")]
+        public void IsSaleContractProjectChanged_Test()
+        {
+            
+        }
+
+        [Test(Description = "如何合同项目更改那么清空材料明细")]
+        public void ChangeSaleContractProject_Test()
+        {
+            
+        }
+
         [Test(Description = "提交审批前")]
         public void BeforeApproving_Test()
         {
             
         }
+
         [Test(Description = "提交审批后")]
         public void AfterApproving_Test()
         {
             
         }
+
         [Test(Description = "审批通过后")]
         public void AfterApproved_Test()
         {
             
         }
+
         [Test(Description = "审批驳回前")]
         public void BeforeUnApprove_Test()
         {
             
         }
+
         [Test(Description = "审批驳回后")]
         public void AfterUnApprove_Test()
         {
             
         }
+
         [Test(Description = "判断公司是否被引用")]
         public void IsExistMyBusinessUnit_Test()
         {
             
         }
+
         [Test(Description = "校验销售合同是否存在")]
         public void VerifyIsExist_Test()
         {
             
         }
+
         [Test(Description = "根据销售合同GUID集合，获取材料明细")]
         public void GetSaleContractProductDetailsBySaleContractGUIDs_Test()
         {
             
         }
+
         [Test(Description = "新增材料明细(批量)")]
         public void InsertProductDetails_Test()
         {
             
         }
+
         [Test(Description = "根据销售合同GUID获取材料明细")]
         public void GetSaleContractProductDetailsBySaleContractGUID_Test()
         {
             
         }
+
         [Test(Description = "获取销售合同订单收货信息")]
         public void GetSaleContractOrderInfo_Test()
         {
             
         }
+
         [Test(Description = "校验材料是否存在销售合同明细中")]
         public void IsExistProduct_Test()
         {
             
         }
+
         [Test(Description = "校验销售合同是否存在")]
         public void FindById_Test()
         {
             
         }
+
         [Test(Description = "得到销售税目明细")]
         public void GetSaleContractTaxItemsBySaleContractGUID_Test()
         {
             
         }
+
         [Test(Description = "校验合同编码是否存在")]
         public void IsExistsContractCode_Test()
         {
             
         }
+
         [Test(Description = "采购合同是否已经生成销售合同")]
         public void IsUserByContractGUID_Test()
         {
             
         }
+
         [Test(Description = "根据GUID获取合同或补充合同")]
         public void GetSaleContractAndSaleBcContractByContrctGUID_Test()
         {
             
         }
+
         [Test(Description = "获取销售合同对应的销售2采购合同")]
         public void GetContractBySaleContrctGUID_Test()
         {
             
         }
+
         [Test(Description = "根据销售合同主键得到销售合同")]
         public void GetSaleContractById_Test()
         {
             
         }
+
         [Test(Description = "根据采购合同GUID获取销售合同")]
         public void GetSaleContractByCgContractGUID_Test()
         {
             
         }
+
         [Test(Description = "判断合同是否存在指定的合同类别")]
         public void ContractTypeIsExistsContract_Test()
         {
             
         }
+
         [Test(Description = "判断该项目是否在合同中使用")]
         public void IsSaleContractExistServiceProject_Test()
         {
             
         }
+
         [Test(Description = "判断销售合同中，是否存在供应商")]
         public void IsSaleContractIsExistProvider_Test()
         {
             
         }
+
         [Test(Description = "根据实际用料计划查询合同")]
         public void GetSaleContractByProductRequirementGUID_Test()
         {
             
         }
+
         [Test(Description = "生成销售合同编码")]
         public void GetCodeSerialNumber_Test()
         {
             
         }
+
         [Test(Description = "生成销售合同前校验")]
         public void CheckCreateSaleContractByContract_Test()
         {
             
         }
+
         [Test(Description = "采购合同转销售合同")]
         public void ConvertSaleContractByContract_Test()
         {
             
         }
+
         [Test(Description = "采购合同订单信息转销售合同订单信息")]
         public void ConvertSaleContractOrderInfoByContractOrderInfo_Test()
         {
             
         }
+
         [Test(Description = "采购合同明细转销售合同明细")]
         public void ConvertSaleContractProductsByContractProducts_Test()
         {
             
         }
+
         [Test(Description = "根据采购合同生成销售合同事务方法")]
         public void CreateSaleContractByContractTrans_Test()
         {
             
         }
+
         [Test(Description = "根据采购合同生成销售合同")]
         public void CreateSaleContractByContract_Test()
         {
             
         }
+
         [Test(Description = "关联采购合同前校验")]
         public void CheckRelationContract_Test()
         {
             
         }
+
         [Test(Description = "生成采购合同前校验")]
         public void CheckCreateContract_Test()
         {
             
         }
+
         [Test(Description = "生成采购事务方法")]
         public void CreateContractTrans_Test()
         {
             
         }
+
         [Test(Description = "生成采购")]
         public void CreateContract_Test()
         {
             
         }
+
         [Test(Description = "生成日志")]
         public void CreateCompareLog_Test()
         {
             
         }
+
         [Test(Description = "生成日志")]
         public void CreateLog_Test()
         {
             
         }
+
         [Test(Description = "创建采购合同转销售合同日志")]
         public void CreateConversionLog_Test()
         {
             
         }
+
         [Test(Description = "获取更改日志的比较本文")]
         public void GetLogCompareString_Test()
         {
             
         }
+
        #endregion
 	}
 }

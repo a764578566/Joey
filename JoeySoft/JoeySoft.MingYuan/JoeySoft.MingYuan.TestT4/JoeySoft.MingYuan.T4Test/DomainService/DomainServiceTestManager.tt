@@ -72,6 +72,9 @@
 
             List<string> publicServiceNames = new List<string>();
             List<string> domainServiceNames = new List<string>();
+            List<string> entityServiceNames = new List<string>();
+            List<string> fileJsonNames = new List<string>();
+            List<string> loadDataJsons = new List<string>();
 
             List<string> testMockServiceResolvers = new  List<string> ();
 
@@ -82,12 +85,23 @@
                 string name = node.Attributes["name"].InnerText.Replace($"F:Mysoft."+moduleName+".DomainServices."+entityName+serviceName+".", "");
                 if (name.IndexOf("_i") == -1)
                 {
-                    if (name.ToLower().IndexOf(serviceName) != -1)
+                    foreach (var itemName in serviceNames)
                     {
-                        string str = name.Replace("_", "");
-                        str= str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
-                        domainServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();",str , name));
-                        testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});",str,name));
+                        if (name.ToLower().IndexOf(itemName.ToLower()) != -1)
+                        {
+                            string str = name.Replace("_", "");
+                            str = str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
+                            domainServiceNames.Add(string.Format("private readonly Stub{0} {1} = new Stub{0}();", str, name));
+                            testMockServiceResolvers.Add(string.Format("TestMockServiceResolver.RegisterInstance<{0}, Stub{0}>({1});", str, name));
+                        }
+                    }
+                    if (name.IndexOf("EntityService") != -1)
+                    {
+                        string str = name.Replace("_", "").Replace("EntityService", "");
+                        str = str[0].ToString().ToUpper() + str.Substring(1, str.Length - 1);
+                        entityServiceNames.Add(string.Format("private readonly EntityMocker<{0}> {1}Mock = new EntityMocker<{0}>();", str, name.Replace("EntityService", "")));
+                        fileJsonNames.Add(string.Format("private readonly string {0}FileJsonName = \"{1}.json\";", name.Replace("EntityService", ""), str));
+                        loadDataJsons.Add(string.Format("{0}Mock.LoadData({0}FileJsonName);", name.Replace("EntityService", "")));
                     }
                 }
                 else
@@ -100,6 +114,9 @@
             }
             session["PublicServiceNames"] = publicServiceNames;
             session["DomainServiceNames"] = domainServiceNames;
+            session["EntityServiceNames"] = entityServiceNames;
+            session["FileJsonNames"] = fileJsonNames;
+            session["LoadDataJsons"] = loadDataJsons;
             session["TestMockServiceResolvers"] = testMockServiceResolvers;
 
             var sessionHost = (ITextTemplatingSessionHost) this.Host;

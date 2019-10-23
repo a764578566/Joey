@@ -26,19 +26,19 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
     {
 		private readonly SaleBcContractInitialFillinDomainService _saleBcContractInitialFillinDomainService = new SaleBcContractInitialFillinDomainService();
 
-        private readonly EntityMocker<SaleBcContractInitialFillin> _saleBcContractInitialFillinMock = new EntityMocker<SaleBcContractInitialFillin>();
         
+
         private readonly StubFormEntityDomainService _formEntity = new StubFormEntityDomainService();
+
         #region 接口服务
         #endregion
 
-        private readonly string _saleBcContractInitialFillinFileJsonName = "SaleBcContractInitialFillin.json";
-
+  
         [SetUp]
         public void InitResource()
         {
             TestMockServiceResolver.RegisterInstance<FormEntityDomainService, StubFormEntityDomainService>(_formEntity);
-            _saleBcContractInitialFillinMock.LoadData(_saleBcContractInitialFillinFileJsonName);
+ 
         }
 
         #region  销售合同初始补充单测 1个方法
@@ -47,6 +47,7 @@ namespace Mysoft.Clgyl.SaleMng.UnitTest.DomainServices
         {
             
         }
+
        #endregion
 	}
 }
